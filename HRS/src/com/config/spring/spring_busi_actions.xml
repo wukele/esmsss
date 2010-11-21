@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+		
+	
+	
+	<bean id="AppChart" class="com.res.chart.AppChart" abstract="false"
+		lazy-init="default" autowire="default" dependency-check="default">
+	</bean>
+	<bean id="LoginAction" class="com.busi.action.LoginAction"
+		abstract="false" lazy-init="default" autowire="default"
+		dependency-check="default">
+		<property name="operDao">
+			<ref bean="InfoOperDAO" />
+		</property>
+		<property name="configDao">
+			<ref bean="InfoConfigDAO" />
+		</property>
+	</bean>
+	
+	
+	<bean id="LoadMenuItems" class="com.ulp.action.LoadMenuItemsAction"
+		abstract="false"  lazy-init="default"
+		autowire="default" dependency-check="default">
+		<property name="menuDao">
+			<ref bean="MenuItemDao" />
+		</property>
+	</bean>
+	
+	
+	
+	
+	<bean id="GetMenuItem" class="com.ulp.action.json.GetMenuItemAction"
+		abstract="false" lazy-init="default" autowire="default"
+		dependency-check="default">
+		<property name="menuDao">
+			<ref bean="InfoMenuDAO" />
+		</property>
+	</bean></beans>

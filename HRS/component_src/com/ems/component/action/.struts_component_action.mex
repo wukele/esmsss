@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="component" location="33,62" size="180,79">
+    <action name="ems_dispatcher_page_action" location="20,29" size="150,40">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="EmsDispatcherPage.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="EmsDispatcherPage.jsp" path="/pages/ems/comm/EmsDispatcherPage.jsp" location="388,202" size="150,55" />
+</Struts2Diagram>
+
