@@ -20,7 +20,7 @@ public class DirectDataEngine extends ActionSupport {
 	}
 
 	public  String  execute(){
-		
+		System.out.println("request");
 		return SUCCESS;
 	}
 }
