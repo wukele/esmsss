@@ -5,6 +5,7 @@ public class DataEngine {
 			private String	type="polling";
 			private String url;
 			private String baseParams;
+			private int interval;
 			public String getId() {
 				return id;
 			}
