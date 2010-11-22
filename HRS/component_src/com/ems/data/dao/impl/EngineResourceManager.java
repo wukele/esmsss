@@ -27,7 +27,8 @@ public class EngineResourceManager extends HibernateDaoSupport implements
 					return null;
 		}else{
 					for(int i=0;i<engines.size();i++){
-									List<InfoEngine>  ie=getHibernateTemplate().find("from ", engines.get(i));
+									List<InfoEngine>  ie=getHibernateTemplate().find("from InfoEngine as engine " +
+											"where engine.engineCode=?", engines.get(i));
 									
 					}
 		}
