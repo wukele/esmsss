@@ -27,4 +27,14 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="PageEngineManager"
+		class="com.ems.data.dao.impl.EngineResourceManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	
+	
 </beans>

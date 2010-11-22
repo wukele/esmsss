@@ -28,5 +28,7 @@
 		<property name="pageManager">
 			<ref bean="PageResourcesManager" />
 		</property>
-		
+		<property name="engineRes">
+			<ref bean="PageEngineManager" />
+		</property>
 	</bean></beans>

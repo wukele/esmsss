@@ -11,6 +11,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.component.BaseComponent;
 import com.component.CommEmsKey;
+import com.component.DataEngine;
+import com.ems.data.dao.IEngineResources;
 import com.ems.data.dao.IPageResourcesManager;
 import com.ems.entity.InfoPage;
 
@@ -56,6 +58,20 @@ public class EmsDispatcherPageAction extends ActionSupport implements ServletReq
 	
 	private IPageResourcesManager  pageManager;
 	
+	private IEngineResources  engineRes;
+	
+
+		public IEngineResources getEngineRes() {
+		return engineRes;
+	}
+
+
+
+	public void setEngineRes(IEngineResources engineRes) {
+		this.engineRes = engineRes;
+	}
+
+
 
 		public IPageResourcesManager getPageManager() {
 		return pageManager;
@@ -82,7 +98,11 @@ public class EmsDispatcherPageAction extends ActionSupport implements ServletReq
 			 ja.addAll(comps);
 			 session.removeAttribute(CommEmsKey.KEY_EMS_PAGE_COMPONENT);
 			 session.setAttribute(CommEmsKey.KEY_EMS_PAGE_COMPONENT, ja.toString());
-			 
+			 List<DataEngine>  de=engineRes.BuildPageEngine(String.valueOf(infopage.getPageId()));
+			 JSONArray  jde=new JSONArray();
+			 jde.addAll(de);
+			 session.removeAttribute(CommEmsKey.KEY_EMS_PAGE_ENGINES);
+			 session.setAttribute(CommEmsKey.KEY_EMS_PAGE_ENGINES, jde.toString());
 			 return SUCCESS;
 		 }
 

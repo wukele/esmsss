@@ -1,6 +1,9 @@
 package com.ems.data.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -26,15 +29,21 @@ public class EngineResourceManager extends HibernateDaoSupport implements
 		if(engines==null ||  engines.size()<0){
 					return null;
 		}else{
+					List<DataEngine>  ens=new ArrayList<DataEngine>();
 					for(int i=0;i<engines.size();i++){
 									List<InfoEngine>  ie=getHibernateTemplate().find("from InfoEngine as engine " +
 											"where engine.engineCode=?", engines.get(i));
-									
+									DataEngine  de=new DataEngine();
+									InfoEngine e=ie.get(i);
+									de.setUrl(e.getActionName());
+									de.setInterval(e.getMaxInterval().intValue()*1000);
+									List<String>  paras=getHibernateTemplate().find("from RuleEngineData where " +
+											"engineCode=?",e.getEngineCode());
+									de.setBaseParas(paras);
+									ens.add(de);
 					}
+					return ens;
 		}
-		
-		
-		return null;
 	}
 
 }
