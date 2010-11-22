@@ -28,5 +28,10 @@
         <property name="actionClass" type="java.lang.String">
             <column name="action_class" length="40" />
         </property>
+        <property name="maxInterval" type="java.lang.Integer">
+            <column name="max_interval">
+                <comment>单位为秒</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>
