@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=path %>/ext3/adapter/ext/ext-base.js"></script>
         <!-- ENDLIBS -->
 
-    <script type="text/javascript" src="<%=path %>/ext3/ext-all.js"></script>
+    <script type="text/javascript" src="<%=path %>/ext3/ext-all-debug.js"></script>
     
 
     <!-- Common Styles for the examples -->
@@ -36,6 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     
    	<script type="text/javascript" src="<%=path %>/decorators/Layout/Layout1.js"></script>
+   	<script type="text/javascript" src="<%=path %>/decorators/Layout/initCommPage.js"></script>
    	<script type="text/javascript" src="<%=path %>/dwr/engine.js"></script>
    	<script type="text/javascript" src="<%=path %>/dwr/util.js"></script>
 </head>
