@@ -15,6 +15,7 @@ public class InfoEngine implements java.io.Serializable {
 	private String actionConfig;
 	private String engineType;
 	private String actionClass;
+	private Integer maxInterval;
 
 	// Constructors
 
@@ -30,7 +31,7 @@ public class InfoEngine implements java.io.Serializable {
 	/** full constructor */
 	public InfoEngine(Integer engineId, String engineCode, String engineName,
 			String actionName, String actionConfig, String engineType,
-			String actionClass) {
+			String actionClass, Integer maxInterval) {
 		this.engineId = engineId;
 		this.engineCode = engineCode;
 		this.engineName = engineName;
@@ -38,6 +39,7 @@ public class InfoEngine implements java.io.Serializable {
 		this.actionConfig = actionConfig;
 		this.engineType = engineType;
 		this.actionClass = actionClass;
+		this.maxInterval = maxInterval;
 	}
 
 	// Property accessors
@@ -96,6 +98,14 @@ public class InfoEngine implements java.io.Serializable {
 
 	public void setActionClass(String actionClass) {
 		this.actionClass = actionClass;
+	}
+
+	public Integer getMaxInterval() {
+		return this.maxInterval;
+	}
+
+	public void setMaxInterval(Integer maxInterval) {
+		this.maxInterval = maxInterval;
 	}
 
 }
