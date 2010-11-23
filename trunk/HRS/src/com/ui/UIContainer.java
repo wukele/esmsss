@@ -37,6 +37,7 @@ public class UIContainer {
 									buff.append("\t			root:root_"+module.getModuleCode()+", \n");
 									buff.append("\t			rootVisible: false,\n");
 									buff.append("\t			listeners: {\n click: function(node,e){\n");
+									buff.append("\t           	clearAllTask();\n");
 									buff.append("\t				cp.load({\n" +
 														  "\t						url:node.attributes.url,\n" +
 														  "\t						scripts:true});     \n}\n}\n}\n);\n");
