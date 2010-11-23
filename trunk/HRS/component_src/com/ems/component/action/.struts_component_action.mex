@@ -7,9 +7,11 @@
       </result>
     </action>
   </package>
-  <webResource name="EmsDispatcherPage.jsp" path="/pages/ems/comm/EmsDispatcherPage.jsp" location="410,65" size="150,55" />
-  <package name="DataEngine" location="33,208" size="331,149">
-    <action name="DirectDataEngine" location="9,23" size="150,40" />
+  <package name="DataEngine" location="33,208" size="199,149">
+    <action name="DirectDataEngine" location="9,23" size="150,40">
+      <result name="success" />
+    </action>
   </package>
+  <webResource name="EmsDispatcherPage.jsp" path="/pages/ems/comm/EmsDispatcherPage.jsp" location="410,65" size="150,55" />
 </Struts2Diagram>
 

@@ -14,15 +14,13 @@ public class DataEngine {
 			private String	type="polling";
 			private String url;
 			private int interval;
-			private List<String>  baseParas;
-			public List<String> getBaseParas() {
-				if(baseParas==null){
-							baseParas=new ArrayList<String>();
-				}
-				return baseParas;
+			private String baseParams;
+			public String getBaseParams() {
+			
+				return baseParams;
 			}
-			public void setBaseParas(List<String> baseParas) {
-				this.baseParas = baseParas;
+			public void setBaseParams(String baseParams) {
+				this.baseParams = baseParams;
 			}
 			public String getId() {
 				return id;
