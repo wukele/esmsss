@@ -47,6 +47,7 @@
 				<value>com/data/entity/InfoEngine.hbm.xml</value>
 				<value>com/data/entity/RuleDataDevice.hbm.xml</value>
 				<value>com/data/entity/EngineParameter.hbm.xml</value>
-				<value>com/data/entity/RuleEngineData.hbm.xml</value></list>
+				<value>com/data/entity/RuleEngineData.hbm.xml</value>
+				<value>com/ems/entity/RealTimeData.hbm.xml</value></list>
 		</property></bean>
 </beans>
