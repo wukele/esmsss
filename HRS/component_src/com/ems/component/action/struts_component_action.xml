@@ -10,4 +10,4 @@
 	<package name="DataEngine" extends="json-default">
 		<action name="DirectDataEngine"
 			class="com.ems.component.action.DirectDataEngine">
-		</action></package></struts>    
+		<result type="json"></result></action></package></struts>    

@@ -20,6 +20,10 @@ String path =request.getContextPath();
 <% 
 			}
 	}
+	
+	Object  de=session.getAttribute(CommEmsKey.KEY_EMS_PAGE_ENGINES);
+	
+	
 %>
 <!--end javascript area -->
 
@@ -38,10 +42,34 @@ String path =request.getContextPath();
 		BasePanel.add(data);
 		
 		BasePanel.render(Ext.get('page_container'));
+		/* DataEngines */
+		<%  
+				Object  engine=session.getAttribute(CommEmsKey.KEY_EMS_PAGE_ENGINES);
+				if(engine!=null){%>
+					var configEngines=<%= (String)engine %>;
 		
-		/*Ω≈±æ“˝«Ê≈‰÷√*/
+					if(configEngines){
+						if(configEngines.length){
+									for(var ei=0;ei<configEngines.length;ei++){
+											Ext.Direct.addProvider(configEngines[ei]);
+											Ext_Direct_providers[ei]=configEngines[ei].id;
+									}
+						}
+					}
+
+		Ext.Direct.on('message', function(e){
+     			Ext.Msg.alert('info',e.page_id);
+    	});
+				
+				
+				
+				
+		<%
+				}
+		%>
+	
 		
-		var configEngine={};
+		
 		
 		
 		
@@ -50,5 +78,6 @@ String path =request.getContextPath();
 </script>
 <script type="text/javascript" src="<%=path %>/pages/ems/comm/EmsDispatcherPage.js"></script>
 <div id='page_container'></div>
+<<s:debug></s:debug>
 
 

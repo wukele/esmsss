@@ -37,9 +37,16 @@ public class EngineResourceManager extends HibernateDaoSupport implements
 									InfoEngine e=ie.get(i);
 									de.setUrl(e.getActionName());
 									de.setInterval(e.getMaxInterval().intValue()*1000);
-									List<String>  paras=getHibernateTemplate().find("from RuleEngineData where " +
+									de.setId(e.getEngineCode());
+									List<String>  paras=getHibernateTemplate().find("select  valueId  from RuleEngineData where " +
 											"engineCode=?",e.getEngineCode());
-									de.setBaseParas(paras);
+									String values="{values:'";
+									/*for(int p=0;p<paras.size();p++){
+													values+=paras.get(p)+",";
+									}*/
+									values+=e.getEngineCode()+"'}";
+								
+									de.setBaseParams(values);
 									ens.add(de);
 					}
 					return ens;
