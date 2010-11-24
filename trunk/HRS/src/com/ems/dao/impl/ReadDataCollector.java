@@ -2,13 +2,14 @@ package com.ems.dao.impl;
 
 import java.util.List;
 
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.ems.dao.IReadDataConllector;
+import com.ems.dao.IReadDataCollector;
 import com.ems.entity.RealTimeData;
 
 public class ReadDataCollector extends HibernateDaoSupport implements
-		IReadDataConllector {
+		IReadDataCollector {
 
 	public List<RealTimeData> GetRealTimeDataByValueId(List<String> values) {
 		// TODO Auto-generated method stub
@@ -18,10 +19,13 @@ public class ReadDataCollector extends HibernateDaoSupport implements
 
 	public List<RealTimeData> findRealtimedataByDE(String deCode) {
 		// TODO Auto-generated method stub
+		String queryData="select new RealTimeData(rtd.dataSn,rtd.deviceVarId,rtd.varPhyValue,rtd.varLogicValue,red.valueId) " +
+				" from RealTimeData as rtd,RuleEngineData as red,RuleDataDevice as rdd" +
+				" where red.valueId=rdd.valueId  and rtd.deviceVarId=rdd.deviceValueId and red.engineCode=?";
 		
-		
-		
-		return null;
+		return getHibernateTemplate().find(queryData, deCode);
 	}
+
+	
 
 }
