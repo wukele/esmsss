@@ -9,6 +9,14 @@ import java.sql.Timestamp;
 public class RealTimeData implements java.io.Serializable {
 
 	// Fields
+	private String valueId;
+	public String getValueId() {
+		return valueId;
+	}
+
+	public void setValueId(String valueId) {
+		this.valueId = valueId;
+	}
 
 	private Integer dataSn;
 	private String deviceVarId;
@@ -22,13 +30,13 @@ public class RealTimeData implements java.io.Serializable {
 	public RealTimeData() {
 	}
 
-	/** minimal constructor */
+	/** minimal constructor
 	public RealTimeData(Integer dataSn, String deviceVarId) {
 		this.dataSn = dataSn;
 		this.deviceVarId = deviceVarId;
 	}
 
-	/** full constructor */
+	/** full constructor
 	public RealTimeData(Integer dataSn, String deviceVarId, String varPhyValue,
 			String varLogicValue, Timestamp collectTime) {
 		this.dataSn = dataSn;
@@ -36,7 +44,19 @@ public class RealTimeData implements java.io.Serializable {
 		this.varPhyValue = varPhyValue;
 		this.varLogicValue = varLogicValue;
 		this.collectTime = collectTime;
+	} */
+	
+	
+	
+	public RealTimeData(Integer dataSn, String deviceVarId, String varPhyValue,
+			String varLogicValue,String valueId) {
+		this.dataSn = dataSn;
+		this.deviceVarId = deviceVarId;
+		this.varPhyValue = varPhyValue;
+		this.varLogicValue = varLogicValue;
+		this.valueId=valueId;
 	}
+
 
 	// Property accessors
 
