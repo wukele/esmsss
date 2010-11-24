@@ -31,4 +31,15 @@
 		<property name="engineRes">
 			<ref bean="PageEngineManager" />
 		</property>
+	</bean>
+	 
+		
+	<bean id="DirectDataEngine"
+		class="com.ems.component.action.DirectDataEngine" abstract="false"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="collect">
+			<ref bean="ReadDataCollector" />
+		</property>
+		
+		
 	</bean></beans>

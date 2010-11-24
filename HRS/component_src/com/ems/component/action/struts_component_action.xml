@@ -9,5 +9,11 @@
 	</package>
 	<package name="DataEngine" extends="json-default">
 		<action name="DirectDataEngine"
-			class="com.ems.component.action.DirectDataEngine">
-		<result type="json"></result></action></package></struts>    
+			class="DirectDataEngine">
+		<result type="json">
+				<param name="excludeProperties">
+				collect
+				</param>
+		</result></action>
+	</package>
+</struts>    
