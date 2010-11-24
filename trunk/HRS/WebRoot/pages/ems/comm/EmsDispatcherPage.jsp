@@ -58,7 +58,13 @@ String path =request.getContextPath();
 					}
 
 		Ext.Direct.on('message', function(e){
-     			Ext.Msg.alert('info',e.page_id);
+     			var datas=e.realTimeData;
+     			if(datas && Ext.isArray(datas)){
+     					for(var i=0;i<datas.length;i++){
+     						 var item=datas[i];
+     						 Ext.getCmp(item.valueId).setValue(item.varLogicValue);
+     					}
+     			}
     	});
 				
 				
