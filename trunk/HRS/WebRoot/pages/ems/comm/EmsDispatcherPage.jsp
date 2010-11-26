@@ -84,6 +84,6 @@ String path =request.getContextPath();
 </script>
 <script type="text/javascript" src="<%=path %>/pages/ems/comm/EmsDispatcherPage.js"></script>
 <div id='page_container'></div>
-<<s:debug></s:debug>
+
 
 
