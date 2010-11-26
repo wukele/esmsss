@@ -4,6 +4,9 @@
 
 Ext.namespace('Ext.ems.');
 
+Ext.onReady(function(){
+		
+})
 
 
 Ext.ems.ImageBox=Ext.extend(Ext.BoxComponent,{
@@ -28,7 +31,7 @@ Ext.ems.ImageBox=Ext.extend(Ext.BoxComponent,{
 	},
 	OnImageClick:function(e){
 		//Ext.Msg.alert('info','1234');
-		
+		Ext.DomHelper.
 		var exp=/\w+@\w+.\w{3}/;
 		
 		var m='whitecell@hotmail.com1 '.match(exp);
