@@ -20,7 +20,7 @@
 		var tabpanel;
 		var tab1;
 		var tab2;
-		var tab1Data;
+		var tab1Data = '<div>H1 这是默认效果</div>';
 		
 		
 		return {
@@ -31,7 +31,7 @@
 					tabpanel.getItem('tab1').update(tab1Data);
 				}});
 				
-				tab1 = {title:'tab1',id:'tab1'};
+				tab1 = {title:'tab1',html:tab1Data,id:'tab1'};
 				tab2 = {title:'tab2',html:'tab2',id:'tab2'};
 				tabpanel = new Ext.TabPanel({
 					region:'center',
