@@ -39,7 +39,7 @@
 					items:[tab1,tab2]});
 				viewport = new Ext.Viewport({
 					title:'viewport + tabpanel test',
-					enableScrooll:true,
+					enableScroll:true,
 					layout:'fit',
 					//面板内容
 					items:[tabpanel]
