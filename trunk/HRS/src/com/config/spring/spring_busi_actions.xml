@@ -30,7 +30,11 @@
 		</property>
 	</bean>
 	
-	
+	<bean id="UserManager" class="com.busi.usermanager.action.UserManagerAction">
+		<property name="operDao" >
+			<ref bean="InfoOperDAO"/>
+		</property>
+	</bean>
 	
 	
 	<bean id="GetMenuItem" class="com.ulp.action.json.GetMenuItemAction"
