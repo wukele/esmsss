@@ -11,9 +11,9 @@
 	type="text/css"></link>
 <script type="text/javascript">
 	Ext.onReady(function() {
-		Ext.ns('com.ems.user');
+		Ext.ns('com.hrs.test');
 
-		com.ems.user.usermanager = function() {
+		com.hrs.test.usermanager = function() {
 			var userGrid;
 			var columnModel;
 			var jsonStore;
@@ -21,23 +21,29 @@
 			var delUserBtn;
 			var modifyUserBtn;
 			var panel;
+			var data;
+			var pagesize=6;
 			
-
+			data = {items:[{username:'test01',password:'test01',email:'email@test01'},
+			  			{username:'test02',password:'test02',email:'email@test02'}, 
+						{username:'test03',password:'test03',email:'email@test03'} ,
+						{username:'test04',password:'test04',email:'email@test04'},
+						{username:'test05',password:'test05',email:'email@test05'},
+						{username:'test06',password:'test06',email:'email@test06'},
+						{username:'test07',password:'test07',email:'email@test07'},
+						{username:'test08',password:'test08',email:'email@test08'},
+						{username:'test09',password:'test09',email:'email@test09'},
+						{username:'test10',password:'test10',email:'email@test10'},
+						{username:'test11',password:'test11',email:'email@test11'}]};
+			data.count=data.items.length;
+			
 			jsonStore = new Ext.data.Store({
-				proxy : new Ext.data.MemoryProxy([ {
-					username : 'test01',
-					password : 'test01',
-					email : 'email@test01'
-				}, {
-					username : 'test02',
-					password : 'test02',
-					email : 'email@test02'
-				}, {
-					username : 'test03',
-					password : 'test03',
-					email : 'email@test03'
-				} ]),
-				reader : new Ext.data.ArrayReader({}, [ {
+				proxy: new Ext.data.MemoryProxy(data),
+				reader : new Ext.data.JsonReader({
+					 idProperty:'username',
+					 root:'items',
+					 totalProperty:'count'
+				}, [ {
 					name : 'username',
 					mapping : 'username'
 				}, {
@@ -48,7 +54,7 @@
 					mapping : 'email'
 				} ])
 			});
-			jsonStore.load();
+			jsonStore.load({params:{start:0,limit:pagesize}});
 			
 			/*
 			columnModel = new Ext.grid.columnModel({
@@ -82,7 +88,7 @@
 			*/
 			var sm = new Ext.grid.CheckboxSelectionModel();
 			columnModel = new Ext.grid.ColumnModel({
-				columns : [ new Ext.grid.RowNumberer() ,{
+				columns : [sm, new Ext.grid.RowNumberer() ,{
 					id : 'username',
 					header : '用户名',
 					dataIndex : 'username'
@@ -92,13 +98,14 @@
 				}, {
 					header : '邮件',
 					dataIndex : 'email'
-				},sm],
+				}],
 				defaults: {
 				        sortable: true,
 				        menuDisabled: true,
 				        width: 100
 				 }
 			});
+			  
 			return {
 				self : this,
 				addUser : function() {
@@ -120,7 +127,13 @@
 						stripeRows : true,
 						// config options for stateful behavior
 						stateful : true,
-						stateId : 'um-grid'
+						stateId : 'um-grid',
+						tbar:[new Ext.PagingToolbar({
+					        store: jsonStore,       // grid and PagingToolbar using same store
+					        displayInfo: true,
+					        pageSize: pagesize
+					        //prependButtons: true
+				    })],
 					});
 					
 					addUserBtn = new Ext.Button({
@@ -156,7 +169,7 @@
 
 		}();
 
-		com.ems.user.usermanager.init();
+		com.hrs.test.usermanager.init();
 	});
 </script>
 userManager

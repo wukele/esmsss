@@ -29,19 +29,21 @@
 		var panel;
 		var window;
 		
-		return {init:function(){
+		return {_self:this,init:function(){
 			panel=new Ext.Panel({
 				layout:'column',
 				baseCls:'x-plain',
 				items:[
 					{
+						padding:5,
 						columnWidth:.5,
 						layout:'form',
 						labelWidth:55,
 						defaultType:'textfield',
 						defaults:{width:160},
 						baseCls:'x-plain',
-						items:[{fieldLabel:'用户名',name:'username'},{fieldLabel:'密码',name:'password'},{fieldLabel:'电子邮件',name:'email'}]
+						items:[{fieldLabel:'用户名',name:'username'},{fieldLabel:'密码',name:'password',inputType:"password"},{fieldLabel:'电子邮件',name:'email'},
+						       {fieldLabel:'性别',name:'sex',triggerAction:'all',mode:'local',editable:false,xtype:'combo',store:[['y','男性'],['n','女性']]},{fieldLabel:'权限',name:'role',xtype:'combo',store:[['op','操作员'],['admin','管理员']],editable:false,mode:'local',triggerAction: "all"}]
 					},
 					{
 						columnWidth:.5,
