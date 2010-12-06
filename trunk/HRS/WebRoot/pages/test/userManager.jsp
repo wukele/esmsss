@@ -8,7 +8,7 @@
 	src="<%=cp%>/ext3/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="<%=cp%>/ext3/ext-all.js"></script>
 <link href="<%=cp%>/ext3/resources/css/ext-all.css" rel="stylesheet"
-	type="text/css"></link>
+	type="text/css"/>
 <script type="text/javascript">
 	Ext.onReady(function() {
 		Ext.ns('com.hrs.test');
@@ -133,7 +133,7 @@
 					        displayInfo: true,
 					        pageSize: pagesize
 					        //prependButtons: true
-				    })],
+				    })]
 					});
 					
 					addUserBtn = new Ext.Button({
