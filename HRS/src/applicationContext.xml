@@ -5,7 +5,6 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-
 	<bean id="dataSourceMysql"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
@@ -15,7 +14,7 @@
 			value="jdbc:mysql://localhost:3306/protest">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="zcf123"></property>
+		<property name="password" value="missdark_mysql"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
