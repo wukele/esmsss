@@ -38,11 +38,17 @@
                         {userId:3,username:'ffmmx3',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
                         {userId:4,username:'ffmmx4',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
                         {userId:5,username:'ffmmx5',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
-                        {userId:6,username:'ffmmx6',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'}]};
+                        {userId:6,username:'ffmmx6',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
+                        {userId:7,username:'ffmmx7',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
+                        {userId:8,username:'ffmmx8',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
+                        {userId:9,username:'ffmmx9',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
+                        {userId:10,username:'ffmmx10',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'},
+                        {userId:11,username:'ffmmx11',password:'password',email:'firefoxmmx@gmail.com',address:'我晓得你住哪里',phone:'123123123123'}]};
                 data['count']=data.result.length;
                 data['msg']='loading...';
 
                 testStore=new Ext.data.Store({
+                    autoLoad:true,
                     proxy:new Ext.data.MemoryProxy(data),
                     reader:new Ext.data.JsonReader({
                         idProperty: 'userId',
@@ -54,8 +60,10 @@
                             {name:'email',mapping:'email'},
                             {name:'address',mapping:'address'},
                             {name:'phone',mapping:'phone'}]
+                        
                     })
                 });
+                testStore.load({params:{start:0,end:6,limit:6}});
                 
                 return {
                     init:function(){
@@ -91,7 +99,7 @@
                                     width: 220,
                                     // use shorthand alias defined above
                                     editor: new fm.TextField({
-                                        allowBlank: false,
+                                        allowBlank: true,
                                         inputType:'password'
                                     })
                                 },
@@ -101,7 +109,7 @@
                                     width: 220,
                                     // use shorthand alias defined above
                                     editor: new fm.TextField({
-                                        allowBlank: false
+                                        allowBlank: true
                                     })
                                 },
                                 {
@@ -110,7 +118,7 @@
                                     width: 220,
                                     // use shorthand alias defined above
                                     editor: new fm.TextField({
-                                        allowBlank: false
+                                        allowBlank: true
                                     })
                                 },
                                 {
@@ -119,15 +127,26 @@
                                     width: 220,
                                     // use shorthand alias defined above
                                     editor: new fm.TextField({
-                                        allowBlank: false
+                                        allowBlank: true
                                     })
                                 }
                             ]
                         });
                         editorGird=new Ext.grid.EditorGridPanel({
                             store:testStore,
+                            sm:sm,
                             cm:cm,
-                            bbar:[{xtype:'button',name:'add',text:'添加'},{xtype:'button',name:'del',text:'删除'}]
+                            enableScroll:true,
+                            layout:'column',
+                            autoHeight:true,
+                            bbar:[{xtype:'button',name:'add',text:'添加',handler:function(){
+                                        
+                                        var rec=new Ext.data.Record({userId:testStore.getCount()+1,username:'',password:'',email:'',address:'',phone:''});
+                                        testStore.insert(testStore.getCount(), rec);
+                            }},{xtype:'button',name:'del',text:'删除',handler:function(){
+                                var selectedDatas=this.ownerCt.ownerCt.getSelectionModel().getSelections();
+                                testStore.remove(selectedDatas);
+                            }}]
                         });
 
                         viewport=new Ext.Viewport({
