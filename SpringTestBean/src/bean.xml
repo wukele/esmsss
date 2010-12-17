@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:annotation-config>
+	</context:annotation-config>
+	<context:component-scan base-package="bean"></context:component-scan>
+
+	<bean id="useTimeAspectBean" class="aspect.UseTimeAspect"></bean>
+	<bean id="user" class="bean.User">
+		<property name="username" value="ffmmx"></property>
+		<property name="password" value="ffmmx_pass"></property>
+		<property name="email" value="firefoxmmx@gmail.com"></property>
+	</bean>
+
+	<bean id="userDaoInterface" abstract="true" class="dao.user.UserDaoInterface">
+	</bean>
+	<bean id="userDaoImp" class="dao.user.UserDaoImp">
+		<property name="dataSource" ref="myMysqlDataSource"></property>
+	</bean>
+
+	<bean id="userDaoHibernateImp" class="dao.user.UserDaoHibernateImp">
+		<property name="sessionFactory" ref="myMysqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="userDao2" class="dao.user.UserDao2">
+		<property name="sessionFactory" ref="myMysqlSessionFactory"></property>
+	</bean>
+
+	<bean id="userService" class="service.UserService">
+		<property name="sessionFactory" ref="myMysqlSessionFactory"></property>
+		<property name="userDao" ref="userDaoHibernateImp"></property>
+	</bean>
+
+	<bean id="userService2" class="service.User2Service">
+		<property name="userDao" ref="userDao2"></property>
+		<property name="customerDao" ref="customerDao"></property>
+	</bean>
+	<bean id="customerDao" class="dao.customer.CustomerDaoImp">
+		<property name="sessionFactory" ref="myMysqlSessionFactory"></property>
+	</bean>
+	<bean id="customerService" class="service.CustomerService">
+		<property name="customerDao" ref="customerDao"></property>
+	</bean>
+	<!-- 数据库源配置 -->
+	<!-- oracle -->
+	<!--<bean id="myOracleDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@192.168.5.10:1521:ptn"></property>
+		<property name="username" value="auc"></property>
+		<property name="password" value="auc86815300"></property>
+	</bean>-->
+	<!-- mysql -->
+	<bean id="myMysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1/test"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="missdark_mysql"></property>
+	</bean>
+
+	<!--<bean id="myOracleSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="myOracleDataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>bean.User</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+				hibernate.show_sql=true
+				hibernate.hbm2ddl.auto=update
+      		</value>
+		</property>
+	</bean>-->
+
+	<bean id="myMysqlSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="myMysqlDataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>bean.User</value>
+				<value>bean.User2</value>
+				<value>bean.Customer</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.show_sql=true
+				hibernate.hbm2ddl.auto=update
+				hibernate.format_sql=true
+      		</value>
+		</property>
+	</bean>
+
+	<!--<bean id="oracleTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="myOracleSessionFactory"></property>
+	</bean>-->
+
+	<bean id="mysqlTransacationManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="myMysqlSessionFactory"></property>
+	</bean>
+
+	<!-- 事务管理 -->
+	<aop:config>
+		<aop:pointcut expression="execution(public * service..*.*(..)))"
+			id="txManagerPoint" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txManagerPoint" />
+
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="mysqlTransacationManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+</beans>
