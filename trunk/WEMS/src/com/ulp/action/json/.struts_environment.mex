@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="ulp_actionJson" location="71,43" size="311,218">
+    <action name="getmenu" location="66,94" size="150,40">
+      <result name="success" />
+    </action>
+  </package>
+</Struts2Diagram>
+

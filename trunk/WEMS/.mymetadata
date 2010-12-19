@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="WEMS"
+  id="myeclipse.1292646794669"
+  context-root="/WEMS"
+  j2ee-spec="5.0"
+  archive="WEMS.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
