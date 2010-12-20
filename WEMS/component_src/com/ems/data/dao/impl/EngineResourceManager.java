@@ -3,16 +3,17 @@ package com.ems.data.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONArray;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+
+import org.springframework.stereotype.Component;
 
 import com.component.DataEngine;
-import com.data.entity.EngineParameter;
 import com.data.entity.InfoEngine;
+import com.ems.dao.EmsDao;
 import com.ems.data.dao.IEngineResources;
-
-public class EngineResourceManager extends HibernateDaoSupport implements
+@Component("EngineResourceManager")
+public class EngineResourceManager extends EmsDao implements
 		IEngineResources {
 
 	public List<String> GetEngineScripts(String pageId) {

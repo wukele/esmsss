@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.stereotype.Component;
 
 import com.ems.dao.IRealDataCollector;
 import com.ems.entity.RealTimeData;
 import com.opensymphony.xwork2.ActionSupport;
-
+@Component("DirectDataEngine")
 public class DirectDataEngine extends ActionSupport{
 
 	/**
@@ -22,7 +24,8 @@ public class DirectDataEngine extends ActionSupport{
 	public IRealDataCollector getCollect() {
 		return collect;
 	}
-
+	
+	@Resource(name="RealDataCollector")
 	public void setCollect(IRealDataCollector collect) {
 		this.collect = collect;
 	}

@@ -2,13 +2,16 @@ package com.ems.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+
+
+import com.ems.dao.EmsDao;
 import com.ems.dao.IRealDataCollector;
 import com.ems.entity.RealTimeData;
-
-public class RealDataCollector extends HibernateDaoSupport implements
+@Component("RealDataCollector")
+public class RealDataCollector extends EmsDao implements
 		IRealDataCollector {
 
 	public List<RealTimeData> GetRealTimeDataByValueId(List<String> values) {

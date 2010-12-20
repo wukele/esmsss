@@ -2,12 +2,14 @@ package com.ems.component.action;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.stereotype.Component;
 
 import com.component.BaseComponent;
 import com.component.CommEmsKey;
@@ -17,7 +19,7 @@ import com.ems.data.dao.IPageResourcesManager;
 import com.ems.entity.InfoPage;
 
 import com.opensymphony.xwork2.ActionSupport;
-
+@Component("EmsDispatcherPageAction")
 public class EmsDispatcherPageAction extends ActionSupport implements ServletRequestAware {
 		 /**
 	 * 
@@ -66,19 +68,19 @@ public class EmsDispatcherPageAction extends ActionSupport implements ServletReq
 	}
 
 
-
+	@Resource(name="EngineResourceManager")
 	public void setEngineRes(IEngineResources engineRes) {
 		this.engineRes = engineRes;
 	}
 
 
-
+	
 		public IPageResourcesManager getPageManager() {
 		return pageManager;
 	}
 
 
-
+	@Resource(name="EmsPageRourceManager")
 	public void setPageManager(IPageResourcesManager pageManager) {
 		this.pageManager = pageManager;
 	}
