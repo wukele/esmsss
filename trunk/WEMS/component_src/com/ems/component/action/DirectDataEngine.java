@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts2.interceptor.ServletRequestAware;
+
 import org.springframework.stereotype.Component;
 
 import com.ems.dao.IRealDataCollector;
@@ -71,7 +71,6 @@ public class DirectDataEngine extends ActionSupport{
 		type="event";
 		name="message";
 		real_time_data=collect.findRealtimedataByDE(values);
-		System.out.println(values);
 		return SUCCESS;
 	}
 
