@@ -6,6 +6,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
+
+import com.ems.dao.EmsDao;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -18,8 +21,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  * @see com.entries.ulp.InfoMenu
  * @author MyEclipse Persistence Tools
  */
-
-public class InfoMenuDAO extends HibernateDaoSupport {
+@Component("InfoMenuDAO")
+public class InfoMenuDAO extends EmsDao {
 	private static final Log log = LogFactory.getLog(InfoMenuDAO.class);
 	// property constants
 	public static final String PARENT_MENU_CODE = "parentMenuCode";

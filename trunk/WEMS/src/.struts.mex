@@ -24,18 +24,12 @@
       </result>
     </action>
   </package>
-  <package name="component" location="50,500" size="170,71">
-    <action name="ems_dispatcher_page_action" location="10,20" size="150,41">
-      <result name="success">
-        <resourceEdge source="success" routing="0" target="EmsDispatcherPage.jsp" />
-      </result>
-    </action>
-  </package>
   <webResource name="index.jsp" path="/index.jsp" location="383,68" size="150,55" />
   <webResource name="errorLogin.jsp" path="/pages/Login/errorLogin.jsp" location="511,163" size="150,55" />
   <webResource name="Home.jsp" path="/pages/Home.jsp" location="514,297" size="150,55" />
-  <webResource name="EmsDispatcherPage.jsp" path="/pages/ems/comm/EmsDispatcherPage.jsp" location="50,650" size="150,55" />
-  <include file="struts_environment.xml" location="454,17" size="150,30" />
-  <include file="struts_ulpJson.xml" location="625,87" size="150,30" />
+  <webResource name="EmsDispatcherPage.jsp" path="/pages/ems/comm/EmsDispatcherPage.jsp" location="46,397" size="150,55" />
+  <include file="struts_environment.xml" location="267,11" size="150,30" />
+  <include file="struts_ulpJson.xml" location="509,18" size="150,30" />
+  <include file="struts_component_action.xml" location="347,340" size="150,30" />
 </Struts2Diagram>
 

@@ -29,5 +29,5 @@
 	</package>-->
 	<include file="com/environment/action/struts_environment.xml"></include>
 	<include file="com/ulp/action/json/struts_ulpJson.xml"></include>
-	 <include file="com/ems/component/action/struts_component_action.xml"></include> 
-</struts>    
+	
+<include file="struts_component_action.xml"></include></struts>    
