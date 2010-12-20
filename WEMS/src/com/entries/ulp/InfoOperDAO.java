@@ -7,6 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
+
+import com.ems.dao.EmsDao;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -19,8 +22,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  * @see com.entries.ulp.InfoOper
  * @author MyEclipse Persistence Tools
  */
-
-public class InfoOperDAO extends HibernateDaoSupport {
+@Component("InfoOperDAO")
+public class InfoOperDAO extends EmsDao {
 	private static final Log log = LogFactory.getLog(InfoOperDAO.class);
 	// property constants
 	public static final String REGION_ID = "regionId";

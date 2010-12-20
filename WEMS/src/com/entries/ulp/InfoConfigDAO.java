@@ -6,6 +6,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
+
+import com.ems.dao.EmsDao;
 
 /**
  	* A data access object (DAO) providing persistence and search support for InfoConfig entities.
@@ -15,8 +18,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 	 * @see com.entries.ulp.InfoConfig
   * @author MyEclipse Persistence Tools 
  */
-
-public class InfoConfigDAO extends HibernateDaoSupport  {
+@Component("InfoConfigDAO")
+public class InfoConfigDAO extends EmsDao  {
 		 private static final Log log = LogFactory.getLog(InfoConfigDAO.class);
 		//property constants
 	public static final String CONFIG_NAME = "configName";

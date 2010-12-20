@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
 
+import com.ems.dao.EmsDao;
 import com.entries.ulp.InfoMenu;
 import com.entries.ulp.InfoOper;
 import com.entries.ulp.InfoSysModule;
 import com.ui.TreeMenuItems;
 import com.ulp.dao.MenuItemDao;
-
-public class MenuItemDaoImpl extends HibernateDaoSupport implements MenuItemDao {
+@Component("MenuItemDao")
+public class MenuItemDaoImpl extends EmsDao implements MenuItemDao {
 
 	public List<InfoMenu> QueryOperCMenuItem(InfoOper oper, String parentCode) {
 		// TODO Auto-generated method stub
