@@ -2,15 +2,15 @@ package com.ems.data.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
 
 import com.component.BaseComponent;
+import com.ems.dao.EmsDao;
 import com.ems.data.dao.IPageResourcesManager;
 import com.ems.entity.InfoPage;
 import com.ems.entity.InfoPageResource;
-
-public class EmsPageRourceManager extends HibernateDaoSupport implements
+@Component("EmsPageRourceManager")
+public class EmsPageRourceManager extends EmsDao implements
 		IPageResourcesManager {
 
 	public List<String> GetPageScripts(String menuCode) {
