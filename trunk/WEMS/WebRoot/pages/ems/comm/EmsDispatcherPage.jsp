@@ -51,6 +51,7 @@ String path =request.getContextPath();
 					if(configEngines){
 						if(configEngines.length){
 									for(var ei=0;ei<configEngines.length;ei++){
+											configEngines[ei].baseParams=Ext.util.JSON.decode(configEngines[ei].baseParams);
 											Ext.Direct.addProvider(configEngines[ei]);
 											Ext_Direct_providers[ei]=configEngines[ei].id;
 									}
