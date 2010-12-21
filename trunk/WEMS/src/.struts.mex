@@ -31,5 +31,6 @@
   <include file="struts_environment.xml" location="267,11" size="150,30" />
   <include file="struts_ulpJson.xml" location="509,18" size="150,30" />
   <include file="struts_component_action.xml" location="283,346" size="150,30" />
+  <include file="admin_user_action.xml" location="332,436" size="150,30" />
 </Struts2Diagram>
 
