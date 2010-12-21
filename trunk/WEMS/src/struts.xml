@@ -30,4 +30,4 @@
 	<include file="com/environment/action/struts_environment.xml"></include>
 	<include file="com/ulp/action/json/struts_ulpJson.xml"></include>
 	
-<include file="struts_component_action.xml"></include></struts>    
+<include file="struts_component_action.xml"></include><include file="com/admin/user/action/admin_user_action.xml"></include></struts>    
