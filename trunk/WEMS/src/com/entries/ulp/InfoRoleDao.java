@@ -11,6 +11,7 @@ public class InfoRoleDao extends EmsDao {
 							return  getHibernateTemplate().find("from InfoRole");
 			}
 			
+			
 			public  List<InfoRole>  findInfoRolebyRoleCodeOrName(String roleCode,String roleName){
 							String  queryStr="from  InfoRole  as r where " +
 									"r.roleCode=? or  r.roleName=?";

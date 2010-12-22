@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import com.entries.ulp.InfoRole;
 import com.entries.ulp.InfoRoleDao;
@@ -16,7 +18,9 @@ public class RoleService {
 		public void setRoleDao(InfoRoleDao roleDao) {
 			this.roleDao = roleDao;
 		}
-
+	 	
+	 	
+	  
 		public  List<InfoRole>   queryInfoRoles(String role_code,String  role_name){
 			   List<InfoRole>   rs=null;
 				if("".equals(role_code)  &&  "".equals(role_name)){
