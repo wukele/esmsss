@@ -54,13 +54,12 @@
 				<value>com/data/entity/EngineParameter.hbm.xml</value>
 				<value>com/data/entity/RuleEngineData.hbm.xml</value>
 				<value>com/ems/entity/RealTimeData.hbm.xml</value>
-			</list>
+				<value>com/entries/ulp/InfoDept.hbm.xml</value></list>
 		</property>
 	</bean>
 	<context:annotation-config></context:annotation-config> 
 	<context:component-scan base-package="com.busi.*,com.ulp.*,*.*.dao,com.entries.ulp,
-	com.ulp.dao.impl,com.ems.dao.impl,com.ems.data.dao.impl,com.ems.component.action,
-	com.admin.user.action"></context:component-scan>
+	com.ulp.dao.impl,com.ems.dao.impl,com.ems.data.dao.impl,com.ems.component.action,com.admin.user.*"></context:component-scan>
 
 
 </beans>
