@@ -5,8 +5,8 @@
 		<action name="RoleAddEntityRuleActionQry"
 			class="RoleAddEntityRuleAction" method="doQueryRoleInfo">
 		<result type="json">
-				<param name="includeProperties">
-				roles
+				<param name="excludeProperties">
+				role_code,role_name,rs
 				</param>
 		</result></action>
 	</package>
