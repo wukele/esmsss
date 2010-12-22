@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!DOCTYPE struts SYSTEM "struts-2.0.dtd">
 <struts>
 
 	<constant name="struts.devMode" value="false" />
@@ -22,12 +22,8 @@
 			<result>/pages/Home.jsp</result>
 		</action>
 	</package>
-	<!--<package name="component" namespace="/" extends="struts-default">
-		<action name="ems_dispatcher_page_action" class="EmsDispatcherPageAction">
-			<result>/pages/ems/comm/EmsDispatcherPage.jsp</result>
-		</action>
-	</package>-->
-	<include file="com/environment/action/struts_environment.xml"></include>
+	<include file="com/environment/action/struts_environment.xml" />
+	<include file="com/admin/user/action/admin_user_action.xml"></include>
+	<include file="component_action.xml"></include>
 	<include file="com/ulp/action/json/struts_ulpJson.xml"></include>
-	
-<include file="struts_component_action.xml"></include><include file="com/admin/user/action/admin_user_action.xml"></include></struts>    
+</struts>    

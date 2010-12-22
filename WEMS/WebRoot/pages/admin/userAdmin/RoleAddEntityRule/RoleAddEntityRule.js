@@ -44,10 +44,15 @@ RoleAddEntityRule=function(){
 	});
 }
 function queryInfoRole(e){
-	var ruleCode=Ext.getCmp('role_code').getValue();
-	var ruleName=Ext.getCmp('role_name').getValue();
+	var roleCode=Ext.getCmp('role_code').getValue();
+	var roleName=Ext.getCmp('role_name').getValue();
 	Ext.Ajax.request({
-			url:'RoleAddEntityRuleActionQry.action'
+			url:'RoleAddEntityRuleActionQry.action',
+			params:{
+				role_code:roleCode,
+				role_name:roleName
+			}
+			
 	});
 }
 
