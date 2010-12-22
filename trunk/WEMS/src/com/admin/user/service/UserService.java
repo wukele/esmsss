@@ -15,7 +15,7 @@ import com.entries.ulp.InfoOperDAO;
  * @author hooxin
  *
  */
-@Component("userService")
+@Component("UserService")
 public class UserService {
 	private static final Log log = LogFactory.getLog(UserService.class);
 	private String errorMsg;
@@ -25,7 +25,6 @@ public class UserService {
 	 * 添加一个用户
 	 * @param user 用户/操作员实体
 	 */
-	@Transactional
 	public void appendUser(InfoOper user){
 		InfoOper oldUser=null;
 		
@@ -51,7 +50,7 @@ public class UserService {
 		return errorMsg;
 	}
 	
-	@Resource(name="InfoOperDAO")
+	
 	public InfoOperDAO getUserDao() {
 		return userDao;
 	}
@@ -60,7 +59,6 @@ public class UserService {
 	 * 修改用户信息 
 	 * @param user 用户/操作员实体
 	 */
-	@Transactional
 	public void modifyUser(InfoOper user){
 		
 		if(user.getOperNo()==null || user.getOperNo().trim().length() == 0){
@@ -85,7 +83,8 @@ public class UserService {
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
-
+	
+	@Resource(name="InfoOperDAO")
 	public void setUserDao(InfoOperDAO userDao) {
 		this.userDao = userDao;
 	}
