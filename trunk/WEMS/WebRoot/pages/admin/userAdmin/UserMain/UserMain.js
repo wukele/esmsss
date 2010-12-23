@@ -22,8 +22,6 @@
 		return {
 			me:this,
 			queryUser:function(){
-				if(!store.isDestroyed)
-					store.destroy();
 				var paras={};
 				var qryFields=grid.getTopToolbar().findByType('textfield');
 				Ext.each(qryFields,function(item,index,allItems){
@@ -32,16 +30,16 @@
 						paraName=submitprefix+'.'+item.getName();
 					paras[paraName]=item.getValue();
 				});
-				store=new Ext.data.JsonStore({
+				store.reload({
 					proxy : new Ext.data.HttpProxy({
-						url : 'qryUser.action'
+						url : 'qryUser.action',
+						method:'post'
 					}),
-					baseParams:{jsonObject:paras},
+					baseParams:paras,
 					fields : fieldModel,
 					idProperty : 'operNo',
 					root : 'lstUser'
 				});
-				store.reload();
 				
 			},
 			setUserAddCt : function(userAddCt) {

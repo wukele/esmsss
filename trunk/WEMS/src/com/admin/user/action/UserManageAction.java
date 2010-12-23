@@ -1,10 +1,12 @@
 package com.admin.user.action;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 @Component("UserManageAction")
+@Scope("prototype")
 public class UserManageAction extends ActionSupport {
 	/**
 	 * 
