@@ -1,11 +1,14 @@
 package com.admin.user.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.entries.ulp.InfoOper;
 import com.entries.ulp.InfoOperDAO;
@@ -76,6 +79,24 @@ public class UserService {
 		userDao.merge(user);
 	}
 
+	/**
+	 * 查询用户信息
+	 * @param operNo 用户号
+	 * @param operName 用户名称
+	 * @return
+	 */
+	public List<InfoOper> findUsers(String operNo,String operName){
+		List<InfoOper> lst=null;
+		Map<String, Object> map	= new HashMap<String, Object>();
+		
+		if(operNo!=null && operNo.trim().length() > 0)
+			map.put("operNo", operNo);
+		if(operName!=null && operName.trim().length() > 0)
+			map.put("operName", operName);
+		
+		lst=userDao.findByPropertiesMap(map);
+		return lst;
+	}
 	public void removeUser(InfoOper user){
 		
 	}
