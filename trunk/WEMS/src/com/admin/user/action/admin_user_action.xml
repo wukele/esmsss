@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-   <package name="UserAdmin" extends="json-default">
+   <package name="UserAdminJson" extends="json-default">
 		<action name="RoleAddEntityRuleActionQry"
 			class="RoleAddEntityRuleAction" method="doQueryRoleInfo">
 		<result type="json">
@@ -9,5 +9,25 @@
 				role_code,role_name,rs
 				</param>
 		</result></action>
+		<action name="addUser" method="addUser" class="UserManageJsonAction" >
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
+		<action name="qryUser" method="queryUser" class="UserManageJsonAction" >
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="UserAdmin" extends="struts-default">
+		<action name="user_manager_main_view" method="displayUserMain" class="UserManageAction" >
+			<result>/pages/admin/userAdmin/UserMain/UserMain.jsp</result>
+		</action>
 	</package>
 </struts>    
