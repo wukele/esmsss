@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.admin.user.service.UserService;
@@ -12,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 @Component("UserManageJsonAction")
+@Scope("prototype")
 public class UserManageJsonAction extends ActionSupport {
 	private InfoOper user;
 	private List<InfoOper> lstUser;
