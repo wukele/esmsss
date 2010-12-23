@@ -5,7 +5,7 @@
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<constant name="struts.i18n.encoding" value="GBK" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
 
 	<package name="base" namespace="/" extends="struts-default">
 		<action name="login" class="LoginAction">
