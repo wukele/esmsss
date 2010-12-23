@@ -1,12 +1,13 @@
 package com.entries.ulp;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Component;
 
 import com.ems.dao.EmsDao;
@@ -325,5 +326,39 @@ public class InfoOperDAO extends EmsDao {
 
 	public static InfoOperDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (InfoOperDAO) ctx.getBean("InfoOperDAO");
+	}
+	
+	/**
+	 * 根据属性键值对查找用户信息
+	 * @param map 属性映射（KEY不一定要求和字段字段一样）
+	 * @author ffmmx
+	 * @return 用户信息列表
+	 */
+	@SuppressWarnings("unchecked")
+	public List<InfoOper> findByPropertiesMap(Map<String, Object> map){
+		List<InfoOper> lst=null;
+		List<Object> paras=new ArrayList<Object>();
+		
+		log.debug("finding by properties map...");
+		String hql="from InfoOper as oper where 1=1";
+		
+		if(map.containsKey("operNo")){
+			hql+=" and oper.operNo=?";
+			paras.add(map.get("operNo"));
+		}
+		if(map.containsKey("operName")){
+			hql+=" and oper.operName=?";
+			paras.add(map.get("operName"));
+		}
+		
+		try {
+			lst=(List<InfoOper>)getHibernateTemplate().find(hql, paras.toArray());
+			log.debug("finding by properties map successfull");
+		} catch (RuntimeException e) {
+			log.error("finding by properties map failed",e);
+			throw e;
+		}
+		return lst;
+		
 	}
 }
