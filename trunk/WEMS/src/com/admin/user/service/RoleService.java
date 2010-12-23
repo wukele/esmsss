@@ -5,11 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 
+
+import com.entries.ulp.InfoMenu;
 import com.entries.ulp.InfoRole;
 import com.entries.ulp.InfoRoleDao;
+
 @Component("RoleService")
 public class RoleService {
 	    
@@ -19,6 +21,13 @@ public class RoleService {
 			this.roleDao = roleDao;
 		}
 	 	
+	 	public List<InfoMenu> getRoleMenus(String role_code){
+	 		  return  roleDao.findRoleMenuByRoleCode(role_code);
+	 	}
+	 	
+	 	public List<InfoMenu> getOperMenu(String operNo){
+	 		 return roleDao.findRoleMenuWithOper(operNo);
+	 	}
 	 	
 	  
 		public  List<InfoRole>   queryInfoRoles(String role_code,String  role_name){
