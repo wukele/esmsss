@@ -6,7 +6,7 @@
 			class="RoleAddEntityRuleAction" method="doQueryRoleInfo">
 		<result type="json">
 				<param name="excludeProperties">
-				role_code,role_name,rs
+				role_code,role_name,rs,operMenu,roleMenu
 				</param>
 		</result></action>
 		<action name="addUser" method="addUser" class="UserManageJsonAction" >
@@ -22,6 +22,11 @@
 					userService
 				</param>
 			</result>
+		</action>
+		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu" class="doQueryRoleMenu">
+			<param name="excludeProperties">
+				role_code,role_name,rs,roles
+			</param>
 		</action>
 	</package>
 	
