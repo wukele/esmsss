@@ -23,10 +23,13 @@
 				</param>
 			</result>
 		</action>
-		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu" class="doQueryRoleMenu">
+		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu" 
+		    class="RoleAddEntityRuleAction">
+		    <result type="json">
 			<param name="excludeProperties">
 				role_code,role_name,rs,roles
 			</param>
+			</result>
 		</action>
 	</package>
 	
