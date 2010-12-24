@@ -9,4 +9,6 @@ function clearAllTask(){
 			   				};	
 			   		}
 		   }
+		   var  MainCmp=Ext.getCmp('content-panel');
+		   MainCmp.getEl().removeChild();
 }
