@@ -21,7 +21,7 @@ public class InfoRoleDao extends EmsDao {
 			
 			public List<InfoMenu>  findRoleMenuWithOper(String operNo){
 				String queryStr="select m from RuleRoleFunc as rrf," +
-						"InfoMenu as m,RuleOperRole as rr,where rrf.roleCode=" +
+						"InfoMenu as m,RuleOperRole as rr where rrf.roleCode=" +
 						"rr.roleCode and rrf.entityType='M' and m.menuCode=rrf.entityCode and " +
 						"rr.operNo=?";
 				return getHibernateTemplate().find(queryStr,operNo);
