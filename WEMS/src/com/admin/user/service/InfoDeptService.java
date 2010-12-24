@@ -14,7 +14,7 @@ public class InfoDeptService {
 
 	private InfoDeptDAO infoDeptDAO;
 
-	@Resource(name = "InfoDeptDAO")
+	
 	
 
 	public List<InfoDept> findAllInfoDept() {
@@ -23,6 +23,7 @@ public class InfoDeptService {
 		return rs;
 	}
 
+	@Resource(name = "InfoDeptDAO")
 	public void setInfoDeptDAO(InfoDeptDAO infoDeptDAO) {
 		this.infoDeptDAO = infoDeptDAO;
 	}
