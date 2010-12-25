@@ -196,9 +196,71 @@
 					}, {
 						xtype : 'button',
 						name : 'btnRemoveUser',
-						text : '删除',
+						text : '删除/失效',
 						handler : function() {
-							// 删除方法
+							var _window = new Ext.Window({
+								title:"用户操作",
+								width:250,
+								height:100,
+								plain:true,
+								resizable:false,
+								layout:"form",
+								labelWidth:55,
+								defaultType:"textfield",
+								items:[{
+									xtype:"panel",
+									style:"padding:5px",
+									baseCls:"x-plain",
+									layout:"column",
+									items:[{
+										columnWidth:.9,
+										baseCls:"x-plain",
+										layout:"form",
+										labelWidth:55,
+										defaults:{xtype:"textfield",width:125},
+										items:[{
+											xtype : "combo",
+											mode : "local",
+											triggerAction : 'all',
+											fieldLabel : "操作类别",
+											store : new Ext.data.ArrayStore( {
+												fields : [ "classification" ],
+												data : [ [ "删除" ], [ "失效" ] ]
+											}),
+											displayField : "classification",
+											editable : false
+											}]
+										}]
+								  }],
+								buttons:[{
+									text:"确定",
+									handler:function(){
+										var records=grid.getSelectionModel().getSelections();
+										var operNo;
+										_window=this.ownerCt.ownerCt;
+										var flag=_window.findByType("combo")[0].getValue();
+										for(var i=0;i<records.length;i++){
+											operNo=records[i].get("operNo")
+											Ext.Ajax.request({
+												url:"delUser.action?"+"operNo="+operNo+"&flag="+flag,
+												method : "post",
+											})
+										}
+									}
+								},{
+									text:"取消",
+									handler:function(){
+										_window.hide();
+									}
+								}],
+								listeners:{
+									"show":function(){
+										var _classType=_window.findByType("combo")[0]
+										_classType.setValue("删除");
+									}
+								}
+						});
+								_window.show();
 							
 						}
 					} ]
