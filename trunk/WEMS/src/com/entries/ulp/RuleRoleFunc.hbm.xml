@@ -8,7 +8,7 @@
     <class name="com.entries.ulp.RuleRoleFunc" table="rule_role_func" catalog="protest">
         <id name="entityId" type="java.lang.Integer">
             <column name="ENTITY_ID" />
-            <generator class="assigned"></generator>
+            <generator class="native"></generator>
         </id>
         <property name="roleCode" type="java.lang.String">
             <column name="ROLE_CODE" length="6" not-null="true" />
