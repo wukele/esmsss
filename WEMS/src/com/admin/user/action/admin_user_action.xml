@@ -16,6 +16,13 @@
 				</param>
 			</result>
 		</action>
+		<action name="modifyUser" method="modifyUser" class="UserManageJsonAction" >
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
 		<action name="qryUser" method="queryUser" class="UserManageJsonAction" >
 			<result type="json">
 				<param name="excludeProperties">
