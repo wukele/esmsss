@@ -35,7 +35,7 @@
 						url : 'qryUser.action',
 						method:'post'
 					}),
-					baseParams:paras,
+					params:paras,
 					fields : fieldModel,
 					idProperty : 'operNo',
 					root : 'lstUser'
@@ -45,6 +45,7 @@
 			setUserAddCt : function(userAddCt) {
 				if (userAddCt)
 					UserAddCt = userAddCt;
+				UserAddCt.setDataStore(store);
 			},
 			init : function(contianerId) {
 				// for test ###
@@ -143,8 +144,8 @@
 						handler : function() {
 							// 添加用户方法
 							// @add ffmmx
-							var addWindow = UserAddCt.getWindowCt();
-							UserAddCt.clearWindowFieldValues();
+							var addWindow = UserAddCt.getAddWindow();
+							
 							addWindow.show();
 						}
 					}, {

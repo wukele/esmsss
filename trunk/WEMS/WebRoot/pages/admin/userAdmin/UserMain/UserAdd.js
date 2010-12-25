@@ -14,6 +14,13 @@
 		var genderStore;
 
 		return {
+			getAddWindow:function(){
+				this.clearWindowFieldValues();
+				return this.getWindow();
+			},
+			getModifyWindow:function(record){
+				return this.getWindow();
+			},
 			clearWindowFieldValues : function() {
 				fields = window.findByType('textfield');
 				combos = window.findByType('combo');
@@ -25,7 +32,7 @@
 					item.setValue(1);
 				});
 			},
-			getWindowCt : function() {
+			getWindow : function() {
 				return window;
 			},
 			setDataStore : function(dataStore) {
@@ -150,7 +157,29 @@
 				});
 
 				Ext.Ajax.request({
-					url : ''
+					url : 'addUser.action',
+					method:'post',
+					params:data,
+					success:function(req,status){
+						ret=Ext.util.JSON.decode(req.responseText);
+						if(ret==null)
+							return;
+						//失败
+						if(ret.errorCode!=0){
+							Ext.MessageBox.alert('添加失败',req.errorMsg);
+							return;
+						}
+						//添加成功
+						recData={};
+						for(i=0;i<fields.length;i++){
+							recData[fields[i].getName()]=fields[i].getValue();
+						}
+						for(i=0;i<combos.length;i++){
+							recData[combos[i].getName()]=combos[i].getValue();
+						}
+						var rec=new Ext.data.Record(recData,recData['operNo']);
+						store.add(rec);
+					}
 				});
 
 				window.hide();
