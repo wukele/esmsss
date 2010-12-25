@@ -38,8 +38,17 @@ public class InfoRoleDao extends EmsDao {
 
 			public void saveRuleRoleFunc(RuleRoleFunc rrf) {
 				// TODO Auto-generated method stub
-				      
+				      			//getHibernateTemplate().
 								getHibernateTemplate().save(rrf);
 						
+			}
+
+			public void delRuleRoleFunc(String roleCode, String menuCode) {
+				// TODO Auto-generated method stub
+						List<RuleRoleFunc>   rrfs=getHibernateTemplate().find("from RuleRoleFunc as rrf" +
+								" where rrf.roleCode=?  and  rrf.entityCode=?", new String[]{roleCode,menuCode});
+						if(rrfs!=null && rrfs.size()>0){
+							   getHibernateTemplate().delete(rrfs.get(0));
+						}
 			}
 }
