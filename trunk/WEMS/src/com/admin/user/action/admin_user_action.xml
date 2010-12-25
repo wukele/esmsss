@@ -30,6 +30,13 @@
 				</param>
 			</result>
 		</action>
+		<action name="delUser" method="delOrDenialUser" class="UserManageJsonAction" >
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
 		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu" 
 		    class="RoleAddEntityRuleAction">
 		    <result type="json">
