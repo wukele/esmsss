@@ -37,6 +37,7 @@ public class UserService {
 			user.setRegionId("0");
 			user.setDealType("0");
 			user.setStatisticalDeptNo("999999");
+			user.setFlag(0);
 			userDao.save(user);
 		}catch (RuntimeException e) {
 			// TODO: handle exception
@@ -65,9 +66,6 @@ public class UserService {
 	public int modifyUser(InfoOper user){
 		errorCode=0;
 		try {
-			user.setRegionId("0");
-			user.setDealType("0");
-			user.setStatisticalDeptNo("999999");
 			userDao.merge(user);
 		} catch (RuntimeException e) {
 			log.error("modifyUser failed...");
