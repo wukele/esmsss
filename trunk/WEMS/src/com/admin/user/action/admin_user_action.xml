@@ -31,6 +31,11 @@
 			</param>
 			</result>
 		</action>
+	 	<action name="RoleAddEntityRule" method="doAddRoleMenu" class="RoleAddEntityRuleAction">
+	 		<result type="json"></result>
+	 	</action>
+		
+		
 	</package>
 	
 	<package name="UserAdmin" extends="struts-default">
