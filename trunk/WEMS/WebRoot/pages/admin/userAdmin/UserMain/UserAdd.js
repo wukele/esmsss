@@ -17,15 +17,24 @@
 		return {
 			modifyUser:function(){
 				var data={};
+				var paras={};
 				var allFields=[];
 				var fields=window.findByType('textfield');
 				var combos=window.findByType('combo');
 				allFields=fields.concat(combos);
 				
+				var rec=store.getById(window.findById('operNo').getValue());
+				data=rec.data;
 				for(i=0;i<allFields.length;i++){
 					var fieldName='';
-						fieldName=submitprefix?submitprefix+'.'+allFields[i].getName() : allFields[i].getName();
+						fieldName=allFields[i].getName();
 					data[fieldName]=allFields[i].getValue();
+				}
+				
+				for(i in data){
+					var fieldName='';
+					fieldName=submitprefix?submitprefix+'.'+i:i;
+					paras[fieldName]=data[i];
 				}
 				//验证
 				isFieldsValidated=true;
@@ -37,7 +46,7 @@
 					Ext.Ajax.request({
 						url:'modifyUser.action',
 						method:'post',
-						params:data,
+						params:paras,
 						success:function(xhq,status){
 							if(xhq.responseText==null)
 								return;
@@ -48,15 +57,7 @@
 								return;
 							}
 							//修改成功
-							var recData={};
-							for(i=0;i<fields.length;i++){
-								recData[fields[i].getName()]=fields[i].getValue();
-							}
-							for(i=0;i<combos.length;i++){
-								recData[combos[i].getName()]=combos[i].getValue();
-							}
-							var rec=store.getById(recData['operNo']);
-							rec.data=recData;
+							rec.data=data;
 							rec.commit();
 						}
 					});
@@ -213,20 +214,16 @@
 					window.render(containerId);
 			},
 			addUser : function() {
-				fields = window.findByType('textfield');
-				combos = window.findByType('combo');
-				data = {};
-
-				Ext.each(fields, function(item, index, allItems) {
+				var fields = window.findByType('textfield');
+				var combos = window.findByType('combo');
+				var allFields=[];
+				
+				var data = {};
+				allFields=fields.concat(combos);
+				
+				Ext.each(allFields, function(item, index, allItems) {
 					var fieldName = '';
-					if (submitprefix != null)
-						fieldName = submitprefix + '.' + item.getName();
-					data[fieldName] = item.getValue();
-				});
-				Ext.each(combos, function(item, index, allItems) {
-					var fieldName = '';
-					if (submitprefix != null)
-						fieldName = submitprefix + '.' + item.getName();
+						fieldName =submitprefix?submitprefix+'.'+item.getName():item.getName();
 					data[fieldName] = item.getValue();
 				});
 
