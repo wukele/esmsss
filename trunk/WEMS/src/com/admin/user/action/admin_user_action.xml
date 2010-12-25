@@ -48,7 +48,10 @@
 	 	<action name="RoleAddEntityRule" method="doAddRoleMenu" class="RoleAddEntityRuleAction">
 	 		<result type="json"></result>
 	 	</action>
-		
+		<action name="RoleAddEntityRuleDel" method="doDelRoleRuleFunc" class="RoleAddEntityRuleAction">
+	 		<result type="json"></result>
+	 	</action>
+	 	
 		
 	</package>
 	
