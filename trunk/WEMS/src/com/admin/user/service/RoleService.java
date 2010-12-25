@@ -51,5 +51,10 @@ public class RoleService {
 				roleDao.saveRuleRoleFunc(rrf);
 		}
 		
+		@Transactional
+		public void  DelRoleMenu(String role_code,String menu_code){
+			   roleDao.delRuleRoleFunc(role_code,menu_code);
+		}
+		
 		
 }
