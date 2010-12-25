@@ -2,6 +2,7 @@ package com.entries.ulp;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Component;
 
 import com.ems.dao.EmsDao;
@@ -28,9 +29,17 @@ public class InfoRoleDao extends EmsDao {
 			}
 			
 			
+			@SuppressWarnings("unchecked")
 			public  List<InfoRole>  findInfoRolebyRoleCodeOrName(String roleCode,String roleName){
 							String  queryStr="from  InfoRole  as r where " +
 									"r.roleCode=? or  r.roleName=?";
 							return getHibernateTemplate().find(queryStr, new String[]{roleCode,roleName});
+			}
+
+			public void saveRuleRoleFunc(RuleRoleFunc rrf) {
+				// TODO Auto-generated method stub
+				      
+								getHibernateTemplate().save(rrf);
+						
 			}
 }
