@@ -18,12 +18,27 @@ public class UserManageJsonAction extends ActionSupport {
 	private InfoOper user;
 	private List<InfoOper> lstUser;
 	private UserService userService;
+	private int errorCode;
+	private String errorMsg;
 	
+	/**
+	 * 添加用户
+	 * @return
+	 * @throws Exception
+	 */
 	public String addUser() throws Exception{
-		
+		if(user==null)
+			throw new RuntimeException("user [InfoOper] is null!");
+		errorCode=userService.appendUser(user);
+		errorMsg=userService.getErrorMsg();
 		return SUCCESS;
 	}
 	
+	/**
+	 * 用户查询
+	 * @return
+	 * @throws Exception
+	 */
 	public String queryUser() throws Exception{
 		if(user==null)
 			user=new InfoOper();
@@ -32,6 +47,19 @@ public class UserManageJsonAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 修改用户 
+	 * @return
+	 * @throws Exception
+	 */
+	public String modifyUser() throws Exception{
+		if(user==null)
+			throw new RuntimeException("user [InfoOper] is null!");
+		errorCode=userService.modifyUser(user);
+		errorMsg=userService.getErrorMsg()	;
+		
+		return SUCCESS;
+	}
 	public InfoOper getUser() {
 		return user;
 	}
@@ -56,5 +84,23 @@ public class UserManageJsonAction extends ActionSupport {
 
 	public void setLstUser(List<InfoOper> lstUser) {
 		this.lstUser = lstUser;
+	}
+
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public int getErrorCode() {
+		return errorCode;
 	}
 }

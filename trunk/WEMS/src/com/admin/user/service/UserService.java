@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.entries.ulp.InfoOper;
 import com.entries.ulp.InfoOperDAO;
@@ -22,31 +23,29 @@ import com.entries.ulp.InfoOperDAO;
 public class UserService {
 	private static final Log log = LogFactory.getLog(UserService.class);
 	private String errorMsg;
+	private int errorCode;
 	private InfoOperDAO userDao;
 	
 	/**
 	 * 添加一个用户
 	 * @param user 用户/操作员实体
 	 */
-	public void appendUser(InfoOper user){
-		InfoOper oldUser=null;
-		
-		if(user.getOperNo()==null || user.getOperNo().trim().length() == 0){
-			errorMsg="user [InfoOper] operno is null";
-			log.error(errorMsg);
-			throw new RuntimeException(errorMsg);
+	@Transactional 
+	public int appendUser(InfoOper user){
+		errorCode=0;
+		try{
+			user.setRegionId("0");
+			user.setDealType("0");
+			user.setStatisticalDeptNo("999999");
+			userDao.save(user);
+		}catch (RuntimeException e) {
+			// TODO: handle exception
+			log.error("appdenUser failed...");
+			errorCode=1;
+			errorMsg="appdenUser failed...";
 		}
 		
-		oldUser=userDao.findById(user.getOperNo());
-		
-		if(oldUser!=null){
-			errorMsg="user [InfoOper] of that OperNo is "+user.getOperNo()+" is exist.";
-			log.error(errorMsg);
-			throw new RuntimeException(errorMsg);
-		}
-		
-		userDao.save(user);
-		
+		return errorCode;
 	}
 
 	public String getErrorMsg() {
@@ -62,21 +61,21 @@ public class UserService {
 	 * 修改用户信息 
 	 * @param user 用户/操作员实体
 	 */
-	public void modifyUser(InfoOper user){
-		
-		if(user.getOperNo()==null || user.getOperNo().trim().length() == 0){
-			errorMsg="user [InfoOper] operno is null";
-			log.error(errorMsg);
-			throw new RuntimeException(errorMsg);
+	@Transactional
+	public int modifyUser(InfoOper user){
+		errorCode=0;
+		try {
+			user.setRegionId("0");
+			user.setDealType("0");
+			user.setStatisticalDeptNo("999999");
+			userDao.merge(user);
+		} catch (RuntimeException e) {
+			log.error("modifyUser failed...");
+			errorCode=1;
+			errorMsg="modifyUser failed...";
 		}
 		
-		if(user.getOperPwd()==null || user.getOperPwd().trim().length()==0){
-			errorMsg="user [InfoOper] operpwd is null";
-			log.error(errorMsg);
-			throw new RuntimeException(errorMsg);
-		}
-		
-		userDao.merge(user);
+		return errorCode;
 	}
 
 	/**
@@ -108,5 +107,13 @@ public class UserService {
 	@Resource(name="InfoOperDAO")
 	public void setUserDao(InfoOperDAO userDao) {
 		this.userDao = userDao;
+	}
+
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
 	}
 }

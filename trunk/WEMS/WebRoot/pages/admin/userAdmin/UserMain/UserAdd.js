@@ -12,13 +12,79 @@
 		var submitprefix = 'user';
 		var store;
 		var genderStore;
+		var isFieldsValidated=false;
 
 		return {
+			modifyUser:function(){
+				var data={};
+				var allFields=[];
+				var fields=window.findByType('textfield');
+				var combos=window.findByType('combo');
+				allFields=fields.concat(combos);
+				
+				for(i=0;i<allFields.length;i++){
+					var fieldName='';
+						fieldName=submitprefix?submitprefix+'.'+allFields[i].getName() : allFields[i].getName();
+					data[fieldName]=allFields[i].getValue();
+				}
+				//验证
+				isFieldsValidated=true;
+				for(i=0;i<allFields.length;i++){
+					isFieldsValidated=isFieldsValidated && allFields[i].validate();
+				}
+				if(isFieldsValidated){
+					//修改
+					Ext.Ajax.request({
+						url:'modifyUser.action',
+						method:'post',
+						params:data,
+						success:function(xhq,status){
+							if(xhq.responseText==null)
+								return;
+							
+							//修改失败
+							if(xhq.errorCode>0){
+								Ext.MessageBox.alert('修改失败','失败原因:'+xhq.errorMsg);
+								return;
+							}
+							//修改成功
+							var recData={};
+							for(i=0;i<fields.length;i++){
+								recData[fields[i].getName()]=fields[i].getValue();
+							}
+							for(i=0;i<combos.length;i++){
+								recData[combos[i].getName()]=combos[i].getValue();
+							}
+							var rec=store.getById(recData['operNo']);
+							rec.data=recData;
+							rec.commit();
+						}
+					});
+					window.hide();
+				}
+			},
 			getAddWindow:function(){
 				this.clearWindowFieldValues();
+				window.setTitle('添加用户');
+				var btnOk = window.getFooterToolbar().findById('ok');
+				btnOk.handler=this.addUser;
 				return this.getWindow();
 			},
 			getModifyWindow:function(record){
+				var allFields=[];
+				var fields=window.findByType('textfield');
+				var combos=window.findByType('combo');
+				allFields=fields.concat(combos);
+				
+				if(record){
+					for(i=0;i<allFields.length;i++){
+						allFields[i].setValue(record.data[allFields[i].getName()]);
+					}
+				}
+				window.setTitle('修改用户');
+				window.findById('operNo').readOnly=true;
+				var btnOk = window.getFooterToolbar().findById('ok');
+				btnOk.handler=this.modifyUser;
 				return this.getWindow();
 			},
 			clearWindowFieldValues : function() {
@@ -62,6 +128,7 @@
 						width : 180
 					},
 					items : [ {
+						id:'operNo',
 						fieldLabel : '用户号',
 						name : 'operNo',
 						allowBlank : false,
@@ -69,6 +136,7 @@
 						maxLength : 10,
 						maxLengthText : '至多10位'
 					}, {
+						id:'operName',
 						fieldLabel : '用户名称',
 						name : 'operName',
 						allowBlank : false,
@@ -76,6 +144,7 @@
 						maxLength : 60,
 						maxLengthText : '至多60位'
 					}, {
+						id:'loginName',
 						fieldLabel : '登录名称',
 						name : 'loginName',
 						allowBlank : false,
@@ -83,6 +152,7 @@
 						maxLength : 60,
 						maxLengthText : '至多60位'
 					}, {
+						id:'operPwd',
 						fieldLabel : '密码',
 						name : 'operPwd',
 						allowBlank : false,
@@ -104,16 +174,19 @@
 						valueField : 'genderKey',
 						displayField : 'genderName'
 					}, {
+						id:'phone',
 						fieldLabel : '电话',
 						name : 'phone',
 						maxLength : 20,
 						maxLengthText : '至多20位'
 					}, {
+						id:'positions',
 						fieldLabel : '位置',
 						name : 'positions',
 						maxLength : 32,
 						maxLengthText : '至多32位'
 					}, {
+						id:'mobileNo',
 						fieldLabel : '手机号码',
 						name : 'mobileNo',
 						maxLength : 20,
@@ -121,11 +194,12 @@
 					} ],
 					buttons : [ {
 						xtype : 'button',
+						id:'ok',
 						name : 'ok',
-						text : '确认',
-						handler : this.addUser
+						text : '确认'
 					}, {
 						xtype : 'button',
+						id:'cancel',
 						name : 'cancel',
 						text : '取消',
 						handler : function() {

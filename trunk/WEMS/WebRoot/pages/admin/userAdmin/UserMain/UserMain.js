@@ -159,6 +159,12 @@
 					} ]
 				});
 
+				//Ìí¼ÓË«»÷ÐÞ¸Ä¡£¡£
+				grid.on('rowdblclick',function(gridPanel, rowIndex,e){
+					var selectedRecord=gridPanel.getSelectionModel().getSelected();
+					var modifyWindow = UserAddCt.getModifyWindow(selectedRecord);
+					modifyWindow.show();
+				});
 				if (contianerId)
 					grid.render(contianerId);
 			}
