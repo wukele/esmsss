@@ -6,7 +6,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -18,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=path %>/ext3/resources/css/ext-all-notheme.css" /> 
     <link rel="stylesheet" type="text/css" href="<%=path %>/ext3/resources/css/xtheme-gray.css" />
     <link rel="stylesheet" type="text/css" href="<%=path %>/resources/layout1.css" />
+    <link rel="stylesheet" type="text/css" href="<%=path %>/ext3/examples/shared/icons/silk.css" />
     <!-- GC -->
         <!-- LIBS -->
     <script type="text/javascript" src="<%=path %>/ext3/adapter/ext/ext-base.js"></script>
