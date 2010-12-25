@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.admin.user.service.RoleService;
 import com.entries.ulp.InfoMenu;
+import com.entries.ulp.InfoOper;
 import com.entries.ulp.InfoRole;
 import com.opensymphony.xwork2.ActionSupport;
 import com.ulp.comm.CommUlpKey;
@@ -25,6 +26,7 @@ public class RoleAddEntityRuleAction extends ActionSupport implements ServletReq
 	private static final long serialVersionUID = 9120789797018893831L;
 	private String role_code;
 	private String role_name;
+	private String menu_code;
 	private List<InfoRole>  roles;
 	private RoleService   rs;
 	private HttpServletRequest  request;
@@ -54,11 +56,25 @@ public class RoleAddEntityRuleAction extends ActionSupport implements ServletReq
 	
 	public String doQueryRoleMenu(){
 		roleMenu=rs.getRoleMenus(role_code);
-		String   operNo=String.valueOf(request.getSession().getAttribute(CommUlpKey.KEY_INFO_OPER));
+		String   operNo=((InfoOper)request.getSession().getAttribute(CommUlpKey.KEY_INFO_OPER)).getOperNo();
 		operMenu=rs.getOperMenu(operNo);
 		return SUCCESS;
 	}
 	
+	public String doAddRoleMenu(){
+		rs.AddRoleMenu(role_code, menu_code);
+		return  SUCCESS;
+	}
+	
+	
+	public String doDelRoleRuleFunc(){
+		rs.DelRoleMenu(role_code, menu_code);
+		return  SUCCESS;
+	}
+	
+	public void setMenu_code(String menuCode) {
+		menu_code = menuCode;
+	}
 	public void setRole_code(String roleCode) {
 		role_code = roleCode;
 	}
