@@ -5,12 +5,14 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
 import com.entries.ulp.InfoMenu;
 import com.entries.ulp.InfoRole;
 import com.entries.ulp.InfoRoleDao;
+import com.entries.ulp.RuleRoleFunc;
 
 @Component("RoleService")
 public class RoleService {
@@ -39,4 +41,15 @@ public class RoleService {
 				}
 			   return rs;
 		}
+		
+		@Transactional
+		public  void  AddRoleMenu(String role_code,String  menu_code){
+				RuleRoleFunc   rrf=new RuleRoleFunc();
+				rrf.setEntityCode(menu_code);
+				rrf.setEntityType("M");
+				rrf.setRoleCode(role_code);
+				roleDao.saveRuleRoleFunc(rrf);
+		}
+		
+		
 }
