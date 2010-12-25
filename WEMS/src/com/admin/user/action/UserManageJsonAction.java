@@ -3,7 +3,10 @@ package com.admin.user.action;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -65,6 +68,31 @@ public class UserManageJsonAction extends ActionSupport {
 	}
 
 
+	/**
+	 * 删除或者失效用户
+	 * 
+	 * @throws Exception
+	 * @author yunlong.yuan time 2010.12.25
+	 */
+	public String delOrDenialUser() throws Exception {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/JSON;charset=GBK");
+		response.setHeader("Cache-Control", "no-cache");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String operNo = request.getParameter("operNo");
+		String flag = request.getParameter("flag");
+		System.out.println("################################## " + operNo);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + flag);
+		// if(flags==0){
+		// userService.removeUser(user);
+		// return SUCCESS;
+		// }else if(flags==1){
+		// userService.accessDenial(user);
+		// return SUCCESS;
+		// }
+		return null;
+	}
 	
 	public UserService getUserService() {
 		return userService;
