@@ -85,7 +85,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 							 session=request.getSession(true);
 					}*/
 					session.setAttribute(CommUlpKey.KEY_INFO_OPER, oper);
-					session.setMaxInactiveInterval(CommTools.getSysMaxInactiveInterval(configDao));
+					//session.setMaxInactiveInterval(CommTools.getSysMaxInactiveInterval(configDao));
 					return SUCCESS;
 				}
 				public void setServletRequest(HttpServletRequest arg0) {
