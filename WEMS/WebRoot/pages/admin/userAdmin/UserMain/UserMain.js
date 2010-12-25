@@ -12,8 +12,44 @@
 		var grid;
 		var store;
 
-		var fieldModel = [ 'operNo', 'operName', 'loginName', 'operPwd',
-				'gender', 'positions', 'phone', 'email', 'mobileNo' ];
+		var fieldModel = [ 'operNo',
+		               	'regionId',
+		            	'deptNo',
+		            	'roleCode',
+		            	'operName',
+		            	'loginName',
+		            	'operPwd',
+		            	'question',
+		            	'answer',
+		            	'gender',
+		            	'positions',
+		            	'phone',
+		            	'email',
+		            	'mobileNo',
+		            	'needSms',
+		            	'operMessage',
+		            	'effDate',
+		            	'expHintDate',
+		            	'expDate',
+		            	'initFlag',
+		            	'dealType',
+		            	'appType',
+		            	'statisticalDeptNo',
+		            	'operAlias',
+		            	'loginCount',
+		            	'resInit1',
+		            	'resInit2',
+		            	'resChar1',
+		            	'resChar2',
+		            	'pwdEncode',
+		            	'operStatus',
+		            	'operKind',
+		            	'flag',
+		            	'acctStatus',
+		            	'busiType',
+		            	'derateFlag',
+		            	'isOnline',
+		            	'loginIp' ];
 		var cm;
 		var sm = new Ext.grid.CheckboxSelectionModel();
 		var UserAddCt;
@@ -95,6 +131,15 @@
 					}, {
 						header : '手机号码',
 						dataIndex : 'mobileNo'
+					},{
+						header:'是否有效',
+						dataIndex:'flag',
+						renderer: function(val){
+							if(val == 1)
+								return '无效';
+							else if(val == 0)
+								return '有效';
+						}
 					} ],
 					defaults : {
 						sortable : true
