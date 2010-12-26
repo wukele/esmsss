@@ -30,6 +30,7 @@ String path = request.getContextPath();
     
     <script type="text/javascript">
     		Ext.chart.Chart.CHART_URL = "<%=path %>/ext3/resources/charts.swf";
+    		Ext.BLANK_IMAGE_URL = '<%=path %>/ext3/resources/images/default/s.gif';
     		var basePath="<%= path%>";
     </script>
     
@@ -37,6 +38,7 @@ String path = request.getContextPath();
     
    	<script type="text/javascript" src="<%=path %>/decorators/Layout/Layout1.js"></script>
    	<script type="text/javascript" src="<%=path %>/decorators/Layout/initCommPage.js"></script>
+   	<script type="text/javascript" src="<%=path %>/ext3/examples/shared/examples.js"></script>
    	<script type="text/javascript" src="<%=path %>/dwr/engine.js"></script>
    	<script type="text/javascript" src="<%=path %>/dwr/util.js"></script>
 </head>
