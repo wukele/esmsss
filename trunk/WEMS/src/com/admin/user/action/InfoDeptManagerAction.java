@@ -60,8 +60,6 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	public void setInfoDeptDao(InfoDeptDAO infoDeptDao) {
 		this.infoDeptDao = infoDeptDao;
 	}
-	public InfoDeptDAO getInfoDeptDao() {
-		return infoDeptDao;
-	}
+	
 	
 }
