@@ -90,13 +90,31 @@ public class UserService {
 			map.put("operNo", operNo);
 		if(operName!=null && operName.trim().length() > 0)
 			map.put("operName", operName);
-		
 		lst=userDao.findByPropertiesMap(map);
 		return lst;
 	}
+	
+	/**
+	 * 删除用户
+	 * @param user
+	 * @author yunlong.yuan
+	 */
+	@Transactional
 	public void removeUser(InfoOper user){
-		
+		userDao.delete(user);
 	}
+	
+	
+	/**
+	 * 拒绝此用户访问数据库
+	 * @param user
+	 * @author yunlong.yuan
+	 */
+	@Transactional
+	public void accessDenial(InfoOper user){
+		userDao.denial(user);
+	}
+	
 	
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
