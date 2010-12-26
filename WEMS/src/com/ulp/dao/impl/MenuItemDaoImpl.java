@@ -17,7 +17,7 @@ public class MenuItemDaoImpl extends EmsDao implements MenuItemDao {
 
 	public List<InfoMenu> QueryOperCMenuItem(InfoOper oper, String parentCode) {
 		// TODO Auto-generated method stub
-			String QueryCMenu="select new InfoMenu(m.menuCode,m.moduleCode," +
+			String QueryCMenu="select  distinct new InfoMenu(m.menuCode,m.moduleCode," +
 					"m.menuUrl,m.menuCol,m.menuRow,m.isshow,m.menuTitle,m.isactive)" +
 					" from InfoMenu as m,RuleOperRole as rr,RuleRoleFunc as rf" +
 					" where rf.roleCode=rr.roleCode and rf.entityType='M' and rf.entityCode=m.menuCode and m.isactive=1 " +
@@ -40,7 +40,7 @@ public class MenuItemDaoImpl extends EmsDao implements MenuItemDao {
 		// TODO Auto-generated method stub
 		int  count=0;
 		boolean  res=false;
-		String QueryCMenu="select m " +
+		String QueryCMenu="select distinct m " +
 		" from InfoMenu as m,RuleOperRole as rr,RuleRoleFunc as rf" +
 		" where rf.roleCode=rr.roleCode and rf.entityType='M' and rf.entityCode=m.menuCode and m.isactive=1" +
 		" and rr.operNo=?  and  m.parentMenuCode=";
@@ -63,7 +63,7 @@ public class MenuItemDaoImpl extends EmsDao implements MenuItemDao {
 
 	public List<InfoSysModule> QueryOperModule(InfoOper oper) {
 		// TODO Auto-generated method stub
-		String QueryCMenu="select new InfoSysModule(md.moduleCode,md.moduleName) " +
+		String QueryCMenu="select distinct new InfoSysModule(md.moduleCode,md.moduleName) " +
 				"from InfoSysModule as md where md.isActive=1 and md.moduleCode in(" +
 				"select distinct m.moduleCode " +
 		" from InfoMenu as m,RuleOperRole as rr,RuleRoleFunc as rf" +
