@@ -34,9 +34,7 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	public void setInfoDeptService(InfoDeptService infoDeptService) {
 		this.infoDeptService = infoDeptService;
 	}
-	public InfoDeptService getInfoDeptService() {
-		return infoDeptService;
-	}
+	
 	
 
 	public  String findAllInfoDept(){
@@ -56,9 +54,7 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-	public HttpServletRequest getRequest() {
-		return request;
-	}
+
 	
 	@Resource(name="InfoDeptDAO")
 	public void setInfoDeptDao(InfoDeptDAO infoDeptDao) {
