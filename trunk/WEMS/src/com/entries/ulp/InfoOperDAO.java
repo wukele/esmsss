@@ -77,6 +77,11 @@ public class InfoOperDAO extends EmsDao {
 		}
 	}
 
+	
+	/**
+	 * 删除用户
+	 * @param persistentInstance
+	 */
 	public void delete(InfoOper persistentInstance) {
 		log.debug("deleting InfoOper instance");
 		try {
@@ -84,6 +89,22 @@ public class InfoOperDAO extends EmsDao {
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
+			throw re;
+		}
+	}
+	
+	/**
+	 * 拒绝此用户访问系统
+	 * @param persistentInstance
+	 * @author yunlong.yuan
+	 */
+	public void denial(InfoOper persistentInstance){
+		log.debug("updating InfoOper instance");
+		try {
+			getHibernateTemplate().update(persistentInstance);
+			log.debug("update successful");
+		} catch (RuntimeException re) {
+			log.error("update failed", re);
 			throw re;
 		}
 	}
