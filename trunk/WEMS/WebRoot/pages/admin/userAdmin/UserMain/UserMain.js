@@ -242,8 +242,19 @@
 										for(var i=0;i<records.length;i++){
 											operNo=records[i].get("operNo")
 											Ext.Ajax.request({
-												url:"delUser.action?"+"operNo="+operNo+"&flag="+flag,
+												url:"delUser.action",
 												method : "post",
+												params:{"operNo":operNo,"flag":flag},
+												success: function(response, opts) {
+													alert("操作成功");
+													_window.hide();
+													me.queryUser;
+												},
+										  		failure: function(response, opts) {
+										      		alert("操作失败");
+													_window.hide();
+										  	    }
+
 											})
 										}
 									}
