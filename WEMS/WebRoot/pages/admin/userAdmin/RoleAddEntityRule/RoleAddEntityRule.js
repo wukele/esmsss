@@ -149,6 +149,7 @@ function queryInfoRole(e){
             														handler: function(){
             																var rec= operMenuPanel.getSelectionModel().getSelected();
         																	if (!rec) {
+        																		Ext.example.msg('注意','请选定添加项');
             																	return false;
         																    }
         																
@@ -168,10 +169,11 @@ function queryInfoRole(e){
                         															},
                         															success: function(){
                         																   roleMenuPanel.store.add(rec);
+                        																   Ext.example.msg('OK','角色功能{0}添加成功',rec.get('menuTitle'))
                         																   return true;     
                         															},
                         															failure: function(e){
-                        																   Ext.Msg.alert('错误','角色功能新增失败');
+                        																   Ext.example.msg('错误','角色功能新增失败');
                         															},
                         															method:'POST'
                         														}); 							
@@ -185,12 +187,11 @@ function queryInfoRole(e){
 				 												]),
 				 												iconCls:'silk-cog',
 				 												ddGroup:'roleMenuPanelDDGrourp',
-				 												columnWidth:0.45,
+				 												columnWidth:0.5,
 				 												title:'操作员可操作功能',
-				 												frame:true,
 				 												height:300,
 				 												store:roleEntityStore,
-				 												border:false,
+				 												frame:true,
 				 												enableDragDrop   : true,
 				 												cm:new Ext.grid.ColumnModel({
 				 														defaults:{
@@ -238,7 +239,7 @@ function queryInfoRole(e){
             														handler: function(){
             															  var rec=roleMenuPanel.getSelectionModel().getSelected();
             															  if(!rec){
-            															  	   Ext.Msg.alert('信息','请选定删除项');
+            															  	   Ext.example.msg('信息','请选定删除项');
             															  	   return false;
             															  }
             															  Ext.Ajax.request({
@@ -249,7 +250,9 @@ function queryInfoRole(e){
             															  		},
             															  		method:'POST',
             															  		success:function(){
+            															  			 
             															  			 crStore.remove(rec);
+            															  			 Ext.example.msg('OK','角色功能删除成功')
             															  			 roleEntityStore.load();
             															  		}
             															  });
@@ -257,12 +260,11 @@ function queryInfoRole(e){
 				 												}
 				 												]),
 				 												iconCls:'silk-cog',						
-				 												columnWidth:0.45,
+				 												columnWidth:0.5,
 				 												title:'角色功能',
-				 												frame:true,
 				 												height:300,
 				 												store:crStore,
-				 												border:false,
+				 												frame:true,
 				 												enableDragDrop   : true,
 				 												cm:new Ext.grid.ColumnModel({
 				 														defaults:{
@@ -309,15 +311,16 @@ function queryInfoRole(e){
                         															},
                         															success: function(){
                         																   roleMenuPanel.store.add(records);
+                        																   Ext.example.msg('OK','角色功能{0}添加成功',records[0].get('menuTitle'))
                         																   return true;     
                         															},
                         															failure: function(e){
-                        																   Ext.Msg.alert('错误','角色功能新增失败');
+                        																   Ext.example.msg('错误','角色功能新增失败');
                         															},
                         															method:'POST'
                         													}); 													               												
                         											}else{
-                        													Ext.Msg.alert('信息','角色功能不能重复');
+                        													Ext.example.msg('信息','角色功能不能重复');
                         													return false;
                         											}
                 											}
