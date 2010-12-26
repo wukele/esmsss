@@ -179,7 +179,7 @@ function queryInfoRole(e){
                         														}); 							
                         													}else{
                         														
-                        														Ext.Msg.alert('信息','角色功能不能重复');
+                        														Ext.example.msg('信息','角色功能不能重复');
                         													}
             														},
             														scope: this
