@@ -7,14 +7,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.admin.user.service.InfoDeptService;
 import com.admin.user.service.RoleService;
 import com.entries.ulp.InfoDept;
+import com.entries.ulp.InfoDeptDAO;
 import com.entries.ulp.InfoRole;
 import com.opensymphony.xwork2.ActionSupport;
 @Component("InfoDeptManagerAction")
+@Scope("prototype")
 public class InfoDeptManagerAction extends ActionSupport implements ServletRequestAware {
 
 	private HttpServletRequest  request;
@@ -25,6 +28,7 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	
 	private List<InfoDept>  infoDepts;
 	private InfoDeptService   infoDeptService;
+	private InfoDeptDAO infoDeptDao;
 	
 	@Resource(name="InfoDeptService")
 	public void setInfoDeptService(InfoDeptService infoDeptService) {
@@ -33,6 +37,7 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	public InfoDeptService getInfoDeptService() {
 		return infoDeptService;
 	}
+	
 
 	public  String findAllInfoDept(){
 		setInfoDepts(infoDeptService.findAllInfoDept());
@@ -53,6 +58,14 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	}
 	public HttpServletRequest getRequest() {
 		return request;
+	}
+	
+	@Resource(name="InfoDeptDAO")
+	public void setInfoDeptDao(InfoDeptDAO infoDeptDao) {
+		this.infoDeptDao = infoDeptDao;
+	}
+	public InfoDeptDAO getInfoDeptDao() {
+		return infoDeptDao;
 	}
 	
 }
