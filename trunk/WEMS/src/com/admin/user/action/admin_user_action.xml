@@ -53,7 +53,10 @@
 	 	</action>
 		<action name="RoleDeviceManagerActionQryDevice" method="RoleDeviceManagerActionQryDevice" class="RoleDeviceManagerAction">
 			<result type="json"></result>
+		</action><action name="RoleDeviceManagerActionQryRoleDev" method="RoleDeviceManagerActionQryRoleDev" class="RoleDeviceManagerAction">
+			<result type="json"></result>
 		</action>
+		
 	</package>
 	
 	<package name="UserAdmin" extends="struts-default">
