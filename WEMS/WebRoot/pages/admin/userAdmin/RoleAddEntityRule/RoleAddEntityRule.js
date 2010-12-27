@@ -117,7 +117,7 @@ function queryInfoRole(e){
 				 					if(!operPanel){
 				 						 operPanel=new Ext.Panel({
 				 						 		iconCls:'silk-user-edit',
-				 						 		width:1024,
+				 	
 				 						 		title:'角色功能变更',
 				 					 			layout:'column',
 				 								height:320,
