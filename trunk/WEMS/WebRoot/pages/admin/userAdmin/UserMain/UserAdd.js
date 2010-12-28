@@ -53,12 +53,14 @@
 							
 							//修改失败
 							if(xhq.errorCode>0){
-								Ext.MessageBox.alert('修改失败','失败原因:'+xhq.errorMsg);
+								Ext.example.msg('修改失败','失败原因:'+xhq.errorMsg);
 								return;
 							}
 							//修改成功
 							rec.data=data;
 							rec.commit();
+							
+							Ext.example.msg('成功','用户修改成功');
 						}
 					});
 					window.hide();
@@ -237,7 +239,7 @@
 							return;
 						//失败
 						if(ret.errorCode!=0){
-							Ext.MessageBox.alert('添加失败',req.errorMsg);
+							Ext.example.msg('注意',req.errorMsg);
 							return;
 						}
 						//添加成功
@@ -250,6 +252,7 @@
 						}
 						var rec=new Ext.data.Record(recData,recData['operNo']);
 						store.add(rec);
+						Ext.example.msg('成功','用户添加成功');
 					}
 				});
 
