@@ -9,6 +9,8 @@
 	Ext.ns('com.wems.admin.userAdmin');
 
 	com.wems.admin.userAdmin.UserMain = function() {
+		var frame;
+		var qryPanel;
 		var grid;
 		var store;
 
@@ -59,11 +61,10 @@
 			me:this,
 			queryUser:function(){
 				var paras={};
-				var qryFields=grid.getTopToolbar().findByType('textfield');
+				var qryFields=qryPanel.findByType('textfield');
 				Ext.each(qryFields,function(item,index,allItems){
 					var paraName='';
-					if(submitprefix)
-						paraName=submitprefix+'.'+item.getName();
+						paraName=submitprefix?submitprefix+'.'+item.getName():item.getName();
 					paras[paraName]=item.getValue();
 				});
 				store.reload({
@@ -118,7 +119,13 @@
 						dataIndex : 'operPwd'
 					}, {
 						header : '性别',
-						dataIndex : 'gender'
+						dataIndex : 'gender',
+						renderer:function(val){
+							if(val==1)
+								return '男';
+							else
+								return '女';
+						}
 					}, {
 						header : '位置',
 						dataIndex : 'positions'
@@ -146,43 +153,44 @@
 					}
 				});
 
+				//查询面板
+				qryPanel=new Ext.Panel({
+					bodyStyle:'width:100%',
+					defaults:{border:false},
+					layout : 'column',
+					frame:true,
+					items : [ {xtype:'panel',columnWidth:.25,layout:'form',items:[{
+						xtype : 'textfield',
+						width : 160,
+						fieldLabel : '用户号',
+						name : 'operNo',
+						maxLength : 10,
+						maxLengthText : '至多10位',
+						rightPadding:.20
+					} ]}, {xtype:'panel',columnWidth:.25,layout:'form',items:[{
+						xtype : 'textfield',
+						width : 160,
+						fieldLabel : '用户名称',
+						name : 'operName',
+						maxLength : 60,
+						maxLengthText : '至多60位',
+						rightPadding:.20
+					} ]}, {
+						xtype : 'button',
+						name : 'query',
+						text : '查询',
+						handler :this.queryUser // 查询用户方法
+					} ]
+				}) ;
+				
 				grid = new Ext.grid.GridPanel({
 					store : store,
-					layout : 'fit',
-					title : '用户管理',
+					title : '用户视图',
 					sm : sm,
 					cm : cm,
-					autoHeight:true,
-					height:500,
+					bodyStyle:'width:100%;height:70%;',
 					viewConfig:{autoFill:true},
 					tbar : [ {
-						xtype : 'panel',
-						layout : 'column',
-						frame:true,
-						items : [ {html:'用户号:',layout:'fit'},{
-								xtype : 'textfield',
-								width : 160,
-								fieldLabel : '用户号',
-								name : 'operNo',
-								maxLength : 10,
-								maxLengthText : '至多10位'
-							} , {html:'用户名称:',layout:'fit'},{
-								xtype : 'textfield',
-								width : 160,
-								fieldLabel : '用户名称',
-								name : 'operName',
-								maxLength : 60,
-								maxLengthText : '至多60位'
-							} , {
-							xtype : 'button',
-							name : 'query',
-							text : '查询',
-							handler :
-								// 查询用户方法
-								this.queryUser
-						} ]
-					} ],
-					bbar : [ {
 						xtype : 'button',
 						name : 'btnAddUser',
 						text : '添加',
@@ -240,7 +248,7 @@
 										_window=this.ownerCt.ownerCt;
 										var flag=_window.findByType("combo")[0].getValue();
 										for(var i=0;i<records.length;i++){
-											operNo=records[i].get("operNo")
+											operNo=records[i].get("operNo");
 											Ext.Ajax.request({
 												url:"delUser.action",
 												method : "post",
@@ -255,7 +263,7 @@
 													_window.hide();
 										  	    }
 
-											})
+											});
 										}
 									}
 								},{
@@ -266,7 +274,7 @@
 								}],
 								listeners:{
 									"show":function(){
-										var _classType=_window.findByType("combo")[0]
+										var _classType=_window.findByType("combo")[0];
 										_classType.setValue("删除");
 									}
 								}
@@ -283,8 +291,18 @@
 					var modifyWindow = UserAddCt.getModifyWindow(selectedRecord);
 					modifyWindow.show();
 				});
+				
+				//总容器
+				frame=new Ext.Panel({
+					iconCls: 'silk-user',
+					layout:'form',
+					width:'100%',
+					heigth:'100%',
+					title:'用户管理',
+					items:[qryPanel,grid]
+				});
 				if (contianerId)
-					grid.render(contianerId);
+					frame.render(contianerId);
 			}
 		};
 	}();
