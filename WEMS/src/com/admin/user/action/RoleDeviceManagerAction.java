@@ -10,11 +10,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+
 import com.admin.user.service.RoleDeviceService;
 import com.ems.entity.DeviceTable;
 import com.entries.ulp.RuleRoleFunc;
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 @Component("RoleDeviceManagerAction")
 @Scope("prototype")
 public class RoleDeviceManagerAction extends ActionSupport  implements  ServletRequestAware{
@@ -102,13 +104,22 @@ public class RoleDeviceManagerAction extends ActionSupport  implements  ServletR
 			return SUCCESS;
 		}
 		
-		
+	
 		public  String  RoleDeviceManagerActionAddDev(){
 			RuleRoleFunc    rrf=new RuleRoleFunc();
 			rrf.setEntityType("E");
 			rrf.setRoleCode(role_code);
 			rrf.setEntityCode(device_id);
 			err_code=role_device_service.AddRoleDevice(rrf);
+			return SUCCESS;
+		}
+		
+		public  String  RoleDeviceManagerActionDelDev(){
+			RuleRoleFunc    rrf=new RuleRoleFunc();
+			rrf.setEntityType("E");
+			rrf.setRoleCode(role_code);
+			rrf.setEntityCode(device_id);
+			err_code=role_device_service.DelRoleDevice(rrf);
 			return SUCCESS;
 		}
 		
