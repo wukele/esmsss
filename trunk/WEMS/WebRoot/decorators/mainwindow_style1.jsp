@@ -36,7 +36,7 @@ String path = request.getContextPath();
     
     
     
-   	<script type="text/javascript" src="<%=path %>/decorators/Layout/Layout1.js"></script>
+   	<script type="text/javascript" src="<%=path %>/decorators/Layout/BaseLayoutApp.js"></script>
    	<script type="text/javascript" src="<%=path %>/decorators/Layout/initCommPage.js"></script>
    	<script type="text/javascript" src="<%=path %>/ext3/examples/shared/examples.js"></script>
    	<script type="text/javascript" src="<%=path %>/dwr/engine.js"></script>
@@ -64,14 +64,10 @@ String path = request.getContextPath();
 				<%=buff.toString()%>				
 				
             	var accordion = new Ext.Panel({
-                	margins:'2 0 2 2',
-                	region:'west',
-       			    split: true,
         			height: 400,
         			width: 200,
 	        		minSize: 100,
-	       			 maxSize: 500,
-        			autoScroll: true,
+	        		title:'¹¦ÄÜ',
                 	layout:'accordion',
                 	items: [<%=accordionItems%>]
             	});

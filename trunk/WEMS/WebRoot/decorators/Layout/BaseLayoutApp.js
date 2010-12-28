@@ -1,3 +1,39 @@
+Ext.ns('Ems.App')
+
+/*Ems.App.DeviceTree=Ext.extend(Ext.tree.TreePanel,{
+	title:'设备',
+	root:new Ext.tree.TreeNode({
+		  text:'系统设备',
+		  expanded:true
+	})
+});*/
+
+
+
+Ems.App.MainTab=Ext.extend(Ext.TabPanel,{
+	  	margins:'2 0 2 2',
+        region:'west',
+        split: true,
+        height: 400,
+        width: 200,
+	    minSize: 100,
+	    maxSize: 500,
+        autoScroll: true,
+        activeTab: 0,
+	  initComponent:function(){
+	  		this.funcTree=CreateMenuBar();
+	  		this.devT=new Ext.tree.TreePanel({
+	  			title:'设备',
+	  			root:new Ext.tree.AsyncTreeNode({
+	  				text:'系统设备'
+	  			}),
+	  			dataUrl:'EmsSystemDeviceAction.action'
+	  		});
+	  		this.items=[this.funcTree,this.devT];
+	  		Ems.App.MainTab.superclass.initComponent.call(this);
+	  }
+});
+
 function appLoad(){
 			
 	Ext.QuickTips.init();
@@ -30,11 +66,14 @@ function appLoad(){
 		split:true,
 		border: 1,
 		height:100,
-		collapsible:true
+		collapsible:true,
+		animCollapse:true,
+		collapsed:true,
+		title:'事件'
 	});
     
     
-    var MenuBar=CreateMenuBar();
+    var MenuBar=new Ems.App.MainTab();
     
     
 	// Assign the changeLayout function to be called on tree node click.
