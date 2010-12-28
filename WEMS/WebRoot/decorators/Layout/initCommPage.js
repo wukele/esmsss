@@ -13,8 +13,8 @@ Ext.Ajax.on('requestcomplete',function(){
 });*/
 
 
-Ext.Ajax.on('requestexception',function(){
-	LoadMaskDataChg.hide();
+Ext.Ajax.on('requestexception',function(e){
+	Ext.example.msg('系统错误','后台传输错误');
 });
 
 function clearAllTask(){
