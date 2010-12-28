@@ -59,6 +59,9 @@
 		<action name="RoleDeviceManagerActionAddDev" method="RoleDeviceManagerActionAddDev" class="RoleDeviceManagerAction">
 			<result type="json"></result>
 		</action>
+		<action name="RoleDeviceDel" method="RoleDeviceManagerActionDelDev" class="RoleDeviceManagerAction">
+			<result type="json"></result>
+		</action>
 	</package>
 	
 	<package name="UserAdmin" extends="struts-default">
