@@ -1,14 +1,14 @@
 package com.admin.user.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-
 
 import com.entries.ulp.InfoMenu;
 import com.entries.ulp.InfoRole;
@@ -159,4 +159,42 @@ public class RoleService {
 			}
 		}
 		
+		/**
+		 * 查询角色信息，条件皆为可选
+		 * @param roleCode 角色代码
+		 * @param roleName 角色名称
+		 * @param roleLevel 角色级别
+		 * @param isactive 是否激活
+		 * @param roleType 角色类型
+		 * @param comments 注释
+		 * @return 角色信息列表
+		 */
+		public List<InfoRole> findRoles(String roleCode,String roleName,String roleLevel,
+				Integer isactive,String roleType,String comments){
+			log.debug("findRoles instance");
+			Map<String, Object> map=new HashMap<String, Object>();
+			List<InfoRole> lst=null;
+			
+			if(roleCode!=null && roleCode.trim().length()>0)
+				map.put("roleCode", roleCode);
+			if(roleName!=null && roleName.trim().length()>0)
+				map.put("roleName", roleName);
+			if(roleLevel!=null && roleLevel.trim().length()>0)
+				map.put("roleLevel", roleLevel);
+			if(roleType!=null && roleType.trim().length()>0)
+				map.put("roleType", roleType);
+			if(comments!=null && comments.trim().length()>0)
+				map.put("comments", comments);
+			if(isactive!=null)
+				map.put("isactive", isactive);
+			try {
+				lst=roleDao.findRoleByMap(map);
+				log.debug("findRoles finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+			
+			return lst;
+		}
 }
