@@ -156,6 +156,7 @@ EMS.RoleQuery.RoleOperDeviceArea=Ext.extend(Ext.Panel,{
             			    	var  record=Ext.getCmp('roleDeviceView').getSelectionModel().getSelected();
             			    	if(!record){
             			    		Ext.example.msg('错误','请选定删除设备');
+            			    		return false;
             			    	}
             			    	Ext.Ajax.request({
             			    		url:'RoleDeviceDel.action',
