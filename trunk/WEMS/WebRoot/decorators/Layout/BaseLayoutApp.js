@@ -42,7 +42,6 @@ Ems.App.MainTab=Ext.extend(Ext.TabPanel,{
 	  											},
 	  											script:true
 	  									});
-	  									Ext.example.msg('–≈œ¢','{0}“≥√Ê',deviceId);
 	  							}
 	  							clearAllTask();
 	  					}
