@@ -78,10 +78,29 @@ public class RoleService {
 		 * 删除角色
 		 * @param roleCode 角色代码
 		 */
+		@Transactional
 		public void removeRole(String roleCode){
 			log.debug("removeRole instance");
 			try {
 				roleDao.deleteRole(roleCode);
+				log.debug("removeRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+		}
+		/**
+		 * 批量删除角色
+		 * @param aRoleCode 角色代码
+		 */
+		@Transactional
+		public void removeRoles(String[] aRoleCode){
+			log.debug("removeRole instance");
+			try {
+				if(aRoleCode==null || aRoleCode.length==0)
+					throw new RuntimeException("aRoleCode is null");
+				for(String roleCode:aRoleCode)
+					roleDao.deleteRole(roleCode);
 				log.debug("removeRole finish.");
 			} catch (RuntimeException e) {
 				log.error(e);	
@@ -93,6 +112,7 @@ public class RoleService {
 		 * 修改角色
 		 * @param role 角色实体
 		 */
+		@Transactional
 		public void modifyRole(InfoRole role){
 			log.debug("modifyRole instance");
 			try {
@@ -105,9 +125,29 @@ public class RoleService {
 		}
 		
 		/**
+		 * 批量无效化角色
+		 * @param aRoleCode 角色代码
+		 */
+		@Transactional
+		public void invaildateRoles(String[] aRoleCode){
+			log.debug("invaildateRole instance");
+			try {
+				if(aRoleCode==null|| aRoleCode.length==0)
+					throw new RuntimeException("aRoleCode is null");
+				for(String roleCode:aRoleCode)
+					roleDao.invaildateRole(roleCode);
+				log.debug("invaildateRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+		}
+		
+		/**
 		 * 无效化角色
 		 * @param roleCode 角色代码
 		 */
+		@Transactional
 		public void invaildateRole(String roleCode){
 			log.debug("invaildateRole instance");
 			try {
