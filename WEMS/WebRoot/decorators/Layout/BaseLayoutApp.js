@@ -25,6 +25,7 @@ Ems.App.MainTab=Ext.extend(Ext.TabPanel,{
 	  		this.devT=new Ext.tree.TreePanel({
 	  			title:'设备',
 	  			root:new Ext.tree.AsyncTreeNode({
+	  				iconCls:'silk-table-refresh',
 	  				text:'系统设备'
 	  			}),
 	  			dataUrl:'EmsSystemDeviceAction.action'
