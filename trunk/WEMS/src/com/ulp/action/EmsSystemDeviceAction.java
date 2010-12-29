@@ -1,49 +1,47 @@
 package com.ulp.action;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import net.sf.json.JSONArray;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.entries.ulp.InfoOper;
 import com.opensymphony.xwork2.ActionSupport;
 import com.ui.TreeDeviceNode;
+import com.ulp.comm.CommUlpKey;
+import com.ulp.service.TreeDeviceServce;
 
 
 @Component("EmsSystemDeviceAction")
-public class EmsSystemDeviceAction extends ActionSupport {
+@Scope("prototype")
+public class EmsSystemDeviceAction extends ActionSupport  implements ServletRequestAware{
 		
 	   private  List<TreeDeviceNode>  devices;
-	    
+	   private  HttpServletRequest request;
+	   private  TreeDeviceServce   treeService;
+	   @Resource(name="TreeDeviceServce")
+		public void setTreeService(TreeDeviceServce treeService) {
+		   this.treeService = treeService;
+	   }
 		public List<TreeDeviceNode> getDevices() {
-		return devices;
-	}
-
-	public void setDevices(List<TreeDeviceNode> devices) {
-		this.devices = devices;
-	}
-
+			return devices;
+		}
 		public  String  execute(){
-			devices=new ArrayList<TreeDeviceNode>();
-			for(int  i=0;i<5;i++){
-					TreeDeviceNode  node=new TreeDeviceNode();
-					node.setIconCls("silk_user");
-					node.setId("id"+i);
-					node.setLeaf(true);
-					node.setText("text_"+i);
-					devices.add(node);
-			}
-			TreeDeviceNode   nd=devices.get(0);
-			TreeDeviceNode  cnd=new TreeDeviceNode();
-			cnd.setText("chidl");
-			cnd.setLeaf(false);
-			JSONArray   c=nd.getChildren();
-			c.add(cnd);
-			nd.setChildren(c);
-			
-			
+			InfoOper   oper=(InfoOper)request.getSession().getAttribute(CommUlpKey.KEY_INFO_OPER);
+			devices=treeService.CreateOperTreeDevice(oper.getOperNo());
 			return SUCCESS;
+		}
+
+		public void setServletRequest(HttpServletRequest arg0) {
+			// TODO Auto-generated method stub
+			request=arg0;
 		}
 		
 }
