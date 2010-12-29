@@ -13,8 +13,24 @@ Ext.Ajax.on('requestcomplete',function(){
 });*/
 
 
-Ext.Ajax.on('requestexception',function(e){
-	Ext.example.msg('系统错误','后台传输错误');
+Ext.Ajax.on('requestexception',function(c,e){
+	var doc = e.responseText;
+	
+	if(!doc){
+		Ext.example.msg('系统错误','后台传输错误{0}',e.status);
+	}else{
+		var start = doc.indexOf('<pre>')+5;
+		var end = doc.indexOf('</pre>');
+		if(end){
+			Ext.example.msg('系统错误','后台传输错误{0}-{1}',e.status,e.statusText);
+			if(e.status!=500){
+					return ;
+			}
+		}
+		var errs=doc.substr(start,end);
+		var errs=errs.substr(0,100);
+		Ext.example.msg('系统错误','后台传输错误{0}',errs);
+	}
 });
 
 function clearAllTask(){
