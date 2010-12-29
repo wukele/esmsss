@@ -3,6 +3,8 @@ package com.ulp.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -32,6 +34,15 @@ public class EmsSystemDeviceAction extends ActionSupport {
 					node.setText("text_"+i);
 					devices.add(node);
 			}
+			TreeDeviceNode   nd=devices.get(0);
+			TreeDeviceNode  cnd=new TreeDeviceNode();
+			cnd.setText("chidl");
+			cnd.setLeaf(false);
+			JSONArray   c=nd.getChildren();
+			c.add(cnd);
+			nd.setChildren(c);
+			
+			
 			return SUCCESS;
 		}
 		
