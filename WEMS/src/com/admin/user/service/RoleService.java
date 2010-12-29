@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import com.entries.ulp.RuleRoleFunc;
 
 @Component("RoleService")
 public class RoleService {
+	    private static final Logger log=Logger.getLogger(RoleService.class);
 	    
 	 	private InfoRoleDao  roleDao;
 	 	@Resource(name="InfoRoleDao")
@@ -56,5 +58,65 @@ public class RoleService {
 			   roleDao.delRuleRoleFunc(role_code,menu_code);
 		}
 		
+		/**
+		 * 添加角色
+		 * @param role 角色实体
+		 */
+		@Transactional
+		public void addRole(InfoRole role){
+			log.debug("addRole instance.");
+			try {
+				roleDao.insertRole(role);
+				log.debug("addRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+		}
+		
+		/**
+		 * 删除角色
+		 * @param roleCode 角色代码
+		 */
+		public void removeRole(String roleCode){
+			log.debug("removeRole instance");
+			try {
+				roleDao.deleteRole(roleCode);
+				log.debug("removeRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+		}
+		
+		/**
+		 * 修改角色
+		 * @param role 角色实体
+		 */
+		public void modifyRole(InfoRole role){
+			log.debug("modifyRole instance");
+			try {
+				roleDao.updateRole(role);
+				log.debug("modifyRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+		}
+		
+		/**
+		 * 无效化角色
+		 * @param roleCode 角色代码
+		 */
+		public void invaildateRole(String roleCode){
+			log.debug("invaildateRole instance");
+			try {
+				roleDao.invaildateRole(roleCode);
+				log.debug("invaildateRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				throw e;
+			}
+		}
 		
 }
