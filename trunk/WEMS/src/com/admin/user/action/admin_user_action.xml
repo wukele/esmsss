@@ -1,71 +1,118 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-   <package name="UserAdminJson" extends="json-default">
-		<action name="RoleAddEntityRuleActionQry"
-			class="RoleAddEntityRuleAction" method="doQueryRoleInfo">
-		<result type="json">
+	<package name="UserAdminJson" extends="json-default">
+		<action name="RoleAddEntityRuleActionQry" class="RoleAddEntityRuleAction"
+			method="doQueryRoleInfo">
+			<result type="json">
 				<param name="excludeProperties">
-				role_code,role_name,rs,operMenu,roleMenu
+					role_code,role_name,rs,operMenu,roleMenu
 				</param>
-		</result></action>
-		<action name="addUser" method="addUser" class="UserManageJsonAction" >
+			</result>
+		</action>
+		<action name="addUser" method="addUser" class="UserManageJsonAction">
 			<result type="json">
 				<param name="excludeProperties">
 					userService
 				</param>
 			</result>
 		</action>
-		<action name="modifyUser" method="modifyUser" class="UserManageJsonAction" >
+		<action name="modifyUser" method="modifyUser" class="UserManageJsonAction">
 			<result type="json">
 				<param name="excludeProperties">
 					userService
 				</param>
 			</result>
 		</action>
-		<action name="qryUser" method="queryUser" class="UserManageJsonAction" >
+		<action name="qryUser" method="queryUser" class="UserManageJsonAction">
 			<result type="json">
 				<param name="excludeProperties">
 					userService
 				</param>
 			</result>
 		</action>
-		<action name="delUser" method="delOrDenialUser" class="UserManageJsonAction" >
+		<action name="delUser" method="delOrDenialUser" class="UserManageJsonAction">
 			<result type="json">
 				<param name="excludeProperties">
 					userService
 				</param>
 			</result>
 		</action>
-		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu" 
-		    class="RoleAddEntityRuleAction">
-		    <result type="json">
-			<param name="excludeProperties">
-				role_code,role_name,rs,roles
+		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu"
+			class="RoleAddEntityRuleAction">
+			<result type="json">
+				<param name="excludeProperties">
+					role_code,role_name,rs,roles
 			</param>
 			</result>
 		</action>
-	 	<action name="RoleAddEntityRule" method="doAddRoleMenu" class="RoleAddEntityRuleAction">
-	 		<result type="json"></result>
-	 	</action>
-		<action name="RoleAddEntityRuleActionDel" method="doDelRoleRuleFunc" class="RoleAddEntityRuleAction">
-	 		<result type="json"></result>
-	 	</action>
-		<action name="RoleDeviceManagerActionQryDevice" method="RoleDeviceManagerActionQryDevice" class="RoleDeviceManagerAction">
-			<result type="json"></result>
-		</action><action name="RoleDeviceManagerActionQryRoleDev" method="RoleDeviceManagerActionQryRoleDev" class="RoleDeviceManagerAction">
+		<action name="RoleAddEntityRule" method="doAddRoleMenu"
+			class="RoleAddEntityRuleAction">
 			<result type="json"></result>
 		</action>
-		<action name="RoleDeviceManagerActionAddDev" method="RoleDeviceManagerActionAddDev" class="RoleDeviceManagerAction">
+		<action name="RoleAddEntityRuleActionDel" method="doDelRoleRuleFunc"
+			class="RoleAddEntityRuleAction">
 			<result type="json"></result>
 		</action>
-		<action name="RoleDeviceDel" method="RoleDeviceManagerActionDelDev" class="RoleDeviceManagerAction">
+		<action name="RoleDeviceManagerActionQryDevice" method="RoleDeviceManagerActionQryDevice"
+			class="RoleDeviceManagerAction">
 			<result type="json"></result>
+		</action>
+		<action name="RoleDeviceManagerActionQryRoleDev" method="RoleDeviceManagerActionQryRoleDev"
+			class="RoleDeviceManagerAction">
+			<result type="json"></result>
+		</action>
+		<action name="RoleDeviceManagerActionAddDev" method="RoleDeviceManagerActionAddDev"
+			class="RoleDeviceManagerAction">
+			<result type="json"></result>
+		</action>
+		<action name="RoleDeviceDel" method="RoleDeviceManagerActionDelDev"
+			class="RoleDeviceManagerAction">
+			<result type="json"></result>
+		</action>
+		
+		<!-- add by ffmmx -->
+		<!-- role info crud -->
+		<action name="addRole" method="addRole" class="RoleManagerJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					roleService
+				</param>
+			</result>
+		</action>
+		<action name="addRole" method="addRole" class="RoleManagerJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					roleService
+				</param>
+			</result>
+		</action>
+		<action name="removeRole" method="removeRole" class="RoleManagerJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					roleService
+				</param>
+			</result>
+		</action>
+		<action name="modifyRole" method="modifyRole" class="RoleManagerJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					roleService
+				</param>
+			</result>
+		</action>
+		<action name="invalidateRole" method="invalidateRole" class="RoleManagerJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					roleService
+				</param>
+			</result>
 		</action>
 	</package>
-	
+
 	<package name="UserAdmin" extends="struts-default">
-		<action name="user_manager_main_view" method="displayUserMain" class="UserManageAction" >
+		<action name="user_manager_main_view" method="displayUserMain"
+			class="UserManageAction">
 			<result>/pages/admin/userAdmin/UserMain/UserMain.jsp</result>
 		</action>
 	</package>
