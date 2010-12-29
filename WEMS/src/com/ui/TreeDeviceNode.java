@@ -1,10 +1,19 @@
 package com.ui;
 
+import net.sf.json.JSONArray;
+
 public class TreeDeviceNode implements java.io.Serializable{
 		  private  String id;
 		  private  String text;
 		  private  boolean  leaf;
 		  private  String  iconCls;
+		  private  JSONArray   children;
+		public JSONArray getChildren() {
+			return children;
+		}
+		public void setChildren(JSONArray children) {
+			this.children = children;
+		}
 		public String getId() {
 			return id;
 		}
@@ -18,7 +27,11 @@ public class TreeDeviceNode implements java.io.Serializable{
 			this.text = text;
 		}
 		public boolean isLeaf() {
-			return leaf;
+			if(this.getChildren()==null){
+				return  true;
+			}else{
+				return false;
+			}
 		}
 		public void setLeaf(boolean leaf) {
 			this.leaf = leaf;
