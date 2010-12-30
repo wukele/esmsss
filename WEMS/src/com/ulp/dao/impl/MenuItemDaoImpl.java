@@ -68,7 +68,7 @@ public class MenuItemDaoImpl extends EmsDao implements MenuItemDao {
 				"select distinct m.moduleCode " +
 		" from InfoMenu as m,RuleOperRole as rr,RuleRoleFunc as rf" +
 		" where rf.roleCode=rr.roleCode and rf.entityType='M' and rf.entityCode=m.menuCode and m.isactive=1" +
-		" and rr.operNo=?) ";
+		" and rr.operNo=?) order by md.moduleIndex asc";
 		List<InfoSysModule> modules=getHibernateTemplate().find(QueryCMenu, oper.getOperNo());	
 		return modules;
 	}

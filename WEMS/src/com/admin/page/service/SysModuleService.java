@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.entries.ulp.InfoSysModule;
 import com.entries.ulp.InfoSysModuleDAO;
@@ -20,5 +21,10 @@ public class SysModuleService {
 			
 			public   List<InfoSysModule>   QueryAllModules(){
 				return  sysModuleDao.findAll();
+			}
+			
+			@Transactional
+			public  void  AddModules(InfoSysModule   sm){
+				sysModuleDao.save(sm);
 			}
 }

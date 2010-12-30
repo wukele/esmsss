@@ -13,7 +13,17 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SysModuleAction extends ActionSupport {
 	   
 	   private  List<InfoSysModule>   modules;
+	   private  String module_code;
+	   public void setModule_code(String moduleCode) {
+		module_code = moduleCode;
+	}
+
+	private  InfoSysModule   sm;
 	
+		public void setSm(InfoSysModule sm) {
+		this.sm = sm;
+	}
+
 		public List<InfoSysModule> getModules() {
 		return modules;
 	}
@@ -26,6 +36,13 @@ public class SysModuleAction extends ActionSupport {
 		
 		public String  SysModuleActionQry(){
 			modules=sysModuleService.QueryAllModules();
+			return SUCCESS;
+		}
+		
+		
+		public String  SysModuleActionAdd(){
+			sm.setModuleCode(module_code);
+			sysModuleService.AddModules(sm);
 			return SUCCESS;
 		}
 		
