@@ -73,7 +73,7 @@
 		
 		<!-- add by ffmmx -->
 		<!-- role info crud -->
-		<action name="addRole" method="addRole" class="RoleManagerJsonAction">
+		<action name="qryRole" method="qryRole" class="RoleManagerJsonAction">
 			<result type="json">
 				<param name="excludeProperties">
 					roleService
@@ -102,6 +102,13 @@
 			</result>
 		</action>
 		<action name="invalidateRole" method="invalidateRole" class="RoleManagerJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					roleService
+				</param>
+			</result>
+		</action>
+		<action name="validateRole" method="validateRole" class="RoleManagerJsonAction">
 			<result type="json">
 				<param name="excludeProperties">
 					roleService
