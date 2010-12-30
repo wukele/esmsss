@@ -60,7 +60,7 @@
 	</bean>
 	<context:annotation-config></context:annotation-config> 
 	<context:component-scan base-package="com.busi.*,com.ulp.*,*.*.dao,com.entries.ulp,
-	com.ulp.dao.impl,com.ems.dao.impl,com.ems.data.dao.impl,com.ems.component.action,com.admin.user.*"></context:component-scan>
+	com.ulp.dao.impl,com.ems.dao.impl,com.ems.data.dao.impl,com.ems.component.action,com.admin.*.*"></context:component-scan>
 
 
 </beans>
