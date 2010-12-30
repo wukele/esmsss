@@ -27,4 +27,5 @@
 	<include file="component_action.xml"></include>
 	<include file="com/ulp/action/json/struts_ulpJson.xml"></include>
 	<include file="devices_action.xml"></include>
+	<include file="com/admin/page/action/admin_page_action.xml"></include>
 </struts>    
