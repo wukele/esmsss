@@ -116,7 +116,9 @@
 						dataIndex : 'loginName'
 					}, {
 						header : 'ÃÜÂë',
-						dataIndex : 'operPwd'
+						dataIndex : 'operPwd',
+						renderer:function(val){ 
+							return val.replace(/\w*/,'******');}
 					}, {
 						header : 'ĞÔ±ğ',
 						dataIndex : 'gender',

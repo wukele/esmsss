@@ -11,7 +11,6 @@ import com.admin.user.service.RoleService;
 import com.entries.ulp.InfoRole;
 import com.opensymphony.xwork2.ActionSupport;
 
-
 @SuppressWarnings("serial")
 @Component("RoleManagerJsonAction")
 @Scope("prototype")
@@ -19,11 +18,12 @@ public class RoleManagerJsonAction extends ActionSupport {
 
 	private InfoRole role;
 	private List<InfoRole> lstRole;
-	private String[] aRoleCode;
-	
-	private int returnNo=0;
+	private List<String> lstRoleCode;
+
+	private int returnNo = 0;
 	private String returnMsg;
 	private RoleService roleService;
+
 	public RoleManagerJsonAction() {
 		// TODO Auto-generated constructor stub
 	}
@@ -36,17 +36,17 @@ public class RoleManagerJsonAction extends ActionSupport {
 	 * 
 	 */
 	public String addRole() throws Exception {
-		if(role==null)
+		if (role == null)
 			throw new RuntimeException("role entity is null");
-		try{
+		try {
 			roleService.addRole(role);
-		}catch (RuntimeException e) {
-			returnNo=1;
-			returnMsg=e.getMessage();
+		} catch (RuntimeException e) {
+			returnNo = 1;
+			returnMsg = e.getMessage();
 			throw e;
 		}
-		returnNo=0;
-		returnMsg="添加角色成功";
+		returnNo = 0;
+		returnMsg = "添加角色成功";
 		return SUCCESS;
 	}
 
@@ -58,13 +58,17 @@ public class RoleManagerJsonAction extends ActionSupport {
 	 */
 	public String removeRole() throws Exception {
 		try {
+			String[] aRoleCode=new String[lstRoleCode.size()];
+			for(int i=0;i<lstRoleCode.size();i++)
+				aRoleCode[i]=(String) lstRoleCode.get(i);
 			roleService.removeRoles(aRoleCode);
 		} catch (RuntimeException e) {
-			returnNo=1;
-			returnMsg=e.getMessage();
+			returnNo = 1;
+			returnMsg = e.getMessage();
+			throw e;
 		}
-		returnNo=0;
-		returnMsg="删除成功";
+		returnNo = 0;
+		returnMsg = "删除成功";
 		return SUCCESS;
 	}
 
@@ -75,16 +79,17 @@ public class RoleManagerJsonAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String modifyRole() throws Exception {
-		if(role==null)
+		if (role == null)
 			throw new RuntimeException("role is null");
 		try {
 			roleService.modifyRole(role);
 		} catch (RuntimeException e) {
-			returnNo=1;
-			returnMsg=e.getMessage();
+			returnNo = 1;
+			returnMsg = e.getMessage();
+			throw e;
 		}
-		returnNo=0;
-		returnMsg="修改角色成功";
+		returnNo = 0;
+		returnMsg = "修改角色成功";
 		return SUCCESS;
 	}
 
@@ -96,28 +101,57 @@ public class RoleManagerJsonAction extends ActionSupport {
 	 */
 	public String invalidateRole() throws Exception {
 		try {
+			String[] aRoleCode=new String[lstRoleCode.size()];
+			for(int i=0;i<lstRoleCode.size();i++)
+				aRoleCode[i]=(String) lstRoleCode.get(i);
 			roleService.invaildateRoles(aRoleCode);
 		} catch (RuntimeException e) {
-			returnNo=1;
-			returnMsg="无效化角色失败:"+e.getMessage();
+			returnNo = 1;
+			returnMsg = "无效化角色失败:" + e.getMessage();
+			throw e;
 		}
-		
-		returnNo=0;
-		returnMsg="无效化角色成功";
+
+		returnNo = 0;
+		returnMsg = "无效化角色成功";
 		return SUCCESS;
 	}
 
 	/**
-	 * 查询角色
+	 * 有效化角色
 	 * @return
 	 * @throws Exception
 	 */
-	public String qryRole() throws Exception{
-		if(role==null)
-			role=new InfoRole();
-		
+	public String validateRole() throws Exception {
+		try {
+			String[] aRoleCode=new String[lstRoleCode.size()];
+			for(int i=0;i<lstRoleCode.size();i++)
+				aRoleCode[i]=(String) lstRoleCode.get(i);
+			roleService.vaildateRoles(aRoleCode);
+		} catch (RuntimeException e) {
+			returnNo = 1;
+			returnMsg = "有效化角色失败:" + e.getMessage();
+			throw e;
+		}
+
+		returnNo = 0;
+		returnMsg = "有效化角色成功";
 		return SUCCESS;
 	}
+	/**
+	 * 查询角色
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String qryRole() throws Exception {
+		if (role == null)
+			role = new InfoRole();
+		lstRole = roleService.findRoles(role.getRoleCode(), role.getRoleName(),
+				role.getRoleLevel(), role.getIsactive(), role.getRoleType(),
+				role.getComments());
+		return SUCCESS;
+	}
+
 	public InfoRole getRole() {
 		return role;
 	}
@@ -125,7 +159,6 @@ public class RoleManagerJsonAction extends ActionSupport {
 	public List<InfoRole> getLstRole() {
 		return lstRole;
 	}
-
 
 	public void setRole(InfoRole role) {
 		this.role = role;
@@ -138,18 +171,10 @@ public class RoleManagerJsonAction extends ActionSupport {
 	public RoleService getRoleService() {
 		return roleService;
 	}
-	
-	@Resource(name="RoleService")
+
+	@Resource(name = "RoleService")
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
-	}
-
-	public String[] getaRoleCode() {
-		return aRoleCode;
-	}
-
-	public void setaRoleCode(String[] aRoleCode) {
-		this.aRoleCode = aRoleCode;
 	}
 
 	public int getReturnNo() {
@@ -166,6 +191,14 @@ public class RoleManagerJsonAction extends ActionSupport {
 
 	public void setReturnMsg(String returnMsg) {
 		this.returnMsg = returnMsg;
+	}
+
+	public List getLstRoleCode() {
+		return lstRoleCode;
+	}
+
+	public void setLstRoleCode(List lstRoleCode) {
+		this.lstRoleCode = lstRoleCode;
 	}
 
 }

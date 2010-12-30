@@ -107,16 +107,17 @@ public class InfoRoleDao extends EmsDao {
 	}
 	
 	/**
-	 * 无效化角色
+	 * 修改角色状态
 	 * @param roleCode 角色代码
+	 * @param status 状态
 	 */
-	public void invaildateRole(String roleCode){
-		log.debug("invaildateRole starting.");
-		String sql="update InfoRole set isactive = 0 where roleCode=?";
+	public void changeRoleStatus(String roleCode,int status){
+		log.debug("changeRoleStatus starting.");
+		String sql="update InfoRole set isactive = ? where roleCode=?";
 		
 		try {
-			getHibernateTemplate().bulkUpdate(sql,roleCode);
-			log.debug("invaildateRole finish.");
+			getHibernateTemplate().bulkUpdate(sql,new Object[]{status,roleCode});
+			log.debug("changeRoleStatus finish.");
 		} catch (RuntimeException e) {
 			log.error(e);
 			throw e;

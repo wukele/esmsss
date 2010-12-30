@@ -66,10 +66,13 @@ public class RoleService {
 		public void addRole(InfoRole role){
 			log.debug("addRole instance.");
 			try {
+				role.setRegionId("1");
+				role.setOperNo("1");
 				roleDao.insertRole(role);
 				log.debug("addRole finish.");
 			} catch (RuntimeException e) {
 				log.error(e);	
+				e.printStackTrace();
 				throw e;
 			}
 		}
@@ -86,6 +89,7 @@ public class RoleService {
 				log.debug("removeRole finish.");
 			} catch (RuntimeException e) {
 				log.error(e);	
+				e.printStackTrace();
 				throw e;
 			}
 		}
@@ -103,7 +107,8 @@ public class RoleService {
 					roleDao.deleteRole(roleCode);
 				log.debug("removeRole finish.");
 			} catch (RuntimeException e) {
-				log.error(e);	
+				log.error(e);
+				e.printStackTrace();
 				throw e;
 			}
 		}
@@ -119,7 +124,8 @@ public class RoleService {
 				roleDao.updateRole(role);
 				log.debug("modifyRole finish.");
 			} catch (RuntimeException e) {
-				log.error(e);	
+				log.error(e);
+				e.printStackTrace();
 				throw e;
 			}
 		}
@@ -135,7 +141,7 @@ public class RoleService {
 				if(aRoleCode==null|| aRoleCode.length==0)
 					throw new RuntimeException("aRoleCode is null");
 				for(String roleCode:aRoleCode)
-					roleDao.invaildateRole(roleCode);
+					roleDao.changeRoleStatus(roleCode, 0);
 				log.debug("invaildateRole finish.");
 			} catch (RuntimeException e) {
 				log.error(e);	
@@ -151,14 +157,45 @@ public class RoleService {
 		public void invaildateRole(String roleCode){
 			log.debug("invaildateRole instance");
 			try {
-				roleDao.invaildateRole(roleCode);
+				roleDao.changeRoleStatus(roleCode, 0);
 				log.debug("invaildateRole finish.");
 			} catch (RuntimeException e) {
 				log.error(e);	
+				e.printStackTrace();
 				throw e;
 			}
 		}
-		
+		/**
+		 * 有效化角色
+		 * @param roleCode 角色代码
+		 */
+		@Transactional
+		public void vaildateRole(String roleCode){
+			log.debug("vaildateRole instance");
+			try {
+				roleDao.changeRoleStatus(roleCode, 1);
+				log.debug("vaildateRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				e.printStackTrace();
+				throw e;
+			}
+		}
+		@Transactional
+		public void vaildateRoles(String[] aRoleCode){
+			log.debug("invaildateRole instance");
+			try {
+				if(aRoleCode==null|| aRoleCode.length==0)
+					throw new RuntimeException("aRoleCode is null");
+				for(String roleCode:aRoleCode)
+					roleDao.changeRoleStatus(roleCode, 1);
+				log.debug("invaildateRole finish.");
+			} catch (RuntimeException e) {
+				log.error(e);	
+				e.printStackTrace();
+				throw e;
+			}
+		}
 		/**
 		 * 查询角色信息，条件皆为可选
 		 * @param roleCode 角色代码
@@ -191,7 +228,8 @@ public class RoleService {
 				lst=roleDao.findRoleByMap(map);
 				log.debug("findRoles finish.");
 			} catch (RuntimeException e) {
-				log.error(e);	
+				log.error(e);
+				e.printStackTrace();
 				throw e;
 			}
 			
