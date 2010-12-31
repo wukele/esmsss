@@ -55,7 +55,8 @@
 				<value>com/data/entity/RuleEngineData.hbm.xml</value>
 				<value>com/ems/entity/RealTimeData.hbm.xml</value>
 				<value>com/entries/ulp/InfoDept.hbm.xml</value>
-				<value>com/ems/entity/DeviceTable.hbm.xml</value></list>
+				<value>com/ems/entity/DeviceTable.hbm.xml</value>
+				<value>com/ems/entity/TlpPageImage.hbm.xml</value></list>
 		</property>
 	</bean>
 	<context:annotation-config></context:annotation-config> 
