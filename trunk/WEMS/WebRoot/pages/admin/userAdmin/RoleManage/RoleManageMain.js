@@ -383,10 +383,14 @@
 					} ]
 				});
 				// 初始化角色查询存储
+				paras={};
+				paras[submitprefix?submitprefix+'.'+'isactive':'isactive']=STATUS_ACTIVE;
+				
 				store = new Ext.data.JsonStore({
 					proxy : new Ext.data.HttpProxy({
 						url : 'qryRole.action'
 					}),
+					params:paras,
 					fields : fieldModel,
 					idProperty : 'roleCode',
 					root : 'lstRole'
