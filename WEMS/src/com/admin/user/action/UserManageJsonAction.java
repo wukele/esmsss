@@ -23,6 +23,9 @@ public class UserManageJsonAction extends ActionSupport {
 	private UserService userService;
 	private int errorCode;
 	private String errorMsg;
+	private int returnNo;
+	private String returnMsg;
+	private List<String> lstUserNo;
 
 	/**
 	 * 添加用户
@@ -104,6 +107,44 @@ public class UserManageJsonAction extends ActionSupport {
 		return null;
 	}
 
+	public String removeUser() throws Exception{
+		try{
+			userService.removeUser(lstUserNo);
+		}catch (RuntimeException e) {
+			returnNo=1;
+			returnMsg=e.getMessage();
+			throw e;
+		}
+		returnNo=0;
+		returnMsg="删除成功";
+		return SUCCESS;
+	}
+	public String invalidateUser() throws Exception{
+		try{
+			userService.invalidateUser(lstUserNo);
+		}catch (RuntimeException e) {
+			returnNo=1;
+			returnMsg=e.getMessage();
+			throw e;
+		}
+		
+		returnNo=0;
+		returnMsg="无效执行成功";
+		return SUCCESS;
+	}
+	public String validateUser() throws Exception{
+		try{
+			userService.validateUser(lstUserNo);
+		}catch(RuntimeException e){
+			returnNo=1;
+			returnMsg=e.getMessage();
+			throw e;
+		}
+		returnNo=0;
+		returnMsg="有效执行成功";
+		return SUCCESS;
+	}
+	
 	public UserService getUserService() {
 		return userService;
 	}
@@ -139,5 +180,29 @@ public class UserManageJsonAction extends ActionSupport {
 
 	public int getErrorCode() {
 		return errorCode;
+	}
+
+	public int getReturnNo() {
+		return returnNo;
+	}
+
+	public String getReturnMsg() {
+		return returnMsg;
+	}
+
+	public List<String> getLstUserNo() {
+		return lstUserNo;
+	}
+
+	public void setReturnNo(int returnNo) {
+		this.returnNo = returnNo;
+	}
+
+	public void setReturnMsg(String returnMsg) {
+		this.returnMsg = returnMsg;
+	}
+
+	public void setLstUserNo(List<String> lstUserNo) {
+		this.lstUserNo = lstUserNo;
 	}
 }

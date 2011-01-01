@@ -14,6 +14,9 @@
 		var genderStore;
 		var isFieldsValidated=false;
 
+		var STATUS_ACTIVE=0;
+		var STATUS_NOT_ACTIVE=1;
+		
 		return {
 			modifyUser:function(){
 				var data={};
@@ -250,6 +253,7 @@
 						for(i=0;i<combos.length;i++){
 							recData[combos[i].getName()]=combos[i].getValue();
 						}
+						recData['flag']=STATUS_ACTIVE;
 						var rec=new Ext.data.Record(recData,recData['operNo']);
 						store.add(rec);
 						Ext.example.msg('成功','用户添加成功');

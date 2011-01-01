@@ -368,8 +368,8 @@ public class InfoOperDAO extends EmsDao {
 			paras.add(map.get("operNo"));
 		}
 		if(map.containsKey("operName")){
-			hql+=" and oper.operName=?";
-			paras.add(map.get("operName"));
+			hql+=" and oper.operName like ?";
+			paras.add("%"+map.get("operName")+"%");
 		}
 		
 		try {
@@ -381,5 +381,29 @@ public class InfoOperDAO extends EmsDao {
 		}
 		return lst;
 		
+	}
+	
+	public void deleteUser(String operNo) {
+		log.debug("deleteUser instance");
+		String hql="delete from InfoOper as user where user.operNo=?";
+		try {
+			getHibernateTemplate().bulkUpdate(hql, operNo);
+			log.debug("deleteUser successful");
+		} catch (RuntimeException re) {
+			log.error("deleteUser failed", re);
+			throw re;
+		}
+	}
+	
+	public void changeUserStatus(String operNo,Integer status ){
+		log.debug("changeUserStatus instance");
+		String hql="update InfoOper as user set user.flag=? where user.operNo=?";
+		try {
+			getHibernateTemplate().bulkUpdate(hql, new Object[]{status,operNo});
+			log.debug("changeUserStatus successful");
+		} catch (RuntimeException re) {
+			log.error("changeUserStatus failed", re);
+			throw re;
+		}
 	}
 }

@@ -38,6 +38,27 @@
 				</param>
 			</result>
 		</action>
+		<action name="removeUser" method="removeUser" class="UserManageJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
+		<action name="validateUser" method="validateUser" class="UserManageJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
+		<action name="invalidateUser" method="invalidateUser" class="UserManageJsonAction">
+			<result type="json">
+				<param name="excludeProperties">
+					userService
+				</param>
+			</result>
+		</action>
 		<action name="RoleAddEntityRuleQryMenu" method="doQueryRoleMenu"
 			class="RoleAddEntityRuleAction">
 			<result type="json">

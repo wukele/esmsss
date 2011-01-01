@@ -145,12 +145,12 @@ public class InfoRoleDao extends EmsDao {
 			lstProperties.add(map.get("isactive"));
 		}
 		if(map.containsKey("roleName")){
-			hql+=" and r.roleName like '%?%'";
-			lstProperties.add(map.get("roleName"));
+			hql+=" and r.roleName like ?";
+			lstProperties.add("%"+map.get("roleName")+"%");
 		}
 		if(map.containsKey("comments")){
-			hql+=" and r.comments like '%?%'";
-			lstProperties.add(map.get("comments"));
+			hql+=" and r.comments like ?";
+			lstProperties.add("%"+map.get("comments")+"%");
 		}
 		if(map.containsKey("roleType")){
 			hql+=" and r.roleType=?";
