@@ -3,14 +3,14 @@
 <%@page import="com.ulp.comm.CommUlpKey"%>
 <%@page import="com.ui.UIContainer"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>	
 		<decorator:title default="system"></decorator:title>
 </title>
@@ -43,9 +43,9 @@ String path = request.getContextPath();
    	<script type="text/javascript" src="<%=path %>/dwr/util.js"></script>
 </head>
 <body>
-<div id='header'><h1>数据中心采集系统</h1></div>
+<div id='header'><h1>鏁版嵁涓績閲囬泦绯荤粺</h1></div>
 <div id='menuContent'>
-	<!-- 建立功能菜单树 -->
+	<!-- 寤虹珛鍔熻兘鑿滃崟鏍� -->
 	<script type="text/javascript">
 	<%
 		UIContainer  ui=(UIContainer)session.getAttribute(CommUlpKey.KEY_UI_CONTIANER);
@@ -58,7 +58,7 @@ String path = request.getContextPath();
 	
 	
 	
-	<!-- 建立功能菜单树结束 -->
+	<!-- 寤虹珛鍔熻兘鑿滃崟鏍戠粨鏉� -->
 	<script type="text/javascript">
 			function CreateMenuBar(){
 				<%=buff.toString()%>				
@@ -67,7 +67,7 @@ String path = request.getContextPath();
         			height: 400,
         			width: 200,
 	        		minSize: 100,
-	        		title:'功能',
+	        		title:'鍔熻兘',
                 	layout:'accordion',
                 	items: [<%=accordionItems%>]
             	});
