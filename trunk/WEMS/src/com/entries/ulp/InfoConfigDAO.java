@@ -156,6 +156,13 @@ public class InfoConfigDAO extends EmsDao  {
             throw re;
         }
     }
+    
+    
+    public  List<String>  findBGImages(){
+    	log.info("find all path");
+    	return  getHibernateTemplate().find("select cf.configValue  from InfoConfig as cf" +
+    			"where cf.configName='BackgroundImagePath'");
+    }
 
 	public static InfoConfigDAO getFromApplicationContext(ApplicationContext ctx) {
     	return (InfoConfigDAO) ctx.getBean("InfoConfigDAO");
