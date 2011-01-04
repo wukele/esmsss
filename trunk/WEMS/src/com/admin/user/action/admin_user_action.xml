@@ -135,7 +135,19 @@
 					roleService
 				</param>
 			</result>
-		</action>
+		</action> 
+		<action name="selectInfoDept" class="InfoDeptManagerAction" method="selectInfoDept">
+                        <result type="json"></result>
+                </action>
+                <action name="insertInfoDept" class="InfoDeptManagerAction" method="insertInfoDept">
+                        <result type="json"></result>
+                </action>
+                <action name="deleteInfoDept" class="InfoDeptManagerAction" method="deleteInfoDept">
+                        <result type="json"></result>
+                </action>
+                <action name="updateInfoDept" class="InfoDeptManagerAction" method="updateInfoDept">
+                        <result type="json"></result>
+                </action>
 	</package>
 
 	<package name="UserAdmin" extends="struts-default">
