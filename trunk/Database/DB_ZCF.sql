@@ -767,3 +767,10 @@ CREATE TABLE `variable_type` (
 -- ----------------------------
 -- Records of variable_type
 -- ----------------------------
+INSERT INTO `info_sys_module` VALUES ('6000001', '系统管理', '6', '1');
+
+INSERT INTO `info_menu` VALUES ('60000002','', '6000001', '', '0', '0', '1', 'info_dept_manager.action', '部门信息管理', '', '', '1', '', '', '', null, null, null, '');
+
+
+INSERT INTO `rule_role_func` VALUES ('OP', 'M', '6000002');
+
