@@ -10,4 +10,12 @@
 		<param name="excludeProperties">
 				menuDao
 		</param>
-	</result></action></package></struts>    
+	</result></action>
+	<action name="UiConfigQry" method="UiConfigQry"  class="UiConfigAction">
+		 <result type="json">
+		 </result>
+	</action>
+	
+	</package>
+		
+</struts>    

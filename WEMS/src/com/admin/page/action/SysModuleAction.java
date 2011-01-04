@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.admin.page.service.SysModuleService;
 import com.entries.ulp.InfoSysModule;
 import com.opensymphony.xwork2.ActionSupport;
 @Component("SysModuleAction")
+@Scope("prototype")
 public class SysModuleAction extends ActionSupport {
 	   
 	   private  List<InfoSysModule>   modules;
