@@ -1,0 +1,2 @@
+数据库名 boangs0_fox 用户名 boangs0_fox 密码 dark_fox
+ip 216.227.211.75
