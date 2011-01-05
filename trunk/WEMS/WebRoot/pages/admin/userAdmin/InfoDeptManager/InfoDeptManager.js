@@ -28,7 +28,7 @@ Ext.onReady(function(){
 	]);
 	var allInfoDepts=ajaxSyncCall("selectInfoDept.action").infoDepts;
 	//alert(allInfoDepts)
-	var  store=new  Ext.data.Store({
+	var store=new Ext.data.Store({
 		/*proxy:new  Ext.data.HttpProxy({
 				url:'selectInfoDept.action'
 		}),*/
