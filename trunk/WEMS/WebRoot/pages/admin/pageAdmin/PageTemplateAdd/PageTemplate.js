@@ -117,7 +117,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 	   		handler:function(){
 	   				
 	   		}
-	   },
+	   },'-',
 	   {
 	   		text:'ÐÂÔö¿Õ°×Ò³',
 	   		handler:function(){
