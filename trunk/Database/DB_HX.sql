@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2010 年 12 月 25 日 10:06
+-- 生成日期: 2011 年 01 月 05 日 15:51
 -- 服务器版本: 5.1.51
 -- PHP 版本: 5.3.4
 
@@ -227,18 +227,23 @@ CREATE TABLE IF NOT EXISTS `control_command` (
 --
 
 CREATE TABLE IF NOT EXISTS `device_table` (
-  `device_id` int(11) NOT NULL COMMENT '设备ID',
-  `device_name` varchar(255) NOT NULL COMMENT '设备名称',
-  `device_type` varchar(255) NOT NULL COMMENT '设备类型',
-  `device_ip` varchar(255) NOT NULL COMMENT '设备IP',
+  `device_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '设备ID',
+  `device_name` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '设备名称',
+  `device_type` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '设备类型',
+  `device_ip` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '设备IP',
   `collect_task_id` int(11) NOT NULL COMMENT '采集任务ID',
-  `action_flag` smallint(6) NOT NULL COMMENT '活动标志'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `action_flag` smallint(6) NOT NULL COMMENT '活动标志',
+  PRIMARY KEY (`device_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10000004 ;
 
 --
 -- 转存表中的数据 `device_table`
 --
 
+INSERT INTO `device_table` (`device_id`, `device_name`, `device_type`, `device_ip`, `collect_task_id`, `action_flag`) VALUES
+(10000001, '设备1', '电力', '192.168.1.100', 1000001, 1),
+(10000002, '设备2', '电力', '192.168.1.102', 1000002, 1),
+(10000003, '设备3', '漏水', '192.168.1.103', 1000003, 1);
 
 -- --------------------------------------------------------
 
@@ -471,8 +476,11 @@ INSERT INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_C
 ('10000001', NULL, '1000001', NULL, 0, 1, 1, 'ems_dispatcher_page_action.action', 'UPS 监控系统', 'UPS 监控系统', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
 ('20000004', NULL, '2000001', NULL, 0, 2, 1, 'temphumidity_monitor.action', '温湿度监控', '温湿度监控', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
 ('20000005', NULL, '2000001', NULL, 0, 3, 1, 'leakage_detection.action', '漏水检测', '漏水检测', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('200000041', '20000004', '2000001', NULL, 0, 0, 1, 'roomhumidity_monitor.action', '房间湿度监控', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('60000001', NULL, '6000001', NULL, 0, 0, 1, 'user_manager_main_view.action', '用户管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('200000041', '20000004', '2000001', NULL, 0, 0, 1, 'roomhumidity_monitor.action', '房间湿度监控', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+('60000001', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleAddEntityRule/RoleAddEntityRule.jsp', '角色功能新增', '角色功能新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+('60000002', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleAddDevice/RoleMangerDevice.jsp', '角色设备新增', '角色设备新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+('60000003', NULL, '6000001', NULL, 0, 0, 1, 'user_manager_main_view.action', '用户管理', '用户管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+('60000004', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleManage/RoleManageMain.jsp', '角色管理', '角色管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -527,15 +535,8 @@ CREATE TABLE IF NOT EXISTS `info_oper` (
 --
 
 INSERT INTO `info_oper` (`OPER_NO`, `REGION_ID`, `DEPT_NO`, `ROLE_CODE`, `OPER_NAME`, `LOGIN_NAME`, `OPER_PWD`, `QUESTION`, `ANSWER`, `GENDER`, `POSITIONS`, `PHONE`, `EMAIL`, `MOBILE_NO`, `NEED_SMS`, `OPER_MESSAGE`, `EFF_DATE`, `EXP_HINT_DATE`, `EXP_DATE`, `INIT_FLAG`, `DEAL_TYPE`, `APP_TYPE`, `STATISTICAL_DEPT_NO`, `OPER_ALIAS`, `LOGIN_COUNT`, `RES_INIT1`, `RES_INIT2`, `RES_CHAR1`, `RES_CHAR2`, `PWD_ENCODE`, `OPER_STATUS`, `OPER_KIND`, `FLAG`, `ACCT_STATUS`, `BUSI_TYPE`, `DERATE_FLAG`, `IS_ONLINE`, `LOGIN_IP`) VALUES
-('TEST01', '0000', '0001', '*', '张长风', '', '123456', 'wifename', 'wifename', 1, '1', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', 1, NULL, NULL, NULL, NULL, 1, '0', '1', '999999', NULL, 734, NULL, NULL, NULL, NULL, NULL, '100', '10', 0, '1', '0', '1', '0', ''),
-('11', '0', NULL, NULL, '22', '33', '44', NULL, NULL, 1, '66', '55', NULL, '77', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('22', '0', NULL, NULL, '33', '44', '55', NULL, NULL, 1, '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('33', '0', NULL, NULL, '44', '55', '66', NULL, NULL, 1, '88', '77', NULL, '99', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('44', '0', NULL, NULL, '55', '66', '77', NULL, NULL, 1, '99', '88', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('77', '0', NULL, NULL, '88', '99', '00', NULL, NULL, 1, '11', '11', NULL, '111', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('88', '0', NULL, NULL, '11', '11', '11', NULL, NULL, 1, '11', '11', NULL, '11', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('111', '0', NULL, NULL, '111', '11', '11', NULL, NULL, 1, '11', '11', NULL, '11', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('21', '0', NULL, NULL, '12', '21', '21', NULL, NULL, 1, '21', '21', NULL, '21', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('TEST01', '0000', '0001', '*', '张长风', '', '123456', 'wifename', 'wifename', 1, '1213', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', 1, '', NULL, NULL, NULL, 1, '0', '1', '999999', '', 905, NULL, NULL, '', '', '', '100', '10', 0, '1', '0', '1', '0', ''),
+('TEST02', '0', NULL, NULL, '胡欣', '127.0.0.1', '1', NULL, NULL, 1, '保密', '保密', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -624,7 +625,8 @@ CREATE TABLE IF NOT EXISTS `info_role` (
 
 INSERT INTO `info_role` (`ROLE_CODE`, `REGION_ID`, `ROLE_LEVEL`, `LOCAL_NET`, `COMMENTS`, `ROLE_NAME`, `OPER_NO`, `ISACTIVE`, `RES_CHAR`, `SYS_TYPE`, `ROLE_TYPE`, `BELONG_TYPE`, `DEPT_NO`) VALUES
 ('OP', '0', '1', NULL, '操作员', '操作员', 'TEST01', 1, NULL, '1', '1', NULL, NULL),
-('ADMIN', '0', '1', '', '管理员', '管理员', 'TEST01', 1, NULL, '1', '1', NULL, NULL);
+('AD', '0', '1', NULL, '系统管理员', '系统管理员', 'TEST01', 1, NULL, '1', '1', NULL, NULL),
+('TT', '1', '1', NULL, NULL, 'TEST', '1', 0, NULL, NULL, '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -781,7 +783,7 @@ CREATE TABLE IF NOT EXISTS `real_time_data` (
 --
 
 INSERT INTO `real_time_data` (`data_sn`, `device_var_id`, `var_phy_value`, `var_logic_value`, `collect_time`) VALUES
-(1, 'UPS10011', '218', '234', '2010-11-23 11:45:02');
+(1, 'UPS10011', '218', '123', '2010-11-23 11:45:02');
 
 -- --------------------------------------------------------
 
@@ -848,7 +850,7 @@ CREATE TABLE IF NOT EXISTS `rule_oper_role` (
 
 INSERT INTO `rule_oper_role` (`OPER_NO`, `ROLE_CODE`, `RID`) VALUES
 ('TEST01', 'OP', 1),
-('TEST01', 'ADMIN', 2);
+('TEST01', 'AD', 2);
 
 -- --------------------------------------------------------
 
@@ -860,19 +862,25 @@ CREATE TABLE IF NOT EXISTS `rule_role_func` (
   `ROLE_CODE` varchar(6) NOT NULL,
   `ENTITY_TYPE` varchar(10) NOT NULL,
   `ENTITY_CODE` varchar(15) NOT NULL,
-  PRIMARY KEY (`ENTITY_CODE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `ENTITY_ID` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ENTITY_ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
 
 --
 -- 转存表中的数据 `rule_role_func`
 --
 
-INSERT INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`) VALUES
-('OP', 'M', '10000001'),
-('OP', 'M', '20000004'),
-('OP', 'M', '20000005'),
-('OP', 'M', '200000041'),
-('ADMIN', 'M', '60000001');
+INSERT INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES
+('AD', 'M', '60000004', 83),
+('AD', 'M', '60000002', 6),
+('AD', 'M', '60000001', 5),
+('OP', 'E', '10000003', 9),
+('OP', 'E', '10000002', 8),
+('OP', 'M', '10000001', 78),
+('OP', 'M', '20000004', 79),
+('OP', 'M', '20000005', 80),
+('OP', 'M', '200000041', 81),
+('AD', 'M', '60000003', 82);
 
 -- --------------------------------------------------------
 
