@@ -140,7 +140,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 						store:this.store,
 						listeners:{
 							selectionchange:function(e,nodes){
-									 	Ext.Msg.alert('info',nodes[0].innerHTML);
+										
 							}
 						}
 			})];
