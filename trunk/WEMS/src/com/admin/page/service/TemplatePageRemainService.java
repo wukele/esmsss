@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.admin.page.dao.TplInfoPageDao;
 import com.page.entity.TplInfoPage;
@@ -12,7 +15,7 @@ import com.page.entity.TplInfoPage;
 
 @Component("TemplatePageRemainService")
 public class TemplatePageRemainService {
-		
+		private static final Log log = LogFactory.getLog(TemplatePageRemainService.class);
 	   private  TplInfoPageDao   tplDao;
 	   @Resource(name="TplInfoPageDao")
 		public void setTplDao(TplInfoPageDao tplDao) {
@@ -27,4 +30,18 @@ public class TemplatePageRemainService {
 						return  tplDao.findTplByIdAndName(tpl_page_id, tpl_page_name);
 			}
 		}
+		
+		@Transactional
+		public  void  DelTemplatePages(String tpl_page_id){
+				int res= tplDao.delTplInfoPage(tpl_page_id);
+				log.info("模板删除成功  del:"+res);
+		}
+		
+		@Transactional
+		public  void  ModifyTemplatePages(TplInfoPage  tpl){
+				tplDao.UpdateTplInfoPage(tpl);
+				log.info("模板修改成功");
+		}
+		
+		
 }
