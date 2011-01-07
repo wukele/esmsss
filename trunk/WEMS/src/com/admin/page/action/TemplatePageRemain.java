@@ -62,7 +62,7 @@ public class TemplatePageRemain extends ActionSupport {
 			}
 			
 			public  String  TemplatePageRemainDel(){
-				
+				tpl_service.DelTemplatePages(tpl_page_id);
 				return SUCCESS;
 			}
 			
