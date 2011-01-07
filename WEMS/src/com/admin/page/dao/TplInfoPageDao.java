@@ -23,4 +23,15 @@ public class TplInfoPageDao extends EmsDao {
 				   		    return getHibernateTemplate().find(qryStr);
 				   	}
 		}
+
+		public int delTplInfoPage(String tplPageId) {
+			// TODO Auto-generated method stub
+				return getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery("delete from  tpl_info_page " +
+						"where tpl_page_id="+tplPageId).executeUpdate();
+		}
+
+		public void UpdateTplInfoPage(TplInfoPage tpl) {
+			// TODO Auto-generated method stub
+			getHibernateTemplate().merge(tpl);
+		}
 }
