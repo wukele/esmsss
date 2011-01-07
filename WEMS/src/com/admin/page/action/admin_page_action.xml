@@ -20,5 +20,11 @@
 			<action name="TplPageQry" class="TemplatePageRemain" method="TemplatePageRemainQry">
 					<result type="json"></result>
 			</action>
+			<action name="TplPageDelete" class="TemplatePageRemain" method="TemplatePageRemainDel">
+					<result type="json"></result>
+			</action>
+			<action name="TplPageModify" class="TemplatePageModify">
+					<result type="json"></result>
+			</action>
 	</package>
 </struts>    
