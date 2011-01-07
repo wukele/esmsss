@@ -19,6 +19,11 @@ public class TemplatePageRemain extends ActionSupport {
 			private  String  tpl_page_id;
 			private  String  tpl_page_name;
 			private  List<TplInfoPage>  tpls;
+			private  int  totalProperty;
+			public int getTotalProperty() {
+				return totalProperty;
+			}
+
 			public List<TplInfoPage> getTpls() {
 				return tpls;
 			}
@@ -47,10 +52,10 @@ public class TemplatePageRemain extends ActionSupport {
 
 			public  String TemplatePageRemainQry(){
 				List<TplInfoPage>  res=tpl_service.QryTemplatePages(tpl_page_id, tpl_page_name);
-				int  s=res.size();
+				totalProperty=res.size();
 				int  end=start+limit;
-				if(end>s){
-						end=s;
+				if(end>totalProperty){
+						end=totalProperty;
 				}
 				tpls=res.subList(start, end);
 				return SUCCESS;
