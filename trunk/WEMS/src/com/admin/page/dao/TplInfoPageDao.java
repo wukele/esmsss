@@ -14,7 +14,13 @@ public class TplInfoPageDao extends EmsDao {
 		}
 		
 		public   List<TplInfoPage> findTplByIdAndName(String  tpl_page_id,String tpl_page_name){
-					return   getHibernateTemplate().find("from TplInfoPage  where tpl.tplPageId=? or " +
-							"tpl.tplPageName like '%?%'", new String[]{tpl_page_id,tpl_page_name});
+				   	String qryStr="from  TplInfoPage  as tpl";
+				   	if("".equals(tpl_page_id)){
+				   			qryStr+=" where tpl.tplPageName=?";
+				   			return getHibernateTemplate().find(qryStr,tpl_page_name);
+				   	}else{
+				   		    qryStr+=" where tpl.tplPageId="+tpl_page_id;
+				   		    return getHibernateTemplate().find(qryStr);
+				   	}
 		}
 }
