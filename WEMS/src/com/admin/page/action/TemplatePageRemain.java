@@ -60,4 +60,11 @@ public class TemplatePageRemain extends ActionSupport {
 				tpls=res.subList(start, end);
 				return SUCCESS;
 			}
+			
+			public  String  TemplatePageRemainDel(){
+				
+				return SUCCESS;
+			}
+			
+			
 }
