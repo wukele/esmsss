@@ -58,21 +58,43 @@
 
 .thumb-wrap{
 	float: left;
-	margin: 10px;
+	margin: 5px;
 	margin-right: 0;
-	padding: 10px;
+	padding: 5px;
 	width: 220px;
 }
+.x-list-image{
+	width: 100px;
+	float: left;	
+}
+.x-list-text{
+	width: 220px;
+	float: left;	
+}
+
+.x-list-wrap{
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid '00';
+	height: 100px
+}
+
+.x-list-wrap p{
+	margin: 2px;	
+}
+
+
 
 
 .x-view-over{
     border:1px solid #dddddd;
     background: #efefef url(../../resources/images/default/grid/row-over.gif) repeat-x left top;
-	padding: 10px;
+	padding: 5px;
+	margin: 5px;
 }
 
 .x-view-selected{
 	background: #eff5fb url(images/selected.gif) no-repeat right bottom;
 	border:1px solid #99bbe8;
-	padding: 10px;
+	padding: 5px;
 }

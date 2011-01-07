@@ -232,6 +232,7 @@ function queryInfoRole(e){
 				 					
 				 						if(!roleMenuPanel){
 				 								roleMenuPanel=new Ext.grid.GridPanel({
+				 												reserveScrollOffset: true,
 				 												tbar:new Ext.Toolbar([
 				 												{
 				 													text: 'É¾³ý',
