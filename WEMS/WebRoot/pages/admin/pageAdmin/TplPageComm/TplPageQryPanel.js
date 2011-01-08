@@ -57,7 +57,9 @@ Ems.page.TplPageEditWindow=Ext.extend(Ext.Window,{
 	closeAction:'hide',
 	title:'模板信息编辑',
 	width:400,
-	height:200,
+	height:265,
+	resizable:false,
+	id:'EditWindow',
 	initComponent:function(){
 			this.EditForm=new Ext.FormPanel({
 					defaultType:'textfield',
@@ -68,7 +70,8 @@ Ems.page.TplPageEditWindow=Ext.extend(Ext.Window,{
 					frame:true,
 					items:[{
 						name:'tplPageId',
-						fieldLabel:'模板ID'
+						fieldLabel:'模板ID',
+						readOnly:true
 					},{
 						name:'tplPageName',
 						fieldLabel:'模板名称'
@@ -78,25 +81,54 @@ Ems.page.TplPageEditWindow=Ext.extend(Ext.Window,{
 					},{
 						name:'tplPageType',
 						fieldLabel:'模板类型'
+					},{
+						name:'tplPageResource',
+						fieldLabel:'资源ID'
+					},{
+						name:'tplImageHeight',
+						fieldLabel:'底图高',
+						xtype:'numberfield'
+					},{
+						name:'tplImageWidth',
+						fieldLabel:'底图宽',
+						xtype:'numberfield'
 					}
 					],
 					buttons:[
 					{
 						text:'提交',
 						handler:function(){
+							  if(!this.ownerCt.ownerCt.getForm().isValid())return false;
+							 
 							  this.ownerCt.ownerCt.getForm().submit({
 							  		url:'TplPageModify.action',
 							  		success:function(form, action){
-							  				form.ownerCt.fireEvent('editsuccess',form,action);
+							  			if(action.result.res_code==0){
+							  				 var ed=Ext.getCmp('EditWindow');
+							  				 ed.fireEvent('editsuccess',ed);
+							  			}
+							  		},
+							  		failure: function(form, action) {
+							  			if(action.result!=undefined && action.result.res_code==0){
+							  				 var ed=Ext.getCmp('EditWindow');
+							  				 ed.fireEvent('editsuccess',ed);
+							  			}
 							  		}
-							  })
+							  });
+						}
+					},
+					{
+						text:'取消',
+						handler:function(){
+							this.ownerCt.ownerCt.getForm().reset();
+							this.ownerCt.ownerCt.ownerCt.hide();
 						}
 					}
 					]
 			});
 			this.items=[this.EditForm];
 			Ems.page.TplPageEditWindow.superclass.initComponent.call(this);
-			this.addEvents('editsuccess');
+			this.addEvents({'editsuccess':true});
 	}
 })
 
@@ -120,7 +152,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 			return false;
 	 		}
 	 		Ext.example.msg('Info','删除:'+ records[0].get('tplPageName'));
-	 		Ext.ajax.Request({
+	 		Ext.Ajax.request({
 	 			url:'TplPageDelete.action',		
 	 			method:'POST',
 	 			params:{
@@ -140,7 +172,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 },'-',
 	 {
 	 	 text:'编辑',
-	 	 ionCls:'silk_edit',
+	 	 iconCls:'silk-user-edit',
 	 	 handler:function(){
 	 	 	var container=this.ownerCt.ownerCt;
 	 		var records=container.listView.getSelectedRecords();
@@ -153,7 +185,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 			this.editWindow.show();
 	 		}else{
 	 			this.editWindow=new Ems.page.TplPageEditWindow();
-	 			this.editWindow.on('editsuccess',function(form, action){
+	 			this.editWindow.on('editsuccess',function(window){
 	 					Ext.example.msg('OK','编辑成功');
 	 					container.store.load({
 	 						params:{
@@ -161,7 +193,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 								limit:7
 	 						}
 	 					});
-	 					form.onwerCt.hide();
+	 					window.hide();
 	 			});
 	 			this.editWindow.EditForm.getForm().loadRecord(records[0]);
 	 			this.editWindow.show();
@@ -229,7 +261,9 @@ Ems.page.TplPageQryPanel=Ext.extend(Ext.Panel,{
 					{name:'tplPageId',mapping:'tplPageId'},
 					{name:'tplPageResource',mapping:'tplPageResource'},
 					{name:'tplPageName',mapping:'tplPageName'},
-					{name:'tplImagePath',mapping:'tplImagePath'}
+					{name:'tplImagePath',mapping:'tplImagePath'},
+					{name:'tplImageWidth',mapping:'tplImageWidth'},
+					{name:'tplImageHeight',mapping:'tplImageHeight'}
 					]
 			});
 			this.store.load({
