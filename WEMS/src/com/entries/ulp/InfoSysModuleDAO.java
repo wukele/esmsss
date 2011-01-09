@@ -151,6 +151,17 @@ public class InfoSysModuleDAO extends EmsDao {
 			throw re;
 		}
 	}
+	
+	public void update(InfoSysModule instance){
+		log.debug("updating InfoSysModule instance");
+		try {
+			getHibernateTemplate().update(instance);
+			log.debug("update successful");
+		} catch (RuntimeException re) {
+			log.error("update failed", re);
+			throw re;
+		}
+	}
 
 	public static InfoSysModuleDAO getFromApplicationContext(
 			ApplicationContext ctx) {
