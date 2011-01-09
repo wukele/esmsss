@@ -1,5 +1,10 @@
 Ext.ns('Ems.page')
 
+
+var sm=new Ext.grid.RowSelectionModel({
+				singleSelect:true
+			});
+var store;
 Ems.page.SysEditWindow=Ext.extend(Ext.Window,{
 		title:'系统信息',
 		frame:true,
@@ -82,8 +87,6 @@ Ems.page.SysEditWindow=Ext.extend(Ext.Window,{
 		}
 });
 
-
-
 Ems.page.ModuleMgr=Ext.extend(Ext.grid.GridPanel,{
 			title:'子系统管理',
 			autoHeight:true,
@@ -107,9 +110,7 @@ Ems.page.ModuleMgr=Ext.extend(Ext.grid.GridPanel,{
 				}
 				]
 			}),
-			sm:new Ext.grid.RowSelectionModel({
-				singleSelect:true
-			}),
+			sm:sm,
 			tbar:new Ext.Toolbar([
 				{
 			 		text:'添加',
@@ -126,6 +127,34 @@ Ems.page.ModuleMgr=Ext.extend(Ext.grid.GridPanel,{
 					text:'删除',
 					iconCls:'silk-delete',
 					handler:function(){
+						var _ModuleMgr=this.ownerCt.ownerCt;
+						var selectedRecord = sm.getSelected();
+						var paras = {};
+						if (selectedRecord == null || selectedRecord.length == 0){
+							Ext.example.msg("注意", "至少选择一条记录");
+						}
+						paras["moudle_codes"] = selectedRecord.get("moduleCode") ;
+						
+						Ext.Ajax.request({
+						url : 'SysModuleMgrDel.action',
+						method : 'post',
+						params : paras,
+						success : function(xhq, status) {
+							var ret = Ext.util.JSON
+							.decode(xhq.responseText);
+							if (xhq.responseText == null)
+								return;
+
+							// 失败
+							if (ret.returnNo > 0) {
+								Ext.example.msg('失败', '失败原因:' + ret.returnMsg);
+								return;
+							}
+							// 成功
+							_ModuleMgr.initComponent;
+							//Ext.example.msg('成功', ret.returnMsg);
+						}
+					});
 						
 					}
 					
