@@ -44,6 +44,7 @@ public class SysModuleService {
 		for (String module_code : module_codes) {
 			InfoSysModule moudle=new InfoSysModule();
 			moudle.setModuleCode(module_code);
+			moudle.setModuleName("");
 			sysModuleDao.delete(moudle);
 		}
 	}
