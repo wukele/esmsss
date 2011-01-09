@@ -19,7 +19,7 @@ Ems.page.SysEditWindow=Ext.extend(Ext.Window,{
 						fieldLabel:'系统编码',
 						blankText:'系统名称必填',
 						allowBlank:false,
-						name:'module_code'
+						name:'sm.moduleCode'
 					},
 					{
 						fieldLabel:'系统名称',
@@ -59,8 +59,10 @@ Ems.page.SysEditWindow=Ext.extend(Ext.Window,{
 								clientValidation: true,
 								url:'SysModuleMgrAdd.action',
     							success:function(){
+//								 var _window=this.ownerCt.ownerCt.ownerCt;
+//								 _window.hide();
     								 Ext.example.msg('OK','{0}新增成功',this.ownerCt.ownerCt.items.items[1].getValue());
-    								 this.ownerCt.ownerCt.hide();
+    								 this.ownerCt.ownerCt.ownerCt.hide();
     							}
 							});	
 							
