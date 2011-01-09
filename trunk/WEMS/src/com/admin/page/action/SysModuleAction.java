@@ -100,6 +100,9 @@ public class SysModuleAction extends ActionSupport {
 	 * @return
 	 */
 	public String SysModuleActionDel() {
+		System.out.println("!!!!!!!!!!!!!!!! del");
+		System.out.println("@@@@@@@@@@@@@"+ moudle_codes.size());
+		System.out.println("@@@@@@@@@@@@@"+ moudle_codes.get(0));
 		try {
 			sysModuleService.delModules(moudle_codes);
 		} catch (RuntimeException e) {

@@ -2,14 +2,27 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="pageAdmin" extends="json-default" namespace="/">
-			<action name="SysModuleMgr" class="SysModuleAction" method="SysModuleActionQry">
-					<result type="json">
-					</result>
-			</action>
-			<action name="SysModuleMgrAdd" class="SysModuleAction" method="SysModuleActionAdd">
-					<result type="json">
-					</result>
-			</action>
+		<action name="SysModuleMgr" class="SysModuleAction" method="SysModuleActionQry">
+			<result type="json">
+				<param name="excludeProperties">
+					sysModuleService
+				</param>
+			</result>
+		</action>
+		<action name="SysModuleMgrAdd" class="SysModuleAction" method="SysModuleActionAdd">
+			<result type="json">
+				<param name="excludeProperties">
+					sysModuleService
+				</param>
+			</result>
+		</action>
+		<action name="SysModuleMgrDel" class="SysModuleAction" method="SysModuleActionDel">
+			<result type="json">
+				<param name="excludeProperties">
+					sysModuleService
+				</param>
+			</result>
+		</action>
 			
 			<action name="PageTemplateActionUpLoad"  class="PageTemplateAction" method="PageTemplateActionUpLoad">
 					<result type="json"></result>
