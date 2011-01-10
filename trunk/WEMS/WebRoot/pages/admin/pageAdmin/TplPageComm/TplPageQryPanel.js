@@ -1,5 +1,6 @@
 Ext.ns('Ems.page')
 
+
 Ems.page.TplPageQryForm=Ext.extend(Ext.FormPanel,{
 	title:'Ä£°åÒ³Ãæ²éÑ¯',
 	frame:true,
