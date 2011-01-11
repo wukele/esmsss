@@ -24,7 +24,7 @@ public class TemplatePageRemainService {
 
 		public  List<TplInfoPage>  QryTemplatePages(String  tpl_page_id,String tpl_page_name){
 			if((tpl_page_id==null && tpl_page_name==null) || (tpl_page_id=="" && tpl_page_name=="")
-					||  ("".equals(tpl_page_name) && "".equals(tpl_page_id))){
+					||  ("".equals(tpl_page_name) && "".equals(tpl_page_id))  ||  tpl_page_id=="" ||  tpl_page_id.equals("")){
 						return  tplDao.findAllTplInfoPage();
 			}else{
 						return  tplDao.findTplByIdAndName(tpl_page_id, tpl_page_name);
