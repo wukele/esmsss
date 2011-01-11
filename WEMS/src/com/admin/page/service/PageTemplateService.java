@@ -4,19 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
 import javax.annotation.Resource;
 
-import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.velocity.texen.util.FileUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ems.dao.impl.TlpPageImageDao;
 import com.ems.entity.TlpPageImage;
+import com.page.entity.TplInfoPage;
+import com.util.FileTypeUtil;
 
 
 
@@ -56,12 +56,19 @@ public class PageTemplateService {
 			@Transactional
 			public boolean UpLoadFile(File imagePath, TlpPageImage tlp,
 					String savePath, String operNo) {
-				// TODO Auto-generated method stub
-						boolean res=false;
+						boolean res=false;						
+						//设置随机10位英文名
+						String dot_ext=null;
+						dot_ext=tlp.getImageName().lastIndexOf(".")>-1?"."+tlp.getImageName().split("\\.")[1]:"";
+						
+						tlp.setImageName(RandomStringUtils.random(10, true, false)+dot_ext);
 						tlpImageDao.save_tlp_page_image(tlp);
 						try {
-							// FIXED 跨系统路径名称
-							FileUtils.copyFile(imagePath, new File(savePath+"/"+tlp.getImageName()));
+							boolean is_img = FileTypeUtil.isImage(imagePath);
+							if(!is_img)
+								throw new IOException("该文件不是图片格式");
+								// FIXED 跨系统路径名称
+								FileUtils.copyFile(imagePath, new File(savePath+"/"+tlp.getImageName()));
 							res=true;
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
