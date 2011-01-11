@@ -43,7 +43,7 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 			private HttpServletResponse response;
 			private int returnNo;
 			private String returnMsg;
-			private int image_id;
+			private String image_id;
 			private List<Integer> lst_image_id;
 			
 			public void setImage_path(File imagePath) {
@@ -76,7 +76,12 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 				        InfoOper   oper=(InfoOper)session.getAttribute(CommUlpKey.KEY_INFO_OPER);
 				        String savePath   =request.getRealPath(remote_path);
 				        TlpPageImage   tlp=new TlpPageImage();
-				        tlp.setImageId(image_id);
+				        
+				        try {
+				        	tlp.setImageId(Integer.parseInt(image_id));
+						} catch (RuntimeException e) {
+							
+						}
 				        tlp.setFlag("1");
 				        tlp.setImageDisplayName(image_title);
 				        tlp.setImagePath(remote_path);
@@ -112,7 +117,7 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 			public String remove_page_temlate(){
 				
 				try {
-					tplService.remove_page_template(image_id);
+					tplService.remove_page_template(new Integer(image_id));
 				} catch (RuntimeException e) {
 					returnNo=1;
 					returnMsg="É¾³ýµ×Í¼Ê§°Ü:"+e.getMessage();
@@ -150,18 +155,19 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 			public void setReturnMsg(String returnMsg) {
 				this.returnMsg = returnMsg;
 			}
-			public int getImage_id() {
-				return image_id;
-			}
-			public void setImage_id(int image_id) {
-				this.image_id = image_id;
-			}
 			public List<Integer> getLst_image_id() {
 				return lst_image_id;
 			}
 			public void setLst_image_id(List<Integer> lst_image_id) {
 				this.lst_image_id = lst_image_id;
 			}
+			public String getImage_id() {
+				return image_id;
+			}
+			public void setImage_id(String image_id) {
+				this.image_id = image_id;
+			}
+			
 			
 			
 }

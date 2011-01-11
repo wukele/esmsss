@@ -1,22 +1,29 @@
 package com.admin.page.action;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.admin.page.service.TemplatePageRemainService;
+import com.entries.ulp.InfoOper;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.entity.TplInfoPage;
+import com.ulp.comm.CommUlpKey;
 
 @SuppressWarnings("serial")
 @Component("TemplatePageAdd")
 @Scope("prototype")
-public class TemplatePageAdd extends ActionSupport {
+public class TemplatePageAdd extends ActionSupport implements ServletRequestAware {
 	private TemplatePageRemainService temp_page_serv; //模板页面服务
 	private TplInfoPage tpl_info_page; //模板页面
 	private int returnNo;
 	private String returnMsg;
+	private HttpServletRequest request;
 	
 	public TemplatePageAdd() {
 		super();
@@ -26,6 +33,9 @@ public class TemplatePageAdd extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		try{
+			 HttpSession  session=request.getSession();
+		     InfoOper   oper=(InfoOper)session.getAttribute(CommUlpKey.KEY_INFO_OPER);
+		     tpl_info_page.setTplOperCode(oper.getOperNo());
 			temp_page_serv.add_template_page(tpl_info_page);
 		}catch (RuntimeException e) {
 			returnNo=1;
@@ -69,6 +79,11 @@ public class TemplatePageAdd extends ActionSupport {
 
 	public void setReturnMsg(String returnMsg) {
 		this.returnMsg = returnMsg;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		request=arg0;
 	}
 	
 }
