@@ -34,4 +34,13 @@ public class TplInfoPageDao extends EmsDao {
 			// TODO Auto-generated method stub
 			getHibernateTemplate().merge(tpl);
 		}
+		
+		/**
+		 * 新增模板页面
+		 * @param tpl 模板页面
+		 */
+		public void add_tpl_info_page(TplInfoPage tpl){
+			
+			getHibernateTemplate().save(tpl);
+		}
 }

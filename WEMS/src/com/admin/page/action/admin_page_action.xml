@@ -27,6 +27,12 @@
 			<action name="PageTemplateActionUpLoad"  class="PageTemplateAction" method="PageTemplateActionUpLoad">
 					<result type="json"></result>
 			</action>
+			<action name="remove_multiple_page_template"  class="PageTemplateAction" method="remove_multiple_page_template">
+					<result type="json"></result>
+			</action>
+			<action name="tpl_page_qry"  class="TemplatePageAdd">
+					<result type="json"></result>
+			</action>
 			<action name="PageTemplateMgrQry" class="PageTemplateMgr" method="PageTemplateQry">
 					<result type="json"></result>
 			</action>

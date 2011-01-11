@@ -48,6 +48,7 @@ public class PageTemplateMgr extends ActionSupport  implements  ServletRequestAw
 							totalProperty=tlp_images.size();
 							for(int i=0;i<totalProperty;i++){
 										TlpPageImage  tpl=tlp_images.get(i);
+										tpl.setRemotePath(tpl.getImagePath());
 										tpl.setImagePath( content + tpl.getImagePath()  );
 							}
 					}

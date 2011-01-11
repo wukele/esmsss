@@ -15,7 +15,9 @@ public class TlpPageImage implements java.io.Serializable {
 	private String flag;
 	private String imageDesc;
 	private String operNo;
-
+	//add by ffmmx
+	private String remotePath;
+	
 	// Constructors
 
 	/** default constructor */
@@ -95,6 +97,17 @@ public class TlpPageImage implements java.io.Serializable {
 
 	public void setOperNo(String operNo) {
 		this.operNo = operNo;
+	}
+
+	public String getRemotePath() {
+		return remotePath;
+	}
+
+	public void setRemotePath(String remotePath) {
+		if(remotePath==null||remotePath.trim().length()==0)
+			this.remotePath=getImagePath();
+		else
+			this.remotePath = remotePath;
 	}
 
 }
