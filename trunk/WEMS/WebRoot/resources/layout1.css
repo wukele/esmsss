@@ -62,25 +62,36 @@
 	margin-right: 0;
 	padding: 5px;
 	width: 220px;
+	height:100px;
+	overflow: hidden;
 }
 .x-list-image{
 	width: 100px;
-	float: left;	
+	float: left;
+	overflow: hidden;	
 }
 .x-list-text{
 	width: 220px;
-	float: left;	
+	float: left;
+	overflow: hidden;
 }
 
 .x-list-wrap{
 	margin: 5px;
 	padding: 5px;
-	border: 1px solid '00';
 	height: 100px
 }
 
 .x-list-wrap p{
 	margin: 2px;	
+}
+
+
+.x-content-panel{
+	background:url(wallpapers/desktop.jpg) center;
+	background-repeat:no-repeat;
+	width: 100%;
+	height: 100%;
 }
 
 
