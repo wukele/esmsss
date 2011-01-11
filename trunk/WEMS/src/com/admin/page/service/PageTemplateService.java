@@ -58,9 +58,10 @@ public class PageTemplateService {
 					String savePath, String operNo) {
 				// TODO Auto-generated method stub
 						boolean res=false;
-						tlpImageDao.addTlpPageImage(tlp);
+						tlpImageDao.save_tlp_page_image(tlp);
 						try {
-							FileUtils.copyFile(imagePath, new File(savePath+"\\"+tlp.getImageName()));
+							// FIXED 跨系统路径名称
+							FileUtils.copyFile(imagePath, new File(savePath+"/"+tlp.getImageName()));
 							res=true;
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -80,4 +81,38 @@ public class PageTemplateService {
 				}
 			}
 			
+			/**
+			 * 
+			 * @param tlp_id
+			 */
+			@Transactional
+			public void remove_page_template(Integer tlp_id){
+				log.debug("remove_page_template start");
+				try {
+					tlpImageDao.delete_tlp_page_image(tlp_id);
+					log.debug("remove_page_template finished");
+				} catch (RuntimeException e) {
+					log.error("remove_page_template faild");
+					log.error("页面模板删除失败");
+					log.error(e);
+					throw e;
+				}
+			}
+			
+			@Transactional
+			public void remove_muti_page_template(List<Integer> lst_tlp_id){
+				log.debug("remove_muti_page_template start.");
+				try {
+					if(lst_tlp_id==null || lst_tlp_id.size()==0)
+						throw new RuntimeException("lst_tlp_id is null..");
+					for(Integer tlp_id: lst_tlp_id){
+						remove_page_template(tlp_id);
+					}
+					log.debug("remove_muti_page_template finished..");
+				} catch (RuntimeException e) {
+					log.error("remove_muti_page_template failed");
+					log.error(e);
+					throw e;
+				}
+			}
 }

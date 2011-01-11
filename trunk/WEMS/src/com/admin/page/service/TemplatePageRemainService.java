@@ -43,5 +43,27 @@ public class TemplatePageRemainService {
 				log.info("模板修改成功");
 		}
 		
-		
+		// add by ffmmx
+		/**
+		 * 普通配置模板页面新增
+		 * @param tpl 普通模板页面
+		 */
+		@Transactional
+		public void add_template_page(TplInfoPage tpl){
+			log.debug("add_template_page is starting");
+			try{
+				if(tpl==null)
+					throw new RuntimeException("普通模板页面实体 tpl 为空;TplInfoPage tpl is null");
+				if(tpl.getTplPageType()==null || tpl.getTplPageType().trim().length()==0)
+					throw new RuntimeException("页面类型 TplPageType 为空; TplInfoPage TplPageType is null	");
+				
+				tplDao.add_tpl_info_page(tpl);
+				log.debug("add_template_page finished");
+			}catch (RuntimeException e) {
+				log.error("add_template_page faild");
+				log.error("模板页面新增失败");
+				log.error(e);
+				throw e;
+			}
+		}
 }
