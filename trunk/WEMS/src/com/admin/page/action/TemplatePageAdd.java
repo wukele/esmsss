@@ -81,7 +81,7 @@ public class TemplatePageAdd extends ActionSupport implements ServletRequestAwar
 		this.returnMsg = returnMsg;
 	}
 
-	@Override
+	
 	public void setServletRequest(HttpServletRequest arg0) {
 		request=arg0;
 	}
