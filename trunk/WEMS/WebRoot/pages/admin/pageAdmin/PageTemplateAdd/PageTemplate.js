@@ -70,8 +70,9 @@ Ems.page.PageTempateMangerPan=Ext.extend(Ext.FormPanel,{
             			var _file_type='gif,bmp,png,jpg,jpeg';
             			var rex_exp='^';
             			for(i=0;i<_file_type.split(',').length;i++){
-            				rex_exp+=_file_type.split(',')[i];
+            				rex_exp+='.*\.'+_file_type.split(',')[i]+'|';
             			}
+            			rex_exp=rex_exp.substr(0, rex_exp.length-1);
             			rex_exp+='$';
             			
             			var exp=new RegExp(rex_exp);
