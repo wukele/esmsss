@@ -60,14 +60,19 @@ Ems.page.SysEditWindow=Ext.extend(Ext.Window,{
 				this.rbuttons=[
 					{text:'提交',handler:function(){
 							//Ext.Msg.alert('moduleCode',this.ownerCt.ownerCt.items.items[0].getValue());
+						var _window=this.ownerCt.ownerCt.ownerCt;
+						this.ownerCt.ownerCt.ownerCt.initComponent();
 							this.ownerCt.ownerCt.getForm().submit({
 								clientValidation: true,
 								url:'SysModuleMgrAdd.action',
-    							success:function(){
-//								 var _window=this.ownerCt.ownerCt.ownerCt;
-//								 _window.hide();
-    								 Ext.example.msg('OK','{0}新增成功',this.ownerCt.ownerCt.items.items[1].getValue());
-    								 this.ownerCt.ownerCt.ownerCt.hide();
+    							success:function(form, action){
+								Ext.Msg.alert('Success', action.result.msg);
+
+								alert("12333333")
+								_window.hide();
+								_window.initComponent;
+								// Ext.example.msg('OK','{0}新增成功',this.ownerCt.ownerCt.items.items[1].getValue());
+//    								 this.ownerCt.ownerCt.ownerCt.hide();
     							}
 							});	
 							
