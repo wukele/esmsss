@@ -148,6 +148,21 @@ Ext.onReady(function(){
             {
                     text:'清除权限',
                     handler:function(){
+                    	var length=grid.getSelectionModel().getSelections().length;
+                    	if(length!=1){
+                    		Ext.Msg.alert("提示","需要选择其中一行数据!");
+                    		return;
+                    	}
+                    	var operNo=grid.getSelectionModel().getSelections()[0].data.operNo;
+											var paras={};
+                    	paras["pageParam.operNo"]=operNo;
+                    	ajaxSyncCall('deleteRuleOperRole.action',"pageParam.operNo="+operNo);
+                    	paras=getFormParams(qryForm)
+                    	paras.limit=10;
+                    	paras.start=0;
+                    	var ruleOperRoles=ajaxSyncCall("selectInfoDept.action","pageParam.operNo="+paras["operNo"]+"&"+"pageParam.operName="+paras["operName"]).infoDepts;
+											store.proxy=new Ext.data.PagingMemoryProxy(ruleOperRoles);
+											store.reload({params:paras});
                     }
                     
             },
