@@ -28,8 +28,17 @@ public class SysModuleService {
 	 * @param sm
 	 */
 	@Transactional
-	public void AddModules(InfoSysModule sm) {
-		sysModuleDao.save(sm);
+	public Boolean AddModules(InfoSysModule sm) {
+		Boolean whether;
+		try {
+			sysModuleDao.save(sm);
+			whether=true;
+		} catch (RuntimeException re) {
+			whether=false;
+			throw re;
+		}
+		
+		return whether;
 	}
 	
 	/**
