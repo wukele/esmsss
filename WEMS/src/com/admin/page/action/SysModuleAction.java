@@ -27,6 +27,7 @@ public class SysModuleAction extends ActionSupport {
 	private List<String> moudle_codes;
 	private String isActive;
 	private String returnMsg;
+	private int returnNo;
 	  
 	public String getIsActive() {
 		return isActive;
@@ -114,7 +115,7 @@ public class SysModuleAction extends ActionSupport {
 		}
 		
 		returnMsg = "添加成功 ";
-		return SUCCESS;
+		return null;
 	}
 
 	/**
@@ -123,15 +124,14 @@ public class SysModuleAction extends ActionSupport {
 	 * @return
 	 */
 	public String SysModuleActionDel() {
-		System.out.println("!!!!!!!!!!!!!!!! del");
-		System.out.println("@@@@@@@@@@@@@"+ moudle_codes.size());
-		System.out.println("@@@@@@@@@@@@@"+ moudle_codes.get(0));
 		try {
 			sysModuleService.delModules(moudle_codes);
 		} catch (RuntimeException e) {
 			returnMsg = e.getMessage();
+			returnNo=1;
 			throw e;
 		}
+		returnNo=0;
 		returnMsg = "删除执行成功";
 		return SUCCESS;
 	}
