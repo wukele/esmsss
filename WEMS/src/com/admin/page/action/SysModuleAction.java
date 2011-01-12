@@ -1,9 +1,15 @@
 package com.admin.page.action;
 
+import java.awt.print.Printable;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOExceptionWithCause;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +27,7 @@ public class SysModuleAction extends ActionSupport {
 	private List<String> moudle_codes;
 	private String isActive;
 	private String returnMsg;
+	  
 	public String getIsActive() {
 		return isActive;
 	}
@@ -80,7 +87,11 @@ public class SysModuleAction extends ActionSupport {
 	 * 
 	 * @return
 	 */
-	public String SysModuleActionAdd() {
+	public String SysModuleActionAdd() throws IOException{
+		String msg;
+		HttpServletResponse response=ServletActionContext.getResponse();
+		PrintWriter out=response.getWriter();
+		response.setContentType("text/html; charset=GBK");
 		if(isActive.equals("是")){
 			sm.setIsActive(1);
 		}
@@ -88,11 +99,20 @@ public class SysModuleAction extends ActionSupport {
 			sm.setIsActive(0);
 		}
 		try {
-			sysModuleService.AddModules(sm);
+			if(sysModuleService.AddModules(sm)){
+				 msg="{success:true}";
+				out.print(msg);
+			}else{
+				msg="{success:false}";
+				out.print(msg);
+			}
+			
 		} catch (RuntimeException e) {
 			returnMsg = e.getMessage();
+			out.close();
 			throw e;
 		}
+		
 		returnMsg = "添加成功 ";
 		return SUCCESS;
 	}
