@@ -20,6 +20,7 @@ public class SysModuleAction extends ActionSupport {
 	private SysModuleService sysModuleService;
 	private List<String> moudle_codes;
 	private String isActive;
+	private String returnMsg;
 	public String getIsActive() {
 		return isActive;
 	}
@@ -28,14 +29,20 @@ public class SysModuleAction extends ActionSupport {
 		this.isActive = isActive;
 	}
 
-	private String returnMsg;
-
 	public void setSm(InfoSysModule sm) {
 		this.sm = sm;
 	}
 
 	public List<InfoSysModule> getModules() {
 		return modules;
+	}
+	
+	public String getReturnMsg() {
+		return returnMsg;
+	}
+
+	public void setReturnMsg(String returnMsg) {
+		this.returnMsg = returnMsg;
 	}
 
 	@Resource(name = "SysModuleService")
@@ -80,10 +87,6 @@ public class SysModuleAction extends ActionSupport {
 		if (isActive.equals("·ñ")) {
 			sm.setIsActive(0);
 		}
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+sm.getModuleName());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+sm.getModuleCode());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+sm.getIsActive());
-//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+sm.getModuleIndex());
 		try {
 			sysModuleService.AddModules(sm);
 		} catch (RuntimeException e) {
