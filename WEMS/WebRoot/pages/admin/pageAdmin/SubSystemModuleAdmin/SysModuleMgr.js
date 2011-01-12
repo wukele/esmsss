@@ -66,13 +66,9 @@ Ems.page.SysEditWindow=Ext.extend(Ext.Window,{
 								clientValidation: true,
 								url:'SysModuleMgrAdd.action',
     							success:function(form, action){
-								Ext.Msg.alert('Success', action.result.msg);
-
-								alert("12333333")
-								_window.hide();
-								_window.initComponent;
-								// Ext.example.msg('OK','{0}新增成功',this.ownerCt.ownerCt.items.items[1].getValue());
-//    								 this.ownerCt.ownerCt.ownerCt.hide();
+										 module_mgr.store.load();
+										 Ext.example.msg('OK','新增成功');
+								 		_window.hide();
     							}
 							});	
 							
@@ -156,8 +152,8 @@ Ems.page.ModuleMgr=Ext.extend(Ext.grid.GridPanel,{
 								return;
 							}
 							// 成功
-							_ModuleMgr.initComponent;
-							//Ext.example.msg('成功', ret.returnMsg);
+							module_mgr.store.load();
+							Ext.example.msg('成功', ret.returnMsg);
 						}
 					});
 						
@@ -186,8 +182,9 @@ Ems.page.ModuleMgr=Ext.extend(Ext.grid.GridPanel,{
 
 
 Ext.onReady(function(){
-	new Ems.page.ModuleMgr({
-			renderTo:Ext.getDom('sysModule')
-	});
+	
+	module_mgr = new Ems.page.ModuleMgr({
+                       renderTo:Ext.getDom('sysModule')
+       });
 });
 
