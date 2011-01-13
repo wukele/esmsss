@@ -1,5 +1,6 @@
 package com.admin.page.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,22 +15,28 @@ import com.opensymphony.xwork2.ActionSupport;
 @Component("PageResourceAction")
 @Scope("prototype")
 public class PageResourceAction extends ActionSupport {
-			private   String  tpl_page_resource;
+			private   String  tplPageResource;
 			private   PageResourceService  prs;
 			private   List<PageResourceStruct>  tplComps;
 			public List<PageResourceStruct> getTplComps() {
 				return tplComps;
 			}
-			public void setTpl_page_resource(String tplPageResource) {
-				tpl_page_resource = tplPageResource;
-			}
+		
 			@Resource(name="PageResourceService")
 			public void setPrs(PageResourceService prs) {
 				this.prs = prs;
 			}
 			
 			public  String  PageResourceActionQry(){
-				tplComps=prs.QueryPageResource(tpl_page_resource);
+				if(tplPageResource==null ||  "".equals(tplPageResource)){
+					tplComps=new ArrayList<PageResourceStruct>();
+					return  SUCCESS;
+				}
+				tplComps=prs.QueryPageResource(tplPageResource);
 				return  SUCCESS;
+			}
+
+			public void setTplPageResource(String tplPageResource) {
+				this.tplPageResource = tplPageResource;
 			}
 }
