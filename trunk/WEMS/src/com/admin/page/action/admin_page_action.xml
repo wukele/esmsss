@@ -30,6 +30,13 @@
 				</param>
 			</result>
 		</action>
+		<action name="SysModuleMgrUpdate" class="SysModuleAction" method="SysModuleActionUpdate">
+			<result type="json">
+				<param name="excludeProperties">
+					sysModuleService
+				</param>
+			</result>
+		</action>
 			
 			<action name="PageTemplateActionUpLoad"  class="PageTemplateAction" method="PageTemplateActionUpLoad">
 					<result type="json"></result>
