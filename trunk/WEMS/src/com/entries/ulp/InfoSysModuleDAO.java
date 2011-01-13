@@ -28,6 +28,7 @@ public class InfoSysModuleDAO extends EmsDao {
 	public static final String MODULE_NAME = "moduleName";
 	public static final String MODULE_INDEX = "moduleIndex";
 	public static final String IS_ACTIVE = "isActive";
+	public static final String MOUDLE_CODE="moduleCode";
 
 	protected void initDao() {
 		// do nothing
@@ -104,6 +105,10 @@ public class InfoSysModuleDAO extends EmsDao {
 
 	public List findByIsActive(Object isActive) {
 		return findByProperty(IS_ACTIVE, isActive);
+	}
+	
+	public List findByModuleCode(Object moduleCode){
+		return findByProperty(MOUDLE_CODE, moduleCode);
 	}
 
 	public List findAll() {
