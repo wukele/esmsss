@@ -1,11 +1,19 @@
-select m
-from RuleRoleFunc as rrf,
-InfoMenu as m,
-RuleOperRole as rr
-where rrf.roleCode=
-rr.roleCode and 
-rrf.entityType='M' and
-m.menuCode=
-rrf.entityCode and 
-rr.operNo='TEST01'
-
+select new
+com.admin.page.struct.PageResourceStruct(
+tr.resourceId,
+tr.pageResource,
+cc.componentName,
+tr.xtypeCode,
+tr.resourceTop,
+tr.resourceLeft,
+tr.resourceWidth,
+tr.resourceHeight,
+tr.valueId,
+tr.config,
+tr.baseCls
+)
+from CodeComponent as  cc,
+TplPageResource as tr where 
+cc.codeXtype=
+tr.xtypeCode  and  
+tr.pageResource='TPOWER0G'

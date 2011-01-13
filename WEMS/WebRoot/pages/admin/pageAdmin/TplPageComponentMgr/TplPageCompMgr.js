@@ -14,7 +14,9 @@ Ext.extend(Ems.page.ComponentApp,Ext.util.Observable,{
 		isReady: false,
 		init : Ext.emptyFn,
 		layout:function(){
-		
+				var  height=Ext.get('container').getHeight();
+				EmsCompApp.QryPanel.setHeight(height-40);
+				EmsCompApp.CompPanel.setHeight(height-40);
 		},
 		
 		initApp:function(){
@@ -22,15 +24,21 @@ Ext.extend(Ems.page.ComponentApp,Ext.util.Observable,{
         	Ext.EventManager.on(window, 'beforeunload', this.onUnload, this);
 			this.fireEvent('ready', this);
         	this.isReady = true;
-			var  QryCt=Ext.get('tplPageTemp');
-			var  ComponentCt=Ext.get('tplComp');
+			var  QryCt=Ext.getDom('tplPageTemp');
+			var  ComponentCt=Ext.getDom('tplComp');
 			this.QryCt=QryCt;
 			this.ComponentCt=ComponentCt;
 			
-			this.QryPanel=new Ems.page.TemplatePageQryPanel(this,{
-				 renderTo:this.QryCt.dom,
-				 height:400
+	        this.QryPanel=new Ems.page.TemplatePageQryPanel(this,{
+				 height:400,
+				 renderTo:this.QryCt
 			});
+			this.CompPanel=new Ems.page.ComponentResourceView(this,{
+				title:'Ò³Ãæ×é¼þ',
+				height:400,
+				renderTo:this.ComponentCt
+			});
+		
 			
 			
 			//Ext.EventManager.onWindowResize(this.layout);
