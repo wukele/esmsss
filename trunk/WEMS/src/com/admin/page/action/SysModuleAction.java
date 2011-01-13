@@ -145,7 +145,7 @@ public class SysModuleAction extends ActionSupport {
 	
 	public String SysModuleActionUpdateSearch(){
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@ " +isActive);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@ " +sm.getModuleCode());
 		//modules=sysModuleService.updateSearch(sm.getModuleCode());
 		return null;
 	}
