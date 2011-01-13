@@ -142,11 +142,7 @@ public class SysModuleAction extends ActionSupport {
 	
 	
 	public String SysModuleActionUpdateSearch(){
-		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@ " +sm.getModuleCode());
 		modules=sysModuleService.updateSearch(sm.getModuleCode());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+modules.get(0).getModuleName());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+modules.get(0).getIsActive());
 		return SUCCESS;
 	}
 
@@ -154,16 +150,16 @@ public class SysModuleAction extends ActionSupport {
 	 * 更新子系统
 	 */
 	public String SysModuleActionUpdate() {
-//		sm = new InfoSysModule();
-//		sm.setModuleCode(module_code);
-//		sm.setModuleIndex(module_index);
-//		sm.setModuleName(module_name);
-//		sm.setIsActive(is_active);
-//		try {
-//			sysModuleService.updateModules(sm);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+		HttpServletResponse response=ServletActionContext.getResponse();
+		response.setContentType("text/html; charset=GBK");
+		try {
+			sysModuleService.updateModules(sm);
+		} catch (RuntimeException e) {
+			returnMsg = e.getMessage();
+			returnNo=1;
+			throw e;
+		}
+		returnMsg = "更新执行成功";
 		return SUCCESS;
 	}
 
