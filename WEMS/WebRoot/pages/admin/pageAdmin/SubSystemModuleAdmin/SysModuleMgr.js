@@ -159,6 +159,79 @@ Ems.page.ModuleMgr=Ext.extend(Ext.grid.GridPanel,{
 						
 					}
 					
+				},'-',{
+					text:'更新',
+					iconCls:'silk-update',
+					handler:function(){
+						var _ModuleMgr=this.ownerCt.ownerCt;
+						var selectedRecord = sm.getSelected();
+						var paras = {};
+						var perfix="sm.";
+						if (selectedRecord == null || selectedRecord.length == 0){
+							Ext.example.msg("注意", "至少选择一条记录");
+						}
+						params=  selectedRecord.get("moduleCode") ;
+						this.store=new Ext.data.JsonStore({
+								proxy:new Ext.data.HttpProxy({
+									url:'SysModuleMgrUps.action?sm.moduleCode='+params,
+									//method :"post",
+									
+								}),
+								//params:paras,
+								autoLoad:true,
+								root:'modules',
+								fields:[
+									{name:'moduleCodeUpdate',mapping:'moduleCode'},
+									{name:'moduleNameUpdate',mapping:'moduleName'},
+									{name:'isActiveUpdate',mapping:'isActive'}
+								]
+							}),
+						this.store.load();
+						var _window = new Ext.Window({
+							title:"更新子系统",
+							width:220,
+							height:200,
+							plain:true,
+							resizable:false,
+							layout:"form",
+							labelWidth:55,
+							defaultType:"textfield",
+							defaults:{anchor:"100%"},
+							items:[
+									{
+										name:'moduleCodeUpdate',
+										fieldLabel:"系统编码"	
+									},{
+										name:'moduleNameUpdate',
+										fieldLabel:"系统名称"
+									},{
+										name:'moduleNameUpdate',
+										fieldLabel:"系统索引"
+									},{
+										name:"isActiveUpdate",
+										xtype:"combo",
+										mode:"local",
+										triggerAction: 'all',
+										fieldLabel:"是否激活",
+										store:new Ext.data.ArrayStore({
+											fields:[,'value','displayText'],
+											data:[[1,"是"],[0,"否"]]
+										}),
+										displayField:"displayText",
+										editable:false
+									}
+								],
+							buttons:[{
+								text:"确定"
+							},{
+								text:"取消"
+							}]
+							
+						});
+						_window.show();
+						
+					}
+					
 				}
 			]),
 			initComponent:function(){
