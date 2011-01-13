@@ -1,6 +1,5 @@
 package com.admin.page.action;
 
-import java.awt.print.Printable;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOExceptionWithCause;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -146,8 +144,10 @@ public class SysModuleAction extends ActionSupport {
 	public String SysModuleActionUpdateSearch(){
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@ " +sm.getModuleCode());
-		//modules=sysModuleService.updateSearch(sm.getModuleCode());
-		return null;
+		modules=sysModuleService.updateSearch(sm.getModuleCode());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+modules.get(0).getModuleName());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+modules.get(0).getIsActive());
+		return SUCCESS;
 	}
 
 	/**
