@@ -70,17 +70,22 @@ public class SysModuleAction extends ActionSupport {
 		this.modules = modules;
 	}
 
-	public String SysModuleActionQry() {
-		modules = sysModuleService.QueryAllModules();
-		return SUCCESS;
-	}
-
 	public List<String> getMoudle_codes() {
 		return moudle_codes;
 	}
 
 	public void setMoudle_codes(List<String> moudleCodes) {
 		moudle_codes = moudleCodes;
+	}
+	
+	
+	/**
+	 * 子系统询查询
+	 * @return
+	 */
+	public String SysModuleActionQry() {
+		modules = sysModuleService.QueryAllModules();
+		return SUCCESS;
 	}
 
 	/**
@@ -134,6 +139,15 @@ public class SysModuleAction extends ActionSupport {
 		returnNo=0;
 		returnMsg = "删除执行成功";
 		return SUCCESS;
+	}
+	
+	
+	
+	public String SysModuleActionUpdateSearch(){
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@ " +isActive);
+		//modules=sysModuleService.updateSearch(sm.getModuleCode());
+		return null;
 	}
 
 	/**
