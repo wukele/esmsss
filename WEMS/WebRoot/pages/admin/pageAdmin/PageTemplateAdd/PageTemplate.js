@@ -125,8 +125,8 @@ Ems.page.PageTempateView=Ext.extend(Ext.DataView,{
 		multiSelect:true,
 		initComponent:function(){
 				this.tpl=new Ext.XTemplate('<tpl for=".">',
-				'<div class="thumb-wrap" data="{image_id:{imageId},image_name:\'{imageName}\','+
-				'image_path:null,remote_path:\'{remotePath}\',image_title:\'{imageDisplayName}\'}">'+
+				'<div class="thumb-wrap" style="height:auto;" data="{image_id:{imageId},image_name:\'{imageName}\','+
+				'image_path:null,remote_path:\'{remotePath}\',image_title:\'{imageDisplayName}\'}" >'+
 				'<div class="thumb"><img src="{imagePath}/{imageName}" title="{imageDisplayName}" width="220" height="200"/>',
 				'</div><span>{imageDisplayName}</span></div></tpl><div class="x-clear"></div>');
 				Ems.page.PageTempateView.superclass.initComponent.call(this);		
