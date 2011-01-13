@@ -19,6 +19,10 @@ public class SysModuleService {
 		this.sysModuleDao = sysModuleDao;
 	}
 
+	/**
+	 * 查询子系统
+	 * @return
+	 */
 	public List<InfoSysModule> QueryAllModules() {
 		return sysModuleDao.findAll();
 	}
@@ -58,7 +62,13 @@ public class SysModuleService {
 		}
 	}
 	
+	@Transactional
 	public void updateModules(InfoSysModule sm){
 		sysModuleDao.update(sm);
+	}
+	
+	@Transactional
+	public List updateSearch(String moduleCode){
+		return sysModuleDao.findByModuleCode(moduleCode);
 	}
 }
