@@ -77,11 +77,11 @@ function appLoad(){
 		margins: '2 2 2 0',
 		activeItem: 0,
 		border: 1,
-		autoScroll: true,
-		autoLoad:{
-			url:'home.action',
+		autoScroll: true
+		/*autoLoad:{
+			//url:'home.action',
 			scripts:true
-		}
+		}*/
 	});
 	
 	
