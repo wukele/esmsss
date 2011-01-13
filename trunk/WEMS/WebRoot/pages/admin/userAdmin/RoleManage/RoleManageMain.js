@@ -503,7 +503,8 @@
 					title : '╫ги╚йсм╪',
 					sm : sm,
 					cm : cm,
-					bodyStyle : 'width:100%;height:70%;',
+					border:false,
+					height:350,
 					viewConfig : {
 						autoFill : true
 					},

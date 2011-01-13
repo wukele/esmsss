@@ -303,7 +303,8 @@
 						title : '”√ªß ”Õº',
 						sm : sm,
 						cm : cm,
-						bodyStyle:'width:100%;height:70%;',
+						border:false,
+						height:350,
 						viewConfig:{autoFill:true},
 						tbar : [ {
 							xtype : 'button',
