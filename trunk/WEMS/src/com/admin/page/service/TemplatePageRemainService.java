@@ -1,6 +1,8 @@
 package com.admin.page.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,7 +17,7 @@ import com.page.entity.TplInfoPage;
 
 @Component("TemplatePageRemainService")
 public class TemplatePageRemainService {
-		private static final Log log = LogFactory.getLog(TemplatePageRemainService.class);
+	   private static final Log log = LogFactory.getLog(TemplatePageRemainService.class);
 	   private  TplInfoPageDao   tplDao;
 	   @Resource(name="TplInfoPageDao")
 		public void setTplDao(TplInfoPageDao tplDao) {
@@ -65,5 +67,31 @@ public class TemplatePageRemainService {
 				log.error(e);
 				throw e;
 			}
+		}
+		
+		/**
+		 * 查询页面模板
+		 * @param tplPageId 模板ID
+		 * @param tplPageName 模板名称
+		 * @return 
+		 */
+		public List<TplInfoPage> findTemplatePages(Integer tplPageId,String tplPageName){
+			Map<String, Object > map = new HashMap<String, Object>();
+			List<TplInfoPage> lst=null;
+			log.debug("qryTemplatePages is starting");
+			try {
+				if(tplPageId!=null)
+					map.put("tplPageId", tplPageId);
+				if(tplPageName!=null)
+					map.put("tplPageName", tplPageName);
+				lst = tplDao.findByPropertiesMap(map);
+				log.debug("qryTemplatePages finished");
+			} catch (RuntimeException e) {
+				log.error("qryTemplatePages faild");
+				log.error("模板页面新增失败");
+				log.error(e);
+				throw e;
+			}
+			return lst;
 		}
 }
