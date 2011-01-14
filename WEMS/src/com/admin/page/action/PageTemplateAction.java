@@ -117,7 +117,7 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 			public String remove_page_temlate(){
 				
 				try {
-					tplService.remove_page_template(new Integer(image_id));
+					tplService.remove_page_template_img(new Integer(image_id));
 				} catch (RuntimeException e) {
 					returnNo=1;
 					returnMsg="É¾³ýµ×Í¼Ê§°Ü:"+e.getMessage();
@@ -131,9 +131,9 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 			 * ÅúÁ¿É¾³ýµ×Í¼
 			 * @return
 			 */
-			public String remove_multiple_page_template() {
+			public String remove_multiple_page_template_img() {
 				try {
-					tplService.remove_muti_page_template(lst_image_id);
+					tplService.remove_muti_page_template_img(lst_image_id);
 				} catch (RuntimeException e) {
 					returnNo=1;
 					returnMsg="É¾³ýµ×Í¼Ê§°Ü:"+e.getMessage();
