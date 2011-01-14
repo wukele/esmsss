@@ -14,8 +14,10 @@ import com.ems.entity.TlpPageImage;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+@SuppressWarnings("serial")
 @Component("PageTemplateMgr")
 @Scope("prototype")
+
 public class PageTemplateMgr extends ActionSupport  implements  ServletRequestAware{
 		 	
 	   private  String image_name; 
