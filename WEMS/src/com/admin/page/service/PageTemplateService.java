@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.admin.page.dao.TplInfoPageDao;
 import com.ems.dao.impl.TlpPageImageDao;
 import com.ems.entity.TlpPageImage;
 import com.page.entity.TplInfoPage;
@@ -25,7 +26,6 @@ public class PageTemplateService {
 			private static final Log log = LogFactory.getLog(PageTemplateService.class);
 			
 			private TlpPageImageDao  tlpImageDao;
-			
 			
 			public TlpPageImageDao getTlpImageDao() {
 				return tlpImageDao;
@@ -89,11 +89,11 @@ public class PageTemplateService {
 			}
 			
 			/**
-			 * 
-			 * @param tlp_id
+			 * É¾³ýÒ³ÃæÄ£°åµ×Í¼
+			 * @param tlp_id µ×Í¼ID
 			 */
 			@Transactional
-			public void remove_page_template(Integer tlp_id){
+			public void remove_page_template_img(Integer tlp_id){
 				log.debug("remove_page_template start");
 				try {
 					tlpImageDao.delete_tlp_page_image(tlp_id);
@@ -106,14 +106,18 @@ public class PageTemplateService {
 				}
 			}
 			
+			/**
+			 * ÅúÁ¿É¾³ýÒ³ÃæÄ£°åµ×Í¼
+			 * @param lst_tlp_id Ò³ÃæÄ£°åµ×Í¼IDÁÐ±í
+			 */
 			@Transactional
-			public void remove_muti_page_template(List<Integer> lst_tlp_id){
+			public void remove_muti_page_template_img(List<Integer> lst_tlp_id){
 				log.debug("remove_muti_page_template start.");
 				try {
 					if(lst_tlp_id==null || lst_tlp_id.size()==0)
 						throw new RuntimeException("lst_tlp_id is null..");
 					for(Integer tlp_id: lst_tlp_id){
-						remove_page_template(tlp_id);
+						remove_page_template_img(tlp_id);
 					}
 					log.debug("remove_muti_page_template finished..");
 				} catch (RuntimeException e) {
