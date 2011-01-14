@@ -1,6 +1,8 @@
 package com.admin.page.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -42,5 +44,26 @@ public class TplInfoPageDao extends EmsDao {
 		public void add_tpl_info_page(TplInfoPage tpl){
 			
 			getHibernateTemplate().save(tpl);
+		}
+		
+		/**
+		 * 查询页面模板，通过属性映射
+		 * @param map 属性映射
+		 * @return 页面模板列表
+		 */
+		@SuppressWarnings("unchecked")
+		public List<TplInfoPage> findByPropertiesMap(Map<String, Object> map){
+			List<Object> lstProperties=new ArrayList<Object>();
+			String hql="from TplInfoPage as tip where 1=1";
+			if(map.containsKey("tplPageId")){
+				hql+=" and tip.tplPageId=?";
+				lstProperties.add(map.get("tplPageId"));
+			}
+			if(map.containsKey("tplPageName")){
+				hql+=" and tip.tplPageName=?";
+				lstProperties.add(map.get("tplPageName"));
+			}
+			
+			return getHibernateTemplate().find(hql, lstProperties.toArray());
 		}
 }
