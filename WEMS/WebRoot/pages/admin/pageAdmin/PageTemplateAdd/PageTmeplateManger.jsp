@@ -1,4 +1,4 @@
-<%@ page language="java"  pageEncoding="utf-8"%>
+<%@ page language="java"  pageEncoding="GBK"%>
 <%
 String path = request.getContextPath();
 %>
