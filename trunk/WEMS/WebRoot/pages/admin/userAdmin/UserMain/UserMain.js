@@ -184,10 +184,12 @@
 							url : 'qryUser.action',
 							method:'post'
 						}),
+						baseParams:{start:0,limit:20},
 						params:paras,
 						fields : fieldModel,
 						idProperty : 'operNo',
-						root : 'lstUser'
+						root : 'lstUser',
+						totalProperty:'userCount'
 					});
 					
 				},
@@ -209,9 +211,11 @@
 						proxy : new Ext.data.HttpProxy({
 							url : 'qryUser.action'
 						}),
+						baseParams:{start:0,limit:20},
 						fields : fieldModel,
 						idProperty : 'operNo',
-						root : 'lstUser'
+						root : 'lstUser',
+						totalProperty:'userCount'
 					});
 					store.load();
 
@@ -303,8 +307,8 @@
 						title : '用户视图',
 						sm : sm,
 						cm : cm,
-						border:false,
-						height:350,
+						border:true,
+						height:398,
 						viewConfig:{autoFill:true},
 						tbar : [ {
 							xtype : 'button',
@@ -317,28 +321,34 @@
 								
 								addWindow.show();
 							}
-						}, {
+						}, '-',{
 							xtype : 'button',
 							name : 'btnRemoveUser',
 							text : '删除',
 							handler : function(){
 								me.removeUser();
 							}
-						},{
+						},'-',{
 							xtype:'button',
 							name:'btnInvaidateUser',
 							text:'失效',
 							handler:function(){
 								me.invaildateUser();
 							}
-						},{
+						},'-',{
 							xtype:'button',
 							name:'btnVaidateUser',
 							text:'有效',
 							handler:function(){
 								me.vaildateUser();
 							}
-						}]
+						}],
+						bbar:new Ext.PagingToolbar({store:store,
+							displayInfo: true,
+							pageSize:20,
+							displayMsg : '显示第 {0} 条到 {1} 条记录，一共 {2} 条',
+							emptyMsg : '没有记录'
+						})
 					});
 
 					//添加双击修改。。
@@ -355,6 +365,7 @@
 						width:'100%',
 						heigth:'100%',
 						title:'用户管理',
+						border:false,
 						items:[qryPanel,grid]
 					});
 					if (contianerId)

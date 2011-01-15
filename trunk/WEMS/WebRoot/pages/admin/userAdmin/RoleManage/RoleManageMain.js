@@ -292,10 +292,12 @@
 						url : 'qryRole.action',
 						method : 'post'
 					}),
+					baseParams:{start:0,limit:20},
 					params : paras,
 					fields : fieldModel,
 					idProperty : 'roleCode',
-					root : 'lstRole'
+					root : 'lstRole',
+					totalProperty:'roleCount'
 				});
 			},
 			init : function(contianerId) {
@@ -390,10 +392,12 @@
 					proxy : new Ext.data.HttpProxy({
 						url : 'qryRole.action'
 					}),
+					baseParams:{start:0,limit:20},
 					params:paras,
 					fields : fieldModel,
 					idProperty : 'roleCode',
-					root : 'lstRole'
+					root : 'lstRole',
+					totalProperty:'roleCount'
 				});
 				store.load();
 				// 查询面板
@@ -504,7 +508,7 @@
 					sm : sm,
 					cm : cm,
 					border:false,
-					height:350,
+					height:398,
 					viewConfig : {
 						autoFill : true
 					},
@@ -517,7 +521,7 @@
 							var addWindow = me.getAddWindow();
 							addWindow.show();
 						}
-					}, {
+					},'-', {
 						xtype : 'button',
 						name : 'btnRemoveInvalidateRole',
 						text : '删除',
@@ -525,21 +529,27 @@
 							// 删除角色
 							me.removeRole();
 						}
-					}, {
+					}, '-',{
 						xtype : 'button',
 						name : 'btnInvaildateRole',
 						text : '失效',
 						handler : function() {
 							me.invaildateRole();
 						}
-					}, {
+					},'-', {
 						xtype : 'button',
 						name : 'btnInvaildateRole',
 						text : '有效',
 						handler : function() {
 							me.vaildateRole();
 						}
-					} ]
+					} ],
+					bbar:new Ext.PagingToolbar({store:store,
+						displayInfo: true,
+						pageSize:20,
+						displayMsg : '显示第 {0} 条到 {1} 条记录，一共 {2} 条',
+						emptyMsg : '没有记录'
+					})
 
 				});
 				// 添加双击修改。。
@@ -557,6 +567,7 @@
 					width : '100%',
 					heigth : '100%',
 					title : '角色管理',
+					border:false,
 					items : [ qryPanel, rolePanel ]
 				});
 				if (contianerId)

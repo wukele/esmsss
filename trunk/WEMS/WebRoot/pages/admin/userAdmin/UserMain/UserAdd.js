@@ -94,15 +94,16 @@
 				return this.getWindow();
 			},
 			clearWindowFieldValues : function() {
-				fields = window.findByType('textfield');
-				combos = window.findByType('combo');
-
-				Ext.each(fields, function(item, index, allItems) {
-					item.setValue('');
-				});
-				Ext.each(combos, function(item, index, allItems) {
-					item.setValue(1);
-				});
+//				fields = window.findByType('textfield');
+//				combos = window.findByType('combo');
+//
+//				Ext.each(fields, function(item, index, allItems) {
+//					item.setValue('');
+//				});
+				window.get(0).getForm().reset();
+//				Ext.each(combos, function(item, index, allItems) {
+//					item.setValue(1);
+//				});
 			},
 			getWindow : function() {
 				return window;
@@ -120,20 +121,20 @@
 				window = new Ext.Window({
 					title : '添加用户',
 					frame : true,
-					width : 300,
+					width : 350,
 					height : 130,
-					layout : "form",
-					labelWidth : 60,
 					autoHeight : true,
-					plain : true,
 					resizable : true,
 					buttonAlign : "center",
 					closeAction : "hide",
-					defaults : {
-						xtype : "textfield",
-						width : 180
-					},
-					items : [ {
+					items:[new Ext.form.FormPanel({
+						plain : true,
+						defaults : {
+							xtype : "textfield",
+							width : 180
+						},
+						labelWidth : 60,
+						layout:'form',items : [ {
 						id:'operNo',
 						fieldLabel : '用户号',
 						name : 'operNo',
@@ -197,7 +198,7 @@
 						name : 'mobileNo',
 						maxLength : 20,
 						maxLengthText : '至多20位'
-					} ],
+					} ]})],
 					buttons : [ {
 						xtype : 'button',
 						id:'ok',
