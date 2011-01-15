@@ -137,7 +137,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 		window:new Ext.Window({
 			title:'页面新增',
 			frame : true,
-			width : 300,
+			width : 350,
 			height : 130,
 			labelWidth : 60,
 			autoHeight : true,
@@ -160,7 +160,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 			},
 			{
 				id:'tplImagePath',
-				fieldLabel : '页面路径',
+				fieldLabel : '页面底图路径',
 				name : 'tplImagePath',
 				maxLength : 255,
 				maxLengthText : '至多255位'
@@ -219,6 +219,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				var paras={};
 				var submit_prefix='tpl_info_page';
 				var fp;
+				var _self=this;
 				
 				fp=this.ownerCt.ownerCt.findById('form_page_tpl');
 				if(fp.getForm().isValid()){
@@ -247,7 +248,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				  				return;
 				  			}
 				  			Ext.example.msg('OK',ret.returnMsg);
-				  			this.ownerCt.ownerCt.hide();
+				  			_self.ownerCt.ownerCt.hide();
 					}});
 				}
 			}},{xtype:'button',text:'关闭',handler:function(){
@@ -262,6 +263,12 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 	   		text:'页面新增',
 	   		handler:function(){
 	   			this.ownerCt.ownerCt.window.findById('form_page_tpl').getForm().reset();
+	   			if(arr_selected_page_template && arr_selected_page_template.length==1){
+	   				var data=eval("("+arr_selected_page_template[0].getAttribute('data')+")");
+	   				var imgField=this.ownerCt.ownerCt.window.findById('form_page_tpl').findById('tplImagePath');
+	   				imgField.setValue(data.remote_path+'/'+data.image_name);
+	   			}
+	   				
 	   			this.ownerCt.ownerCt.window.show();
 	   		}
 	   },'-',
@@ -284,7 +291,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 					var page_template_panel = this.ownerCt.ownerCt;
 					
 					Ext.Ajax.request({
-						url:'remove_multiple_page_template.action',
+						url:'remove_multiple_page_template_img.action',
 						params:paras,
 				  		method:'POST',
 				  		success:function(xhr,status){
