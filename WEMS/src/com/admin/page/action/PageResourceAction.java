@@ -21,6 +21,8 @@ public class PageResourceAction extends ActionSupport {
 			private   List<PageResourceStruct>  tplComps;
 			//add by ffmmx
 			private TplPageResource pageResource;
+			private Integer returnNo;
+			private String returnMsg;
 			
 			public List<PageResourceStruct> getTplComps() {
 				return tplComps;
@@ -40,7 +42,20 @@ public class PageResourceAction extends ActionSupport {
 				return  SUCCESS;
 			}
 			
+			/**
+			 * 页面组件新增
+			 * @return
+			 */
 			public String addPageResource() {
+				
+				try {
+					prs.addPageResource(pageResource);
+				} catch (RuntimeException e) {
+					returnNo=1;
+					returnMsg=e.getMessage();
+				}
+				returnNo=0;
+				returnMsg="页面组件["+pageResource.getResourceId()+"]添加成功";
 				return SUCCESS;
 			}
 			
@@ -55,5 +70,21 @@ public class PageResourceAction extends ActionSupport {
 
 			public void setPageResource(TplPageResource pageResource) {
 				this.pageResource = pageResource;
+			}
+
+			public Integer getReturnNo() {
+				return returnNo;
+			}
+
+			public String getReturnMsg() {
+				return returnMsg;
+			}
+
+			public void setReturnNo(Integer returnNo) {
+				this.returnNo = returnNo;
+			}
+
+			public void setReturnMsg(String returnMsg) {
+				this.returnMsg = returnMsg;
 			}
 }
