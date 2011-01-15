@@ -7,7 +7,7 @@ Ems.page.ComponentList=Ext.extend(Ext.grid.GridPanel,{
 		},
 		initComponent:function(){
 			this.store=new Ext.data.JsonStore({
-					proxy:new Ext.data.HttpProxy({url:'CompList.'})
+					proxy:new Ext.data.HttpProxy({url:'CompList.action'})
 			});
 		}
 });
