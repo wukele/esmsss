@@ -66,8 +66,8 @@ public class PageResourceService {
 				
 				log.debug("removePageResource finished..");
 			} catch (RuntimeException e) {
-				log.debug("removePageResource failed..");
-				log.debug(e);
+				log.error("removePageResource failed..");
+				log.error(e);
 				throw e;
 			}
 		}
@@ -85,8 +85,8 @@ public class PageResourceService {
 					throw new RuntimeException("lstResourceId is null or lstResourceId.size equal 0 || 资源ID列表为空或者长度为0");
 				log.debug("removeMutiPageResource finished..");
 			} catch (RuntimeException e) {
-				log.debug("removeMutiPageResource failed..");
-				log.debug(e);
+				log.error("removeMutiPageResource failed..");
+				log.error(e);
 				throw e;
 			}
 		}
