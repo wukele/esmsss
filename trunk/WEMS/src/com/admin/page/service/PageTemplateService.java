@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
@@ -18,6 +19,7 @@ import com.ems.dao.impl.TlpPageImageDao;
 import com.ems.entity.TlpPageImage;
 import com.page.entity.TplInfoPage;
 import com.util.FileTypeUtil;
+import com.util.WebContext;
 
 
 
@@ -96,6 +98,11 @@ public class PageTemplateService {
 			public void remove_page_template_img(Integer tlp_id){
 				log.debug("remove_page_template start");
 				try {
+					HttpServletRequest request= WebContext.getRequest();
+					TlpPageImage tpi = tlpImageDao.findById(tlp_id);
+					File imgFile = new File(request.getRealPath("/")+"/"+tpi.getImagePath()+"/"+tpi.getImageName());
+					if(imgFile.exists())
+						imgFile.delete();
 					tlpImageDao.delete_tlp_page_image(tlp_id);
 					log.debug("remove_page_template finished");
 				} catch (RuntimeException e) {
