@@ -5,7 +5,8 @@
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<constant name="struts.i18n.encoding" value="gb2312" />
+	<!-- fixed encoding error of json data  -->
+	<constant name="struts.i18n.encoding" value="utf8" />
 	<constant name="struts.multipart.maxSize" value="10000000" />
 	<package name="base" namespace="/" extends="struts-default">
 		<action name="login" class="LoginAction">
