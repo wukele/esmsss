@@ -45,15 +45,7 @@
 				return window;
 			},
 			clearWindowFieldValues : function() {
-				fields = window.findByType('textfield');
-				combos = window.findByType('combo');
-
-				Ext.each(fields, function(item, index, allItems) {
-					item.setValue('');
-				});
-				Ext.each(combos, function(item, index, allItems) {
-					item.setValue(1);
-				});
+				window.get(0).getForm().reset();
 			},
 			getAddWindow : function() {
 				this.clearWindowFieldValues();
@@ -311,15 +303,15 @@
 				window = new Ext.Window({
 					title : 'ÃÌº””√ªß',
 					frame : true,
-					width : 300,
+					width : 350,
 					height : 130,
-					layout : "form",
-					labelWidth : 60,
+					
 					autoHeight : true,
 					plain : true,
 					resizable : true,
 					buttonAlign : "center",
 					closeAction : "hide",
+					items:[{xtype:'form',labelWidth : 60,
 					defaults : {
 						xtype : "textfield",
 						width : 180
@@ -368,7 +360,7 @@
 						valueField : 'key',
 						displayField : 'name',
 						value : ''
-					} ],
+					} ]}],
 					buttons : [ {
 						xtype : 'button',
 						id : 'ok',
