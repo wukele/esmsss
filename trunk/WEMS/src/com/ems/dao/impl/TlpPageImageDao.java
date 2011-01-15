@@ -28,8 +28,21 @@ public class TlpPageImageDao extends EmsDao {
 				getHibernateTemplate().saveOrUpdate(tlp_image);
 			}
 			
+			/**
+			 * É¾³ýÄ£°åÒ³Ãæµ×Í¼
+			 * @param tlp_image_id Ä£°åÒ³Ãæµ×Í¼ID
+			 */
 			public void delete_tlp_page_image(Integer tlp_image_id){
 				String hql="delete from TlpPageImage as tlpi where tlpi.imageId=?";
 				getHibernateTemplate().bulkUpdate(hql, tlp_image_id);
+			}
+			
+			/**
+			 * »ñÈ¡µ×Í¼£¬Í¨¹ýID
+			 * @param tlpImageId µ×Í¼ID
+			 * @return µ×Í¼
+			 */
+			public TlpPageImage findById(Integer tlpImageId){
+				return (TlpPageImage) getHibernateTemplate().get(TlpPageImage.class, tlpImageId);
 			}
 }
