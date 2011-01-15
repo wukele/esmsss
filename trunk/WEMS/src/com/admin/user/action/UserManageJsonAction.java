@@ -26,6 +26,7 @@ public class UserManageJsonAction extends ActionSupport {
 	private int returnNo;
 	private String returnMsg;
 	private List<String> lstUserNo;
+	private Integer userCount=0;
 
 	/**
 	 * 添加用户
@@ -51,7 +52,8 @@ public class UserManageJsonAction extends ActionSupport {
 		if (user == null)
 			user = new InfoOper();
 		lstUser = userService.findUsers(user.getOperNo(), user.getOperName());
-
+		if(lstUser!=null)
+			userCount=lstUser.size();
 		return SUCCESS;
 	}
 
@@ -80,6 +82,7 @@ public class UserManageJsonAction extends ActionSupport {
 	 * @throws Exception
 	 * @author yunlong.yuan time 2010.12.25
 	 */
+	@Deprecated
 	public String delOrDenialUser() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/JSON;charset=GBK");
@@ -107,6 +110,11 @@ public class UserManageJsonAction extends ActionSupport {
 		return null;
 	}
 
+	/**
+	 * 删除用户
+	 * @return
+	 * @throws Exception
+	 */
 	public String removeUser() throws Exception{
 		try{
 			userService.removeUser(lstUserNo);
@@ -119,6 +127,11 @@ public class UserManageJsonAction extends ActionSupport {
 		returnMsg="删除成功";
 		return SUCCESS;
 	}
+	/**
+	 * 无效用户
+	 * @return
+	 * @throws Exception
+	 */
 	public String invalidateUser() throws Exception{
 		try{
 			userService.invalidateUser(lstUserNo);
@@ -132,6 +145,11 @@ public class UserManageJsonAction extends ActionSupport {
 		returnMsg="无效执行成功";
 		return SUCCESS;
 	}
+	/**
+	 * 有效用户
+	 * @return
+	 * @throws Exception
+	 */
 	public String validateUser() throws Exception{
 		try{
 			userService.validateUser(lstUserNo);
@@ -204,5 +222,13 @@ public class UserManageJsonAction extends ActionSupport {
 
 	public void setLstUserNo(List<String> lstUserNo) {
 		this.lstUserNo = lstUserNo;
+	}
+
+	public Integer getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(Integer userCount) {
+		this.userCount = userCount;
 	}
 }
