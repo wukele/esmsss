@@ -19,7 +19,8 @@ public class RoleManagerJsonAction extends ActionSupport {
 	private InfoRole role;
 	private List<InfoRole> lstRole;
 	private List<String> lstRoleCode;
-
+	private Integer roleCount=0; 
+	
 	private int returnNo = 0;
 	private String returnMsg;
 	private RoleService roleService;
@@ -149,6 +150,9 @@ public class RoleManagerJsonAction extends ActionSupport {
 		lstRole = roleService.findRoles(role.getRoleCode(), role.getRoleName(),
 				role.getRoleLevel(), role.getIsactive(), role.getRoleType(),
 				role.getComments());
+		if(lstRole!=null)
+			roleCount=lstRole.size();
+		
 		return SUCCESS;
 	}
 
@@ -193,11 +197,19 @@ public class RoleManagerJsonAction extends ActionSupport {
 		this.returnMsg = returnMsg;
 	}
 
-	public List getLstRoleCode() {
+	public Integer getRoleCount() {
+		return roleCount;
+	}
+
+	public void setRoleCount(Integer roleCount) {
+		this.roleCount = roleCount;
+	}
+
+	public List<String> getLstRoleCode() {
 		return lstRoleCode;
 	}
 
-	public void setLstRoleCode(List lstRoleCode) {
+	public void setLstRoleCode(List<String> lstRoleCode) {
 		this.lstRoleCode = lstRoleCode;
 	}
 
