@@ -20,7 +20,7 @@ Ext.extend(Ems.page.TemplatePageQryPanel,Ext.Panel,{
 					{name:'tplImageWidth',mapping:'tplImageWidth'},
 					{name:'tplImageHeight',mapping:'tplImageHeight'}
 					],
-					baseParams:{limit:8,tpl_page_id:2}
+					baseParams:{limit:8}
 				});
 				this.store.load({
 					params:{
