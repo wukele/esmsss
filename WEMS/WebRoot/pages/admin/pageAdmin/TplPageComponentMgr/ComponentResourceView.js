@@ -25,14 +25,16 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 					{header:'宽(px)',dataIndex:'resourceWidth'},
 					{header:'高(px)',dataIndex:'resourceHeight'}]
 		}),
-		
+
 		sm:new Ext.grid.RowSelectionModel({
 				singleSelect:true
 		}),
 		setheader:function(h){
 				this.setTitle(h);
 		},
-	
+		//add by ffmmx
+		tbar:[{xtype:'button',name:'addPageResourceBtn',id:'addPageResourceBtn',text:'新增页面组件',handler:function(){alert('toadd');}},'-',
+		      {xtype:'button',name:'removePageResourceBtn',id:'removePageResourceBtn',text:'删除页面组件',handler:function(){alert('todel');}}],
 		constructor:function(app,config){
 				this.app=app;
 				this.tplPageResource=config.tplPageResource;
