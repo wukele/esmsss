@@ -26,7 +26,7 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 					{header:'¸ß(px)',dataIndex:'resourceHeight'}]
 		}),
 
-		sm:new Ext.grid.RowSelectionModel({
+		sm:new Ext.grid.RowSelectionModel({	
 				singleSelect:true
 		}),
 		setheader:function(h){
@@ -71,8 +71,6 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 							listeners:{
 									"show":function(_window){	
 									//Ext.getCmp("pageResource").setValue();
-									var _tplPqgeQry=new Ems.page.ComponentResourceView();
-									_tplPqgeQry.initComponent();
 									
 									//alert(new Ems.page.me.title)
 								}
