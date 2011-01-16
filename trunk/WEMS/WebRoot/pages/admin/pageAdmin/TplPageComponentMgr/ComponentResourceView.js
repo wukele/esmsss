@@ -1,13 +1,13 @@
 Ext.ns('Ems.page')
 Ext.onReady(function(){
 	
-	
+	var globalPageResource;
 	
 });
 var sm=new Ext.grid.RowSelectionModel({
 				singleSelect:true
 			});
-var globalPageResource;
+
 Ems.page.ComponentResourceView=function(app,config){
 				this.app=app;
 				this.tplPageResource=config.tplPageResource;
@@ -115,11 +115,36 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 										if (ret.returnNo > 0) {
 											Ext.example.msg('失败', '失败原因:' + ret.returnMsg);
 											return;
+										}else{
+											var _submitWindow=new Ext.Window({
+											title:"是否增加临时组件",
+											width:200,
+											height:50,
+											plain:true,
+											resizable:false,
+											layout:"form",
+											buttons:[
+													{
+														text:"增加",
+														handler:function(){
+															
+														}	
+													},{
+														text:"不增加",
+													 	handler:function(){
+															_submitWindow.hide();
+													 	}
+													}
+												]
+											
+										});
+											_submitWindow.show();
+											// 成功
+											//ComponentResourceView.store.load();
+											_window.hide();
+											Ext.example.msg('成功', ret.returnMsg);
 										}
-										// 成功
-										//ComponentResourceView.store.load();
-										_window.hide();
-										Ext.example.msg('成功', ret.returnMsg);
+										
 										}
 									});
 								}
