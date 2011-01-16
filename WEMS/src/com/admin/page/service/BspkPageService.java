@@ -91,12 +91,14 @@ public class BspkPageService {
 				bspkResource.setValueId(resource.getValueId());
 				bspkResource.setXtypeCode(resource.getXtypeCode());
 
+				bskpDao.insertBspkPageResource(bspkResource);
+				
 				if (resource.getConfig() != null
 						&& resource.getConfig().trim().length() > 0) {
-
+					
 				}
 
-				bskpDao.insertBspkPageResource(bspkResource);
+				
 			}
 			log.debug("addBspkPageInfo finished..");
 		} catch (RuntimeException e) {
