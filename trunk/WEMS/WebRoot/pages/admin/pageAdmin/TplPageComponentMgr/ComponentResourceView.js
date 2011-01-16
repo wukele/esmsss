@@ -1,5 +1,13 @@
 Ext.ns('Ems.page')
-
+Ext.onReady(function(){
+	
+	
+	
+});
+var sm=new Ext.grid.RowSelectionModel({
+				singleSelect:true
+			});
+var globalPageResource;
 Ems.page.ComponentResourceView=function(app,config){
 				this.app=app;
 				this.tplPageResource=config.tplPageResource;
@@ -26,9 +34,7 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 					{header:'高(px)',dataIndex:'resourceHeight'}]
 		}),
 
-		sm:new Ext.grid.RowSelectionModel({	
-				singleSelect:true
-		}),
+		sm:sm,
 		setheader:function(h){
 				this.setTitle(h);
 		},
@@ -50,29 +56,34 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 									  {
 										name:'pageResource',
 										id:"pageResource",
+										hidden:true,
 										fieldLabel:"资源ID"
 									},{
 										name:'xtypeCode',
+										allowBlank:false,
 										fieldLabel:"XTYPE"
 									},{
 										name:'resourceTop',
+										allowBlank:false,
 										fieldLabel:"X axis"
 									},{
 										name:'resourceLeft',
+										allowBlank:false,
 										fieldLabel:"Y axis"
 									},{
 										name:'resourceWidth',
+										allowBlank:false,
 										fieldLabel:"宽(px)"
 									},{
 										name:'resourceHeight',
+										allowBlank:false,
 										fieldLabel:"高(px)"
 									}
 								],
 							listeners:{
-									"show":function(_window){	
-									//Ext.getCmp("pageResource").setValue();
-									
-									//alert(new Ems.page.me.title)
+									"show":function(_window){
+										Ext.getCmp("pageResource").setValue(globalPageResource);
+										
 								}
 							},
 							buttons:[{
@@ -84,7 +95,12 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 									for(var i=0;i<fieldName.length;i++){
 										paraName=perfix+fieldName[i].getName();
 										params[paraName]=fieldName[i].getEl().dom.value ;
+										if(fieldName[i].getEl().dom.value==""||fieldName[i].getEl().dom.value=='undefined'){
+											Ext.example.msg('错误', "不能有空值或者必须有底图");
+											return;
+										}
 									}
+									
 									Ext.Ajax.request({
 										url : 'tplCompResourceAdd.action',
 										method : 'post',
@@ -130,6 +146,7 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 		
 		qryPageResource:function(tplPageResource){
 			   this.tplPageResource=tplPageResource
+			   globalPageResource=tplPageResource
 			   this.store.load({
 			   			params:{tplPageResource:this.tplPageResource}
 			   });
