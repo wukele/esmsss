@@ -17,7 +17,7 @@ import com.page.entity.TplPageResource;
 public class PageResourceService {
 		private static final Logger log=Logger.getLogger(PageResourceService.class);
 		private TplPageResourceDao   resDao;
-
+		
 		public TplPageResourceDao getResDao() {
 			return resDao;
 		}
@@ -63,7 +63,7 @@ public class PageResourceService {
 		public void removePageResource(Integer resourceId) {
 			log.debug("removePageResource start..");
 			try {
-				
+				//nocomplete
 				log.debug("removePageResource finished..");
 			} catch (RuntimeException e) {
 				log.error("removePageResource failed..");
@@ -81,8 +81,9 @@ public class PageResourceService {
 		public void removeMutiPageResource(List<Integer> lstResourceId){
 			log.debug("removeMutiPageResource start..");
 			try {
-				if(lstResourceId==null || lstResourceId.size()>0)
+				if(lstResourceId==null || lstResourceId.size()==0)
 					throw new RuntimeException("lstResourceId is null or lstResourceId.size equal 0 || 资源ID列表为空或者长度为0");
+				//nocomplete
 				log.debug("removeMutiPageResource finished..");
 			} catch (RuntimeException e) {
 				log.error("removeMutiPageResource failed..");
@@ -91,5 +92,27 @@ public class PageResourceService {
 			}
 		}
 		
+		
+		/**
+		 * get TplPageResource by id
+		 * @param resourceId 
+		 * @return TplPageResource
+		 */
+		public TplPageResource findPageResourceById(Integer resourceId){
+			log.debug("findPageResourceById start..");
+			TplPageResource resource=null;
+			try {
+				if(resourceId==null || resourceId==0)
+					throw new RuntimeException("resourceId is null or 0. || 资源ID为空或者0");
+				resDao.findById(resourceId);
+				log.debug("findPageResourceById finished...");
+			} catch (RuntimeException e) {
+				log.error("findPageResourceById failed...");
+				log.error(e);
+				throw e;
+			}
+			
+			return resource;
+		}
 		
 }

@@ -94,4 +94,29 @@ public class TemplatePageRemainService {
 			}
 			return lst;
 		}
+		
+		/**
+		 * 获取页面模板，通过页面资源代码
+		 * @param pageResource 页面资源代码
+		 * @return 页面模板
+		 */
+		public TplInfoPage findTemplatePageByPageResource(String pageResource){
+			Map<String, Object> map	=new HashMap<String, Object>();
+			List<TplInfoPage> lst=null;
+			try {
+				if(pageResource!=null)
+					map.put("tplPageResource", pageResource);
+				lst = tplDao.findByPropertiesMap(map);
+				log.debug("qryTemplatePages finished");
+			} catch (RuntimeException e) {
+				log.error("qryTemplatePages faild");
+				log.error("模板页面新增失败");
+				log.error(e);
+				throw e;
+			}
+			if(lst==null||lst.size()==0)
+				return null;
+			else
+				return lst.get(0);
+		}
 }

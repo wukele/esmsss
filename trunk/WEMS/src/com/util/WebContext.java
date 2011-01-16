@@ -83,12 +83,21 @@ public class WebContext {
 	}
 	
 	/**
-	 * 获取响应信息
-	 * @author hooxin
+	 * get response
 	 * @return
 	 */
 	public static HttpServletResponse getResponse() {
 		return (HttpServletResponse)ActionContext.getContext().get(StrutsStatics.HTTP_RESPONSE);
+	}
+	
+	/**
+	 * response set header
+	 * @param header
+	 * @param value
+	 */
+	public static void response(String header,String value){
+		HttpServletResponse res=getResponse();
+		res.setHeader(header, value);
 	}
 	
 	/**

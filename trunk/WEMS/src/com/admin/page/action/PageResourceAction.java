@@ -59,6 +59,15 @@ public class PageResourceAction extends ActionSupport {
 				return SUCCESS;
 			}
 			
+			/**
+			 * 页面组件临时新增
+			 * @return
+			 */
+			public String addTmpPageResource(){
+				return SUCCESS;
+			}
+			
+			
 
 			public void setTplPageResource(String tplPageResource) {
 				this.tplPageResource = tplPageResource;
