@@ -33,7 +33,94 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 				this.setTitle(h);
 		},
 		//add by ffmmx
-		tbar:[{xtype:'button',name:'addPageResourceBtn',id:'addPageResourceBtn',text:'新增页面组件',handler:function(){alert('toadd');}},'-',
+		tbar:[{xtype:'button',name:'addPageResourceBtn',id:'addPageResourceBtn',text:'新增页面组件',handler:function(){
+						var _panel=this.ownerCt.ownerCt;
+						var perfix="pageResource.";
+						var _window = new Ext.Window({
+							title:"添加控件",
+							width:250,
+							height:270,
+							plain:true,
+							resizable:false,
+							layout:"form",
+							labelWidth:55,
+							defaultType:"textfield",
+							defaults:{anchor:"100%"},
+							items:[
+									  {
+										name:'pageResource',
+										id:"pageResource",
+										fieldLabel:"资源ID"
+									},{
+										name:'xtypeCode',
+										fieldLabel:"XTYPE"
+									},{
+										name:'resourceTop',
+										fieldLabel:"X axis"
+									},{
+										name:'resourceLeft',
+										fieldLabel:"Y axis"
+									},{
+										name:'resourceWidth',
+										fieldLabel:"宽(px)"
+									},{
+										name:'resourceHeight',
+										fieldLabel:"高(px)"
+									}
+								],
+							listeners:{
+									"show":function(_window){	
+									//Ext.getCmp("pageResource").setValue();
+									var _tplPqgeQry=new Ems.page.ComponentResourceView();
+									_tplPqgeQry.initComponent();
+									
+									//alert(new Ems.page.me.title)
+								}
+							},
+							buttons:[{
+								text:"确定",
+								handler:function(){
+									var _window=this.ownerCt.ownerCt;
+									var params={};
+									var fieldName=_window.findByType("textfield");
+									for(var i=0;i<fieldName.length;i++){
+										paraName=perfix+fieldName[i].getName();
+										params[paraName]=fieldName[i].getEl().dom.value ;
+									}
+									Ext.Ajax.request({
+										url : 'tplCompResourceAdd.action',
+										method : 'post',
+										params : params,
+										success : function(xhq, status) {
+										var ret = Ext.util.JSON
+										.decode(xhq.responseText);
+										if (xhq.responseText == null)
+											return;
+			
+										// 失败
+										if (ret.returnNo > 0) {
+											Ext.example.msg('失败', '失败原因:' + ret.returnMsg);
+											return;
+										}
+										// 成功
+										//ComponentResourceView.store.load();
+										_window.hide();
+										Ext.example.msg('成功', ret.returnMsg);
+										}
+									});
+								}
+							},{
+								text:"取消",
+								handler:function(){
+									this.ownerCt.ownerCt.hide();
+								}
+							}]
+							
+						});
+						_window.show();
+						
+						
+			}},'-',
 		      {xtype:'button',name:'removePageResourceBtn',id:'removePageResourceBtn',text:'删除页面组件',handler:function(){alert('todel');}}],
 		constructor:function(app,config){
 				this.app=app;
