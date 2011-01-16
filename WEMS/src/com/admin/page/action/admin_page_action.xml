@@ -62,7 +62,9 @@
 			<action name="tplCompResourceQry" class="PageResourceAction" method="PageResourceActionQry">
 					<result type="json"></result>
 			</action>
-			
+			<action name="BskpInfoPage" class="BspkPageMangerAction" method="BspkPageQry">
+					<result type="json"></result>
+			</action>
 			
 	</package>
 </struts>    
