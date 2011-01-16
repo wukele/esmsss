@@ -70,6 +70,8 @@
 			<action name="BskpInfoPage" class="BspkPageMangerAction" method="BspkPageQry">
 					<result type="json"></result>
 			</action>
-			
+			<action name="addTmpPageResource" class="BspkPageMangerAction" method="addTmpPageResource">
+					<result type="json"></result>
+			</action>
 	</package>
 </struts>    

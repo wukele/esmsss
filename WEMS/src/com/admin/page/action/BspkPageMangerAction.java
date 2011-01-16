@@ -39,7 +39,7 @@ public class BspkPageMangerAction extends ActionSupport {
 		}
 		
 		/**
-		 * add a temp page resource[contain ]
+		 * add a temp page resource[contain BspkPageResource and BspkInfoPage]
 		 * @return
 		 */
 		public String addTmpPageResource(){
