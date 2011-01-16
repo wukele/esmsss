@@ -57,7 +57,7 @@ Ems.page.DataPanel=Ext.extend(Ext.TabPanel,{
 				this.items=[{
 						xtype:'bskpPagePanel',
 						title:'¡Ÿ ±“≥√Ê'
-				}];
+				}]; 
 				Ems.page.DataPanel.superclass.initComponent.call(this);
 		}
 });
