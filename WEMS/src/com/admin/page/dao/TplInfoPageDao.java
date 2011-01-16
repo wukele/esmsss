@@ -63,6 +63,10 @@ public class TplInfoPageDao extends EmsDao {
 				hql+=" and tip.tplPageName=?";
 				lstProperties.add(map.get("tplPageName"));
 			}
+			if(map.containsKey("tplPageResource")){
+				hql+=" and tip.tplPageResource=?";
+				lstProperties.add(map.get("tplPageResource"));
+			}
 			
 			return getHibernateTemplate().find(hql, lstProperties.toArray());
 		}

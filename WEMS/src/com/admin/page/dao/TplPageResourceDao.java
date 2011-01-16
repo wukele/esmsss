@@ -37,4 +37,13 @@ public class TplPageResourceDao extends EmsDao {
 				getHibernateTemplate().bulkUpdate(hql, resourceId);
 			}
 			
+			/**
+			 * find TplPageResource by resourceId
+			 * @param resourceId
+			 * @return TplPageResource
+			 */
+			public TplPageResource findById(Integer resourceId){
+				return (TplPageResource)getHibernateTemplate().get(TplPageResource.class, resourceId);
+			}
+			
 }
