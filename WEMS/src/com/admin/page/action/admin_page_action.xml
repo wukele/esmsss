@@ -67,6 +67,13 @@
 			<action name="tplCompResourceQry" class="PageResourceAction" method="PageResourceActionQry">
 					<result type="json"></result>
 			</action>
+			<action name="tplCompResourceAdd" class="PageResourceAction" method="addPageResource">
+					<result type="json"></result>
+			</action>
+			<action name="addTmpPageResource" class="BspkPageMangerAction" method="addTmpPageResource">
+					<result type="json"></result>
+			</action>
+			
 			<action name="BskpInfoPage" class="BspkPageMangerAction" method="BspkPageQry">
 					<result type="json"></result>
 			</action>
