@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
+	<package name="pageAction" extends="struts-default" namespace="/">
+		<action name="BspkPreview" class="BspkPreviewAction">
+				<result>/pages/admin/pageAdmin/BspkPagePreViewer/BspkPageViewer.jsp</result>
+		</action>
+	</package>
 	<package name="pageAdmin" extends="json-default" namespace="/">
 		<action name="SysModuleMgr" class="SysModuleAction" method="SysModuleActionQry">
 			<result type="json">
