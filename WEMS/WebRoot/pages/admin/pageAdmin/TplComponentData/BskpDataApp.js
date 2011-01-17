@@ -35,7 +35,7 @@ Ems.page.bskpPagePanel=Ext.extend(Ext.Panel,{
 					 Ext.example.msg('警告','还未选定页面');
 				}
 				Ems.page.BskpDataApp.BspkPageViewer.load({
-					url:'pages/admin/pageAdmin/BspkPagePreViewer/BspkPageViewer.jsp',
+					url:'BspkPreview.action',
 					scripts:true,
 					params:{
 						 page_id:record.get('bspkPageId')
@@ -84,7 +84,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 Ems.page.BskpDataApp=function(){
 		return {
 			BskpInfoPageField:[
-						{name:'bspkPageId',mapping:'bspkPageId'},
+						{name:'bspkPageId',mapping:'bspkPageId',type:'int'},
 						{name:'bspkPageName',mapping:'bspkPageName'},
 						{name:'bspkImagePath',mapping:'bspkImagePath'},
 						{name:'bspkImageWidth',mapping:'bspkImageWidth'},
@@ -99,7 +99,8 @@ Ems.page.BskpDataApp=function(){
 					 this.BspkPageViewer=new Ems.page.bskpPageViewer({
 							title:'Preview',
 							bodyCssClass:'x-content-panel',
-							margins:'5 5 5 0'
+							margins:'5 5 5 0',
+							autoScroll:true
 						});
 				
 					 this.MainView=new Ems.page.TplContainer({
@@ -113,8 +114,7 @@ Ems.page.BskpDataApp=function(){
         					collapseMode:'mini',
         					header: false,
         					collapseFirst:false,
-					    	margins:'5 5 5 5',
-					    	cmargins:'0 0 0 0'
+					    	margins:'5 5 5 5'
 					    })],
 						container:'container'
 					});
