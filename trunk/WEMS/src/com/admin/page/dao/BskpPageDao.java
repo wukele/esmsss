@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.SQLQuery;
+import org.junit.Test;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ems.dao.EmsDao;
 import com.page.entity.BspkInfoPage;
@@ -73,4 +76,14 @@ public class BskpPageDao extends EmsDao {
 	public void insertBspkPageResource(BspkPageResource resource) {
 		getHibernateTemplate().save(resource);
 	}
+	
+	public void importBspkPageResourceConfig(Integer bspkResourceId,Integer tplResourceId){
+		String sql="insert into bspk_resource_config(config_parameter,config_value,config_type,configDesc,resource_id) SELECT config_parameter, config_value, config_type, configDesc, ? as bspkResourceId FROM tpl_resource_config WHERE resource_id = ?";
+		
+		SQLQuery qry=getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+		qry.setInteger(0, bspkResourceId);
+		qry.setInteger(1, tplResourceId);
+		qry.executeUpdate();
+	}
+	
 }

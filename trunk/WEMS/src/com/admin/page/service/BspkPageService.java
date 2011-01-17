@@ -95,9 +95,8 @@ public class BspkPageService {
 				
 				if (resource.getConfig() != null
 						&& resource.getConfig().trim().length() > 0) {
-					
+					bskpDao.importBspkPageResourceConfig(bspkResource.getResourceId(), resourceId);
 				}
-
 				
 			}
 			log.debug("addBspkPageInfo finished..");

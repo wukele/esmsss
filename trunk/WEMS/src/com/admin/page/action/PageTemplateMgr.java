@@ -17,7 +17,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 @Component("PageTemplateMgr")
 @Scope("prototype")
-
 public class PageTemplateMgr extends ActionSupport  implements  ServletRequestAware{
 		 	
 	   private  String image_name; 
@@ -37,6 +36,7 @@ public class PageTemplateMgr extends ActionSupport  implements  ServletRequestAw
 	}
 
 	private  PageTemplateService  pts;
+	
 	   @Resource(name="PageTemplateService")
 		public void setPts(PageTemplateService pts) {
 		this.pts = pts;
