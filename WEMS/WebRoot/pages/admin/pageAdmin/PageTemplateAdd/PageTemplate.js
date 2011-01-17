@@ -4,6 +4,7 @@ Ext.ns('Ems.page');
 var selectTemp=null;
 
 Ems.page.PageTempateMangerPan=Ext.extend(Ext.FormPanel,{
+		id:'pageTplMgrPan',
 		title:'µ×Í¼ÉÏ´«',
 		fileUpload: true,
         frame: true,
@@ -134,7 +135,7 @@ Ems.page.PageTempateView=Ext.extend(Ext.DataView,{
 		multiSelect:true,
 		initComponent:function(){
 				this.tpl=new Ext.XTemplate('<tpl for=".">',
-				'<div class="thumb-wrap" data="{image_id:{imageId},image_name:\'{imageName}\','+
+				'<div style="height:auto;" class="thumb-wrap" data="{image_id:{imageId},image_name:\'{imageName}\','+
 				'image_path:null,remote_path:\'{remotePath}\',image_title:\'{imageDisplayName}\'}">'+
 				'<div class="thumb"><img src="{imagePath}/{imageName}" title="{imageDisplayName}" width="220" height="200"/>',
 				'</div><span>{imageDisplayName}</span></div></tpl><div class="x-clear"></div>');
@@ -276,7 +277,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 	   			var view=Ext.getCmp('PageTempateView');
 	   			var idx=view.getSelectedIndexes()[0];
 	   			if(idx==undefined){
-	   				 Ext.example.msg('warn','Î´Ñ¡È¡µ×Í¼');
+	   				 Ext.example.msg('¾¯¸æ','Î´Ñ¡È¡µ×Í¼');
 	   				 return false;
 	   			}
 	   			var tmp=view.store.getAt(idx);
@@ -296,45 +297,45 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 	   {
 		   text:'É¾³ýµ×Í¼',
 		   handler:function(){
-				if(arr_selected_page_template && arr_selected_page_template.length>0){
-					var paras={};
-					for(i=0;i< arr_selected_page_template.length;i++ ){
-						var data=eval("("+arr_selected_page_template[i].getAttribute('data')+")");
-						paras['lst_image_id['+i+']']=data['image_id'];
-						
-					}
-					var page_template_panel = this.ownerCt.ownerCt;
-					
-					Ext.Ajax.request({
-						url:'remove_multiple_page_template.action',
-						params:paras,
-				  		method:'POST',
-				  		success:function(xhr,status){
-				  			if(xhr==null||xhr.responseText==null){
-				  				Ext.example.msg('´íÎó','É¾³ýÊ§°Ü');
-				  				return;
-				  			}
-				  			
-				  			var ret = Ext.util.JSON.decode(xhr.responseText);
-				  			
-				  			if(ret.returnNo>0){
-				  				Ext.example.msg('´íÎó',ret.returnMsg);
-				  				return;
-				  			}
-				  			arr_selected_page_template=null;
-				  			Ext.example.msg('OK',ret.returnMsg);
-				  			for(i in paras){
-				  				page_template_panel.store.remove(page_template_panel.store.getById(paras[i]));
-				  			}
-				  			delete page_template_panel;
-				  		}
-					});
+			   	var view=Ext.getCmp('PageTempateView');
+	   			var idx=view.getSelectedIndexes();
+	   			if(idx==undefined||idx==null||idx.length==0){
+	   				 Ext.example.msg('¾¯¸æ','Î´Ñ¡È¡µ×Í¼');
+	   				 return false;
+	   			}
+	   			
+				var paras={};
+				for(i=0;i< idx.length;i++ ){
+					var tmp=view.store.getAt(idx[i]);
+					paras['lst_image_id['+i+']']=tmp.get('imageId');
 				}
-				else{
-					Ext.example.msg('¾¯¸æ','ÇëÑ¡ÔñÐèÒªÉ¾³ýµÄµ×Í¼');
-				}
+				var page_template_panel = this.ownerCt.ownerCt;
+				
+				Ext.Ajax.request({
+					url:'remove_multiple_page_template_img.action',
+					params:paras,
+			  		method:'POST',
+			  		success:function(xhr,status){
+			  			if(xhr==null||xhr.responseText==null){
+			  				Ext.example.msg('´íÎó','É¾³ýÊ§°Ü');
+			  				return;
+			  			}
+			  			
+			  			var ret = Ext.util.JSON.decode(xhr.responseText);
+			  			
+			  			if(ret.returnNo>0){
+			  				Ext.example.msg('´íÎó',ret.returnMsg);
+			  				return;
+			  			}
+			  			Ext.example.msg('OK',ret.returnMsg);
+			  			for(i in paras){
+			  				page_template_panel.store.remove(page_template_panel.store.getById(paras[i]));
+			  			}
+			  			delete page_template_panel;
+			  		}
+				});
+			}
 		   }
-	   }
 	   ]),
 	   initComponent:function(){
 	   		this.store=new Ext.data.JsonStore({
@@ -354,23 +355,8 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 						id:'PageTempateView',
 						listeners:{
 							//Ñ¡ÖÐ³õÊ¼»¯µ×Í¼ÉÏ´«
-							selectionchange:function(e,nodes){
-								/*if(nodes && nodes.length==1){
-									var page_panel=page_template_mrg_panel;
-									
-									var data=eval("("+nodes[0].getAttribute('data')+")");
-									var arr_form_field = page_panel.items.items;
-									if(arr_form_field && arr_form_field.length > 0){
-										for(i=0;i<arr_form_field.length;i++){
-												arr_form_field[i].setValue(data[arr_form_field[i].getName()]);
-										}
-									}
-									delete arr_form_field;
-									delete data;
-									delete page_panel;
-								}
+							selectionchange:function(dataView,nodes){
 								
-								//arr_selected_page_template = nodes;*/
 							}
 						}
 			})];
@@ -387,7 +373,6 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 
 var page_template_mrg_panel;
 var page_template_panel;
-var arr_selected_page_template;
 
 Ext.onReady(function(){
 	page_template_mrg_panel = new Ems.page.PageTempateMangerPan({
