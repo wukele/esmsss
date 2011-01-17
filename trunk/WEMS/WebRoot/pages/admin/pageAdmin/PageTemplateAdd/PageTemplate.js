@@ -29,8 +29,9 @@ Ems.page.PageTempateMangerPan=Ext.extend(Ext.FormPanel,{
 				{
 					xtype:'textfield',
 					fieldLabel: '底图名称',
-					name:'image_title',
-					blankText:'底图名称不能为空'
+					name:'image_displayName',
+					blankText:'底图名称不能为空',
+					id:'image_title'
 				},
 				{
 					xtype:'combo',
@@ -88,9 +89,17 @@ Ems.page.PageTempateMangerPan=Ext.extend(Ext.FormPanel,{
             		handler: function(){
             			var fp=this.ownerCt.ownerCt;
                 		if(fp.getForm().isValid()){
+                				var displayName=fp.getForm().findField('image_title').getValue();
+                				if(displayName){
+                						displayName=encodeURIComponent(displayName);
+                				}
+  	
 	                			fp.getForm().submit({
 	                    			url: 'PageTemplateActionUpLoad.action',
 	                    			waitMsg: 'Uploading...',
+	                    			 params: {
+        									image_title:displayName 
+   									 },	                    			
 	                    			success: function(fp, o){
 	                        			Ext.example.msg('Success', '文件上传成功');
 	                        			page_template_panel.store.load();
@@ -125,8 +134,8 @@ Ems.page.PageTempateView=Ext.extend(Ext.DataView,{
 		multiSelect:true,
 		initComponent:function(){
 				this.tpl=new Ext.XTemplate('<tpl for=".">',
-				'<div class="thumb-wrap" style="height:auto;" data="{image_id:{imageId},image_name:\'{imageName}\','+
-				'image_path:null,remote_path:\'{remotePath}\',image_title:\'{imageDisplayName}\'}" >'+
+				'<div class="thumb-wrap" data="{image_id:{imageId},image_name:\'{imageName}\','+
+				'image_path:null,remote_path:\'{remotePath}\',image_title:\'{imageDisplayName}\'}">'+
 				'<div class="thumb"><img src="{imagePath}/{imageName}" title="{imageDisplayName}" width="220" height="200"/>',
 				'</div><span>{imageDisplayName}</span></div></tpl><div class="x-clear"></div>');
 				Ems.page.PageTempateView.superclass.initComponent.call(this);		
@@ -136,8 +145,8 @@ Ems.page.PageTempateView=Ext.extend(Ext.DataView,{
 Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 		window:new Ext.Window({
 			title:'页面新增',
-			frame : true,
-			width : 350,
+			id:'PageWindow',
+			width : 500,
 			height : 130,
 			labelWidth : 60,
 			autoHeight : true,
@@ -147,6 +156,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 			closeAction : "hide",
 			items:[{xtype:'form',
 				id:'form_page_tpl',
+				frame : true,
 				defaults : {
 					xtype : "textfield",
 					width : 180
@@ -160,7 +170,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 			},
 			{
 				id:'tplImagePath',
-				fieldLabel : '页面底图路径',
+				fieldLabel : '页面路径',
 				name : 'tplImagePath',
 				maxLength : 255,
 				maxLengthText : '至多255位'
@@ -219,7 +229,6 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				var paras={};
 				var submit_prefix='tpl_info_page';
 				var fp;
-				var _self=this;
 				
 				fp=this.ownerCt.ownerCt.findById('form_page_tpl');
 				if(fp.getForm().isValid()){
@@ -248,7 +257,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				  				return;
 				  			}
 				  			Ext.example.msg('OK',ret.returnMsg);
-				  			_self.ownerCt.ownerCt.hide();
+				  			Ext.getCmp('PageWindow').hide();
 					}});
 				}
 			}},{xtype:'button',text:'关闭',handler:function(){
@@ -262,13 +271,19 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 	   {
 	   		text:'页面新增',
 	   		handler:function(){
-	   			this.ownerCt.ownerCt.window.findById('form_page_tpl').getForm().reset();
-	   			if(arr_selected_page_template && arr_selected_page_template.length==1){
-	   				var data=eval("("+arr_selected_page_template[0].getAttribute('data')+")");
-	   				var imgField=this.ownerCt.ownerCt.window.findById('form_page_tpl').findById('tplImagePath');
-	   				imgField.setValue(data.remote_path+'/'+data.image_name);
+	   			var formPan=this.ownerCt.ownerCt.window.findById('form_page_tpl').getForm();
+	   			formPan.reset();
+	   			var view=Ext.getCmp('PageTempateView');
+	   			var idx=view.getSelectedIndexes()[0];
+	   			if(idx==undefined){
+	   				 Ext.example.msg('warn','未选取底图');
+	   				 return false;
 	   			}
-	   				
+	   			var tmp=view.store.getAt(idx);
+	   			var record=new Ext.data.Record();
+	   			record.set('tplPageName',tmp.get('imageDisplayName'));
+	   			record.set('tplImagePath',tmp.get('remotePath')+'/'+tmp.get('imageName'));
+	   			formPan.loadRecord(record);
 	   			this.ownerCt.ownerCt.window.show();
 	   		}
 	   },'-',
@@ -291,7 +306,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 					var page_template_panel = this.ownerCt.ownerCt;
 					
 					Ext.Ajax.request({
-						url:'remove_multiple_page_template_img.action',
+						url:'remove_multiple_page_template.action',
 						params:paras,
 				  		method:'POST',
 				  		success:function(xhr,status){
@@ -336,6 +351,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 			});
 			this.items=[new Ems.page.PageTempateView({
 						store:this.store,
+						id:'PageTempateView',
 						listeners:{
 							//选中初始化底图上传
 							selectionchange:function(e,nodes){
