@@ -3,6 +3,8 @@ package com.admin.page.action;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -83,6 +85,12 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 							
 						}
 				        tlp.setFlag("1");
+				        try {
+							image_title=URLDecoder.decode(image_title, "UTF-8");
+						} catch (UnsupportedEncodingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				        tlp.setImageDisplayName(image_title);
 				        tlp.setImagePath(remote_path);
 				        tlp.setImageName(image_pathFileName);
@@ -93,7 +101,7 @@ public class PageTemplateAction extends ActionSupport  implements  ServletReques
 				        	msg="{success:true,file:'test'}";
 				        else
 				        	msg="{success:false,file:'test'}";
-				        response.setContentType("text/html; charset=GBK");
+				        response.setContentType("text/html; charset=utf-8");
 				        PrintWriter out=null;
 				        try {
 							out=response.getWriter();
