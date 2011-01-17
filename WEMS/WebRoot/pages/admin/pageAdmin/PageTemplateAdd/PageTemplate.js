@@ -355,7 +355,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 						listeners:{
 							//选中初始化底图上传
 							selectionchange:function(e,nodes){
-								if(nodes && nodes.length==1){
+								/*if(nodes && nodes.length==1){
 									var page_panel=page_template_mrg_panel;
 									
 									var data=eval("("+nodes[0].getAttribute('data')+")");
@@ -370,7 +370,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 									delete page_panel;
 								}
 								
-								arr_selected_page_template = nodes;
+								//arr_selected_page_template = nodes;*/
 							}
 						}
 			})];
