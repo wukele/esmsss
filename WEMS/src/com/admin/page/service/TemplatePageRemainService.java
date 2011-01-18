@@ -23,7 +23,13 @@ public class TemplatePageRemainService {
 		public void setTplDao(TplInfoPageDao tplDao) {
 		this.tplDao = tplDao;
 	}
-
+	   
+	   
+	   public  TplInfoPage  GetTplPage(Integer  pageId){
+		     return  tplDao.findTplPageById(pageId);
+	   }
+	   
+	   
 		public  List<TplInfoPage>  QryTemplatePages(String  tpl_page_id,String tpl_page_name){
 			if((tpl_page_id==null && tpl_page_name==null) || (tpl_page_id=="" && tpl_page_name=="")
 					||  ("".equals(tpl_page_name) && "".equals(tpl_page_id))  ||  tpl_page_id=="" ||  tpl_page_id.equals("")){
