@@ -79,6 +79,7 @@ public class RuleOperRoleService {
 		// TODO Auto-generated method stub
 		ret=0;
 		try {
+			ruleOperRoleDAO.deleteRuleOperRole(pageParam.getOperNo());
 			ruleOperRoleDAO.insertRuleOperRole(pageParam);
 		} catch (Exception e) {
 			log.error("insert RuleOperRole failed...");
@@ -96,7 +97,7 @@ public class RuleOperRoleService {
 		
 		try {
 			
-			ruleOperRoleDAO.deleteRuleOperRole(pageParam);
+			ruleOperRoleDAO.deleteRuleOperRole(pageParam.getOperNo());
 		} catch (Exception e) {
 			log.error("delete RuleOperRole failed...");
 			setRet(1);
