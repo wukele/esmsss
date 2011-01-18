@@ -5,6 +5,11 @@
 		<action name="BspkPreview" class="BspkPreviewAction">
 				<result>/pages/admin/pageAdmin/BspkPagePreViewer/BspkPageViewer.jsp</result>
 		</action>
+		<action name="TplPreviewer" class="TplPreviewerAction">
+				<result>
+					/pages/admin/pageAdmin/TplPagePreview/TplPagePreviewer.jsp
+				</result>
+		</action>
 	</package>
 	<package name="pageAdmin" extends="json-default" namespace="/">
 		<action name="SysModuleMgr" class="SysModuleAction" method="SysModuleActionQry">
