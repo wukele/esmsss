@@ -147,6 +147,19 @@
                 </action>
                 <action name="updateInfoDept" class="InfoDeptManagerAction" method="updateInfoDept">
                         <result type="json"></result>
+                </action> 
+                 
+                  <action name="selectRuleOperRole" class="RuleOperRoleManagerAction" method="selectRuleOperRole">
+                        <result type="json"></result>
+                </action>
+                <action name="selectInfoRole" class="RuleOperRoleManagerAction" method="selectInfoRole">
+                        <result type="json"></result>
+                </action>
+                 <action name="deleteRuleOperRole" class="RuleOperRoleManagerAction" method="deleteRuleOperRole">
+                        <result type="json"></result>
+                </action>
+                <action name="insertRuleOperRole" class="RuleOperRoleManagerAction" method="insertRuleOperRole">
+                        <result type="json"></result>
                 </action>
 	</package>
 
