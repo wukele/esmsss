@@ -6,6 +6,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
+
+import com.ems.dao.EmsDao;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -18,8 +21,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  * @see com.ems.entity.CodeComponent
  * @author MyEclipse Persistence Tools
  */
-
-public class CodeComponentDAO extends HibernateDaoSupport {
+@Component("CodeComponentDAO")
+public class CodeComponentDAO extends EmsDao {
 	private static final Log log = LogFactory.getLog(CodeComponentDAO.class);
 	// property constants
 	public static final String CODE_XTYPE = "codeXtype";
