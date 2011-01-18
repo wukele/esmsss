@@ -35,7 +35,7 @@ public class RuleOperRoleDAO extends EmsDao {
 		}
 	}
 
-	public void deleteInfoDept(String operNo) throws Exception {
+	public void deleteRuleOperRole(String operNo) throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("delete RuleOperRole instance");
 		try {
@@ -179,12 +179,21 @@ public class RuleOperRoleDAO extends EmsDao {
 	}
 	public void insertRuleOperRole(IntermedialData pageParam) throws Exception {
 		// TODO Auto-generated method stub
-		RuleOperRole ruleOperRole=new RuleOperRole();
-		ruleOperRole.setOperNo(pageParam.getOperNo());
-		ruleOperRole.setRoleCode(pageParam.getRoleCode());
+		
+		String operNO=pageParam.getOperNo();
+		String roleCodes=pageParam.getRoleCodes();
+		for(int i=0;i<roleCodes.split(",").length;i++){
+			RuleOperRole ruleOperRole=new RuleOperRole();
+			String roleCode=roleCodes.split(",")[i];
+			ruleOperRole.setOperNo(operNO);
+			ruleOperRole.setRoleCode(roleCode);
+			ruleOperRole.setRid(new Integer("1"));
+			getHibernateTemplate().save(ruleOperRole);
+		}
+		
 		log.debug("saving RuleOperRole instance");
 		try {
-			getHibernateTemplate().save(ruleOperRole);
+			
 			log.debug("save successful");
 		} catch (Exception re) {
 			log.error("save failed", re);
