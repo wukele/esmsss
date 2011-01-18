@@ -48,8 +48,10 @@ Ext.onReady(function(){
                     	}
                     	var operNo=grid.getSelectionModel().getSelections()[0].data.operNo;
                     	
-                    	var loader = new Ext.tree.TreeLoader({dataUrl: 'selectInfoRole.action'});
-										
+                    	var loader = new Ext.tree.TreeLoader({
+                    			baseAttrs:{ uiProvider: Ext.ux.TreeCheckNodeUI } ,
+                    			dataUrl: 'selectInfoRole.action'
+                    	});
 											loader.processResponse = function(response, node, callback) {
 											        var json = response.responseText;
 											        try {
@@ -99,8 +101,12 @@ Ext.onReady(function(){
 												deptNo:'0',
 												deptName:'全选'
 											});
+											
 											tree.setRootNode(root);
 											root.expand(false,false);
+					            //tree.root.reload();
+ 
+
                     	var win=new Ext.Window({
 												layout:'fit',
 												width:500,
@@ -111,10 +117,27 @@ Ext.onReady(function(){
 													text:'确定',
 													handler:function(){
 														//addForm.form.findField("parentDeptNo").setValue(tree.getSelectionModel().getSelectedNode().attributes.deptNo);
-														var roleCode=tree.getSelectionModel().getSelectedNode().attributes.roleCode;
-														alert(roleCode);
+														//var roleCode=tree.getSelectionModel().getSelectedNode().attributes.roleCode;
+														//alert(roleCode);
+														var roleCodes="";
+														/*Ext.each(tree.root.childNodes, function(child) {// 如果子节点全部checked
+															if(child.attributes.checked!=null&&child.attributes.checked==true){
+																roleCodes+=child.attributes.roleCode;
+															}
+														});
+														*/
+														for(var i=0;i<tree.root.childNodes.length;i++){
+															var child=tree.root.childNodes[i];
+															if(child.attributes.checked!=null&&child.attributes.checked==true){
+																roleCodes+=child.attributes.roleCode;
+																if(i<tree.root.childNodes.length-1){
+																	roleCodes+=",";
+																}
+															}
+														}
+														//alert(roleCodes)
 														var paras={};
-		                        paras["pageParam.roleCode"]=roleCode;
+		                        paras["pageParam.roleCodes"]=roleCodes;
 		                        paras["pageParam.operNo"]=operNo;
 		                        Ext.Ajax.request({
 		                            url:"insertRuleOperRole.action",
