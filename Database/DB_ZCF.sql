@@ -584,7 +584,7 @@ INSERT INTO `info_menu` VALUES ('70000002', NULL, '7000001', NULL, 0, 0, 1, 'pag
 INSERT INTO `info_menu` VALUES ('60000003', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/InfoDeptManager/InfoDeptManager.jsp', '部门信息管', '部门信息管', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 INSERT INTO `info_menu` VALUES ('60000004', NULL, '6000001', NULL, 0, 0, 1, 'user_manager_main_view.action', '用户管理', '用户管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 INSERT INTO `info_menu` VALUES ('60000005', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleManage/RoleManageMain.jsp', '角色管理', '角色管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-
+INSERT INTO `info_menu` VALUES ('60000006', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RuleOperRoleManager/RuleOperRoleManager.jsp', '工号权限管理', '工号权限管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 -- --------------------------------------------------------
 
 -- 
