@@ -15,6 +15,10 @@ public class TplInfoPageDao extends EmsDao {
 					return   getHibernateTemplate().find("from TplInfoPage");
 		}
 		
+		public    TplInfoPage  findTplPageById(Integer  pageId){
+					return   (TplInfoPage)getHibernateTemplate().get(TplInfoPage.class, pageId);
+		}
+		
 		public   List<TplInfoPage> findTplByIdAndName(String  tpl_page_id,String tpl_page_name){
 				   	String qryStr="from  TplInfoPage  as tpl";
 				   	if("".equals(tpl_page_id)){
