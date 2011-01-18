@@ -1,9 +1,8 @@
 Ext.ns('Ems.page')
 Ext.onReady(function(){
 	
-	var globalPageResource;
-	
 });
+var globalPageResource;
 var sm=new Ext.grid.RowSelectionModel({
 				singleSelect:true
 			});
@@ -45,6 +44,7 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 						var _window = new Ext.Window({
 							title:"添加控件",
 							width:250,
+							closeAction:"close",
 							height:270,
 							plain:true,
 							resizable:false,
@@ -82,13 +82,20 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 								],
 							listeners:{
 									"show":function(_window){
-										Ext.getCmp("pageResource").setValue(globalPageResource);
+										
+										
 										
 								}
 							},
 							buttons:[{
 								text:"确定",
 								handler:function(){
+									var temp=globalPageResource;
+									if(globalPageResource==""){
+										Ext.getCmp("pageResource").setValue(temp);
+									}else{
+										Ext.getCmp("pageResource").setValue(globalPageResource);
+									}
 									var _window=this.ownerCt.ownerCt;
 									var params={};
 									var fieldName=_window.findByType("textfield");
@@ -112,6 +119,7 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 											return;
 			
 										// 失败
+										var resourceId=ret.pageResource.resourceId;
 										if (ret.returnNo > 0) {
 											Ext.example.msg('失败', '失败原因:' + ret.returnMsg);
 											return;
@@ -127,21 +135,34 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 													{
 														text:"增加",
 														handler:function(){
-															
+															Ext.Ajax.request({
+																url : 'addTmpPageResource.action',
+																method : 'post',
+																params : {pageResource:temp,resourceId:resourceId},
+																success:function(){
+																	if (ret.returnNo > 0) {
+																		Ext.example.msg('失败', '失败原因:' + ret.returnMsg);
+																			return;
+																	}
+																	 _submitWindow.destroy();
+																	 Ext.example.msg('成功', ret.returnMsg);
+																		
+																}
+															})
 														}	
 													},{
 														text:"不增加",
 													 	handler:function(){
-															_submitWindow.hide();
+															_submitWindow.destroy() ;
 													 	}
 													}
 												]
 											
 										});
-											_submitWindow.show();
+											_submitWindow.show() ;
 											// 成功
 											//ComponentResourceView.store.load();
-											_window.hide();
+											_window.destroy();
 											Ext.example.msg('成功', ret.returnMsg);
 										}
 										
