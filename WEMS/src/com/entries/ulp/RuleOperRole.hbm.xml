@@ -8,7 +8,7 @@
     <class name="com.entries.ulp.RuleOperRole" table="rule_oper_role" catalog="protest">
         <id name="rid" type="java.lang.Integer">
             <column name="RID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="operNo" type="java.lang.String">
             <column name="OPER_NO" length="10" not-null="true" />
