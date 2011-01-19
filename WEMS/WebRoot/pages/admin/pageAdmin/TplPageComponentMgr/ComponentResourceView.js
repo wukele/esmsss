@@ -180,8 +180,9 @@ Ext.extend(Ems.page.ComponentResourceView,Ext.grid.GridPanel,{
 						_window.show();
 						
 						
-			}},'-',
-		      {xtype:'button',name:'removePageResourceBtn',id:'removePageResourceBtn',text:'删除页面组件',handler:function(){alert('todel');}}],
+			}}
+//		,'-', {xtype:'button',name:'removePageResourceBtn',id:'removePageResourceBtn',text:'删除页面组件',handler:function(){alert('todel');}}
+		],
 		constructor:function(app,config){
 				this.app=app;
 				this.tplPageResource=config.tplPageResource;
