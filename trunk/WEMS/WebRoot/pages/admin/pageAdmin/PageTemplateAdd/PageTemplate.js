@@ -182,7 +182,8 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				name : 'tplImageWidth',
 				maxLength : 3,
 				maxLengthText : '至多3位',
-				vtype:'alphanum'
+				regex:/[0-9]+/,
+				regexText:'必须为整数'
 			},
 			{
 				id:'tplImageHeight',
@@ -190,7 +191,8 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				name : 'tplImageHeight',
 				maxLength : 3,
 				maxLengthText : '至多3位',
-				vtype:'alphanum'
+				regex:/[0-9]+/,
+				regexText:'必须为整数'
 			},
 			{
 				id:'tplPageResource',
