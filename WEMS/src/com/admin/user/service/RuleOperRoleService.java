@@ -41,19 +41,9 @@ public class RuleOperRoleService {
 		return rs;
 	}
 	@Transactional
-	public int insertRuleOperRole(RuleOperRole ruleOperRole) {
+	public void insertRuleOperRole(RuleOperRole ruleOperRole) {
 		// TODO Auto-generated method stub
-		ret=0;
-		try {
-//			getInfoDeptDAO().insertInfoDept(infoDept);
-		} catch (Exception e) {
-			log.error("insertInfoDept failed...");
-			setRet(1);
-			setMsg("insertInfoDept failed..."+e.getMessage());
-		}
-
-		return ret;
-
+		getRuleOperRoleDAO().insertRuleOperRole(ruleOperRole);
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
@@ -74,37 +64,20 @@ public class RuleOperRoleService {
 		List<InfoRole> rs = ruleOperRoleDAO.selectInfoRole(pageParam);
 		return rs;
 	}
-	@Transactional
-	public int insertRuleOperRole(IntermedialData pageParam) {
-		// TODO Auto-generated method stub
-		ret=0;
-		try {
-			ruleOperRoleDAO.deleteRuleOperRole(pageParam.getOperNo());
-			ruleOperRoleDAO.insertRuleOperRole(pageParam);
-		} catch (Exception e) {
-			log.error("insert RuleOperRole failed...");
-			setRet(1);
-			setMsg("insert RuleOperRole failed..."+e.getMessage());
-		}
 
-		return ret;
+	@Transactional
+	public void insertRuleOperRole(IntermedialData pageParam) {
+
+		ruleOperRoleDAO.deleteRuleOperRole(pageParam.getOperNo());
+		ruleOperRoleDAO.insertRuleOperRole(pageParam);
 
 	}
-	@Transactional
-	public int deleteRuleOperRole(IntermedialData pageParam) {
-		// TODO Auto-generated method stub
-		ret=0;
-		
-		try {
-			
-			ruleOperRoleDAO.deleteRuleOperRole(pageParam.getOperNo());
-		} catch (Exception e) {
-			log.error("delete RuleOperRole failed...");
-			setRet(1);
-			setMsg("delete  RuleOperRole failed..."+e.getMessage());
-		}
 
-		return ret;
+	@Transactional
+	public void deleteRuleOperRole(IntermedialData pageParam) {
+
+		ruleOperRoleDAO.deleteRuleOperRole(pageParam.getOperNo());
+
 	}
 
 	
