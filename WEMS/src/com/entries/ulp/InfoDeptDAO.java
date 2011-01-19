@@ -43,40 +43,25 @@ public class InfoDeptDAO extends EmsDao {
 
 	}
 
-	public void insertInfoDept(InfoDept infoDept) throws Exception {
+	public void insertInfoDept(InfoDept infoDept) {
 		// TODO Auto-generated method stub
-		log.debug("saving InfoDept instance");
-		try {
 			getHibernateTemplate().save(infoDept);
 			log.debug("save successful");
-		} catch (Exception re) {
-			log.error("save failed", re);
-			throw re;
-		}
+		
 	}
 
-	public void deleteInfoDept(InfoDept infoDept) throws Exception {
-		// TODO Auto-generated method stub
-		log.debug("delete InfoDept instance");
-		try {
+	public void deleteInfoDept(InfoDept infoDept) {
+		
 			getHibernateTemplate().delete(infoDept);
 			log.debug("delete successful");
-		} catch (Exception re) {
-			log.error("delete failed", re);
-			throw re;
-		}
+		
 	}
 
-	public void updateInfoDept(InfoDept infoDept) throws Exception {
-		// TODO Auto-generated method stub
-		log.debug("update InfoDept instance");
-		try {
+	public void updateInfoDept(InfoDept infoDept) {
+		
 			getHibernateTemplate().update(infoDept);
 			log.debug("update successful");
-		} catch (Exception re) {
-			log.error("update failed", re);
-			throw re;
-		}
+		
 	}
 
 
