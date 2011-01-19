@@ -10,6 +10,8 @@ import java.util.ListIterator;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -30,7 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Component("RuleOperRoleManagerAction")
 @Scope("prototype")
 public class RuleOperRoleManagerAction extends ActionSupport implements ServletRequestAware {
-
+	private static final Log log = LogFactory.getLog(RuleOperRoleManagerAction.class);
 	private HttpServletRequest  request;
 	/**
 	 * 
@@ -63,13 +65,27 @@ public class RuleOperRoleManagerAction extends ActionSupport implements ServletR
 		return  SUCCESS;
 	}
 	public  String insertRuleOperRole(){
-		ret=ruleOperRoleService.insertRuleOperRole(pageParam);
-		msg = ruleOperRoleService.getMsg();
+		ret=0;
+		try {
+			ruleOperRoleService.insertRuleOperRole(pageParam);
+		}
+		 catch (RuntimeException e) {
+			log.error("insert RuleOperRole failed...");
+			setRet(1);
+			setMsg("insert RuleOperRole failed..."+e.getMessage());
+		}
 		return  SUCCESS;
 	}
-	public String deleteInfoDept(){
-		ret=ruleOperRoleService.deleteRuleOperRole(pageParam);
-		msg = ruleOperRoleService.getMsg();
+	public String deleteRuleOperRole(){
+		ret=0;
+		try {
+			ruleOperRoleService.deleteRuleOperRole(pageParam);
+		}
+		 catch (RuntimeException e) {
+			log.error("deleteRuleOperRole failed...");
+			setRet(1);
+			setMsg("deleteRuleOperRole failed..."+e.getMessage());
+		}
 		return  SUCCESS;
 	}
 	public String selectInfoRole(){
