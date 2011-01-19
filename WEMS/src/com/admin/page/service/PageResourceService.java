@@ -104,7 +104,7 @@ public class PageResourceService {
 			try {
 				if(resourceId==null || resourceId==0)
 					throw new RuntimeException("resourceId is null or 0. || 资源ID为空或者0");
-				resDao.findById(resourceId);
+				resource=resDao.findById(resourceId);
 				log.debug("findPageResourceById finished...");
 			} catch (RuntimeException e) {
 				log.error("findPageResourceById failed...");
