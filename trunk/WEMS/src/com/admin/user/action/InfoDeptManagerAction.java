@@ -10,6 +10,8 @@ import java.util.ListIterator;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,7 +27,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Component("InfoDeptManagerAction")
 @Scope("prototype")
 public class InfoDeptManagerAction extends ActionSupport implements ServletRequestAware {
-
+	private static final Log log = LogFactory.getLog(InfoDeptManagerAction.class);
 	private HttpServletRequest  request;
 	/**
 	 * 
@@ -50,18 +52,35 @@ public class InfoDeptManagerAction extends ActionSupport implements ServletReque
 	}
 	
 	public String insertInfoDept(){
-		ret=infoDeptService.insertInfoDept(infoDept);
-		msg = infoDeptService.getMsg();
+		try {
+			infoDeptService.insertInfoDept(infoDept);
+		} catch (Throwable e) {
+			setRet(1);
+			setMsg("insertInfoDept failed..."+e.getMessage());
+			log.error(getMsg());
+		}
+		
 		return  SUCCESS;
 	}
 	public String updateInfoDept(){
-		ret=infoDeptService.updateInfoDept(infoDept);
-		msg = infoDeptService.getMsg();
+		try {
+			infoDeptService.updateInfoDept(infoDept);
+		} catch (Throwable e) {
+			setRet(1);
+			setMsg("updateInfoDept failed..."+e.getMessage());
+			log.error(getMsg());
+		}	
 		return  SUCCESS;
 	}
 	public String deleteInfoDept(){
-		ret=infoDeptService.deleteInfoDept(infoDept);
-		msg = infoDeptService.getMsg();
+		try {
+			infoDeptService.deleteInfoDept(infoDept);
+		} catch (Throwable e) {
+			setRet(1);
+			setMsg("deleteInfoDept failed..."+e.getMessage());
+			log.error(getMsg());
+		}
+		
 		return  SUCCESS;
 	}
 	/**
