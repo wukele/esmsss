@@ -16,8 +16,9 @@ public class PageResourceStruct implements Serializable {
 	
 	public  PageResourceStruct( Integer resourceId,
 			 String pageResource,
-			 String xtypeCode,
+			 
 			 String resourceName,
+			 String xtypeCode,
 			 Integer resourceTop,
 			 Integer resourceLeft,
 			 Integer resourceWidth,
