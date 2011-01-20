@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.SQLQuery;
-import org.junit.Test;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
