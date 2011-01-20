@@ -141,6 +141,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 title:'模板列表',
 	 iconCls:'silk-table',
 	 height:700,
+	 autoScroll:true,
 	 tbar:[
 	 {
 	 	text:'删除',
@@ -164,7 +165,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 				container.store.load({
 	 					params:{
 	 						start:0,
-							limit:7
+							limit:6
 	 					}
 	 				});
 	 			}
@@ -191,7 +192,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 					container.store.load({
 	 						params:{
 	 							start:0,
-								limit:7
+								limit:5
 	 						}
 	 					});
 	 					window.hide();
@@ -221,7 +222,7 @@ Ems.page.TplPageQryListPanel=Ext.extend(Ext.Panel,{
 	 		this.bbar=new Ext.PagingToolbar({
 	 				store:this.store,
 					displayInfo: true,
-					pageSize:8,
+					pageSize:6,
 					displayMsg : '显示第 {0} 条到 {1} 条记录，一共 {2} 条',
 					emptyMsg : '没有记录'
 	 		})
@@ -244,7 +245,7 @@ Ems.page.TplPageQryPanel=Ext.extend(Ext.Panel,{
 			var  tpl_name=e.getForm().findField('tpl_page_name').getValue();
 			this.ownerCt.TplPageQryList.store.load({
 				params: {	start:0,
-					limit:7,
+					limit:5,
 					tpl_page_id:tpl_id,
 					tpl_page_name:tpl_name}
 			});
@@ -270,7 +271,7 @@ Ems.page.TplPageQryPanel=Ext.extend(Ext.Panel,{
 			this.store.load({
 				params:{
 					start:0,
-					limit:7
+					limit:6
 				}
 			});
 			this.TplPageQryList=new Ems.page.TplPageQryListPanel({
