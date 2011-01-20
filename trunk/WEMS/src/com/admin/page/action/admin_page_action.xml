@@ -5,7 +5,7 @@
 		<action name="BspkPreview" class="BspkPreviewAction">
 				<result>/pages/admin/pageAdmin/BspkPagePreViewer/BspkPageViewer.jsp</result>
 		</action>
-		<action name="TplPreviewer" class="TplPreviewerAction">
+		<action name="TplPreviewer" class="TplPreviewerAction" method="TplPreviewerDispatcher">
 				<result>
 					/pages/admin/pageAdmin/TplPagePreview/TplPagePreviewer.jsp
 				</result>

@@ -53,7 +53,7 @@ public class TplPreviewerAction extends ActionSupport implements  ServletRequest
 					resJson.addAll(tplRes);
 					HttpSession  session=request.getSession();
 					session.setAttribute(CommPageKeys.KEY_TPL_PAGE_RESOURCE_JSON, resJson);
-					session.setAttribute(CommPageKeys.KEY_TPL_INFO_PAGE, tplRes);
+					session.setAttribute(CommPageKeys.KEY_TPL_INFO_PAGE, page);
 					return SUCCESS;
 		}
 
