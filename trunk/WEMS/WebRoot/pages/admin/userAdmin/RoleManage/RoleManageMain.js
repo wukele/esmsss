@@ -14,7 +14,7 @@
 		var rolePanel;// 角色面板
 		var window;// 新增修改窗口
 		var store;// 角色列表
-
+		
 		var statusStore;// 激活状态
 		var fieldModel = [ 'roleCode', 'regionId', 'roleLevel', 'localNet',
 				'comments', 'roleName', 'operNo', 'isactive', 'resChar',
@@ -25,6 +25,7 @@
 		
 		var STATUS_ACTIVE=1;
 		var STATUS_NOT_ACTIVE=0;
+		
 		var me = {
 			getModifyWindow : function(record) {
 				var allFields = [];
@@ -199,11 +200,11 @@
 						method : 'post',
 						params : paras,
 						success : function(xhq, status) {
-							var ret = Ext.util.JSON
-							.decode(xhq.responseText);
+							
 							if (xhq.responseText == null)
 								return;
-
+							var ret = Ext.util.JSON
+							.decode(xhq.responseText);
 							// 修改失败
 							if (ret.returnNo > 0) {
 								Ext.example.msg('失败', '失败原因:' + ret.returnMsg);
@@ -226,44 +227,46 @@
 				var allFields = [];
 
 				var data = {};
-				allFields = fields.concat(combos);
+				if(window.items.items[0].getForm().isValid()){
+					allFields = fields.concat(combos);
 
-				Ext.each(allFields, function(item, index, allItems) {
-					var fieldName = '';
-					fieldName = submitprefix ? submitprefix + '.'
-							+ item.getName() : item.getName();
-					data[fieldName] = item.getValue();
-				});
+					Ext.each(allFields, function(item, index, allItems) {
+						var fieldName = '';
+						fieldName = submitprefix ? submitprefix + '.'
+								+ item.getName() : item.getName();
+						data[fieldName] = item.getValue();
+					});
 
-				Ext.Ajax
-						.request({
-							url : 'addRole.action',
-							method : 'post',
-							params : data,
-							success : function(req, status) {
-								var ret = Ext.util.JSON
-										.decode(xhq.responseText);
-								if (ret == null)
-									return;
-								// 失败
-								if (ret.returnNo != 0) {
-									Ext.example.msg('注意', ret.returnMsg);
-									return;
+					Ext.Ajax
+							.request({
+								url : 'addRole.action',
+								method : 'post',
+								params : data,
+								success : function(req, status) {
+									var ret = Ext.util.JSON
+											.decode(req.responseText);
+									if (ret == null)
+										return;
+									// 失败
+									if (ret.returnNo != 0) {
+										Ext.example.msg('注意', ret.returnMsg);
+										return;
+									}
+									Ext.example.msg('成功', ret.returnMsg);
+									// 添加成功
+									recData = {};
+									for (i = 0; i < allFields.length; i++) {
+										recData[allFields[i].getName()] = allFields[i]
+												.getValue();
+									}
+									var rec = new Ext.data.Record(recData,
+											recData['roleCode']);
+									store.add(rec);
 								}
-								Ext.example.msg('成功', ret.returnMsg);
-								// 添加成功
-								recData = {};
-								for (i = 0; i < allFields.length; i++) {
-									recData[allFields[i].getName()] = allFields[i]
-											.getValue();
-								}
-								var rec = new Ext.data.Record(recData,
-										recData['roleCode']);
-								store.add(rec);
-							}
-						});
+							});
 
-				window.hide();
+					window.hide();
+				}
 			},
 			// 查询
 			queryRole : function() {

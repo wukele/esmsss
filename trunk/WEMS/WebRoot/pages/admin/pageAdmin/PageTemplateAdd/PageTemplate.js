@@ -97,12 +97,12 @@ Ems.page.PageTempateMangerPan=Ext.extend(Ext.FormPanel,{
   	
 	                			fp.getForm().submit({
 	                    			url: 'PageTemplateActionUpLoad.action',
-	                    			waitMsg: 'Uploading...',
+	                    			waitMsg: '正在上传...',
 	                    			 params: {
         									image_title:displayName 
    									 },	                    			
 	                    			success: function(fp, o){
-	                        			Ext.example.msg('Success', '文件上传成功');
+	                        			Ext.example.msg('成功', '文件上传成功');
 	                        			page_template_panel.store.load();
 	                    			},
 	                    			failure: function(form, action){
@@ -131,7 +131,7 @@ Ems.page.PageTempateView=Ext.extend(Ext.DataView,{
 		overClass:'x-view-over',
 		itemSelector:'div.thumb-wrap',
 		autoHeight:true,
-		emptyText: 'No images to display',
+		emptyText: '没有可用的底图',
 		multiSelect:true,
 		initComponent:function(){
 				this.tpl=new Ext.XTemplate('<tpl for=".">',
@@ -182,7 +182,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				name : 'tplImageWidth',
 				maxLength : 3,
 				maxLengthText : '至多3位',
-				regex:/[0-9]+/,
+				regex:/^[0-9]+$/,
 				regexText:'必须为整数'
 			},
 			{
@@ -191,7 +191,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 				name : 'tplImageHeight',
 				maxLength : 3,
 				maxLengthText : '至多3位',
-				regex:/[0-9]+/,
+				regex:/^[0-9]+$/,
 				regexText:'必须为整数'
 			},
 			{
@@ -329,7 +329,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 			  				Ext.example.msg('错误',ret.returnMsg);
 			  				return;
 			  			}
-			  			Ext.example.msg('OK',ret.returnMsg);
+			  			Ext.example.msg('成功',ret.returnMsg);
 			  			for(i in paras){
 			  				page_template_panel.store.remove(page_template_panel.store.getById(paras[i]));
 			  			}
