@@ -25,7 +25,6 @@
 				var fields=window.findByType('textfield');
 				var combos=window.findByType('combo');
 				allFields=fields.concat(combos);
-				
 				var rec=store.getById(window.findById('operNo').getValue());
 				data=rec.data;
 				for(i=0;i<allFields.length;i++){
@@ -116,7 +115,7 @@
 				genderStore = new Ext.data.SimpleStore({
 					fields : [ 'genderKey', 'genderName' ],
 					data : [ [ 1, '男' ], [ 0, '女' ] ],
-					id : 1
+					id : 'genderStore'
 				});
 				window = new Ext.Window({
 					title : '添加用户',
@@ -179,13 +178,17 @@
 						editable : false,
 						store : genderStore,
 						valueField : 'genderKey',
-						displayField : 'genderName'
+						displayField : 'genderName',
+						allowBlank:false,
+						blankText:'性别不能为空'
 					}, {
 						id:'phone',
 						fieldLabel : '电话',
 						name : 'phone',
 						maxLength : 20,
-						maxLengthText : '至多20位'
+						maxLengthText : '至多20位',
+						regex:/^(\d{3}-)?\d{8}$/,
+						regexText:'无效的电话号码'
 					}, {
 						id:'positions',
 						fieldLabel : '位置',
@@ -197,7 +200,9 @@
 						fieldLabel : '手机号码',
 						name : 'mobileNo',
 						maxLength : 20,
-						maxLengthText : '至多20位'
+						maxLengthText : '至多20位',
+						regex:/^\d{11}$/,
+						regexText:'无效的手机号码'
 					} ]})],
 					buttons : [ {
 						xtype : 'button',
@@ -225,43 +230,46 @@
 				var allFields=[];
 				
 				var data = {};
-				allFields=fields.concat(combos);
 				
-				Ext.each(allFields, function(item, index, allItems) {
-					var fieldName = '';
-						fieldName =submitprefix?submitprefix+'.'+item.getName():item.getName();
-					data[fieldName] = item.getValue();
-				});
+				if(window.items.items[0].getForm().isValid()){
+					allFields=fields.concat(combos);
+					
+					Ext.each(allFields, function(item, index, allItems) {
+						var fieldName = '';
+							fieldName =submitprefix?submitprefix+'.'+item.getName():item.getName();
+						data[fieldName] = item.getValue();
+					});
 
-				Ext.Ajax.request({
-					url : 'addUser.action',
-					method:'post',
-					params:data,
-					success:function(req,status){
-						ret=Ext.util.JSON.decode(req.responseText);
-						if(ret==null)
-							return;
-						//失败
-						if(ret.errorCode!=0){
-							Ext.example.msg('注意',req.errorMsg);
-							return;
+					Ext.Ajax.request({
+						url : 'addUser.action',
+						method:'post',
+						params:data,
+						success:function(req,status){
+							ret=Ext.util.JSON.decode(req.responseText);
+							if(ret==null)
+								return;
+							//失败
+							if(ret.errorCode!=0){
+								Ext.example.msg('注意',req.errorMsg);
+								return;
+							}
+							//添加成功
+							recData={};
+							for(i=0;i<fields.length;i++){
+								recData[fields[i].getName()]=fields[i].getValue();
+							}
+							for(i=0;i<combos.length;i++){
+								recData[combos[i].getName()]=combos[i].getValue();
+							}
+							recData['flag']=STATUS_ACTIVE;
+							var rec=new Ext.data.Record(recData,recData['operNo']);
+							store.add(rec);
+							Ext.example.msg('成功','用户添加成功');
 						}
-						//添加成功
-						recData={};
-						for(i=0;i<fields.length;i++){
-							recData[fields[i].getName()]=fields[i].getValue();
-						}
-						for(i=0;i<combos.length;i++){
-							recData[combos[i].getName()]=combos[i].getValue();
-						}
-						recData['flag']=STATUS_ACTIVE;
-						var rec=new Ext.data.Record(recData,recData['operNo']);
-						store.add(rec);
-						Ext.example.msg('成功','用户添加成功');
-					}
-				});
+					});
 
-				window.hide();
+					window.hide();
+				}
 			}
 		};
 	}();
