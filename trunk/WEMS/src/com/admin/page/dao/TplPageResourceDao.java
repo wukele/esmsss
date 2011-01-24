@@ -45,5 +45,12 @@ public class TplPageResourceDao extends EmsDao {
 			public TplPageResource findById(Integer resourceId){
 				return (TplPageResource)getHibernateTemplate().get(TplPageResource.class, resourceId);
 			}
+
+			public void UpdateTplComponent(TplPageResource comp) {
+				// TODO Auto-generated method stub
+					getHibernateTemplate().merge(comp);
+			}
 			
+			
+	
 }

@@ -115,4 +115,19 @@ public class PageResourceService {
 			return resource;
 		}
 		
+		
+		@Transactional
+		public void ModTplComponent(TplPageResource comp) {
+			// TODO Auto-generated method stub
+			log.info("Modify comp_id"+comp.getPageResource());
+			resDao.UpdateTplComponent(comp);
+		}
+		
+		@Transactional
+		public void delTplRemove(TplPageResource comp) {
+			// TODO Auto-generated method stub
+			log.info("Del component :"+comp.getResourceId());
+			resDao.deleteTplPageResource(comp.getResourceId());
+		}
+		
 }
