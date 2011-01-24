@@ -91,5 +91,8 @@
 			<action name="ModifyTplComp" class="TplPageResourceAction" method="ModifyTplComponent">
 					<result type="json"></result>
 			</action>
+			<action name="removeTplComponent" class="TplPageResourceAction" method=" removeTplComponent">
+					<result type="json"></result>
+			</action>
 	</package>
 </struts>    
