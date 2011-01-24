@@ -2,40 +2,41 @@
  * @author zhangchangfeng
  */
 
-Ext.namespace('Ext.ems.');
+Ext.namespace('Ems.component');
 
 
-Ext.ems.ImageBox=Ext.extend(Ext.BoxComponent,{
+Ems.component.ImageBox=Ext.extend(Ext.BoxComponent,{
+	
+	ImageON:'image/ups_s.png',
+	ImageOff:'image/ups_s.png',
+	
 	constructor:function(config){
-		Ext.Image.ImageBox.superclass.constructor.call(this, config);
-		this.ImageSrc=config.src;
-		this.autoEl={
+		config=config||{};
+		this.Height=config.height||100;
+		this.Width=config.width||100;
+		config.autoEl={
 			tag:'img',
-			src:this.ImageSrc
-		}
+			src:this.ImageOff
+		};
+		
+		Ems.component.ImageBox.superclass.constructor.call(this, config);
 		this.on({
 		'render':this.OnRender,
 		 scope:this
 		});
 	},
-	ImageSrc:"",
 	OnRender:function(e){
 		e.getEl().on({
-			'click':this.OnImageClick,
+			'click':this.sendCommand,
 			scope:this
 		})
 	},
-	OnImageClick:function(e){
-		//Ext.Msg.alert('info','1234');
-		Ext.DomHelper.
-	    exp=/\w+@\w+.\w{3}/;
-		
-		var m='whitecell@hotmail.com1 '.match(exp);
-		Ext.Msg.alert('match',m);
-		
-	},
 	setValues:function(val){
-		this.ImageSrc=val
+		if(val){
+				this.getEl().dom.src=this.ImageON;
+		}else{
+				this.getEl().dom.src=this.ImageOff;
+		}
 	},
 	sendCommand:function(e){
 		
@@ -44,4 +45,4 @@ Ext.ems.ImageBox=Ext.extend(Ext.BoxComponent,{
 });
 
 
-Ext.reg('ImageBox',Ext.ems.ImageBox);
+Ext.reg('ImageBox',Ems.component.ImageBox);

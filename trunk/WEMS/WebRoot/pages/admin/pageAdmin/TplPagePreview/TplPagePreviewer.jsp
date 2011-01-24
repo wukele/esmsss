@@ -56,7 +56,9 @@ Ems.page.tplContianerData=function(){
 			  			item.width=TplResources[i].resourceWidth;
 			  			item.height=TplResources[i].resourceHeight;
 			  			item.id=TplResources[i].resourceId;
-			  			item.plugins=new Ems.plugins.EditCmenu();
+			  			item.plugins=new Ems.plugins.EditCmenu({
+			  				pageResource:'<%=tpage.getTplPageResource()%>'
+			  			});
 			  			items.add(item);
 			  		}
 			  		return  items.items;

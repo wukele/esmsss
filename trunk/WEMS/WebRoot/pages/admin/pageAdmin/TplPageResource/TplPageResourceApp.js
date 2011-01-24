@@ -37,7 +37,11 @@ Ems.page.TplPageResourceApp=function(){
 								}
 								if(e.getSelectionModel().getSelected()){
 								   var record=e.getSelectionModel().getSelected();
-								 	  	
+								   if(!this.addWindow){
+								   		 var rec=new Ext.data.Record();
+								   		 
+								   }
+								   
 								}else{
 									 Ext.example.msg('错误','请选取组件');
 								}
