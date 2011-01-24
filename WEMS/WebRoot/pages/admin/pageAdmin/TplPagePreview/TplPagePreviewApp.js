@@ -4,6 +4,7 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 		layout:'absolute',
 		constructor:function(config){
 				config=config||{
+					id:'ComponentPanel',
 					bodyStyle:Ems.page.tplContianerData.getTplPagebdStyle(),
 					width:Ems.page.tplContianerData.defaultViewWidth,
 					height:Ems.page.tplContianerData.defaultViewHeight,
