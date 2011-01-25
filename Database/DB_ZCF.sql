@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主机: localhost
--- 生成日期: 2011 年 01 月 05 日 16:58
+-- 生成日期: 2011 年 01 月 25 日 02:14
 -- 服务器版本: 5.0.45
 -- PHP 版本: 5.2.3
 
@@ -19,7 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 表的结构 `alarm_level_setup`
 -- 
 
-CREATE TABLE `alarm_level_setup` (
+CREATE TABLE IF NOT EXISTS `alarm_level_setup` (
   `alarm_level_id` int(11) NOT NULL COMMENT '报警级别设置ID',
   `device_variable_id` int(11) NOT NULL COMMENT '变量类型ID',
   `effect_range_minimum_value` varchar(255) NOT NULL COMMENT '作用范围最小值',
@@ -42,7 +42,7 @@ correspond` smallint(6) NOT NULL COMMENT '对应报警级别',
 -- 表的结构 `alarm_operate`
 -- 
 
-CREATE TABLE `alarm_operate` (
+CREATE TABLE IF NOT EXISTS `alarm_operate` (
   `alarm_history_id` int(11) NOT NULL COMMENT '报警历史ID',
   `alarm_policy_id` int(11) NOT NULL COMMENT '报警策略ID',
   `device_variable_id` int(11) NOT NULL COMMENT '设备变量ID',
@@ -70,7 +70,7 @@ CREATE TABLE `alarm_operate` (
 -- 表的结构 `alarm_policy`
 -- 
 
-CREATE TABLE `alarm_policy` (
+CREATE TABLE IF NOT EXISTS `alarm_policy` (
   `alarm_policy_id` int(11) NOT NULL COMMENT '报警策略ID',
   `alarm_level_id` int(11) NOT NULL COMMENT '报警级别设置ID',
   `policy_work_starttime` datetime NOT NULL COMMENT '策略工作起始时间',
@@ -94,7 +94,7 @@ CREATE TABLE `alarm_policy` (
 -- 表的结构 `alarm_policy_effect_area`
 -- 
 
-CREATE TABLE `alarm_policy_effect_area` (
+CREATE TABLE IF NOT EXISTS `alarm_policy_effect_area` (
   `area_id` int(11) NOT NULL COMMENT '区域ID',
   `alarm_policy_id` int(11) NOT NULL COMMENT '报警策略ID',
   `device_variable_id` int(11) NOT NULL COMMENT '设备变量ID',
@@ -112,7 +112,7 @@ CREATE TABLE `alarm_policy_effect_area` (
 -- 表的结构 `bspk_data_device`
 -- 
 
-CREATE TABLE `bspk_data_device` (
+CREATE TABLE IF NOT EXISTS `bspk_data_device` (
   `rule_id` int(20) NOT NULL auto_increment,
   `value_id` varchar(20) NOT NULL,
   `value_name` varchar(40) default NULL,
@@ -132,7 +132,7 @@ CREATE TABLE `bspk_data_device` (
 -- 表的结构 `bspk_info_page`
 -- 
 
-CREATE TABLE `bspk_info_page` (
+CREATE TABLE IF NOT EXISTS `bspk_info_page` (
   `bspk_page_id` int(10) NOT NULL auto_increment,
   `bspk_page_name` varchar(255) default NULL,
   `bspk_image_path` varchar(255) default NULL,
@@ -142,12 +142,13 @@ CREATE TABLE `bspk_info_page` (
   `bspk_oper_code` varchar(10) default NULL,
   `bspk_page_type` varchar(2) NOT NULL,
   PRIMARY KEY  (`bspk_page_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=10000002 ;
 
 -- 
 -- 导出表中的数据 `bspk_info_page`
 -- 
 
+INSERT INTO `bspk_info_page` VALUES (10000001, 'UpsMain', 'image/power_10.jpg', NULL, 550, '10000001', 'UPS', 'NO');
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE `bspk_info_page` (
 -- 表的结构 `bspk_page_resource`
 -- 
 
-CREATE TABLE `bspk_page_resource` (
+CREATE TABLE IF NOT EXISTS `bspk_page_resource` (
   `resource_id` int(11) NOT NULL auto_increment,
   `page_resource` varchar(20) default NULL,
   `xtype_code` varchar(20) default NULL,
@@ -174,6 +175,8 @@ CREATE TABLE `bspk_page_resource` (
 -- 导出表中的数据 `bspk_page_resource`
 -- 
 
+INSERT INTO `bspk_page_resource` VALUES (1000001, '10000001', 'textfield', 478, 480, 60, 30, 'L10000011', '', '');
+INSERT INTO `bspk_page_resource` VALUES (1000002, '10000001', 'textfield', 300, 400, 60, 30, 'L10000012', '', '');
 
 -- --------------------------------------------------------
 
@@ -181,7 +184,7 @@ CREATE TABLE `bspk_page_resource` (
 -- 表的结构 `bspk_resource_config`
 -- 
 
-CREATE TABLE `bspk_resource_config` (
+CREATE TABLE IF NOT EXISTS `bspk_resource_config` (
   `config_sn` int(11) NOT NULL auto_increment,
   `config_parameter` varchar(100) default NULL,
   `config_value` varchar(255) default NULL,
@@ -202,7 +205,7 @@ CREATE TABLE `bspk_resource_config` (
 -- 表的结构 `code_classify`
 -- 
 
-CREATE TABLE `code_classify` (
+CREATE TABLE IF NOT EXISTS `code_classify` (
   `classify_primary_key` varchar(255) NOT NULL default '' COMMENT '分类主键',
   `classify_id` int(11) NOT NULL,
   `classify_name` varchar(255) NOT NULL COMMENT '分类名称',
@@ -221,7 +224,7 @@ CREATE TABLE `code_classify` (
 -- 表的结构 `code_component`
 -- 
 
-CREATE TABLE `code_component` (
+CREATE TABLE IF NOT EXISTS `code_component` (
   `component_id` int(6) NOT NULL auto_increment,
   `code_xtype` varchar(20) NOT NULL,
   `component_name` varchar(40) default NULL,
@@ -243,7 +246,7 @@ INSERT INTO `code_component` VALUES (1000002, 'ImageBox', '图片框', 'E000001'
 -- 表的结构 `code_list`
 -- 
 
-CREATE TABLE `code_list` (
+CREATE TABLE IF NOT EXISTS `code_list` (
   `CODE_ID` int(11) NOT NULL,
   `CODE_TYPE` varchar(255) NOT NULL,
   `CODE_VALUE` varchar(255) NOT NULL,
@@ -263,7 +266,7 @@ CREATE TABLE `code_list` (
 -- 表的结构 `code_table`
 -- 
 
-CREATE TABLE `code_table` (
+CREATE TABLE IF NOT EXISTS `code_table` (
   `code_id` int(11) NOT NULL COMMENT '代码ID',
   `classify_primary_key` varchar(255) NOT NULL COMMENT '分类主键',
   `code_classify_id` int(11) NOT NULL COMMENT '代码分类ID',
@@ -280,10 +283,33 @@ CREATE TABLE `code_table` (
 -- --------------------------------------------------------
 
 -- 
+-- 表的结构 `comm_alarm`
+-- 
+
+CREATE TABLE IF NOT EXISTS `comm_alarm` (
+  `comm_sn` int(11) NOT NULL auto_increment,
+  `inst_code` varchar(0) NOT NULL,
+  `run_times` int(11) default '0',
+  `run_status` int(11) default '0',
+  `oper_no` varchar(20) default NULL,
+  `run_date` datetime default NULL,
+  `insert_date` datetime default NULL,
+  `device_id` varchar(20) default NULL,
+  PRIMARY KEY  (`comm_sn`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- 导出表中的数据 `comm_alarm`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
 -- 表的结构 `component_resource_code`
 -- 
 
-CREATE TABLE `component_resource_code` (
+CREATE TABLE IF NOT EXISTS `component_resource_code` (
   `component_resource_sn` int(6) NOT NULL auto_increment,
   `resource_type` varchar(6) default NULL,
   `script_url` varchar(100) default NULL,
@@ -305,7 +331,7 @@ INSERT INTO `component_resource_code` VALUES (10000002, 'EXTEND', '/js/comm/Imag
 -- 表的结构 `control_command`
 -- 
 
-CREATE TABLE `control_command` (
+CREATE TABLE IF NOT EXISTS `control_command` (
   `control_log_id` int(11) NOT NULL COMMENT '控制记录ID',
   `device_variable_id` int(11) NOT NULL COMMENT '设备变量ID',
   `setup_value` varchar(255) NOT NULL COMMENT '设置值',
@@ -328,7 +354,7 @@ CREATE TABLE `control_command` (
 -- 表的结构 `device_table`
 -- 
 
-CREATE TABLE `device_table` (
+CREATE TABLE IF NOT EXISTS `device_table` (
   `device_id` int(11) NOT NULL auto_increment COMMENT '设备ID',
   `device_name` varchar(255) character set utf8 NOT NULL COMMENT '设备名称',
   `device_type` varchar(255) character set utf8 NOT NULL COMMENT '设备类型',
@@ -352,7 +378,7 @@ INSERT INTO `device_table` VALUES (10000003, '设备3', '漏水', '192.168.1.103
 -- 表的结构 `device_variable`
 -- 
 
-CREATE TABLE `device_variable` (
+CREATE TABLE IF NOT EXISTS `device_variable` (
   `device_variable_id` int(11) NOT NULL COMMENT '设备变量ID',
   `device_id` int(11) NOT NULL COMMENT '设备ID',
   `variable_type_id` int(11) NOT NULL COMMENT '变量类型ID',
@@ -385,7 +411,7 @@ CREATE TABLE `device_variable` (
 -- 表的结构 `engine_parameter`
 -- 
 
-CREATE TABLE `engine_parameter` (
+CREATE TABLE IF NOT EXISTS `engine_parameter` (
   ` parameter_id` int(6) NOT NULL,
   `engine_id` varchar(11) default NULL,
   `parameter_name` varchar(20) default NULL,
@@ -405,7 +431,7 @@ INSERT INTO `engine_parameter` VALUES (1, '1', 'javascript', 'js/engines/DirectD
 -- 表的结构 `filter_setup`
 -- 
 
-CREATE TABLE `filter_setup` (
+CREATE TABLE IF NOT EXISTS `filter_setup` (
   `buffer_id` int(11) NOT NULL COMMENT '缓冲ID',
   `device_variable_id` int(11) NOT NULL COMMENT '设备变量ID',
   `buffer_time` datetime NOT NULL COMMENT '缓冲时间',
@@ -426,7 +452,7 @@ CREATE TABLE `filter_setup` (
 -- 表的结构 `history_data`
 -- 
 
-CREATE TABLE `history_data` (
+CREATE TABLE IF NOT EXISTS `history_data` (
   `history_id` int(11) NOT NULL COMMENT '历史ID',
   `device_variable_id` int(255) NOT NULL COMMENT '设备变量ID',
   `variable_physics_value` varchar(255) default NULL COMMENT '变量物理值',
@@ -446,7 +472,7 @@ CREATE TABLE `history_data` (
 -- 表的结构 `info_config`
 -- 
 
-CREATE TABLE `info_config` (
+CREATE TABLE IF NOT EXISTS `info_config` (
   `CONFIG_ID` varchar(20) NOT NULL,
   `CONFIG_NAME` varchar(30) default NULL,
   `CONFIG_VALUE` varchar(50) NOT NULL,
@@ -459,8 +485,9 @@ CREATE TABLE `info_config` (
 -- 
 
 INSERT INTO `info_config` VALUES ('1000001', 'MaxInactiveInterval', '60', 'MaxInactiveInterval');
-INSERT INTO `info_config` VALUES ('1000002', 'BackgroundImagePath', '/BackgroundImage', 'BackgroundImagePath');
+INSERT INTO `info_config` VALUES ('1000002', 'BackgroundImagePath', 'BackgroundImage', 'BackgroundImagePath');
 INSERT INTO `info_config` VALUES ('1000003', 'BackgroundImagePath', 'upload/bgImage', 'BackgroundImagePath');
+INSERT INTO `info_config` VALUES ('1000004', 'tpl_page_type', 'E', 'E');
 
 -- --------------------------------------------------------
 
@@ -468,7 +495,7 @@ INSERT INTO `info_config` VALUES ('1000003', 'BackgroundImagePath', 'upload/bgIm
 -- 表的结构 `info_dept`
 -- 
 
-CREATE TABLE `info_dept` (
+CREATE TABLE IF NOT EXISTS `info_dept` (
   `DEPT_NO` varchar(6) NOT NULL,
   `PARENT_DEPT_NO` varchar(6) default NULL,
   `PATH_CODE` varchar(64) default NULL,
@@ -493,6 +520,35 @@ CREATE TABLE `info_dept` (
 -- 
 
 INSERT INTO `info_dept` VALUES ('324324', '100000', 'ASD', '1', 'SDF', '831', 'DSF', 'ASD', '', 'ASD', '1', 'ASD', '', 'SAD', 'ASD', 'ASD');
+INSERT INTO `info_dept` VALUES ('100000', '324324', '大石福海', '1', '场地1', '831', '123', '123324', '12324', '123', '1', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+-- 
+-- 表的结构 `info_device_page`
+-- 
+
+CREATE TABLE IF NOT EXISTS `info_device_page` (
+  `page_id` int(11) NOT NULL,
+  `page_resource_id` varchar(20) default NULL,
+  `page_type` varchar(6) default NULL,
+  `page_image_url` varchar(255) default NULL,
+  `page_name` varchar(40) default NULL,
+  `page_icon` varchar(40) default NULL,
+  `page_image_width` int(4) NOT NULL,
+  `page_image_height` int(4) NOT NULL,
+  `page_top` int(4) default NULL,
+  `page_left` int(4) default NULL,
+  `oper_code` varchar(4) default NULL,
+  `device_id` varchar(20) default NULL,
+  `device_type` varchar(20) default NULL,
+  PRIMARY KEY  (`page_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- 
+-- 导出表中的数据 `info_device_page`
+-- 
+
 
 -- --------------------------------------------------------
 
@@ -500,7 +556,7 @@ INSERT INTO `info_dept` VALUES ('324324', '100000', 'ASD', '1', 'SDF', '831', 'D
 -- 表的结构 `info_engine`
 -- 
 
-CREATE TABLE `info_engine` (
+CREATE TABLE IF NOT EXISTS `info_engine` (
   `engine_id` int(6) NOT NULL default '0',
   `engine_code` varchar(12) default NULL,
   `engine_name` varchar(40) default NULL,
@@ -524,16 +580,17 @@ INSERT INTO `info_engine` VALUES (1, 'DE101', 'directEngine', 'DirectDataEngine.
 -- 表的结构 `info_event`
 -- 
 
-CREATE TABLE `info_event` (
-  `event_sn` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `info_event` (
+  `event_sn` int(10) NOT NULL auto_increment,
   `event_name` varchar(40) default NULL,
   `event_description` varchar(255) default NULL,
   `fire_time` datetime default NULL,
   `event_level` int(2) default NULL,
   `is_confirm` int(1) default NULL,
   `source_entity_code` varchar(20) NOT NULL,
+  `device_var_id` varchar(20) default NULL,
   PRIMARY KEY  (`event_sn`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- 导出表中的数据 `info_event`
@@ -546,7 +603,7 @@ CREATE TABLE `info_event` (
 -- 表的结构 `info_menu`
 -- 
 
-CREATE TABLE `info_menu` (
+CREATE TABLE IF NOT EXISTS `info_menu` (
   `MENU_CODE` varchar(10) NOT NULL,
   `PARENT_MENU_CODE` varchar(10) default NULL,
   `MODULE_CODE` varchar(10) NOT NULL default '0',
@@ -584,14 +641,19 @@ INSERT INTO `info_menu` VALUES ('70000002', NULL, '7000001', NULL, 0, 0, 1, 'pag
 INSERT INTO `info_menu` VALUES ('60000003', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/InfoDeptManager/InfoDeptManager.jsp', '部门信息管', '部门信息管', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 INSERT INTO `info_menu` VALUES ('60000004', NULL, '6000001', NULL, 0, 0, 1, 'user_manager_main_view.action', '用户管理', '用户管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 INSERT INTO `info_menu` VALUES ('60000005', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleManage/RoleManageMain.jsp', '角色管理', '角色管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `info_menu` VALUES ('60000006', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RuleOperRoleManager/RuleOperRoleManager.jsp', '工号权限管理', '工号权限管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `info_menu` VALUES ('70000003', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/RemainTplPage/RemainTemlatePage.jsp', '模板页维护', '模板页维护', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `info_menu` VALUES ('70000005', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/TplPageComponentMgr/TplPageCompMgr.jsp', '模板页面组件新增', '模板页面组件新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `info_menu` VALUES ('70000006', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/TplComponentData/BskpComponentData.jsp', '模板页数据绑定', '模板页数据绑定', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `info_menu` VALUES ('70000007', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/TplPageResource/TplPageResource.jsp', '模板页面组件管理', '模板页面组件管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `info_menu` VALUES ('60000006', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RuleOperRoleManager/RuleOperRoleManager.jsp', '用户角色管理', '用户角色管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+
 -- --------------------------------------------------------
 
 -- 
 -- 表的结构 `info_oper`
 -- 
 
-CREATE TABLE `info_oper` (
+CREATE TABLE IF NOT EXISTS `info_oper` (
   `OPER_NO` varchar(10) NOT NULL,
   `REGION_ID` varchar(15) NOT NULL default '0',
   `DEPT_NO` varchar(10) default '0',
@@ -637,8 +699,8 @@ CREATE TABLE `info_oper` (
 -- 导出表中的数据 `info_oper`
 -- 
 
-INSERT INTO `info_oper` VALUES ('TEST01', '0000', '0001', '*', '张长风', '0:0:0:0:0:0:0:1', '123456', 'wifename', 'wifename', 1, '1', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', 1, NULL, NULL, NULL, NULL, 1, '0', '1', '999999', NULL, 1026, NULL, NULL, NULL, NULL, NULL, '100', '10', 0, '1', '0', '1', '1', '0:0:0:0:0:0:0:1');
-INSERT INTO `info_oper` VALUES ('TEST02', '0', NULL, NULL, 'dORA', '0:0:0:0:0:0:0:1', '123456', NULL, NULL, 1, 'CQ', '123245', NULL, '12345687', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '1', '0:0:0:0:0:0:0:1');
+INSERT INTO `info_oper` VALUES ('TEST01', '0000', '0001', '*', '张长风', '0:0:0:0:0:0:0:1', '123456', 'wifename', 'wifename', 1, '1', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', 1, NULL, NULL, NULL, NULL, 1, '0', '1', '999999', NULL, 1469, NULL, NULL, NULL, NULL, NULL, '100', '10', 0, '1', '0', '1', '1', '0:0:0:0:0:0:0:1');
+INSERT INTO `info_oper` VALUES ('TEST02', '0', NULL, NULL, 'dORA', '0:0:0:0:0:0:0:1', '123456', NULL, NULL, 1, 'CQ', '123245', NULL, '12345687', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '1', '0:0:0:0:0:0:0:1');
 
 -- --------------------------------------------------------
 
@@ -646,7 +708,7 @@ INSERT INTO `info_oper` VALUES ('TEST02', '0', NULL, NULL, 'dORA', '0:0:0:0:0:0:
 -- 表的结构 `info_page`
 -- 
 
-CREATE TABLE `info_page` (
+CREATE TABLE IF NOT EXISTS `info_page` (
   `page_id` int(11) NOT NULL,
   `page_resource_id` varchar(20) default NULL,
   `page_type` varchar(6) default NULL,
@@ -674,7 +736,7 @@ INSERT INTO `info_page` VALUES (10000001, '10000001', 'NOR', 'image/power_10.jpg
 -- 表的结构 `info_page_resource`
 -- 
 
-CREATE TABLE `info_page_resource` (
+CREATE TABLE IF NOT EXISTS `info_page_resource` (
   `resource_id` int(11) NOT NULL auto_increment,
   `page_resource` varchar(20) default NULL,
   `xtype_code` varchar(20) default NULL,
@@ -702,7 +764,7 @@ INSERT INTO `info_page_resource` VALUES (1000002, '10000001', 'textfield', 300, 
 -- 表的结构 `info_role`
 -- 
 
-CREATE TABLE `info_role` (
+CREATE TABLE IF NOT EXISTS `info_role` (
   `ROLE_CODE` varchar(6) NOT NULL,
   `REGION_ID` varchar(15) NOT NULL default '0',
   `ROLE_LEVEL` varchar(6) NOT NULL,
@@ -732,7 +794,7 @@ INSERT INTO `info_role` VALUES ('AD', '0', '1', NULL, '系统管理员', '系统
 -- 表的结构 `info_sys_module`
 -- 
 
-CREATE TABLE `info_sys_module` (
+CREATE TABLE IF NOT EXISTS `info_sys_module` (
   `module_code` varchar(20) NOT NULL,
   `module_name` varchar(50) NOT NULL,
   `module_index` varchar(10) default NULL,
@@ -745,9 +807,7 @@ CREATE TABLE `info_sys_module` (
 -- 
 
 INSERT INTO `info_sys_module` VALUES ('1000001', '动力配电监控', '1', 1);
-INSERT INTO `info_sys_module` VALUES ('2000001', '场地环境监控', '2', 1);
 INSERT INTO `info_sys_module` VALUES ('3000001', '场地安全监控', '3', 1);
-INSERT INTO `info_sys_module` VALUES ('4000001', '机柜微环境监控', '4', 1);
 INSERT INTO `info_sys_module` VALUES ('5000001', '设备通讯状态监控', '5', 1);
 INSERT INTO `info_sys_module` VALUES ('6000001', '用户管理', '6', 1);
 INSERT INTO `info_sys_module` VALUES ('7000001', '页面管理', '7', 1);
@@ -759,7 +819,7 @@ INSERT INTO `info_sys_module` VALUES ('0000000', '主页面', '0', 1);
 -- 表的结构 `linkage_history`
 -- 
 
-CREATE TABLE `linkage_history` (
+CREATE TABLE IF NOT EXISTS `linkage_history` (
   `history_id` int(11) NOT NULL COMMENT '历史ID',
   `linkage_policy_id` int(11) NOT NULL COMMENT '联动策略ID',
   `linkage_value` varchar(255) NOT NULL COMMENT '联动值',
@@ -779,7 +839,7 @@ CREATE TABLE `linkage_history` (
 -- 表的结构 `linkage_policy_setup`
 -- 
 
-CREATE TABLE `linkage_policy_setup` (
+CREATE TABLE IF NOT EXISTS `linkage_policy_setup` (
   `linkage_policy_id` int(11) NOT NULL COMMENT '联动策略ID',
   `trigger_id` int(11) NOT NULL,
   `device_variable_id` int(255) NOT NULL COMMENT '设备变量ID',
@@ -801,7 +861,7 @@ CREATE TABLE `linkage_policy_setup` (
 -- 表的结构 `linkage_trigger_setup`
 -- 
 
-CREATE TABLE `linkage_trigger_setup` (
+CREATE TABLE IF NOT EXISTS `linkage_trigger_setup` (
   `trigger_id` int(11) NOT NULL COMMENT '触发ID',
   `device_variable_id` int(11) NOT NULL COMMENT '设备变量ID',
   `trigger_name` varchar(255) NOT NULL COMMENT '触发名称',
@@ -819,20 +879,45 @@ CREATE TABLE `linkage_trigger_setup` (
 -- --------------------------------------------------------
 
 -- 
+-- 表的结构 `log_comm_alarm`
+-- 
+
+CREATE TABLE IF NOT EXISTS `log_comm_alarm` (
+  `comm_sn` int(11) NOT NULL auto_increment,
+  `inst_code` varchar(0) NOT NULL,
+  `run_times` int(11) default '0',
+  `run_status` int(11) default '0',
+  `oper_no` varchar(20) default NULL,
+  `run_date` datetime default NULL,
+  `insert_date` datetime default NULL,
+  `device_id` varchar(20) default NULL,
+  `result` varchar(50) default NULL,
+  PRIMARY KEY  (`comm_sn`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+
+-- 
+-- 导出表中的数据 `log_comm_alarm`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
 -- 表的结构 `log_info_event`
 -- 
 
-CREATE TABLE `log_info_event` (
+CREATE TABLE IF NOT EXISTS `log_info_event` (
   `log_event_sn` int(15) NOT NULL default '0',
-  `event_sn` int(10) default NULL,
+  `event_sn` int(10) NOT NULL,
   `event_name` varchar(40) default NULL,
   `event_description` varchar(255) default NULL,
   `fire_time` datetime default NULL,
   `event_level` int(2) default NULL,
   `is_confirm` int(1) default NULL,
-  `source_entity_code` varchar(20) default NULL,
+  `source_entity_code` varchar(20) NOT NULL,
   `process_time` datetime default NULL,
   `oper_no` varchar(20) default NULL,
+  `device_var_id` varchar(20) default NULL,
   PRIMARY KEY  (`log_event_sn`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -847,7 +932,7 @@ CREATE TABLE `log_info_event` (
 -- 表的结构 `real_time_data`
 -- 
 
-CREATE TABLE `real_time_data` (
+CREATE TABLE IF NOT EXISTS `real_time_data` (
   `data_sn` int(10) NOT NULL auto_increment,
   `device_var_id` varchar(20) NOT NULL,
   `var_phy_value` varchar(255) default NULL,
@@ -869,7 +954,7 @@ INSERT INTO `real_time_data` VALUES (1, 'UPS10011', '218', '234', '2010-11-23 11
 -- 表的结构 `rule_data_device`
 -- 
 
-CREATE TABLE `rule_data_device` (
+CREATE TABLE IF NOT EXISTS `rule_data_device` (
   `rule_id` int(20) NOT NULL auto_increment,
   `value_id` varchar(20) NOT NULL,
   `value_name` varchar(40) default NULL,
@@ -890,7 +975,7 @@ INSERT INTO `rule_data_device` VALUES (1, 'L10000011', 'UPS', 'UPS1001', 'UPS100
 -- 表的结构 `rule_engine_data`
 -- 
 
-CREATE TABLE `rule_engine_data` (
+CREATE TABLE IF NOT EXISTS `rule_engine_data` (
   `rule_id` int(6) NOT NULL auto_increment,
   `engine_name` varchar(40) default NULL,
   `engine_code` varchar(20) default NULL,
@@ -913,20 +998,18 @@ INSERT INTO `rule_engine_data` VALUES (2, 'directEngine', 'DE101', 'AJ', 'L10000
 -- 表的结构 `rule_oper_role`
 -- 
 
-CREATE TABLE `rule_oper_role` (
+CREATE TABLE IF NOT EXISTS `rule_oper_role` (
   `OPER_NO` varchar(10) NOT NULL,
   `ROLE_CODE` varchar(6) NOT NULL,
   `RID` int(6) NOT NULL auto_increment,
   PRIMARY KEY  (`RID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
 -- 导出表中的数据 `rule_oper_role`
 -- 
 
-INSERT INTO `rule_oper_role` VALUES ('TEST01', 'OP', 1);
-INSERT INTO `rule_oper_role` VALUES ('TEST01', 'AD', 2);
-INSERT INTO `rule_oper_role` VALUES ('TEST02', 'OP', 3);
+INSERT INTO `rule_oper_role` VALUES ('TEST01', 'AD', 5);
 
 -- --------------------------------------------------------
 
@@ -934,22 +1017,23 @@ INSERT INTO `rule_oper_role` VALUES ('TEST02', 'OP', 3);
 -- 表的结构 `rule_role_func`
 -- 
 
-CREATE TABLE `rule_role_func` (
+CREATE TABLE IF NOT EXISTS `rule_role_func` (
   `ROLE_CODE` varchar(6) NOT NULL,
   `ENTITY_TYPE` varchar(10) NOT NULL,
   `ENTITY_CODE` varchar(15) NOT NULL,
   `ENTITY_ID` int(11) NOT NULL auto_increment,
   PRIMARY KEY  (`ENTITY_ID`),
   UNIQUE KEY `UN_KEY` (`ROLE_CODE`,`ENTITY_TYPE`,`ENTITY_CODE`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=130 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=137 ;
 
 -- 
 -- 导出表中的数据 `rule_role_func`
 -- 
 
 INSERT INTO `rule_role_func` VALUES ('OP', 'M', '10000001', 1);
-INSERT INTO `rule_role_func` VALUES ('OP', 'M', '20000004', 4);
-INSERT INTO `rule_role_func` VALUES ('OP', 'M', '20000005', 3);
+INSERT INTO `rule_role_func` VALUES ('AD', 'M', '60000006', 135);
+INSERT INTO `rule_role_func` VALUES ('AD', 'M', '60000002', 10);
+INSERT INTO `rule_role_func` VALUES ('AD', 'M', '70000003', 130);
 INSERT INTO `rule_role_func` VALUES ('AD', 'M', '60000001', 5);
 INSERT INTO `rule_role_func` VALUES ('AD', 'M', '60000003', 129);
 INSERT INTO `rule_role_func` VALUES ('OP', 'E', '10000003', 126);
@@ -959,7 +1043,12 @@ INSERT INTO `rule_role_func` VALUES ('AD', 'M', '10000001', 116);
 INSERT INTO `rule_role_func` VALUES ('OP', 'E', '10000001', 102);
 INSERT INTO `rule_role_func` VALUES ('AD', 'M', '70000002', 7);
 INSERT INTO `rule_role_func` VALUES ('OP', 'E', '10000002', 127);
+INSERT INTO `rule_role_func` VALUES ('AD', 'M', '70000005', 12);
 INSERT INTO `rule_role_func` VALUES ('AD', 'M', '60000005', 128);
+INSERT INTO `rule_role_func` VALUES ('AD', 'M', '70000006', 15);
+INSERT INTO `rule_role_func` VALUES ('AD', 'M', '70000007', 9);
+INSERT INTO `rule_role_func` VALUES ('AD', 'E', '10000002', 136);
+INSERT INTO `rule_role_func` VALUES ('NOR', 'E', '10000002', 134);
 
 -- --------------------------------------------------------
 
@@ -967,7 +1056,7 @@ INSERT INTO `rule_role_func` VALUES ('AD', 'M', '60000005', 128);
 -- 表的结构 `tlp_page_image`
 -- 
 
-CREATE TABLE `tlp_page_image` (
+CREATE TABLE IF NOT EXISTS `tlp_page_image` (
   `image_name` varchar(255) default NULL,
   `image_id` int(11) NOT NULL auto_increment,
   `image_path` varchar(255) default NULL,
@@ -976,13 +1065,14 @@ CREATE TABLE `tlp_page_image` (
   `image_desc` varchar(255) default NULL,
   `oper_no` varchar(20) default NULL,
   PRIMARY KEY  (`image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 -- 
 -- 导出表中的数据 `tlp_page_image`
 -- 
 
-INSERT INTO `tlp_page_image` VALUES ('dsjk14.bmp', 41, 'upload/bgImage', '湿度', '1', NULL, NULL);
+INSERT INTO `tlp_page_image` VALUES ('nvxCNhKJyT.bmp', 58, 'upload/bgImage', '场地', '1', NULL, NULL);
+INSERT INTO `tlp_page_image` VALUES ('wnoOppcrjR.bmp', 59, 'upload/bgImage', '电压', '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -990,7 +1080,7 @@ INSERT INTO `tlp_page_image` VALUES ('dsjk14.bmp', 41, 'upload/bgImage', '湿度
 -- 表的结构 `tpl_info_page`
 -- 
 
-CREATE TABLE `tpl_info_page` (
+CREATE TABLE IF NOT EXISTS `tpl_info_page` (
   `tpl_page_id` int(10) NOT NULL auto_increment,
   `tpl_page_name` varchar(255) default NULL,
   `tpl_image_path` varchar(255) default NULL,
@@ -1000,12 +1090,14 @@ CREATE TABLE `tpl_info_page` (
   `tpl_oper_code` varchar(10) default NULL,
   `tpl_page_type` varchar(2) NOT NULL,
   PRIMARY KEY  (`tpl_page_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 -- 
 -- 导出表中的数据 `tpl_info_page`
 -- 
 
+INSERT INTO `tpl_info_page` VALUES (22, '电压', 'upload/bgImage/wnoOppcrjR.bmp', 1050, 600, 'WD00001', NULL, 'E');
+INSERT INTO `tpl_info_page` VALUES (21, '场地', 'upload/bgImage/nvxCNhKJyT.bmp', 1024, 800, 'TY0001', NULL, 'E');
 
 -- --------------------------------------------------------
 
@@ -1013,7 +1105,7 @@ CREATE TABLE `tpl_info_page` (
 -- 表的结构 `tpl_page_resource`
 -- 
 
-CREATE TABLE `tpl_page_resource` (
+CREATE TABLE IF NOT EXISTS `tpl_page_resource` (
   `resource_id` int(11) NOT NULL auto_increment,
   `page_resource` varchar(20) default NULL,
   `xtype_code` varchar(20) default NULL,
@@ -1026,12 +1118,17 @@ CREATE TABLE `tpl_page_resource` (
   `base_cls` varchar(20) default NULL,
   PRIMARY KEY  (`resource_id`),
   UNIQUE KEY `un_value_id_key` USING BTREE (`value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1000003 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1000016 ;
 
 -- 
 -- 导出表中的数据 `tpl_page_resource`
 -- 
 
+INSERT INTO `tpl_page_resource` VALUES (1000001, 'TPOWER0G', 'textfield', 500, 500, 60, 20, 'L10000011', '', '');
+INSERT INTO `tpl_page_resource` VALUES (1000003, 'WD000001', 'textfield', 10, 10, 30, 30, NULL, NULL, NULL);
+INSERT INTO `tpl_page_resource` VALUES (1000014, 'TY0001', 'textfeild', 100, 100, 100, 20, NULL, NULL, NULL);
+INSERT INTO `tpl_page_resource` VALUES (1000005, 'TY000001', 'textfield', 100, 100, 100, 30, NULL, NULL, NULL);
+INSERT INTO `tpl_page_resource` VALUES (1000013, 'TY0001', 'textfield', 300, 200, 103, 25, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1039,7 +1136,7 @@ CREATE TABLE `tpl_page_resource` (
 -- 表的结构 `tpl_resource_config`
 -- 
 
-CREATE TABLE `tpl_resource_config` (
+CREATE TABLE IF NOT EXISTS `tpl_resource_config` (
   `config_sn` int(11) NOT NULL auto_increment,
   `config_parameter` varchar(100) default NULL,
   `config_value` varchar(255) default NULL,
@@ -1060,7 +1157,7 @@ CREATE TABLE `tpl_resource_config` (
 -- 表的结构 `variable_type`
 -- 
 
-CREATE TABLE `variable_type` (
+CREATE TABLE IF NOT EXISTS `variable_type` (
   `variable_type_id` int(11) NOT NULL COMMENT '变量类型ID',
   `variable_type_name` varchar(255) NOT NULL COMMENT '变量类型名称',
   `describe` varchar(255) NOT NULL COMMENT '描述',
