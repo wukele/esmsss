@@ -503,7 +503,6 @@
 					sm : sm,
 					cm : cm,
 					border:false,
-					height:398,
 					viewConfig : {
 						autoFill : true
 					},
@@ -560,13 +559,16 @@
 					iconCls : 'silk-user',
 					layout : 'form',
 					width : '100%',
-					heigth : '100%',
+					height : '100%',
 					title : '½ÇÉ«¹ÜÀí',
 					border:false,
 					items : [ qryPanel, rolePanel ]
 				});
-				if (contianerId)
+				if (contianerId){
 					frame.render(contianerId);
+					rolePanel.setHeight(Ext.get(contianerId).getHeight() - qryPanel.getHeight() - frame.header.getHeight());
+				}
+					
 			}
 		};
 		return me;
