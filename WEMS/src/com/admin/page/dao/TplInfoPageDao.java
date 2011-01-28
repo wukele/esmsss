@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.ems.dao.EmsDao;
 import com.page.entity.TplInfoPage;
+import com.page.entity.TplPageResource;
 
 @Component("TplInfoPageDao")
 public class TplInfoPageDao extends EmsDao {
@@ -73,5 +74,12 @@ public class TplInfoPageDao extends EmsDao {
 			}
 			
 			return getHibernateTemplate().find(hql, lstProperties.toArray());
+		}
+
+		public List<TplPageResource> findPageResource(String tplPageResource) {
+			// TODO Auto-generated method stub
+			
+			
+			return  getHibernateTemplate().find("from  TplPageResource  where  pageResource=?", tplPageResource);
 		}
 }
