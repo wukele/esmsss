@@ -84,5 +84,21 @@ public class BskpPageDao extends EmsDao {
 		qry.setInteger(1, tplResourceId);
 		qry.executeUpdate();
 	}
+
+	public void addBspkInfoPage(BspkInfoPage bpage) {
+		// TODO Auto-generated method stub
+			getHibernateTemplate().save(bpage);
+		   
+	}
+
+	public void insertBspkRes(String tplPageResource) {
+		// TODO Auto-generated method stub
+				String  insertStr="insert into bspk_page_resource  (page_resource,xtype_code,resource_top,resource_left,resource_width,resource_height,value_id,config,base_cls) " +
+						"SELECT " +
+						"page_resource,xtype_code,resource_top,resource_left,resource_width,resource_height,value_id,config,base_cls " +
+						" FROM tpl_page_resource WHERE page_resource='"+tplPageResource+"'";
+				getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(insertStr).executeUpdate();
+				 
+	}
 	
 }

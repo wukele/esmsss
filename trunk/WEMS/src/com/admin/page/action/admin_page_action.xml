@@ -94,5 +94,8 @@
 			<action name="removeTplComponent" class="TplPageResourceAction" method=" removeTplComponent">
 					<result type="json"></result>
 			</action>
+			<action name="tplCreateBspkPage"  class="TplCreateBspkPageAction" method="BuildBspkPage">
+					<result type="json"></result>
+			</action>	
 	</package>
 </struts>    

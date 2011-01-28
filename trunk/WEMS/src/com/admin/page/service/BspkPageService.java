@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.admin.page.dao.BskpPageDao;
+import com.admin.page.dao.TplInfoPageDao;
+import com.admin.page.dao.TplPageResourceDao;
 import com.page.entity.BspkInfoPage;
 import com.page.entity.BspkPageResource;
 import com.page.entity.TplInfoPage;
@@ -20,10 +22,27 @@ import com.page.entity.TplPageResource;
 public class BspkPageService {
 	private static final Logger log=Logger.getLogger(BspkPageService.class);
 	private BskpPageDao bskpDao;
+    private  TplInfoPageDao   tplPageDao;
+    private  TplPageResourceDao  tplResourceDao;
+    
+    @Resource(name="TplPageResourceDao")
+    public void setTplResourceDao(TplPageResourceDao tplResourceDao) {
+		this.tplResourceDao = tplResourceDao;
+	}
+
+	@Resource(name="TplInfoPageDao")
+    public void setTplPageDao(TplInfoPageDao tplPageDao) {
+		this.tplPageDao = tplPageDao;
+	}
 
 	// add by ffmmx
 	private TemplatePageRemainService tprs;// 页面模板服务
 	private PageResourceService prs;
+	
+	
+	
+	
+	
 
 	@Resource(name = "BskpPageDao")
 	public void setBskpDao(BskpPageDao bskpDao) {
@@ -150,5 +169,28 @@ public class BspkPageService {
 	@Resource(name = "PageResourceService")
 	public void setPrs(PageResourceService prs) {
 		this.prs = prs;
+	}
+	
+	
+	@Transactional
+	public void AddBspkInfoPage(Integer tplPageId, String bspkPageName) {
+		// TODO Auto-generated method stub
+					BspkInfoPage  bpage=new BspkInfoPage();
+					bpage.setBspkPageName(bspkPageName);
+					TplInfoPage   tpage=tplPageDao.findTplPageById(tplPageId);
+					bpage.setBspkImageHeight(tpage.getTplImageHeight());
+					bpage.setBspkImagePath(tpage.getTplImagePath());
+					bpage.setBspkImageWidth(tpage.getTplImageWidth());
+					bpage.setBspkOperCode(tpage.getTplOperCode());
+					bpage.setBspkPageName(bspkPageName);
+					bpage.setBspkPageResource(tpage.getTplPageResource());
+					bpage.setBspkPageType(tpage.getTplPageType());
+					bskpDao.addBspkInfoPage(bpage);
+					List<TplPageResource>   tplRes=tplPageDao.findPageResource(tpage.getTplPageResource());
+					if(tplRes==null ||  tplRes.size()<1){
+									return  ;
+					}else{
+						             bskpDao.insertBspkRes(tpage.getTplPageResource());             
+					}
 	}
 }
