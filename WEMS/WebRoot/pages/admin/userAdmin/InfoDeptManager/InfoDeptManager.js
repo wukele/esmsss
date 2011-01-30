@@ -22,6 +22,7 @@ Ext.onReady(function(){
 		{header:'电话',dataIndex:'phone',sortable:true},
 		{header:'传真',dataIndex:'fax',sortable:true},
 		{header:'地址',dataIndex:'address',sortable:true},
+		{header:'状态',dataIndex:'flag',sortable:true},
 		{header:'区域编码',dataIndex:'areaId',sortable:true},
 		{header:'渠道类型',dataIndex:'channelType',sortable:true},
 		{header:'子渠道类型',dataIndex:'subChannelType',sortable:true}
@@ -550,8 +551,13 @@ function invokeJava(url,paras){
 }
 function renderDeptName(value){
 	if(value!=null&&value.length>0){
-		var resp=ajaxSyncCall("selectInfoDept.action","infoDept.deptNo="+value)
-		return resp.infoDepts[0].deptName;
+		var resp=ajaxSyncCall("selectInfoDept.action","infoDept.deptNo="+value);
+		if(resp.infoDepts.length>0){
+			return resp.infoDepts[0].deptName;
+		}else{
+			return "";
+		}
+		
 	}
 }
 function ajaxSyncCall(urlStr, paramsStr) {
