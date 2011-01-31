@@ -4,7 +4,7 @@ Ext.ns('Ems.page')
 Ems.page.bskpPagePanel=Ext.extend(Ext.Panel,{
 
 		getSelectorTpl:function(){
-			var tpl=['<tpl for=".">','<div class="x-seach-item">','<div class="x-list-image"><img height="40" width="50" src="{bspkImagePath}" />',
+			var tpl=['<tpl for=".">','<div class="x-seach-item">','<div class="x-list-image"><img height="40" width="40" src="{bspkImagePath}" />',
 			'</div><div class="x-item-text"><p>页面ID : {bspkPageId}</p>',
 			'<p>页面名称 : {bspkPageName}</p></div><div class="x-item-text"><p>宽度(px)：{bspkImageWidth}</p><p>',
 			'高度(px) : {bspkImageHeight}</p>',
@@ -18,7 +18,12 @@ Ems.page.bskpPagePanel=Ext.extend(Ext.Panel,{
 						root:'bspkPages'
 				});
 				this.PageView=new Ext.DataView({
-					tpl:new Ext.XTemplate(this.getSelectorTpl()),
+					tpl:new Ext.XTemplate('<tpl for=".">',
+					'<div class="x-seach-item"><div class="x-item-image"><img src="{bspkImagePath}" width="40px" height="40px"/></div>',
+					'<div class="x-item-text"><p>模板页名称  : {bspkPageName}</p>',
+					'<p>资源ID ： {bspkPageResource}</p>',
+					'</div>',
+					'</div></tpl>'),
 					itemSelector:'div.x-seach-item',
 					multiSelect:true,
 					store:this.store,

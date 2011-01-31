@@ -39,7 +39,9 @@ Ems.page.tplContianerData=function(){
 			  bdStyle+='width:'+this.defaultViewWidth+'px;';
 			  return bdStyle;
 		    },
-		
+			getTplPageID:function(){
+					return  '<%= tpage.getTplPageId()%>';
+			},
 		
 			getTplResourceData:function(){
 					var TplResources=Ext.decode('<%=tplResString%>');
