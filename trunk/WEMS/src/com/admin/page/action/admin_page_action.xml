@@ -10,6 +10,11 @@
 					/pages/admin/pageAdmin/TplPagePreview/TplPagePreviewer.jsp
 				</result>
 		</action>
+		<action name="TplPageInit" class="TplPageInitAction">
+				<result>
+					/pages/admin/pageAdmin/TplPageResource/TplPageResource.jsp
+				</result>
+		</action>
 	</package>
 	<package name="pageAdmin" extends="json-default" namespace="/">
 		<action name="SysModuleMgr" class="SysModuleAction" method="SysModuleActionQry">
