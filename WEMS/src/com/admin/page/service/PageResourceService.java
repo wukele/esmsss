@@ -11,13 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.admin.page.dao.TplPageResourceDao;
 import com.admin.page.struct.PageResourceStruct;
+import com.ems.entity.CodeComponentDAO;
 import com.page.entity.TplPageResource;
 
 @Component("PageResourceService")
 public class PageResourceService {
 		private static final Logger log=Logger.getLogger(PageResourceService.class);
 		private TplPageResourceDao   resDao;
-		
+		private  CodeComponentDAO  codeDao;
+		@Resource(name="CodeComponentDAO")
+		public void setCodeDao(CodeComponentDAO codeDao) {
+			this.codeDao = codeDao;
+		}
 		public TplPageResourceDao getResDao() {
 			return resDao;
 		}
@@ -128,6 +133,10 @@ public class PageResourceService {
 			// TODO Auto-generated method stub
 			log.info("Del component :"+comp.getResourceId());
 			resDao.deleteTplPageResource(comp.getResourceId());
+		}
+		public List<String> getAllCodeScripts() {
+			// TODO Auto-generated method stub
+			return codeDao.findComponentScript();
 		}
 		
 }
