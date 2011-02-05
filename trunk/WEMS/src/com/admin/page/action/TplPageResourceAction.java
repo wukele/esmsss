@@ -2,6 +2,7 @@ package com.admin.page.action;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.admin.page.service.PageResourceService;
@@ -10,6 +11,7 @@ import com.page.entity.TplPageResource;
 
 
 @Component("TplPageResourceAction")
+@Scope("prototype")
 public class TplPageResourceAction extends ActionSupport {
 			private  boolean  success=false;
 			private  TplPageResource  comp;

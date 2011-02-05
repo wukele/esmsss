@@ -49,6 +49,7 @@ public class TplPreviewerAction extends ActionSupport implements  ServletRequest
 		public String  TplPreviewerDispatcher(){
 					TplInfoPage   page=tplServ.GetTplPage(page_id);
 					List<PageResourceStruct>  tplRes=resServ.QueryPageResource(page.getTplPageResource());
+					
 					JSONArray   resJson=new JSONArray();
 					resJson.addAll(tplRes);
 					HttpSession  session=request.getSession();
