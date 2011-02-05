@@ -155,9 +155,19 @@ public class CodeComponentDAO extends EmsDao {
 			throw re;
 		}
 	}
+	
+	
+	public  List<String>  findComponentScript(){
+			return   getHibernateTemplate().find("select cr.scriptUrl  from CodeComponent as cc," +
+					"ComponentResourceCode as cr where cc.componentResourceId=" +
+					"cr.componentResourceId  and  cr.needScript=1");
+	}
+	
 
 	public static CodeComponentDAO getFromApplicationContext(
 			ApplicationContext ctx) {
 		return (CodeComponentDAO) ctx.getBean("CodeComponentDAO");
 	}
+
+
 }
