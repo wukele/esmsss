@@ -37,11 +37,93 @@ Ems.page.TplPageResourceApp=function(){
 								}
 								if(e.getSelectionModel().getSelected()){
 								   var record=e.getSelectionModel().getSelected();
-								   if(!this.addWindow){
-								   		 var rec=new Ext.data.Record();
-								   		 
+								   var rec=new Ext.data.Record();
+								   rec.set('pageResource.xtypeCode',record.get('codeXtype'));
+								   rec.set('typeName',record.get('componentName'));
+								   rec.set('pageResource.pageResource',Ems.page.TplPageResourceApp.selectedPage.get('tplPageResource'));
+								    
+								   if(!Ems.page.TplPageResourceApp.addWindow){
+								   		 Ems.page.TplPageResourceApp.addWindow=new Ext.Window({
+								   		 		  width:300,
+								   		 		  height:266,
+								   		 		  resizable:false,
+								   		 		  closeAction:'hide',
+								   		 		  items:[
+								   		 		  	 new Ext.FormPanel({
+								   		 		  	 		buttonAlign:'center',
+								   		 		  	 		labelWidth:70,
+								   		 		  	 		defaultType:'textfield',
+								   		 		  	 		frame:true,
+								   		 		  	 		defaults:{
+								   		 		  	 			allowBlank:false,
+								   		 		  	 			width:150
+								   		 		  	 		},
+								   		 		  	 		items:[{
+								   		 		  	 			fieldLabel:'XTYPE',
+								   		 		  	 			readOnly:true,
+								   		 		  	 			name:'pageResource.xtypeCode'
+								   		 		  	 		},{
+								   		 		  	 			fieldLabel:'组件名称',
+								   		 		  	 			readOnly:true,
+								   		 		  	 			name:'typeName'
+								   		 		  	 		},{
+								   		 		  	 			fieldLabel:'资源编码',
+								   		 		  	 			readOnly:true,
+								   		 		  	 			name:'pageResource.pageResource'
+								   		 		  	 		},{
+								   		 		  	 			fieldLabel:'组件高度',
+								   		 		  	 			xtype:'numberfield',
+								   		 		  	 			name:'pageResource.resourceHeight'
+								   		 		  	 		},{
+								   		 		  	 			fieldLabel:'组件宽度',
+								   		 		  	 			xtype:'numberfield',
+								   		 		  	 			name:'pageResource.resourceWidth'
+								   		 		  	 		},{
+								   		 		  	 			fieldLabel:'Axis X',
+								   		 		  	 			xtype:'numberfield',
+								   		 		  	 			name:'pageResource.resourceLeft'
+								   		 		  	 		},{
+								   		 		  	 			fieldLabel:'Axis Y',
+								   		 		  	 			xtype:'numberfield',
+								   		 		  	 			name:'pageResource.resourceTop'
+								   		 		  	 		}],
+								   		 		  	 		buttons:[{
+								   		 		  	 			text:'提交',
+								   		 		  	 			handler:function(){
+								   		 		  	 				 var fp=this.ownerCt.ownerCt.getForm();
+								   		 		  	 				 if(fp.isValid()){
+								   		 		  	 				 		fp.submit({
+								   		 		  	 				 				url:'tplCompResourceAdd.action',
+								   		 		  	 				 				success:function(form,action){
+								   		 		  	 				 						Ext.example.msg('OK',action.result.returnMsg);
+								   		 		  	 				 						var w=Ext.WindowMgr.getActive();
+								   		 		  	 				 						Ext.getCmp('PageView').load({
+																								url:'TplPreviewer.action',
+																								params:{
+																									page_id:Ems.page.TplPageResourceApp.selectedPage.get('tplPageId')
+																								},
+																								scripts:true
+																							});
+																							w.hide();
+								   		 		  	 				 				}
+								   		 		  	 				 		});	
+								   		 		  	 				 }
+								   		 		  	 			}
+								   		 		  	 			
+								   		 		  	 		},{
+								   		 		  	 			text:'取消',
+								  								handler:function(){
+								  									  this.ownerCt.ownerCt.ownerCt.hide();
+								  								}
+								   		 		  	 		}]
+								   		 		  	 })
+								   		 		  ]
+								   		 });
 								   }
-								   
+								   Ems.page.TplPageResourceApp.addWindow.items.items[0].getForm().reset();
+								   	Ems.page.TplPageResourceApp.addWindow.items.items[0].getForm().loadRecord(rec);
+								    Ems.page.TplPageResourceApp.addWindow.show();
+								   			   
 								}else{
 									 Ext.example.msg('错误','请选取组件');
 								}
