@@ -18,6 +18,15 @@ import com.page.entity.TplPageResource;
 public class PageResourceAction extends ActionSupport {
 			private   String  tplPageResource;
 			private   PageResourceService  prs;
+			private   boolean success;
+			public boolean isSuccess() {
+				return success;
+			}
+
+			public void setSuccess(boolean success) {
+				this.success = success;
+			}
+
 			private   List<PageResourceStruct>  tplComps;
 			//add by ffmmx
 			private TplPageResource pageResource;
@@ -53,8 +62,10 @@ public class PageResourceAction extends ActionSupport {
 				} catch (RuntimeException e) {
 					returnNo=1;
 					returnMsg=e.getMessage();
+					success=false;
 				}
 				returnNo=0;
+				success=true;
 				returnMsg="页面组件["+pageResource.getResourceId()+"]添加成功";
 				return SUCCESS;
 			}
