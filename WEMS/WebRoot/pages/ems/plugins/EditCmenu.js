@@ -89,7 +89,7 @@ Ems.plugins.EditCmenu=Ext.extend(Object,{
 	
 		init:function(component){
 				this.component=component;
-				component.on({focus:this.onContextmenu,
+				component.on({afterrender:this.onAfterRender,
 							  scope:this
 				});
 				
@@ -101,10 +101,18 @@ Ems.plugins.EditCmenu=Ext.extend(Object,{
 					  });
 				}
 		},
+		onAfterRender:function(e){
+				this.component.getEl().on({
+						click:this.onContextmenu,
+						scope:this
+				})	
+		},
+		
+		
 		onContextmenu:function(e){
 				 var m = this.createMenu();
-				 var p=  e.el.getAnchorXY();
-				 p[0]=p[0]+e.getWidth();
+				 var p=  e.getXY();
+				 //p[0]=p[0]+e.getWidth();
 				  m.showAt(p);
 		},
 		createMenu:function(){

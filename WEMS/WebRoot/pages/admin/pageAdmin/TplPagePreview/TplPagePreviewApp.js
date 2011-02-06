@@ -28,9 +28,9 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 			   									function(btn,text){
 			   											if(!text || text.length>255){
 			   													Ext.example.msg('警告','名称长度错误')
-			   											}
-			   											var tplPageId=Ems.page.tplContianerData.getTplPageID();
-			   											Ext.Ajax.request({
+			   											}else if(btn=='ok'){
+			   												var tplPageId=Ems.page.tplContianerData.getTplPageID();
+			   												Ext.Ajax.request({
 			   													url:'tplCreateBspkPage.action',
 			   													params:{
 			   															tpl_page_id:tplPageId,
@@ -39,14 +39,32 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 			   													success:function(){
 			   														 	Ext.example.msg('Success','临时数据页面生成成功');
 			   													}
-			   											})
+			   												})
+			   											}
 			   									}
 			   							)
 			   					}
-			   				},{
+			   				},'-',{
 			   					text:'删除模板页',
 			   					handler:function(){
-			   							
+			   						 	var tplPageId=Ems.page.tplContianerData.getTplPageID();
+			   						 	Ext.Ajax.request({
+			   						 		url:'TplPageDelete.action',
+			   						 		params:{
+			   						 				tpl_page_id:tplPageId
+			   						 		},
+			   						 		success:function(){
+			   						 				Ext.example.msg('Success','模板页删除成功')
+			   						 				//Ext.getCmp('PageView').getEl().update('');
+			   						 				Ems.page.TplPageResourceApp.tplPageCompTab.setActiveTab(1);
+			   						 				Ems.page.TplPageResourceApp.TplPageQryPanel.store.load({
+			   						 					params:{
+															start:0,
+															limit:8
+														}
+			   						 				});
+			   						 		}
+			   						 	});
 			   					}
 			   				}
 			   				]
