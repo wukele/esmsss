@@ -41,7 +41,9 @@ public class TemplatePageRemainService {
 		
 		@Transactional
 		public  void  DelTemplatePages(String tpl_page_id){
+			tplDao.delTplPageResource(tpl_page_id);
 				int res= tplDao.delTplInfoPage(tpl_page_id);
+			
 				log.info("Ä£°åÉ¾³ý³É¹¦  del:"+res);
 		}
 		
