@@ -101,6 +101,9 @@
 			</action>
 			<action name="tplCreateBspkPage"  class="TplCreateBspkPageAction" method="BuildBspkPage">
 					<result type="json"></result>
-			</action>	
+			</action>
+			<action name="removeDataPage" class="BspkPageRemainAction" method="RemoveBspkPage">
+					<result type="json"></result>
+			</action>
 	</package>
 </struts>    
