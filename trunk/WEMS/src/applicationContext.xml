@@ -60,7 +60,8 @@
 				<value>com/page/entity/TplInfoPage.hbm.xml</value>
 				<value>com/page/entity/TplPageResource.hbm.xml</value>
 				<value>com/page/entity/BspkInfoPage.hbm.xml</value>
-				<value>com/page/entity/BspkPageResource.hbm.xml</value></list>
+				<value>com/page/entity/BspkPageResource.hbm.xml</value>
+				<value>com/ems/entity/DeviceVariable.hbm.xml</value></list>
 		</property>
 	</bean>
 	<context:annotation-config></context:annotation-config> 

@@ -193,4 +193,18 @@ public class BspkPageService {
 						             bskpDao.insertBspkRes(tpage.getTplPageResource());             
 					}
 	}
+    
+	
+	 @Transactional
+	public void removeBspkPage(Integer bspkPageId) {
+		// TODO Auto-generated method stub
+				try{
+					bskpDao.delBspkPageResById(bspkPageId);
+		              bskpDao.delBspkInfo(bspkPageId);
+		              
+				}catch(Exception  e){
+					  throw  new RuntimeException(e.getMessage());
+				}
+				log.info("临时数据页面删除成功");
+	}
 }
