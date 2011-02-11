@@ -100,5 +100,20 @@ public class BskpPageDao extends EmsDao {
 				getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(insertStr).executeUpdate();
 				 
 	}
+
+	public void delBspkInfo(Integer bspkPageId) {
+		// TODO Auto-generated method stub
+				 BspkInfoPage    bp=new BspkInfoPage();
+				 bp=(BspkInfoPage)getHibernateTemplate().find("from BspkInfoPage  as bi where bi.bspkPageId=? ", bspkPageId).get(0);
+				 getHibernateTemplate().delete(bp);
+	}
+
+	public void delBspkPageResById(Integer bspkPageId) {
+		// TODO Auto-generated method stub
+				 String  delSql="delete BspkPageResource as bp " +
+				 		"where bp.pageResource in ( " +
+				 		"select bi.bspkPageResource from BspkInfoPage as  bi where bi.bspkPageId=?)";
+				 getHibernateTemplate().bulkUpdate(delSql, bspkPageId);
+	}
 	
 }

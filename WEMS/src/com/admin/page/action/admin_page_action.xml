@@ -105,5 +105,8 @@
 			<action name="removeDataPage" class="BspkPageRemainAction" method="RemoveBspkPage">
 					<result type="json"></result>
 			</action>
+			<action name="qryAllRealTimeData" class="PageUtilAction" method="GetRealTimeData">
+					<result type="json"></result>
+			</action>			
 	</package>
 </struts>    
