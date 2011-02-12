@@ -49,11 +49,11 @@
 	
 </style>
 <script type="text/javascript">
-	Ext.onReady(function(){
+	Ext.onReady(function(){  
 		//new Ems.plugin.NavigatorItem({renderTo:Ext.getBody(),img:'testmenu1.png',imgAtv:'testmenu1_act.png'});
 		new Ems.plugin.Navigator({renderTo:'navigator',img:'nativator.jpg',width:604,height:54,
-			items:[new Ems.plugin.NavigatorItem({img:'testmenu1.png',imgAtv:'testmenu1_act.png'}),
-			       new Ems.plugin.NavigatorItem({img:'testmenu2.png',imgAtv:'testmenu2_act.png'})]});
+			items:[new Ems.plugin.NavigatorItem({img:'testmenu1.png',imgAtv:'testmenu1_act.png',width:78,height:29,title:'≥’∫∫'}),
+			       new Ems.plugin.NavigatorItem({img:'testmenu2.png',imgAtv:'testmenu2_act.png',width:78,height:29,title:'≥’≈Æ'})]});
 		/*
 		var eles=Ext.query('.x-navigator-item');
 		var navItem=Ext.get(eles[0]);
