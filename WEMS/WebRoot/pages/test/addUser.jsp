@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <div id='infoOper'>
+  <div id='infoOper' style="background: no-repeat center center fixed url(''); vertical-align: middle; ">
   <script type="text/javascript" src="<%=path %>/js/test/addNewOper.js"></script>
   	</div>
   

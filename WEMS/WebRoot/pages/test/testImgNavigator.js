@@ -22,11 +22,12 @@ Ems.plugin.NavigatorItem = Ext.extend(Ext.Component, {
 
 				this.html = {
 					tag : 'a',
+					href:'#',
 					cn : [{
-								tag : 'span',
+								tag : 'div',
 								style : {
-									width : this.width,
-									height : this.height
+									width : this.width+'px',
+									height : this.height+'px'
 								},
 								html : this.title
 							}]
@@ -34,13 +35,13 @@ Ems.plugin.NavigatorItem = Ext.extend(Ext.Component, {
 
 				if (this.html) {
 					if (this.img) {
-						this.html.cn[0].html = '<img src="' + this.img
-								+ '" alt="°´Å¥±³¾°">' + this.title + '</img>';
+//						this.html.cn[0].html = '<img src="' + this.img
+//								+ '" alt="°´Å¥±³¾°">' + this.title + '</img>';
+						this.html.cn[0].style['vertical-align']='middle';
+						this.html.cn[0].style['background']='url(\''+this.img+'\') no-repeat center center';
+						this.html.cn[0].style['line-height']=this.height+'px';
 					}
 				}
-				
-//				this.addEvents('mouseout', 'mouseover', 'mousedown', 'click');
-//				this.addLisenter('mouseout',);
 				
 				this.addClass('x-navigator-item');
 				
@@ -64,14 +65,14 @@ Ems.plugin.NavigatorItem = Ext.extend(Ext.Component, {
 			},
 
 			imgOver : function(e, t) {
-				Ext.get(t).dom.src = this.imgActive;
+				Ext.get(t).applyStyles({background: 'url(\''+this.imgActive+'\') no-repeat center center'});
 				
 			},
 			imgVisited : function(e, t) {
-				Ext.get(t).dom.src = this.imgVisited;
+				Ext.get(t).applyStyles({background: 'url(\''+this.imgVisited+'\') no-repeat  center center'}) ;
 			},
 			imgOut : function(e, t) {
-				Ext.get(t).dom.src = this.img;
+				Ext.get(t).applyStyles({background: 'url(\''+this.img+'\') no-repeat  center center'});
 			},
 			visit : function(e, t) {
 				alert('visit function');
