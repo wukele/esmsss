@@ -50,7 +50,7 @@ Ext.onReady(function(){
     	
     	if(store.getCount()>=storeCount)
     		store.removeAt(0);
-    	store.add(new Ext.data.Record({name:++idx, visits: 245000, views: 3000000},idx));
+    	store.add(new Ext.data.Record({name:++idx, visits: Math.random()*1000000, views: 3000000},idx));
     	
     }
   	window.setInterval(changeStore,2000);
