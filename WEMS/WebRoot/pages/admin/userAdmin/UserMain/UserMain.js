@@ -147,6 +147,7 @@
 			queryUser : function() {
 				var paras = {};
 				var qryFields = qryPanel.findByType('textfield');
+				
 				Ext.each(qryFields, function(item, index, allItems) {
 							var paraName = '';
 							paraName = submitprefix ? submitprefix + '.'
@@ -256,45 +257,47 @@
 
 				// 查询面板
 				qryPanel = new Ext.Panel({
-					bodyStyle : 'width:100%',
+					anchor:'100%',
 					defaults : {
-						border : false
+						border : false,
+						labelWidth: 60,  
+        				labelAlign:"right",
+        				buttonAlign:'center'
 					},
 					layout : 'column',
 					frame : true,
 					items : [{
 								xtype : 'panel',
-								columnWidth : .25,
+								columnWidth:.2,
 								layout : 'form',
 								items : [{
 											xtype : 'textfield',
-											width : 160,
+											width : 120,
 											fieldLabel : '用户号',
 											name : 'operNo',
 											maxLength : 10,
-											maxLengthText : '至多10位',
-											rightPadding : .20
+											maxLengthText : '至多10位'
 										}]
 							}, {
 								xtype : 'panel',
-								columnWidth : .25,
 								layout : 'form',
+								columnWidth:.2,
 								items : [{
 											xtype : 'textfield',
-											width : 160,
+											width : 120,
 											fieldLabel : '用户名称',
 											name : 'operName',
 											maxLength : 60,
-											maxLengthText : '至多60位',
-											rightPadding : .20
+											maxLengthText : '至多60位'
 										}]
 							}, {  //状态后台获取
 								xtype : 'panel',
-								columnWidth : .25,
 								layout : 'form',
+								columnWidth:.1,
+								labelWidth:30,
 								items : [{
 									xtype : 'combo',
-									width : 160,
+									width : 60,
 									fieldLabel : '状态',
 									name : 'isactive',
 									store : new Ext.data.JsonStore({
@@ -313,13 +316,13 @@
 									valueField:'configValue',
 									editable:false,
 									triggerAction : 'all',
-									selectOnFocus:true,
-									rightPadding : .20
+									selectOnFocus:true
 								}]
 							}, {
 								xtype : 'button',
 								name : 'query',
 								text : '查询',
+								width:80,
 								handler : this.queryUser
 								// 查询用户方法
 						}]

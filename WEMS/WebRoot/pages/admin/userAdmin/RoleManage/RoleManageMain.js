@@ -397,19 +397,21 @@
 				store.load();
 				// 查询面板
 				qryPanel = new Ext.Panel({
-					bodyStyle : 'width:100%',
+					anchor : '100%',
 					defaults : {
+						labelWidth:60,
+						labelAlign:'right',
 						border : false
 					},
 					layout : 'column',
 					frame : true,
 					items : [ {
 						xtype : 'panel',
-						columnWidth : .25,
+						columnWidth : .2,
 						layout : 'form',
 						items : [ {
 							xtype : 'textfield',
-							width : 160,
+							width : 120,
 							fieldLabel : '角色代号',
 							name : 'roleCode',
 							maxLength : 10,
@@ -418,11 +420,11 @@
 						} ]
 					}, {
 						xtype : 'panel',
-						columnWidth : .25,
+						columnWidth : .2,
 						layout : 'form',
 						items : [ {
 							xtype : 'textfield',
-							width : 160,
+							width : 120,
 							fieldLabel : '角色名称',
 							name : 'roleName',
 							maxLength : 60,
@@ -431,10 +433,11 @@
 						} ]
 					}, {
 						xtype : 'panel',
-						columnWidth : .25,
+						columnWidth : .1,
+						labelWidth:30,
 						layout : 'form',
 						items : [ {
-							width : 160,
+							width : 60,
 							fieldLabel : '状态',
 							name : 'isactive',
 							xtype : 'combo',
@@ -451,6 +454,7 @@
 						} ]
 					}, {
 						xtype : 'button',
+						width:60,
 						name : 'query',
 						text : '查询',
 						handler : function() {
