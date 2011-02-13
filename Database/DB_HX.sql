@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.8.1
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2011 年 01 月 05 日 15:51
--- 服务器版本: 5.1.51
--- PHP 版本: 5.3.4
+-- 生成日期: 2011 年 01 月 29 日 15:35
+-- 服务器版本: 5.1.54
+-- PHP 版本: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -115,6 +115,101 @@ CREATE TABLE IF NOT EXISTS `alarm_policy_effect_area` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `bspk_data_device`
+--
+
+CREATE TABLE IF NOT EXISTS `bspk_data_device` (
+  `rule_id` int(20) NOT NULL AUTO_INCREMENT,
+  `value_id` varchar(20) NOT NULL,
+  `value_name` varchar(40) DEFAULT NULL,
+  `device_number` varchar(40) DEFAULT NULL,
+  `device_value_id` varchar(20) NOT NULL,
+  PRIMARY KEY (`rule_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `bspk_data_device`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `bspk_info_page`
+--
+
+CREATE TABLE IF NOT EXISTS `bspk_info_page` (
+  `bspk_page_id` int(10) NOT NULL AUTO_INCREMENT,
+  `bspk_page_name` varchar(255) DEFAULT NULL,
+  `bspk_image_path` varchar(255) DEFAULT NULL,
+  `bspk_image_width` int(3) DEFAULT NULL,
+  `bspk_image_height` int(3) DEFAULT NULL,
+  `bspk_page_resource` varchar(20) DEFAULT NULL,
+  `bspk_oper_code` varchar(10) DEFAULT NULL,
+  `bspk_page_type` varchar(2) NOT NULL,
+  PRIMARY KEY (`bspk_page_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `bspk_info_page`
+--
+
+INSERT IGNORE INTO `bspk_info_page` (`bspk_page_id`, `bspk_page_name`, `bspk_image_path`, `bspk_image_width`, `bspk_image_height`, `bspk_page_resource`, `bspk_oper_code`, `bspk_page_type`) VALUES(1, '测试5', 'upload/bgImage/BTaQqulWTc.jpg', 500, 500, '1020020', 'TEST01', 'P');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `bspk_page_resource`
+--
+
+CREATE TABLE IF NOT EXISTS `bspk_page_resource` (
+  `resource_id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_resource` varchar(20) DEFAULT NULL,
+  `xtype_code` varchar(20) DEFAULT NULL,
+  `resource_top` int(4) DEFAULT NULL,
+  `resource_left` int(4) DEFAULT NULL,
+  `resource_width` int(4) DEFAULT NULL,
+  `resource_height` int(4) DEFAULT NULL,
+  `value_id` varchar(20) DEFAULT NULL,
+  `config` varchar(255) DEFAULT NULL,
+  `base_cls` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`resource_id`),
+  UNIQUE KEY `un_value_id_key` (`value_id`) USING BTREE
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1000007 ;
+
+--
+-- 转存表中的数据 `bspk_page_resource`
+--
+
+INSERT IGNORE INTO `bspk_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000003, '101001010101', 'textfield', 100, 100, 100, 100, NULL, NULL, NULL);
+INSERT IGNORE INTO `bspk_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000004, '1020020', 'textfield', 100, 100, 100, 100, NULL, NULL, NULL);
+INSERT IGNORE INTO `bspk_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000005, '1000001', 'textfield', 100, 100, 100, 100, NULL, NULL, NULL);
+INSERT IGNORE INTO `bspk_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000006, '10010', 'textfield', 100, 100, 100, 100, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `bspk_resource_config`
+--
+
+CREATE TABLE IF NOT EXISTS `bspk_resource_config` (
+  `config_sn` int(11) NOT NULL AUTO_INCREMENT,
+  `config_parameter` varchar(100) DEFAULT NULL,
+  `config_value` varchar(255) DEFAULT NULL,
+  `config_type` varchar(4) DEFAULT NULL,
+  `configDesc` varchar(100) DEFAULT NULL,
+  `resource_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`config_sn`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `bspk_resource_config`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `code_classify`
 --
 
@@ -150,9 +245,28 @@ CREATE TABLE IF NOT EXISTS `code_component` (
 -- 转存表中的数据 `code_component`
 --
 
-INSERT INTO `code_component` (`component_id`, `code_xtype`, `component_name`, `component_resource_id`, `full_type`) VALUES
-(1000001, 'textfield', '普通字段', 'B000001', 'Ext.form.TextField'),
-(1000002, 'ImageBox', '图片框', 'E000001', 'Ext.ems.ImageBox');
+INSERT IGNORE INTO `code_component` (`component_id`, `code_xtype`, `component_name`, `component_resource_id`, `full_type`) VALUES(1000001, 'textfield', '普通字段', 'B000001', 'Ext.form.TextField');
+INSERT IGNORE INTO `code_component` (`component_id`, `code_xtype`, `component_name`, `component_resource_id`, `full_type`) VALUES(1000002, 'ImageBox', '图片框', 'E000001', 'Ext.ems.ImageBox');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `code_list`
+--
+
+CREATE TABLE IF NOT EXISTS `code_list` (
+  `CODE_ID` int(11) NOT NULL,
+  `CODE_TYPE` varchar(255) NOT NULL,
+  `CODE_VALUE` varchar(255) NOT NULL,
+  `CODE_DESC` varchar(255) DEFAULT NULL,
+  `SEQ_NO` int(4) DEFAULT NULL,
+  PRIMARY KEY (`CODE_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `code_list`
+--
+
 
 -- --------------------------------------------------------
 
@@ -193,9 +307,8 @@ CREATE TABLE IF NOT EXISTS `component_resource_code` (
 -- 转存表中的数据 `component_resource_code`
 --
 
-INSERT INTO `component_resource_code` (`component_resource_sn`, `resource_type`, `script_url`, `need_script`, `component_resource_id`) VALUES
-(10000001, 'BASE', '', 0, 'B000001'),
-(10000002, 'EXTEND', '/js/comm/ImageBoxComponent.js', 1, 'E000001');
+INSERT IGNORE INTO `component_resource_code` (`component_resource_sn`, `resource_type`, `script_url`, `need_script`, `component_resource_id`) VALUES(10000001, 'BASE', '', 0, 'B000001');
+INSERT IGNORE INTO `component_resource_code` (`component_resource_sn`, `resource_type`, `script_url`, `need_script`, `component_resource_id`) VALUES(10000002, 'EXTEND', '/js/comm/ImageBoxComponent.js', 1, 'E000001');
 
 -- --------------------------------------------------------
 
@@ -240,10 +353,9 @@ CREATE TABLE IF NOT EXISTS `device_table` (
 -- 转存表中的数据 `device_table`
 --
 
-INSERT INTO `device_table` (`device_id`, `device_name`, `device_type`, `device_ip`, `collect_task_id`, `action_flag`) VALUES
-(10000001, '设备1', '电力', '192.168.1.100', 1000001, 1),
-(10000002, '设备2', '电力', '192.168.1.102', 1000002, 1),
-(10000003, '设备3', '漏水', '192.168.1.103', 1000003, 1);
+INSERT IGNORE INTO `device_table` (`device_id`, `device_name`, `device_type`, `device_ip`, `collect_task_id`, `action_flag`) VALUES(10000001, '设备1', '电力', '192.168.1.100', 1000001, 1);
+INSERT IGNORE INTO `device_table` (`device_id`, `device_name`, `device_type`, `device_ip`, `collect_task_id`, `action_flag`) VALUES(10000002, '设备2', '电力', '192.168.1.102', 1000002, 1);
+INSERT IGNORE INTO `device_table` (`device_id`, `device_name`, `device_type`, `device_ip`, `collect_task_id`, `action_flag`) VALUES(10000003, '设备3', '漏水', '192.168.1.103', 1000003, 1);
 
 -- --------------------------------------------------------
 
@@ -296,8 +408,7 @@ CREATE TABLE IF NOT EXISTS `engine_parameter` (
 -- 转存表中的数据 `engine_parameter`
 --
 
-INSERT INTO `engine_parameter` (` parameter_id`, `engine_id`, `parameter_name`, `parameter_value`) VALUES
-(1, '1', 'javascript', 'js/engines/DirectDataEngine.js');
+INSERT IGNORE INTO `engine_parameter` (` parameter_id`, `engine_id`, `parameter_name`, `parameter_value`) VALUES(1, '1', 'javascript', 'js/engines/DirectDataEngine.js');
 
 -- --------------------------------------------------------
 
@@ -358,8 +469,14 @@ CREATE TABLE IF NOT EXISTS `info_config` (
 -- 转存表中的数据 `info_config`
 --
 
-INSERT INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES
-('1000001', 'MaxInactiveInterval', '60', 'MaxInactiveInterval');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000001', 'MaxInactiveInterval', '60', 'MaxInactiveInterval');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000002', 'BackgroundImagePath', '/BackgroundImage', 'BackgroundImagePath');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000003', 'BackgroundImagePath', 'upload/bgImage', 'BackgroundImagePath');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000004', 'tpl_page_type', 'P', 'P');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000005', 'tpl_page_type', 'E', 'E');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000006', 'tpl_page_type', 'D', 'D');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000007', 'isActive', '0', '有效');
+INSERT IGNORE INTO `info_config` (`CONFIG_ID`, `CONFIG_NAME`, `CONFIG_VALUE`, `CONFIG_DESC`) VALUES('1000008', 'isActive', '1', '无效');
 
 -- --------------------------------------------------------
 
@@ -391,6 +508,7 @@ CREATE TABLE IF NOT EXISTS `info_dept` (
 -- 转存表中的数据 `info_dept`
 --
 
+INSERT IGNORE INTO `info_dept` (`DEPT_NO`, `PARENT_DEPT_NO`, `PATH_CODE`, `DEPT_TYPE`, `DEPT_NAME`, `LOCAL_NET`, `COMMENTS`, `PHONE`, `FAX`, `ADDRESS`, `FLAG`, `RES_CHAR1`, `RES_CHAR2`, `AREA_ID`, `CHANNEL_TYPE`, `SUB_CHANNEL_TYPE`) VALUES('324324', '100000', 'ASD', '1', 'SDF', '831', 'DSF', 'ASD', '', 'ASD', '1', 'ASD', '', 'SAD', 'ASD', 'ASD');
 
 -- --------------------------------------------------------
 
@@ -414,8 +532,7 @@ CREATE TABLE IF NOT EXISTS `info_engine` (
 -- 转存表中的数据 `info_engine`
 --
 
-INSERT INTO `info_engine` (`engine_id`, `engine_code`, `engine_name`, `action_name`, `action_config`, `engine_type`, `action_class`, `max_interval`) VALUES
-(1, 'DE101', 'directEngine', 'DirectDataEngine.action', '1', 'AJ', NULL, 10);
+INSERT IGNORE INTO `info_engine` (`engine_id`, `engine_code`, `engine_name`, `action_name`, `action_config`, `engine_type`, `action_class`, `max_interval`) VALUES(1, 'DE101', 'directEngine', 'DirectDataEngine.action', '1', 'AJ', NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -472,15 +589,19 @@ CREATE TABLE IF NOT EXISTS `info_menu` (
 -- 转存表中的数据 `info_menu`
 --
 
-INSERT INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES
-('10000001', NULL, '1000001', NULL, 0, 1, 1, 'ems_dispatcher_page_action.action', 'UPS 监控系统', 'UPS 监控系统', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('20000004', NULL, '2000001', NULL, 0, 2, 1, 'temphumidity_monitor.action', '温湿度监控', '温湿度监控', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('20000005', NULL, '2000001', NULL, 0, 3, 1, 'leakage_detection.action', '漏水检测', '漏水检测', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('200000041', '20000004', '2000001', NULL, 0, 0, 1, 'roomhumidity_monitor.action', '房间湿度监控', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('60000001', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleAddEntityRule/RoleAddEntityRule.jsp', '角色功能新增', '角色功能新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('60000002', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleAddDevice/RoleMangerDevice.jsp', '角色设备新增', '角色设备新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('60000003', NULL, '6000001', NULL, 0, 0, 1, 'user_manager_main_view.action', '用户管理', '用户管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
-('60000004', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleManage/RoleManageMain.jsp', '角色管理', '角色管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('10000001', NULL, '1000001', NULL, 0, 1, 1, 'ems_dispatcher_page_action.action', 'UPS 监控系统', 'UPS 监控系统', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('20000004', NULL, '2000001', NULL, 0, 2, 1, 'temphumidity_monitor.action', '温湿度监控', '温湿度监控', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('20000005', NULL, '2000001', NULL, 0, 3, 1, 'leakage_detection.action', '漏水检测', '漏水检测', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('200000041', '20000004', '2000001', NULL, 0, 0, 1, 'roomhumidity_monitor.action', '房间湿度监控', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('60000001', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleAddEntityRule/RoleAddEntityRule.jsp', '角色功能新增', '角色功能新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('60000002', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleAddDevice/RoleMangerDevice.jsp', '角色设备新增', '角色设备新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('70000001', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/SubSystemModuleAdmin/SubSystemModuleMgr.jsp', '子系统管理', '子系统管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('70000002', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/PageTemplateAdd/PageTmeplateManger.jsp', '页面底图管理', '页面底图管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('60000003', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/InfoDeptManager/InfoDeptManager.jsp', '部门信息管', '部门信息管', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('60000004', NULL, '6000001', NULL, 0, 0, 1, 'user_manager_main_view.action', '用户管理', '用户管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('60000005', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RoleManage/RoleManageMain.jsp', '角色管理', '角色管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('60000006', NULL, '6000001', NULL, 0, 0, 1, 'pages/admin/userAdmin/RuleOperRoleManager/RuleOperRoleManager.jsp', '工号权限管理', '工号权限管理', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT IGNORE INTO `info_menu` (`MENU_CODE`, `PARENT_MENU_CODE`, `MODULE_CODE`, `PATH_CODE`, `MENU_COL`, `MENU_ROW`, `ISSHOW`, `MENU_URL`, `MENU_TITLE`, `COMMENTS`, `ICON_URL`, `ISACTIVE`, `RES_CHAR1`, `RES_CHAR2`, `RES_CHAR3`, `RES_INIT1`, `RES_INIT2`, `RES_INIT3`, `DEPLOY_SYS_CODE`) VALUES('70000005', NULL, '7000001', NULL, 0, 0, 1, 'pages/admin/pageAdmin/TplPageComponentMgr/TplPageCompMgr.jsp', '模板页面组件新增', '模板页面组件新增', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -534,9 +655,8 @@ CREATE TABLE IF NOT EXISTS `info_oper` (
 -- 转存表中的数据 `info_oper`
 --
 
-INSERT INTO `info_oper` (`OPER_NO`, `REGION_ID`, `DEPT_NO`, `ROLE_CODE`, `OPER_NAME`, `LOGIN_NAME`, `OPER_PWD`, `QUESTION`, `ANSWER`, `GENDER`, `POSITIONS`, `PHONE`, `EMAIL`, `MOBILE_NO`, `NEED_SMS`, `OPER_MESSAGE`, `EFF_DATE`, `EXP_HINT_DATE`, `EXP_DATE`, `INIT_FLAG`, `DEAL_TYPE`, `APP_TYPE`, `STATISTICAL_DEPT_NO`, `OPER_ALIAS`, `LOGIN_COUNT`, `RES_INIT1`, `RES_INIT2`, `RES_CHAR1`, `RES_CHAR2`, `PWD_ENCODE`, `OPER_STATUS`, `OPER_KIND`, `FLAG`, `ACCT_STATUS`, `BUSI_TYPE`, `DERATE_FLAG`, `IS_ONLINE`, `LOGIN_IP`) VALUES
-('TEST01', '0000', '0001', '*', '张长风', '', '123456', 'wifename', 'wifename', 1, '1213', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', 1, '', NULL, NULL, NULL, 1, '0', '1', '999999', '', 905, NULL, NULL, '', '', '', '100', '10', 0, '1', '0', '1', '0', ''),
-('TEST02', '0', NULL, NULL, '胡欣', '127.0.0.1', '1', NULL, NULL, 1, '保密', '保密', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT IGNORE INTO `info_oper` (`OPER_NO`, `REGION_ID`, `DEPT_NO`, `ROLE_CODE`, `OPER_NAME`, `LOGIN_NAME`, `OPER_PWD`, `QUESTION`, `ANSWER`, `GENDER`, `POSITIONS`, `PHONE`, `EMAIL`, `MOBILE_NO`, `NEED_SMS`, `OPER_MESSAGE`, `EFF_DATE`, `EXP_HINT_DATE`, `EXP_DATE`, `INIT_FLAG`, `DEAL_TYPE`, `APP_TYPE`, `STATISTICAL_DEPT_NO`, `OPER_ALIAS`, `LOGIN_COUNT`, `RES_INIT1`, `RES_INIT2`, `RES_CHAR1`, `RES_CHAR2`, `PWD_ENCODE`, `OPER_STATUS`, `OPER_KIND`, `FLAG`, `ACCT_STATUS`, `BUSI_TYPE`, `DERATE_FLAG`, `IS_ONLINE`, `LOGIN_IP`) VALUES('TEST01', '0000', '0001', '*', '张长风', '', '123456', 'wifename', 'wifename', 1, '1213', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', 1, '', NULL, NULL, NULL, 1, '0', '1', '999999', '', 1139, NULL, NULL, '', '', '', '100', '10', 0, '1', '0', '1', '0', '');
+INSERT IGNORE INTO `info_oper` (`OPER_NO`, `REGION_ID`, `DEPT_NO`, `ROLE_CODE`, `OPER_NAME`, `LOGIN_NAME`, `OPER_PWD`, `QUESTION`, `ANSWER`, `GENDER`, `POSITIONS`, `PHONE`, `EMAIL`, `MOBILE_NO`, `NEED_SMS`, `OPER_MESSAGE`, `EFF_DATE`, `EXP_HINT_DATE`, `EXP_DATE`, `INIT_FLAG`, `DEAL_TYPE`, `APP_TYPE`, `STATISTICAL_DEPT_NO`, `OPER_ALIAS`, `LOGIN_COUNT`, `RES_INIT1`, `RES_INIT2`, `RES_CHAR1`, `RES_CHAR2`, `PWD_ENCODE`, `OPER_STATUS`, `OPER_KIND`, `FLAG`, `ACCT_STATUS`, `BUSI_TYPE`, `DERATE_FLAG`, `IS_ONLINE`, `LOGIN_IP`) VALUES('TEST02', '0', NULL, NULL, 'dORA', '0:0:0:0:0:0:0:1', '123456', NULL, NULL, 1, 'CQ', '123245', NULL, '12345687', NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, '999999', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '1', '0:0:0:0:0:0:0:1');
 
 -- --------------------------------------------------------
 
@@ -564,8 +684,7 @@ CREATE TABLE IF NOT EXISTS `info_page` (
 -- 转存表中的数据 `info_page`
 --
 
-INSERT INTO `info_page` (`page_id`, `page_resource_id`, `page_type`, `page_image_url`, `page_name`, `page_icon`, `page_image_width`, `page_image_height`, `page_top`, `page_left`, `oper_code`, `menu_code`) VALUES
-(10000001, '10000001', 'NOR', 'image/power_10.jpg', 'UpsMain', NULL, 800, 800, 0, 0, 'SHOW', '10000001');
+INSERT IGNORE INTO `info_page` (`page_id`, `page_resource_id`, `page_type`, `page_image_url`, `page_name`, `page_icon`, `page_image_width`, `page_image_height`, `page_top`, `page_left`, `oper_code`, `menu_code`) VALUES(10000001, '10000001', 'NOR', 'image/power_10.jpg', 'UpsMain', NULL, 800, 800, 0, 0, 'SHOW', '10000001');
 
 -- --------------------------------------------------------
 
@@ -592,9 +711,8 @@ CREATE TABLE IF NOT EXISTS `info_page_resource` (
 -- 转存表中的数据 `info_page_resource`
 --
 
-INSERT INTO `info_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES
-(1000001, '10000001', 'textfield', 500, 500, 60, 30, 'L10000011', NULL, NULL),
-(1000002, '10000001', 'textfield', 300, 400, 60, 30, 'L10000012', NULL, NULL);
+INSERT IGNORE INTO `info_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000001, '10000001', 'textfield', 500, 500, 60, 20, 'L10000011', NULL, NULL);
+INSERT IGNORE INTO `info_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000002, '10000001', 'textfield', 300, 400, 60, 30, 'L10000012', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -623,10 +741,9 @@ CREATE TABLE IF NOT EXISTS `info_role` (
 -- 转存表中的数据 `info_role`
 --
 
-INSERT INTO `info_role` (`ROLE_CODE`, `REGION_ID`, `ROLE_LEVEL`, `LOCAL_NET`, `COMMENTS`, `ROLE_NAME`, `OPER_NO`, `ISACTIVE`, `RES_CHAR`, `SYS_TYPE`, `ROLE_TYPE`, `BELONG_TYPE`, `DEPT_NO`) VALUES
-('OP', '0', '1', NULL, '操作员', '操作员', 'TEST01', 1, NULL, '1', '1', NULL, NULL),
-('AD', '0', '1', NULL, '系统管理员', '系统管理员', 'TEST01', 1, NULL, '1', '1', NULL, NULL),
-('TT', '1', '1', NULL, NULL, 'TEST', '1', 0, NULL, NULL, '1', NULL, NULL);
+INSERT IGNORE INTO `info_role` (`ROLE_CODE`, `REGION_ID`, `ROLE_LEVEL`, `LOCAL_NET`, `COMMENTS`, `ROLE_NAME`, `OPER_NO`, `ISACTIVE`, `RES_CHAR`, `SYS_TYPE`, `ROLE_TYPE`, `BELONG_TYPE`, `DEPT_NO`) VALUES('OP', '0', '1', NULL, '操作员', '操作员', 'TEST01', 1, NULL, '1', '1', NULL, NULL);
+INSERT IGNORE INTO `info_role` (`ROLE_CODE`, `REGION_ID`, `ROLE_LEVEL`, `LOCAL_NET`, `COMMENTS`, `ROLE_NAME`, `OPER_NO`, `ISACTIVE`, `RES_CHAR`, `SYS_TYPE`, `ROLE_TYPE`, `BELONG_TYPE`, `DEPT_NO`) VALUES('AD', '0', '1', NULL, '系统管理员', '系统管理员', 'TEST01', 1, NULL, '1', '1', NULL, NULL);
+INSERT IGNORE INTO `info_role` (`ROLE_CODE`, `REGION_ID`, `ROLE_LEVEL`, `LOCAL_NET`, `COMMENTS`, `ROLE_NAME`, `OPER_NO`, `ISACTIVE`, `RES_CHAR`, `SYS_TYPE`, `ROLE_TYPE`, `BELONG_TYPE`, `DEPT_NO`) VALUES('TEST', '1', '1', NULL, NULL, '测试', '1', 1, NULL, NULL, '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -646,13 +763,14 @@ CREATE TABLE IF NOT EXISTS `info_sys_module` (
 -- 转存表中的数据 `info_sys_module`
 --
 
-INSERT INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES
-('1000001', '动力配电监控', '1', 1),
-('2000001', '场地环境监控', '2', 1),
-('3000001', '场地安全监控', '3', 1),
-('4000001', '机柜微环境监控', '4', 1),
-('5000001', '设备通讯状态监控', '5', 1),
-('6000001', '用户管理', '6', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('1000001', '动力配电监控', '1', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('2000001', '场地环境监控', '2', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('3000001', '场地安全监控', '3', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('4000001', '机柜微环境监控', '4', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('5000001', '设备通讯状态监控', '5', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('6000001', '用户管理', '6', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('7000001', '页面管理', '7', 1);
+INSERT IGNORE INTO `info_sys_module` (`module_code`, `module_name`, `module_index`, `is_active`) VALUES('0000000', '主页面', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -782,8 +900,7 @@ CREATE TABLE IF NOT EXISTS `real_time_data` (
 -- 转存表中的数据 `real_time_data`
 --
 
-INSERT INTO `real_time_data` (`data_sn`, `device_var_id`, `var_phy_value`, `var_logic_value`, `collect_time`) VALUES
-(1, 'UPS10011', '218', '123', '2010-11-23 11:45:02');
+INSERT IGNORE INTO `real_time_data` (`data_sn`, `device_var_id`, `var_phy_value`, `var_logic_value`, `collect_time`) VALUES(1, 'UPS10011', '218', '234', '2010-11-23 11:45:02');
 
 -- --------------------------------------------------------
 
@@ -804,8 +921,7 @@ CREATE TABLE IF NOT EXISTS `rule_data_device` (
 -- 转存表中的数据 `rule_data_device`
 --
 
-INSERT INTO `rule_data_device` (`rule_id`, `value_id`, `value_name`, `device_number`, `device_value_id`) VALUES
-(1, 'L10000011', 'UPS', 'UPS1001', 'UPS10011');
+INSERT IGNORE INTO `rule_data_device` (`rule_id`, `value_id`, `value_name`, `device_number`, `device_value_id`) VALUES(1, 'L10000011', 'UPS', 'UPS1001', 'UPS10011');
 
 -- --------------------------------------------------------
 
@@ -814,22 +930,21 @@ INSERT INTO `rule_data_device` (`rule_id`, `value_id`, `value_name`, `device_num
 --
 
 CREATE TABLE IF NOT EXISTS `rule_engine_data` (
-  `rule_id` int(6) NOT NULL,
+  `rule_id` int(6) NOT NULL AUTO_INCREMENT,
   `engine_name` varchar(40) DEFAULT NULL,
   `engine_code` varchar(20) DEFAULT NULL,
   `engine_type` varchar(20) DEFAULT NULL,
   `value_id` varchar(20) DEFAULT NULL,
   `value_type` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`rule_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `rule_engine_data`
 --
 
-INSERT INTO `rule_engine_data` (`rule_id`, `engine_name`, `engine_code`, `engine_type`, `value_id`, `value_type`) VALUES
-(1, 'directEngine', 'DE101', 'AJ', 'L10000011', NULL),
-(2, 'directEngine', 'DE101', 'AJ', 'L10000012', NULL);
+INSERT IGNORE INTO `rule_engine_data` (`rule_id`, `engine_name`, `engine_code`, `engine_type`, `value_id`, `value_type`) VALUES(1, 'directEngine', 'DE101', 'AJ', 'L10000011', NULL);
+INSERT IGNORE INTO `rule_engine_data` (`rule_id`, `engine_name`, `engine_code`, `engine_type`, `value_id`, `value_type`) VALUES(2, 'directEngine', 'DE101', 'AJ', 'L10000012', NULL);
 
 -- --------------------------------------------------------
 
@@ -842,15 +957,15 @@ CREATE TABLE IF NOT EXISTS `rule_oper_role` (
   `ROLE_CODE` varchar(6) NOT NULL,
   `RID` int(6) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`RID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `rule_oper_role`
 --
 
-INSERT INTO `rule_oper_role` (`OPER_NO`, `ROLE_CODE`, `RID`) VALUES
-('TEST01', 'OP', 1),
-('TEST01', 'AD', 2);
+INSERT IGNORE INTO `rule_oper_role` (`OPER_NO`, `ROLE_CODE`, `RID`) VALUES('TEST01', 'OP', 1);
+INSERT IGNORE INTO `rule_oper_role` (`OPER_NO`, `ROLE_CODE`, `RID`) VALUES('TEST01', 'AD', 2);
+INSERT IGNORE INTO `rule_oper_role` (`OPER_NO`, `ROLE_CODE`, `RID`) VALUES('TEST02', 'OP', 3);
 
 -- --------------------------------------------------------
 
@@ -863,24 +978,129 @@ CREATE TABLE IF NOT EXISTS `rule_role_func` (
   `ENTITY_TYPE` varchar(10) NOT NULL,
   `ENTITY_CODE` varchar(15) NOT NULL,
   `ENTITY_ID` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ENTITY_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
+  PRIMARY KEY (`ENTITY_ID`),
+  UNIQUE KEY `UN_KEY` (`ROLE_CODE`,`ENTITY_TYPE`,`ENTITY_CODE`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
 
 --
 -- 转存表中的数据 `rule_role_func`
 --
 
-INSERT INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES
-('AD', 'M', '60000004', 83),
-('AD', 'M', '60000002', 6),
-('AD', 'M', '60000001', 5),
-('OP', 'E', '10000003', 9),
-('OP', 'E', '10000002', 8),
-('OP', 'M', '10000001', 78),
-('OP', 'M', '20000004', 79),
-('OP', 'M', '20000005', 80),
-('OP', 'M', '200000041', 81),
-('AD', 'M', '60000003', 82);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'M', '10000001', 1);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'M', '20000004', 4);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'M', '20000005', 3);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '60000001', 5);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '60000003', 129);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'E', '10000003', 126);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '60000004', 125);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '70000001', 2);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '10000001', 116);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'E', '10000001', 102);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '70000002', 7);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'E', '10000002', 127);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '60000005', 128);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '60000002', 6);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('OP', 'M', '200000041', 81);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'E', '10000001', 130);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'E', '10000002', 131);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'E', '10000003', 132);
+INSERT IGNORE INTO `rule_role_func` (`ROLE_CODE`, `ENTITY_TYPE`, `ENTITY_CODE`, `ENTITY_ID`) VALUES('AD', 'M', '70000005', 133);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tlp_page_image`
+--
+
+CREATE TABLE IF NOT EXISTS `tlp_page_image` (
+  `image_name` varchar(255) DEFAULT NULL,
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_path` varchar(255) DEFAULT NULL,
+  `image_display_name` varchar(255) NOT NULL,
+  `flag` varchar(2) DEFAULT NULL,
+  `image_desc` varchar(255) DEFAULT NULL,
+  `oper_no` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`image_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
+
+--
+-- 转存表中的数据 `tlp_page_image`
+--
+
+INSERT IGNORE INTO `tlp_page_image` (`image_name`, `image_id`, `image_path`, `image_display_name`, `flag`, `image_desc`, `oper_no`) VALUES('dsjk14.bmp', 41, 'upload/bgImage', '湿度', '1', NULL, NULL);
+INSERT IGNORE INTO `tlp_page_image` (`image_name`, `image_id`, `image_path`, `image_display_name`, `flag`, `image_desc`, `oper_no`) VALUES('TNOTcuXENr.jpg', 94, 'upload/bgImage', '测试图片', '1', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tpl_info_page`
+--
+
+CREATE TABLE IF NOT EXISTS `tpl_info_page` (
+  `tpl_page_id` int(10) NOT NULL AUTO_INCREMENT,
+  `tpl_page_name` varchar(255) DEFAULT NULL,
+  `tpl_image_path` varchar(255) DEFAULT NULL,
+  `tpl_image_width` int(3) DEFAULT NULL,
+  `tpl_image_height` int(3) DEFAULT NULL,
+  `tpl_page_resource` varchar(20) DEFAULT NULL,
+  `tpl_oper_code` varchar(10) DEFAULT NULL,
+  `tpl_page_type` varchar(2) NOT NULL,
+  PRIMARY KEY (`tpl_page_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- 转存表中的数据 `tpl_info_page`
+--
+
+INSERT IGNORE INTO `tpl_info_page` (`tpl_page_id`, `tpl_page_name`, `tpl_image_path`, `tpl_image_width`, `tpl_image_height`, `tpl_page_resource`, `tpl_oper_code`, `tpl_page_type`) VALUES(11, '测试图片', 'upload/bgImage/TNOTcuXENr.jpg', 400, 400, '10010', 'TEST01', 'P');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tpl_page_resource`
+--
+
+CREATE TABLE IF NOT EXISTS `tpl_page_resource` (
+  `resource_id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_resource` varchar(20) DEFAULT NULL,
+  `xtype_code` varchar(20) DEFAULT NULL,
+  `resource_top` int(4) DEFAULT NULL,
+  `resource_left` int(4) DEFAULT NULL,
+  `resource_width` int(4) DEFAULT NULL,
+  `resource_height` int(4) DEFAULT NULL,
+  `value_id` varchar(20) DEFAULT NULL,
+  `config` varchar(255) DEFAULT NULL,
+  `base_cls` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`resource_id`),
+  UNIQUE KEY `un_value_id_key` (`value_id`) USING BTREE
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1000012 ;
+
+--
+-- 转存表中的数据 `tpl_page_resource`
+--
+
+INSERT IGNORE INTO `tpl_page_resource` (`resource_id`, `page_resource`, `xtype_code`, `resource_top`, `resource_left`, `resource_width`, `resource_height`, `value_id`, `config`, `base_cls`) VALUES(1000011, '10010', 'textfield', 100, 100, 100, 100, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tpl_resource_config`
+--
+
+CREATE TABLE IF NOT EXISTS `tpl_resource_config` (
+  `config_sn` int(11) NOT NULL AUTO_INCREMENT,
+  `config_parameter` varchar(100) DEFAULT NULL,
+  `config_value` varchar(255) DEFAULT NULL,
+  `config_type` varchar(4) DEFAULT NULL,
+  `configDesc` varchar(100) DEFAULT NULL,
+  `resource_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`config_sn`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `tpl_resource_config`
+--
+
 
 -- --------------------------------------------------------
 
