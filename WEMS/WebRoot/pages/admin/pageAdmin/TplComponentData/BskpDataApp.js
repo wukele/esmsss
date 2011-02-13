@@ -1,5 +1,14 @@
 Ext.ns('Ems.page')
 
+Ems.page.bspkPageMenu=Ext.extend(Ext.menu.Menu,{
+		setRecord:function(rec){
+				this.record=rec;
+		},
+		setSelectIdx:function(idx){
+				this.idx=idx;
+		}
+})
+
 
 Ems.page.bskpPagePanel=Ext.extend(Ext.Panel,{
 
@@ -30,15 +39,49 @@ Ems.page.bskpPagePanel=Ext.extend(Ext.Panel,{
 					overClass:'x-seach-item-over'
 				})
 				this.store.load();
-				this.PageView.on('dblclick',this.bspkPageSelected)
+				this.PageView.on('dblclick',this.bspkPageSelected);
+				this.PageView.on({
+						contextmenu:this.onPageViewContextmenu,
+						scope:this
+				})
 				this.items=this.PageView;
 				Ems.page.bskpPagePanel.superclass.initComponent.call(this);
 		},
-		bspkPageSelected:function(dataView,idx){
+		onPageViewContextmenu:function(dv,idx,ht,e){
+				
+				if(!this.Contextmenu){
+						this.Contextmenu=new Ems.page.bspkPageMenu({
+								items:[{
+									text:'删除',
+									handler:function(){
+										//Ext.Msg.alert('ko',this.ownerCt.record.get('bspkPageId'));
+										Ext.Ajax.request({
+												url:'removeDataPage.action',
+												params:{
+													bspk_page_id:this.ownerCt.record.get('bspkPageId')
+												},
+												success:function(){
+												    dv.store.load();
+												    Ext.example.msg('Success','临时数据页面删除成功');
+												}
+										});
+									}
+								}]
+						});
+				}
+				e.stopEvent();
+				this.Contextmenu.setRecord(dv.store.getAt(idx));
+				this.Contextmenu.setSelectIdx(idx)
+				this.Contextmenu.showAt(e.getXY());	
+		},
+		
+		
+		bspkPageSelected:function(dataView,idx){			
 				var record=dataView.store.getAt(idx);
 				if(record==undefined){
 					 Ext.example.msg('警告','还未选定页面');
 				}
+				this.selectedPage=record;
 				Ems.page.BskpDataApp.BspkPageViewer.load({
 					url:'BspkPreview.action',
 					scripts:true,
@@ -68,18 +111,112 @@ Ems.page.DataPanel=Ext.extend(Ext.TabPanel,{
 });
 
 
+Ems.page.RealTimeDataWindow=Ext.extend(Ext.Window,{
+		height:400,
+		width:790,
+		GetRealTimeDataColumn:function(){
+				var DataCol=new Ext.grid.ColumnModel({
+					defaults:{
+							width:60,
+							menuDisabled:true
+					},
+					columns:[
+						{header:'设备ID',dataIndex:'deviceId'},
+						{header:'设备名称',dataIndex:'deviceName'},
+						{header:'设备类型',dataIndex:'deviceType'},
+						{header:'设备IP',dataIndex:'deviceIp',width:120},
+						{header:'采集任务ID',dataIndex:'collectTaskId'},
+						{header:'变量名称',dataIndex:'variableName'},
+						{header:'设备变量ID',dataIndex:'deviceVarId'},
+						{header:'物理值',dataIndex:'varPhyValue'},
+						{header:'逻辑值',dataIndex:'varLogicValue'},
+						{header:'采集时间',dataIndex:'collectTime',width:180}]
+				});
+				return DataCol;
+		},
+		GetRealTimeDataFields:function(){
+				var Datafields=[
+					{name:'deviceId',mapping:'deviceId',type:'int'},
+					{name:'deviceName',mapping:'deviceName'},
+					{name:'deviceType',mapping:'deviceType'},
+					{name:'deviceIp',mapping:'deviceIp'},
+					{name:'collectTaskId',mapping:'collectTaskId',type:'int'},
+					{name:'variableName',mapping:'variableName'},
+					{name:'deviceVarId',mapping:'deviceVarId'},
+					{name:'varPhyValue',mapping:'varPhyValue'},
+					{name:'varLogicValue',mapping:'varLogicValue'},
+					{name:'collectTime',mapping:'collectTime',type:'date'}]
+				return Datafields;
+		},
+		initComponent:function(){
+					this.DataPanel=new Ext.grid.GridPanel({
+							width:780,
+							height:400,
+							autoScroll:true,
+							border:false,
+							cm:this.GetRealTimeDataColumn(),
+							store:new Ext.data.JsonStore({
+									url:'qryAllRealTimeData.action',
+									fields:this.GetRealTimeDataFields(),
+									autoLoad:true,
+									root:'real_time_datas'
+							}),
+							sm:new Ext.grid.RowSelectionModel({
+								singleSelect:true
+							})
+					});
+					this.items=[this.DataPanel];
+					Ems.page.RealTimeDataWindow.superclass.initComponent.call(this);
+		}
+		
+});
+
+
+
+
 
 
 Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 		region:'center',
 		initComponent:function(){
-				this.tbar=['选项',{
+				this.tbar=['选项','-',{
 					text:'实时数据',
 					handler:function(){
-						
+						  if(!this.DataWindow){
+						  		this.DataWindow=new Ems.page.RealTimeDataWindow({
+						  			closeAction:'hide',
+						  			resizable:false
+						  		});
+						  }
+						  this.DataWindow.show(this.getEl());
 					}
 				}];
+				this.on({
+					afterrender:this.onAfterRender,
+					scope:this
+				})
 				Ems.page.bskpPageViewer.superclass.initComponent.call(this);
+		},
+		onAfterRender:function(c){
+				c.getEl().on({
+					contextmenu:this.onContextmenu
+				})
+		},
+		onContextmenu:function(e){
+				if(!this.CMenu){
+						this.CMenu=new Ext.menu.Menu({
+								items:[{
+									text:'页面组件列表',
+									handler:function(){
+										
+									}
+								},'-',{
+									text:'页面数据引擎列表'
+								}]
+						})
+				}
+				e.stopEvent();
+				this.CMenu.showAt(e.getXY());
 		}
 }),
 
