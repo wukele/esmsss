@@ -13,7 +13,7 @@ public class PageUtilDao extends EmsDao {
 					return   getHibernateTemplate().find("select new com.admin.page.struct.RealTimeDeviceDataStruct(" +
 							"dt.deviceId,dt.deviceName,dt.deviceType,dt.deviceIp,dt.collectTaskId," +
 							"dv.variableName,rtd.deviceVarId,rtd.varPhyValue,rtd.varLogicValue,rtd.collectTime" +
-							")  from DeviceTable as dt,DeviceVariable as dv,RealTimeData as rtd where dt.deviceId=" +
-							"RealTimeData as rtd where dt.deviceId=dv.deviceId  and  dv.deviceVariableId=rtd.deviceVarId");
+							")  from DeviceTable as dt,DeviceVariable as dv,RealTimeData as rtd " +
+							" where dt.deviceId=dv.deviceId  and  dv.deviceVariableId=rtd.deviceVarId");
 		}
 }

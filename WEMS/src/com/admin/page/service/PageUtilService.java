@@ -2,6 +2,8 @@ package com.admin.page.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
 import com.admin.page.dao.PageUtilDao;
@@ -16,7 +18,7 @@ public class PageUtilService {
 			 			return uDao.findAllRealTimeData();
 		 }
 
-		 
+		 @Resource(name="PageUtilDao")
 		public void setuDao(PageUtilDao uDao) {
 			this.uDao = uDao;
 		}
