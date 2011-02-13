@@ -299,7 +299,7 @@
 									xtype : 'combo',
 									width : 60,
 									fieldLabel : '״̬',
-									name : 'isactive',
+									name : 'flag',
 									store : new Ext.data.JsonStore({
 												proxy : new Ext.data.HttpProxy(
 														{
