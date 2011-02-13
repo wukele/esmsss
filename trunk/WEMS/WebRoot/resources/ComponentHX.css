@@ -1,0 +1,38 @@
+/**----------------导航条---------------**/
+.x-navigator {
+	
+}
+
+.x-navigator-img {
+	position: absolute;
+	z-index: -2;
+}
+
+.x-navigator-items {
+	float: left;
+}
+
+.x-navigator-item {
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+	text-align: center;
+}
+
+.x-navigator-side {
+	float: left;
+	width: 5px;
+}
+
+.fl {
+	float: left;
+}
+
+.cl {
+	clear: left;
+}
+
+.cb {
+	clear: both;
+}
+/**------------------导航条结束--------------------**/
