@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../raphael.js"></script>
+<script type="text/javascript">
+var paper=null;
+function reset(){
+	if(!paper) paper=Raphael("canvas", 640, 480);
+	paper.clear();
+	paper.rect(0,0,640,480,10).attr({fill:"#FFFFFF", stroke:"#CCCCCC"});
+}
+
+var paper2=null;
+function reset2(){
+	if(!paper2) paper2=Raphael("canvas2", 200, 480);
+	paper2.clear();
+	paper2.rect(0,0,200,480,10).attr({fill:"#FFFFFF", stroke:"#CCCCCC"});
+}
+
+	function test2(){
+		reset();
+		// 加载图片，显示提示
+		paper.image("gauge1.jpeg", 50, 50, 247, 204).attr("title", "仪表");
+	}
+	function test3(){
+		reset();
+		// 显示中英文文字并设置字号，url连接（在IE系列浏览器中url无效）
+		paper.text(50, 50, "I love raphael!").attr({"font-size":16});;
+		paper.text(50, 150, "我爱谷歌！").attr({"font-size":16, "text-anchor":"start", href:"http://www.google.com"});;
+	}
+
+	 Raphael.fn.ball = function (x, y, r, hue) {
+         hue = hue || 0;
+         return this.set(
+             this.ellipse(x, y + r - r / 5, r, r / 2).attr({fill: "rhsb(" + hue + ", 1, .25)-hsb(" + hue + ", 1, .25)", stroke: "none", opacity: 0}),
+             this.ellipse(x, y, r, r).attr({fill: "r(.5,.9)hsb(" + hue + ", 1, .75)-hsb(" + hue + ", .5, .25)", stroke: "none"}),
+             this.ellipse(x, y, r - r / 5, r - r / 20).attr({stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0})
+         );
+     };
+     
+  	function test4(){
+		reset();
+		// 组合效果
+		paper.ball(150, 180, 150, Math.random());
+	}
+
+	 Raphael.fn.ball2 = function (x, y, r, fromColor, toColor) {
+		 toColor = toColor || fromColor;
+         return this.set(
+             this.circle(x, y, r).attr({fill: "r"+fromColor+"-"+toColor, stroke: "none"})
+         );
+     };
+
+ 	function test5(){
+		reset();
+		// 渐变效果
+		paper.ball2(150, 180, 50, "#FF0000", "#000000");
+	}
+     
+ 	function test6(){
+ 	 	// 位图旋转，效果很差
+		reset();
+		paper.image("gauge2.png", 50, 50, 400, 400).attr("title", "仪表");
+		var p=paper.image("point2.png", 242, 247, 130, 26).attr("title", "指针");
+
+		var i=0;
+	 	function step(){
+			 i++;
+			 p.rotate(i, 235, 235);
+			 if(i<360) setTimeout(step,100);
+		 }
+		 setTimeout(step,50);
+	}
+     
+ 	function test8(){
+		reset();
+		var stepEnabled=true;
+		var c_bg=paper.circle(0,0,150).attr({fill:"#2a536b"});
+		var c=paper.circle(0,0,140).attr({fill:"r#06679e-#15394e", stroke: "none"});
+		var light=paper.ellipse(0, 0, 100, 80).attr({fill: "r#FFFFFF-#2a536b", stroke: "none", opacity: 0})
+	 	var p=paper.path("m-25,0l0,-100l25,-25l25,25l0,100l-50,0z").attr({stroke: "#000000", fill:"#FFFF00","stroke-width":3})
+	 	p.mouseover(function(evt){
+	 		stepEnabled=false;
+		 	});
+	 	p.mouseout(function(evt){
+	 		stepEnabled=true;
+		 	});
+	 	c_bg.translate(200,200);
+	 	c.translate(200,200);
+	 	light.translate(200,150);
+	 	p.translate(200,200);
+	 	var i=0;
+	 	function step(){
+		 	if(stepEnabled){
+				 i++;
+				 if(i>=360) i=0; 
+				 p.rotate(i, 200, 200);
+		 	}
+			 setTimeout(step,30);
+		 }
+		 setTimeout(step,50);
+	}
+ 	
+ 	function test9(){
+		reset2();
+		// 渐变效果
+		paper2.circle(100, 100, 80).attr({fill: "r#FF0000-#000000", stroke: "none"});
+	}
+</script>
+</head>
+<body bgcolor="#cccccc">
+	<button onclick="test2()">加载位图</button>
+	<button onclick="test3()">显示文字</button>
+	<button onclick="test4()">组合视效</button>
+	<button onclick="test5()">渐变效果</button>
+	<button onclick="test6()">位图旋转</button>
+	<button onclick="test8()">矢量图旋转(指针对鼠标事件有响应)</button>
+	<button onclick="test9()">第二画布绘图</button>
+	<div id="canvases">
+	<span id="canvas" style="width:640px; height:480px;"></span>
+	<span id="canvas2" style="width:200px; height:480px;"></span>
+	</div>
+</body>
+</html>
