@@ -211,11 +211,76 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 									handler:function(){
 										   var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
 										   if(!currentPage){
-										   				return false;
+										   				Ext.example.msg('错误','未选取页面');
+										   				return 1;
 										   }
+										   
+										    if(!this.PageResourceWindow){
+											 			this.PageResourceWindow=new  Ext.Window({
+											 							width:597,
+											 							height:400,
+											 							autoScroll:true,
+											 							closeAction:'hide',
+						  												resizable:false,
+											 							items:[new  Ext.grid.GridPanel({
+											 									width:580,
+											 									height:367,
+											 									border:false,
+											 									sm:new  Ext.grid.RowSelectionModel({
+											 											singleSelect:true
+											 									}),
+											 									cm:new  Ext.grid.ColumnModel({
+											 											defaults:{
+											 														width:60,
+																									menuDisabled:true
+											 											},
+											 											columns:[
+											 											{header:'资源ID',dataIndex:'resourceId'},
+											 											{header:'页面资源ID',dataIndex:'pageResource'},
+											 											{header:'Xtype',dataIndex:'xtypeCode'},
+											 											{header:'Axis Y',dataIndex:'resourceTop'},
+											 											{header:'Axis X',dataIndex:'resourceLeft'},
+											 											{header:'Width',dataIndex:'resourceWidth'},
+											 											{header:'Height',dataIndex:'resourceHeight'},
+											 											{header:'数据配置ID',dataIndex:'config'}
+											 											]
+											 									}),
+											 									store:new Ext.data.JsonStore({
+											 											 url:'QryBspkPageResource.action',
+											 											 baseParams:{
+											 											 			 bspk_page_resource:currentPage.get('bspkPageResource')
+											 											 },
+											 											 root:'page_res',
+											 											 fields:[
+											 											 {name:'resourceId',mapping:'resourceId',type:'int'},
+											 											 {name:'pageResource',mapping:'pageResource'},
+											 											 {name:'xtypeCode',mapping:'xtypeCode'},
+											 											 {name:'resourceTop',mapping:'resourceTop'},
+											 											 {name:'resourceLeft',mapping:'resourceLeft'},
+											 											 {name:'resourceWidth',mapping:'resourceWidth'},
+											 											 {name:'resourceHeight',mapping:'resourceHeight'},
+											 											 {name:'valueId',mapping:'valueId'},
+											 											 {name:'config',mapping:'config'}
+											 											 ],
+											 											 autoLoad:true
+											 									})
+											 							})]
+											 			});
+											 }else{
+											 			this.PageResourceWindow.items.items[0].store.load({
+											 						params:{
+											 								   bspk_page_resource:currentPage.get('bspkPageResource')
+											 						}
+											 			});
+														
+											 }
+											 
+											 this.PageResourceWindow.show();
+										   
 									}
 								},'-',{
-									text:'页面数据引擎列表'
+									text:'页面数据引擎列表',
+									handler:
 								}]
 						})
 				}

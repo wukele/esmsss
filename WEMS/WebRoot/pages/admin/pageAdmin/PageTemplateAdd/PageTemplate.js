@@ -106,7 +106,7 @@ Ems.page.PageTempateMangerPan=Ext.extend(Ext.FormPanel,{
 	                        			page_template_panel.store.load();
 	                    			},
 	                    			failure: function(form, action){
-	                    				fp.getForm().reset();
+	                    				form.reset();
 	                    			}
 	                			});
                 		}
