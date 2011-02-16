@@ -107,6 +107,9 @@
 			</action>
 			<action name="qryAllRealTimeData" class="PageUtilAction" method="GetRealTimeData">
 					<result type="json"></result>
+			</action>
+			<action name="QryBspkPageResource" class="BspkPageResourceAction"   method="QryBspkPageResource">
+					<result type="json"></result>
 			</action>			
 	</package>
 </struts>    
