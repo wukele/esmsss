@@ -44,14 +44,18 @@ function clearAllTask(){
 		   }
 		   var doc=  Ext.getCmp('content-panel').getEl().dom.firstChild.firstChild;
 		   clearAllNode(doc);
-		   while(Ext.DomQuery.selectNode('.x-window')){
+		 /*  while(Ext.DomQuery.selectNode('.x-window')){
 		   		el=Ext.DomQuery.selectNode('.x-window')
 		   		  el.parentNode.removeChild(el);
 		   }
 		   while(Ext.DomQuery.selectNode('.x-shadow')){
 		   		el=Ext.DomQuery.selectNode('.x-shadow')
 		   		  el.parentNode.removeChild(el);
-		   }
+		   }*/
+		   
+		   Ext.WindowMgr.each(function(win){
+		   			win.close();
+		   });
 		 
 }
 
