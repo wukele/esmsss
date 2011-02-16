@@ -78,6 +78,8 @@ Ext.onReady(function(){
         }
     });
 
+    
+    
     function changeStore(){
     	
     	if(store.getCount()>=storeCount)
