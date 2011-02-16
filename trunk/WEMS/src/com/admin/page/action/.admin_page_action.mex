@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="pageAction" location="500,885" size="280,420">
+    <action name="BspkPreview" location="65,57" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="BspkPageViewer.jsp" />
+      </result>
+    </action>
+    <action name="TplPreviewer" location="65,232" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="TplPagePreviewer.jsp" />
+      </result>
+    </action>
+    <action name="TplPageInit" location="65,337" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="TplPageResource.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="pageAdmin" location="20,9" size="950,771">
+    <action name="SysModuleMgr" location="15,23" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="SysModuleMgrAdd" location="260,23" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="SysModuleMgrDel" location="505,23" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="SysModuleMgrUps" location="750,23" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="SysModuleMgrUpdate" location="15,163" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="PageTemplateActionUpLoad" location="260,163" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="remove_multiple_page_template_img" location="505,163" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="tpl_page_qry" location="750,163" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="PageTemplateMgrQry" location="15,303" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="TplPageQry" location="260,303" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="TplPageDelete" location="505,303" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="TplPageModify" location="750,303" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="tplCompResourceQry" location="15,443" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="tplCompResourceAdd" location="260,443" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="addTmpPageResource" location="505,443" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="BskpInfoPage" location="750,443" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="addTmpPageResource" location="15,583" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="CompList" location="260,583" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="ModifyTplComp" location="505,583" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="removeTplComponent" location="750,583" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="tplCreateBspkPage" location="15,723" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="removeDataPage" location="260,723" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="qryAllRealTimeData" location="505,723" size="150,41">
+      <result name="success" />
+    </action>
+  </package>
+  <webResource name="BspkPageViewer.jsp" path="/pages/admin/pageAdmin/BspkPagePreViewer/BspkPageViewer.jsp" location="9,905" size="150,55" />
+  <webResource name="TplPagePreviewer.jsp" path="/pages/admin/pageAdmin/TplPagePreview/TplPagePreviewer.jsp" location="54,1080" size="150,55" />
+  <webResource name="TplPageResource.jsp" path="/pages/admin/pageAdmin/TplPageResource/TplPageResource.jsp" location="820,1185" size="150,55" />
+</Struts2Diagram>
+
