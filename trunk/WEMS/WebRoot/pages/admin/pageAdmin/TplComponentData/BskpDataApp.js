@@ -104,7 +104,8 @@ Ems.page.DataPanel=Ext.extend(Ext.TabPanel,{
 		initComponent:function(){
 				this.items=[{
 						xtype:'bskpPagePanel',
-						title:'临时页面'
+						title:'临时页面',
+						id:'bskpPagePanel'
 				}]; 
 				Ems.page.DataPanel.superclass.initComponent.call(this);
 		}
@@ -208,7 +209,10 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 								items:[{
 									text:'页面组件列表',
 									handler:function(){
-										
+										   var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
+										   if(!currentPage){
+										   				return false;
+										   }
 									}
 								},'-',{
 									text:'页面数据引擎列表'
