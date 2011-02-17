@@ -174,6 +174,18 @@ Ems.page.RealTimeDataWindow=Ext.extend(Ext.Window,{
 
 
 
+Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
+		 	height:800,
+			width:800,
+			title:'设备数据',
+			border:false,
+			initComponent:function(){
+					    	
+			}
+});
+
+Ext.reg('devicePanel',Ems.page.DeviceDataPanel);
+
 
 
 
@@ -208,7 +220,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 						this.CMenu=new Ext.menu.Menu({
 								items:[{
 									text:'页面组件列表',
-									handler:function(){
+									handler:function(e){
 										   var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
 										   if(!currentPage){
 										   				Ext.example.msg('错误','未选取页面');
@@ -216,13 +228,38 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										   }
 										   
 										    if(!this.PageResourceWindow){
+										    			var  ResTool=new  Ext.Toolbar({
+										    					items:[{
+										    							text:'组件数据绑定',
+										    							iconCls:'silk-connect',
+										    							handler:function(){
+										    										var   record=this.ownerCt.ownerCt.getSelectionModel().getSelected();
+										    										if(!record){
+										    												Ext.example.msg('错误','请选定需绑定的组件');
+										    												return 1;
+										    										}
+										    										if(!this.DeviceWindow){
+										    													this.DeviceWindow=new  Ems.page.DeviceDataPanel();
+										    										}
+										    							}
+										    					},'-',{
+										    						     text:'组件数据绑定关系解除',
+										    						     iconCls:'silk-delete',
+										    						     handler:function(){
+										    						     			
+										    						     }
+										    					}]
+										    			})
+										    	
 											 			this.PageResourceWindow=new  Ext.Window({
 											 							width:597,
 											 							height:400,
 											 							autoScroll:true,
 											 							closeAction:'hide',
 						  												resizable:false,
+						  												title:'页面组件',
 											 							items:[new  Ext.grid.GridPanel({
+											 									tbar:ResTool,
 											 									width:580,
 											 									height:367,
 											 									border:false,
@@ -242,7 +279,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 											 											{header:'Axis X',dataIndex:'resourceLeft'},
 											 											{header:'Width',dataIndex:'resourceWidth'},
 											 											{header:'Height',dataIndex:'resourceHeight'},
-											 											{header:'数据配置ID',dataIndex:'config'}
+											 											{header:'数据配置ID',dataIndex:'config',width:80}
 											 											]
 											 									}),
 											 									store:new Ext.data.JsonStore({
@@ -275,12 +312,14 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 														
 											 }
 											 
-											 this.PageResourceWindow.show();
+											 this.PageResourceWindow.show(e.getEl());
 										   
 									}
 								},'-',{
 									text:'页面数据引擎列表',
-									handler:
+									handler:function(){
+										
+									}
 								}]
 						})
 				}
