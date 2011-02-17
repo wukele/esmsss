@@ -117,7 +117,14 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 							Ext.Ajax.request({
 								url:'ModifyTplComp.action',
 								method:'post',
-								params:this.data.data
+								params:this.data.data,
+								success:function(result){
+									            var  res=Ext.decode(result.responseText);
+												//Ext.example.msg('ok',''+res.comp.resourceId);
+									            var  cmp=Ext.getCmp(res.comp.resourceId);
+									            cmp.x=res.comp.resourceLeft;
+									            cmp.y=res.comp.resourceTop;
+								}
 							});
 						};
 				   }
