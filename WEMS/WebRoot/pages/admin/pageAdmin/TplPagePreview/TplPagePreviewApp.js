@@ -73,15 +73,54 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 			   this.on({
 			   		scope:this,
 			   		afterrender:this.onAfterRender
-			   })
+			   });
+			  
 		},
-		
 		onAfterRender:function(){
 			  
 			   this.getEl().on({
 			   		 scope: this,
             		 contextmenu: this.onContextMenu
-			   })
+			   });
+			   
+			   //add by ffmmx
+			   // implement mouse drag
+			   this.ddzone=new Ext.dd.DDTarget(this.el,'dd');
+			   if(this.items)
+				   for(i=0;i<this.items.length;i++){
+						var resourceEle=this.items.items[i];
+					   	var rec=new Ext.data.Record({},resourceEle.id);
+					   	
+						rec.set('comp.resourceId',resourceEle.id);
+						rec.set('comp.xtypeCode',resourceEle.xtype);
+					  	rec.set('comp.resourceTop',resourceEle.y);
+					  	rec.set('comp.resourceLeft',resourceEle.x);
+					  	rec.set('comp.resourceWidth',resourceEle.width);
+					  	rec.set('comp.resourceHeight',resourceEle.height);
+					  	rec.set('comp.pageResource',resourceEle.plugins.pageResource);
+			  			
+					   	resourceEle.data=rec;
+					   
+					   
+					   var src = new Ext.dd.DragSource(resourceEle.el,{group:'dd',data:resourceEle.data,src:resourceEle});
+						src.afterDragDrop=function(target,e,id){
+							var dele=Ext.get(id);
+							var el = Ext.get(this.getEl());
+							el.setX(e.xy[0]);
+							el.setY(e.xy[1]);
+							
+							this.data.set('comp.resourceTop',el.getTop()-dele.getTop());
+							this.data.set('comp.resourceLeft',el.getLeft()-dele.getLeft());
+						  	
+							this.src.plugins.ewindow.EditForm.getForm().loadRecord(rec);
+							
+							Ext.Ajax.request({
+								url:'ModifyTplComp.action',
+								method:'post',
+								params:this.data.data
+							});
+						};
+				   }
 		},
 		onContextMenu:function(e,t,o){
 			   e.stopEvent();
