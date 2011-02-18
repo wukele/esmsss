@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>测试状态图标</title>
+<link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css" />
+<script type="text/javascript" src="../../ext3/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="../../ext3/ext-all.js"></script>
+<script type="text/javascript" src="./EmsComponents.js"></script>
+<script type="text/javascript" src="./StateIcon.js"></script>
+<script type="text/javascript">
+	Ext.ns("app");
+	
+	app.si=null;
+	app.si3=null;
+	
+	// 初始化容器
+	app.initContainer=function(){
+		// 设置容器为拖放目标
+		var dropTargetEl =  document.getElementById("divTest");
+		var dropTarget = new Ext.dd.DropTarget(dropTargetEl, {
+	    notifyDrop  : function(ddSource, e, data){
+			Ext.get(ddSource.id).setXY(e.getXY());  // 移动源组件到目标位置
+	        return(true);
+	    }
+		});
+	};
+	
+	// 定义组件快捷菜单
+	app.contextMenu = new Ext.menu.Menu({
+		items: [{text: '设置', handler: function(e){
+				alert("功能暂未实现");
+			}},
+			{
+				text: '删除',
+			handler: function(e){
+				alert("功能暂未实现");
+			}
+		}]
+	});
+
+	
+	// 页面就绪时执行
+	Ext.onReady(function(){
+		// 初始化容器为拖放目标
+		app.initContainer();
+		// 初始化第一个状态图标
+	    app.si=new Ems.component.StateIcon({
+				developMode: true,
+				x:130,		
+				y:100,
+				contextMenu: app.contextMenu
+			});
+	    app.si.render(document.getElementById("divTest"));
+		
+		// 初始化第二个状态图标
+	    app.si2=new Ems.component.StateIcon({
+				developMode: true,
+				x:200,
+				y:46,
+				iconType: "machine",
+				contextMenu: app.contextMenu
+			});
+	    app.si2.render(document.getElementById("divTest"));
+		
+		// 初始化第三个状态图标
+	    app.si3=new Ems.component.StateIcon({
+				x:25,
+				y:100,
+				iconType: "temperature",
+				iconExt: ".jpeg"
+			});
+	    app.si3.render(document.getElementById("divTest"));
+		
+		// 设置状态
+		app.si.setState(1);
+		app.si2.setState("run", "运行中");
+		app.si3.setState(2, "超负荷");
+	});
+	
+	
+
+
+
+			
+</script>
+
+</head>
+<body>
+	<h3>网络监控图</h3>
+	<div id="divTest" style="position:relative;"><img src="net_top.jpeg" border="0"></img></div>
+<div>
+		
+<hr/>
+	    <form name="form1" method="post" action="">
+		  <div>请选择状态数据，观察上图的变化。请拖放、点击、Ctrl+光标键移动选中的组件。</div>
+		路由器运行状态：
+	      <select name="select2" size="5" onClick="app.si2.setState(this.value)" onKeyUp="app.si2.setState(this.value)">
+	        <option value="unknown">unknown</option>
+	        <option value="run">run</option>
+	        <option value="stop">stop</option>
+	        <option value="error">error</option>
+          </select>
+		服务器负荷：
+	      <select name="select3" size="5" onClick="app.si3.setState(this.value.split(' ')[0], this.value.split(' ')[1])"
+		  	onKeyUp="app.si3.setState(this.value.split(" ")[0], this.value.split(" ")[1])">
+	        <option value="0 闲置">0 闲置</option>
+	        <option value="1 正常">1 正常</option>
+	        <option value="2 超负荷">2 超负荷</option>
+          </select>
+		交换机状态：
+	      <select name="select1" size="5" onClick="app.si.setState(this.value)" onKeyUp="app.si.setState(this.value)">
+	        <option value="0">0</option>
+	        <option value="1">1</option>
+	        <option value="2">2</option>
+          </select>
+		  <br />
+  </form>
+    </div>
+
+
+</body>
+</html>
