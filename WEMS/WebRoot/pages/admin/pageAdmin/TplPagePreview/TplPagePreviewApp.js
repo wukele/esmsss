@@ -101,8 +101,28 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 			  			
 					   	resourceEle.data=rec;
 					   
-					   
 					   var src = new Ext.dd.DragSource(resourceEle.el,{group:'dd',data:resourceEle.data,src:resourceEle});
+					   
+					   src.startDrag=function(x,y){
+					   		var el=Ext.get(this.el)
+					   		var pel = this.proxy.getEl();
+					   		
+					   		var cc;
+					   		
+				   		
+				   			cc=el.dom.cloneNode(true);
+				   			cc.id='cc'+el.dom.id;
+				   			cc.style.left="0";
+				   			cc.style.top="0";
+				   			this.proxy.ghost.dom.innerHTML=cc.outerHTML;
+				   			
+					   		var gwidth=this.proxy.ghost.getWidth();
+					   		var gheight=this.proxy.ghost.getHeight();
+					   		this.proxy.ghost.setX(x);
+					   		this.proxy.ghost.setY(y);
+					   		
+					   };
+
 						src.afterDragDrop=function(target,e,id){
 							var dele=Ext.get(id);
 							var el = Ext.get(this.getEl());
@@ -112,8 +132,6 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 							this.data.set('comp.resourceTop',el.getTop()-dele.getTop());
 							this.data.set('comp.resourceLeft',el.getLeft()-dele.getLeft());
 						  	
-							this.src.plugins.ewindow.EditForm.getForm().loadRecord(rec);
-							
 							Ext.Ajax.request({
 								url:'ModifyTplComp.action',
 								method:'post',
