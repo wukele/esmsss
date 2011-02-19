@@ -114,8 +114,8 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 				   			cc.id='cc'+el.dom.id;
 				   			cc.style.left="0";
 				   			cc.style.top="0";
-				   			this.proxy.ghost.dom.innerHTML=cc.outerHTML;
-				   			
+				   			this.proxy.ghost.dom.innerHTML=cc.outerHTML?cc.outerHTML: new XMLSerializer().serializeToString(cc);
+				   			  
 					   		var gwidth=this.proxy.ghost.getWidth();
 					   		var gheight=this.proxy.ghost.getHeight();
 					   		this.proxy.ghost.setX(x);
