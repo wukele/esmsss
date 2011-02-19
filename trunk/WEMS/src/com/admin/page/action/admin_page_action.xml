@@ -110,6 +110,9 @@
 			</action>
 			<action name="QryBspkPageResource" class="BspkPageResourceAction"   method="QryBspkPageResource">
 					<result type="json"></result>
-			</action>			
+			</action>
+			<action name="DeviceInfoQry" class="PageUtilAction" method="GetDeviceTable">
+					<result type="json"></result>
+			</action>		
 	</package>
 </struts>    

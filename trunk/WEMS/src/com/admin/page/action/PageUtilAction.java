@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.admin.page.service.PageUtilService;
 import com.admin.page.struct.RealTimeDeviceDataStruct;
+import com.ems.entity.DeviceTable;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Component("PageUtilAction")
@@ -18,6 +19,13 @@ public class PageUtilAction extends ActionSupport {
 			private PageUtilService  pageService;
 			
 			private List<RealTimeDeviceDataStruct>    real_time_datas;
+			
+			public List<DeviceTable> getDeviceInfos() {
+				return deviceInfos;
+			}
+
+
+			private  List<DeviceTable>  deviceInfos;
 			
 			public List<RealTimeDeviceDataStruct> getReal_time_datas() {
 				return real_time_datas;
@@ -32,4 +40,10 @@ public class PageUtilAction extends ActionSupport {
 					real_time_datas=pageService.GetRealTimeDeviceData();
 					return SUCCESS;
 			}
+			
+			
+		     public String   GetDeviceTable(){
+		    	 	deviceInfos=pageService.GetDeviceInfo();
+		    	    return SUCCESS;
+		     }
 }
