@@ -35,5 +35,10 @@
                 <comment>活动标志</comment>
             </column>
         </property>
+        <property name="roomId" type="java.lang.String">
+            <column name="room_id" length="20">
+                <comment>房间号</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>
