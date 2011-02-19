@@ -20,6 +20,12 @@ public class PageUtilAction extends ActionSupport {
 			
 			private List<RealTimeDeviceDataStruct>    real_time_datas;
 			
+			private Integer   device_id;
+			
+			public void setDevice_id(Integer deviceId) {
+				device_id = deviceId;
+			}
+
 			public List<DeviceTable> getDeviceInfos() {
 				return deviceInfos;
 			}
@@ -39,6 +45,11 @@ public class PageUtilAction extends ActionSupport {
 			public  String  GetRealTimeData(){
 					real_time_datas=pageService.GetRealTimeDeviceData();
 					return SUCCESS;
+			}
+			
+			public  String  QryRtdBydeviceId(){
+					real_time_datas=pageService.GetRealTimeDeviceDataBYDev(device_id);
+					return  SUCCESS;
 			}
 			
 			
