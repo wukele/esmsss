@@ -66,7 +66,7 @@
     <action name="BskpInfoPage" location="750,443" size="150,41">
       <result name="success" />
     </action>
-    <action name="addTmpPageResource" location="15,583" size="150,41">
+    <action name="addTmpPageResource" location="505,443" size="150,41">
       <result name="success" />
     </action>
     <action name="CompList" location="260,583" size="150,41">
@@ -85,6 +85,9 @@
       <result name="success" />
     </action>
     <action name="qryAllRealTimeData" location="505,723" size="150,41">
+      <result name="success" />
+    </action>
+    <action name="QryBspkPageResource" location="0,0" size="0,0">
       <result name="success" />
     </action>
   </package>
