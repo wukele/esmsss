@@ -29,4 +29,10 @@ public class PageUtilService {
 			
 			return   uDao.findDeviceTable();
 		}
+
+		public List<RealTimeDeviceDataStruct> GetRealTimeDeviceDataBYDev(
+				Integer deviceId) {
+			// TODO Auto-generated method stub
+			return uDao.findRealTimeDeviceDataBYDev(deviceId);
+		}
 }
