@@ -14,6 +14,7 @@ public class DeviceTable implements java.io.Serializable {
 	private String deviceIp;
 	private Integer collectTaskId;
 	private Short actionFlag;
+	private String roomId;
 
 	// Constructors
 
@@ -21,7 +22,7 @@ public class DeviceTable implements java.io.Serializable {
 	public DeviceTable() {
 	}
 
-	/** full constructor */
+	/** minimal constructor */
 	public DeviceTable(String deviceName, String deviceType, String deviceIp,
 			Integer collectTaskId, Short actionFlag) {
 		this.deviceName = deviceName;
@@ -29,6 +30,17 @@ public class DeviceTable implements java.io.Serializable {
 		this.deviceIp = deviceIp;
 		this.collectTaskId = collectTaskId;
 		this.actionFlag = actionFlag;
+	}
+
+	/** full constructor */
+	public DeviceTable(String deviceName, String deviceType, String deviceIp,
+			Integer collectTaskId, Short actionFlag, String roomId) {
+		this.deviceName = deviceName;
+		this.deviceType = deviceType;
+		this.deviceIp = deviceIp;
+		this.collectTaskId = collectTaskId;
+		this.actionFlag = actionFlag;
+		this.roomId = roomId;
 	}
 
 	// Property accessors
@@ -79,6 +91,14 @@ public class DeviceTable implements java.io.Serializable {
 
 	public void setActionFlag(Short actionFlag) {
 		this.actionFlag = actionFlag;
+	}
+
+	public String getRoomId() {
+		return this.roomId;
+	}
+
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
 	}
 
 }
