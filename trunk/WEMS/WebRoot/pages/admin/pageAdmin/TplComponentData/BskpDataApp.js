@@ -175,13 +175,163 @@ Ems.page.RealTimeDataWindow=Ext.extend(Ext.Window,{
 
 
 Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
-		 	height:800,
-			width:800,
+		 	height:600,
+			width:1024,
 			title:'设备数据',
 			border:false,
+			layout:'column',
+			
+			setPageRes:function(res){
+						this.record=res;
+			},
+			
 			initComponent:function(){
-					    	
-			}
+							this.DeviceStore=new Ext.data.GroupingStore({
+										proxy:new Ext.data.HttpProxy({
+													url:'DeviceInfoQry.action'
+										}),
+										reader:new Ext.data.JsonReader({
+													 fields:[
+													 {name:'deviceId',mapping:'deviceId',type:'int'},
+													 {name:'deviceName',mapping:'deviceName'},
+													 {name:'deviceType',mapping:'deviceType'},
+													 {name:'deviceIp',mapping:'deviceIp'},
+													 {name:'collectTaskId',mapping:'collectTaskId'},
+													 {name:'actionFlag',mapping:'actionFlag'},
+													 {name:'roomId',mapping:'roomId'}
+													 ],
+													 root:'deviceInfos'
+										}),
+										groupField:'deviceType',
+										autoLoad:true
+							});
+							this.DeviceView=new Ext.grid.GridPanel({
+									columnWidth:0.3,
+								    store:this.DeviceStore,
+								    margins:'5 5 5 5',
+								    height:595,
+								    frame:true,
+								    autoScroll:true,
+								    sm:new Ext.grid.RowSelectionModel({
+								    			singleSelect:true
+								    }),
+								    cm:new Ext.grid.ColumnModel({
+								    			defaults:{
+								    						width:60,
+								    						menuDisabled:true
+								    			},
+								    			columns:[
+								    			{header:'设备ID',dataIndex:'deviceId'},
+								    			{header:'设备名称',dataIndex:'deviceName'},
+								    			{header:'设备类型',dataIndex:'deviceType'},
+								    			{header:'设备IP',dataIndex:'deviceIp',width:100},
+								    			{header:'采集任务ID',dataIndex:'collectTaskId'},
+								    			{header:'是否在用',dataIndex:'actionFlag',renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+								    																											if(value){
+								    																														return  '是';
+								    																											}else{
+								    																														return   '否';
+								    																											}
+								    																								 }
+								    			},
+								    			{header:'房间ID',dataIndex:'roomId'}
+								    			]
+								    }),
+								    view: new Ext.grid.GroupingView({
+            								forceFit:true,
+            								groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
+        							})
+							});
+							this.deviceVarStore=new Ext.data.JsonStore({
+									url:'QryRealTimeDeviceVarible.action',
+									fields:[
+											{name:'deviceId',mapping:'deviceId',type:'int'},
+											{name:'deviceName',mapping:'deviceName'},
+											{name:'deviceType',mapping:'deviceType'},
+											{name:'deviceIp',mapping:'deviceIp'},
+											{name:'collectTaskId',mapping:'collectTaskId',type:'int'},
+											{name:'variableName',mapping:'variableName'},
+											{name:'deviceVarId',mapping:'deviceVarId'},
+											{name:'varPhyValue',mapping:'varPhyValue'},
+											{name:'varLogicValue',mapping:'varLogicValue'},
+											{name:'collectTime',mapping:'collectTime',type:'date'}
+									],
+									root:'real_time_datas'
+							});
+							this.deviceVarGrid=new  Ext.grid.GridPanel({
+									columnWidth:0.55,
+									margins:'5 5 5 5',
+									height:590,
+									frame:true,
+									store:this.deviceVarStore,
+									autoScroll:true,
+									tbar:new   Ext.Toolbar({
+											items:[{
+														text:'绑定',
+														iconCls:'silk-connect',
+														handler:function(){
+																	var record=	this.ownerCt.ownerCt.getSelectionModel().getSelected();
+																	if(!record){
+																			Ext.example.msg('警告','请选择需绑定的设备变量');
+																			return 1;
+																	}
+																	var  v=this.ownerCt.ownerCt.ownerCt.record;
+																	var  vid=v.get('valueId');
+																	var  req={};
+																	if(!vid){
+																				req.device_value_id=record.get('deviceVarId');
+																				req.is_create_new=true;
+																	}else{
+																				req.device_value_id=record.get('deviceVarId');
+																				req.is_create_new=false;
+																				req.value_id=vid;
+																	}
+																	Ext.Ajax.request({
+																				url:'BindDeviceVar.action',
+																				params:req,
+																				success:function(){
+																							Ext.example.msg('OK','组件数据绑定成功');
+																				}
+																	})
+														}
+											}]
+									}),
+									cm:new Ext.grid.ColumnModel({
+											defaults:{
+												 width:30,
+												 menuDisabled:true
+											},
+											columns:[
+												{header:'设备变量ID',dataIndex:'deviceVarId'},
+												{header:'设备变量名称',dataIndex:'variableName'},
+												{header:'物理值',dataIndex:'varPhyValue'},
+												{header:'逻辑值',dataIndex:'varLogicValue'},
+												{header:'采集时间',dataIndex:'collectTime'}
+												]
+									}),
+									sm:new Ext.grid.RowSelectionModel({
+								    			singleSelect:true
+								    }), 
+								    viewConfig:{
+								    		 forceFit: true
+								    }
+							});
+							this.DeviceView.on({
+										click:this.onDeviceSelect
+							})
+							
+							this.items=[this.DeviceView,this.deviceVarGrid];
+					    	Ems.page.DeviceDataPanel.superclass.initComponent.call(this);
+			},
+			
+			onDeviceSelect:function(e){
+					  var   sd=this.getSelectionModel().getSelected();
+					  this.ownerCt.deviceVarStore.load({
+					  			params:{
+					  						device_id:sd.get('deviceId')
+					  			}
+					  });
+			}	
 });
 
 Ext.reg('devicePanel',Ems.page.DeviceDataPanel);
@@ -203,7 +353,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 						  }
 						  this.DataWindow.show(this.getEl());
 					}
-				}];
+				}]; 
 				this.on({
 					afterrender:this.onAfterRender,
 					scope:this
@@ -239,8 +389,22 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    												return 1;
 										    										}
 										    										if(!this.DeviceWindow){
-										    													this.DeviceWindow=new  Ems.page.DeviceDataPanel();
+										    													this.DeviceDataPanel=new  Ems.page.DeviceDataPanel();
+										    													this.DeviceDataPanel.setPageRes(record); 
+										    													this.DeviceWindow=new Ext.Window({
+										    																	height:600,
+										    																	width:800,
+										    																	closeAction:'hide',
+										    																	resizable:false,
+										    																	items:[
+										    																			this.DeviceDataPanel
+										    																	]
+										    													})
+										    										}else{
+										    													this.DeviceDataPanel.setPageRes(record); 
 										    										}
+										    										Ext.WindowMgr.getActive().hide();
+										    										this.DeviceWindow.show();
 										    							}
 										    					},'-',{
 										    						     text:'组件数据绑定关系解除',
