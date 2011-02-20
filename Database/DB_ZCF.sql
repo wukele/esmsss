@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Localhost
-Source Server Version : 50045
+Source Server         : localhost
+Source Server Version : 50051
 Source Host           : localhost:3306
 Source Database       : protest
 
 Target Server Type    : MYSQL
-Target Server Version : 50045
+Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2011-02-11 20:34:11
+Date: 2011-02-20 15:30:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,7 +106,7 @@ CREATE TABLE `bspk_data_device` (
   `device_number` varchar(40) default NULL,
   `device_value_id` varchar(20) NOT NULL,
   PRIMARY KEY  (`rule_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bspk_data_device
@@ -126,14 +126,13 @@ CREATE TABLE `bspk_info_page` (
   `bspk_oper_code` varchar(10) default NULL,
   `bspk_page_type` varchar(2) NOT NULL,
   PRIMARY KEY  (`bspk_page_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10000030 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=10000033 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bspk_info_page
 -- ----------------------------
 INSERT INTO `bspk_info_page` VALUES ('10000001', 'UpsMain', 'image/power_10.jpg', null, '550', '10000001', 'UPS', 'NO');
-INSERT INTO `bspk_info_page` VALUES ('10000028', '电压1', 'upload/bgImage/PjnsabfLsd.bmp', '1050', '800', 'DY00001', null, 'E');
-INSERT INTO `bspk_info_page` VALUES ('10000029', '场地2', 'upload/bgImage/AJPdFnoBBK.bmp', '1024', '800', 'TY0001', null, 'E');
+INSERT INTO `bspk_info_page` VALUES ('10000032', '电力1', 'upload/bgImage/FwmGRsPliP.bmp', '1050', '800', 'DL00001', null, 'E');
 
 -- ----------------------------
 -- Table structure for `bspk_page_resource`
@@ -152,15 +151,14 @@ CREATE TABLE `bspk_page_resource` (
   `base_cls` varchar(20) default NULL,
   PRIMARY KEY  (`resource_id`),
   UNIQUE KEY `un_value_id_key` USING BTREE (`value_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1000052 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=1000054 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bspk_page_resource
 -- ----------------------------
 INSERT INTO `bspk_page_resource` VALUES ('1000001', '10000001', 'textfield', '478', '480', '60', '30', 'L10000011', '', '');
 INSERT INTO `bspk_page_resource` VALUES ('1000002', '10000001', 'textfield', '300', '400', '60', '30', 'L10000012', '', '');
-INSERT INTO `bspk_page_resource` VALUES ('1000050', 'DY00001', 'textfield', '335', '870', '79', '31', null, null, null);
-INSERT INTO `bspk_page_resource` VALUES ('1000051', 'TY0001', 'hotarea', '200', '200', '100', '100', null, null, null);
+INSERT INTO `bspk_page_resource` VALUES ('1000053', 'DL00001', 'hotarea', '299', '561', '100', '100', null, null, null);
 
 -- ----------------------------
 -- Table structure for `bspk_resource_config`
@@ -321,16 +319,17 @@ CREATE TABLE `device_table` (
   `device_ip` varchar(255) character set utf8 NOT NULL COMMENT '设备IP',
   `collect_task_id` int(11) NOT NULL COMMENT '采集任务ID',
   `action_flag` smallint(6) NOT NULL COMMENT '活动标志',
+  `room_id` varchar(20) character set utf8 default NULL COMMENT '房间号',
   PRIMARY KEY  (`device_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10000005 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of device_table
 -- ----------------------------
-INSERT INTO `device_table` VALUES ('10000001', '设备1', '电力', '192.168.1.100', '1000001', '1');
-INSERT INTO `device_table` VALUES ('10000002', '设备2', '电力', '192.168.1.102', '1000001', '1');
-INSERT INTO `device_table` VALUES ('10000003', '设备3', '漏水', '192.168.1.103', '1000003', '1');
-INSERT INTO `device_table` VALUES ('10000004', '设备4', '电力', '192.168.1.104', '1000002', '1');
+INSERT INTO `device_table` VALUES ('10000001', '设备1', '电力', '192.168.1.100', '1000001', '1', null);
+INSERT INTO `device_table` VALUES ('10000002', '设备2', '电力', '192.168.1.102', '1000001', '1', null);
+INSERT INTO `device_table` VALUES ('10000003', '设备3', '漏水', '192.168.1.103', '1000003', '1', null);
+INSERT INTO `device_table` VALUES ('10000004', '设备4', '电力', '192.168.1.104', '1000002', '1', null);
 
 -- ----------------------------
 -- Table structure for `device_variable`
@@ -629,7 +628,7 @@ CREATE TABLE `info_oper` (
 -- ----------------------------
 -- Records of info_oper
 -- ----------------------------
-INSERT INTO `info_oper` VALUES ('TEST01', '0000', '0001', '*', '张长风', '0:0:0:0:0:0:0:1', '123456', 'wifename', 'wifename', '1', '1', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', '1', null, null, null, null, '1', '0', '1', '999999', null, '1569', null, null, null, null, null, '100', '10', '0', '1', '0', '1', '1', '0:0:0:0:0:0:0:1');
+INSERT INTO `info_oper` VALUES ('TEST01', '0000', '0001', '*', '张长风', '0:0:0:0:0:0:0:1', '123456', 'wifename', 'wifename', '1', '1', '13527360252', 'whitecellcisco@hotmail.com', '13527360252', '1', null, null, null, null, '1', '0', '1', '999999', null, '1627', null, null, null, null, null, '100', '10', '0', '1', '0', '1', '1', '0:0:0:0:0:0:0:1');
 INSERT INTO `info_oper` VALUES ('TEST02', '0', null, null, 'dORA', '0:0:0:0:0:0:0:1', '123456', null, null, '1', 'CQ', '123245', null, '12345687', null, null, null, null, null, null, '0', null, '999999', null, '5', null, null, null, null, null, null, null, '0', null, null, null, '1', '0:0:0:0:0:0:0:1');
 
 -- ----------------------------
@@ -957,12 +956,13 @@ CREATE TABLE `tlp_page_image` (
   `image_desc` varchar(255) default NULL,
   `oper_no` varchar(20) default NULL,
   PRIMARY KEY  (`image_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tlp_page_image
 -- ----------------------------
-INSERT INTO `tlp_page_image` VALUES ('AJPdFnoBBK.bmp', '67', 'upload/bgImage', '场地', '1', null, null);
+INSERT INTO `tlp_page_image` VALUES ('uvnVWAGcPe.bmp', '76', 'upload/bgImage', '场地1', '1', null, null);
+INSERT INTO `tlp_page_image` VALUES ('FwmGRsPliP.bmp', '77', 'upload/bgImage', '电力', '1', null, null);
 
 -- ----------------------------
 -- Table structure for `tpl_info_page`
@@ -978,12 +978,12 @@ CREATE TABLE `tpl_info_page` (
   `tpl_oper_code` varchar(10) default NULL,
   `tpl_page_type` varchar(2) NOT NULL,
   PRIMARY KEY  (`tpl_page_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tpl_info_page
 -- ----------------------------
-INSERT INTO `tpl_info_page` VALUES ('36', '场地', 'upload/bgImage/AJPdFnoBBK.bmp', '1024', '800', 'TY0001', null, 'E');
+INSERT INTO `tpl_info_page` VALUES ('38', '电力', 'upload/bgImage/FwmGRsPliP.bmp', '1050', '800', 'DL00001', null, 'E');
 
 -- ----------------------------
 -- Table structure for `tpl_page_resource`
@@ -1002,14 +1002,13 @@ CREATE TABLE `tpl_page_resource` (
   `base_cls` varchar(20) default NULL,
   PRIMARY KEY  (`resource_id`),
   UNIQUE KEY `un_value_id_key` USING BTREE (`value_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1000049 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=1000053 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tpl_page_resource
 -- ----------------------------
-INSERT INTO `tpl_page_resource` VALUES ('1000047', 'TY0001', 'hotarea', '200', '200', '100', '100', null, null, null);
 INSERT INTO `tpl_page_resource` VALUES ('1000044', 'CD0002', 'hotarea', '200', '200', '100', '100', null, null, null);
-INSERT INTO `tpl_page_resource` VALUES ('1000048', 'TY0001', 'textfield', '100', '100', '100', '30', null, null, null);
+INSERT INTO `tpl_page_resource` VALUES ('1000052', 'DL00001', 'hotarea', '210', '487', '100', '100', null, null, null);
 INSERT INTO `tpl_page_resource` VALUES ('1000040', 'TY00001', 'hotarea', '200', '200', '100', '100', null, null, null);
 
 -- ----------------------------
