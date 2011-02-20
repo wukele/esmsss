@@ -116,6 +116,9 @@
 			</action>
 				<action name="QryRealTimeDeviceVarible" class="PageUtilAction" method="QryRtdBydeviceId">
 					<result type="json"></result>
+			</action>
+			<action name="BindDeviceVar" class="BindDeviceVarAction">
+					 <result type="json"></result>
 			</action>				
 	</package>
 </struts>    
