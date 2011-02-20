@@ -280,6 +280,7 @@ Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
 																	var  req={};
 																	if(!vid){
 																				req.device_value_id=record.get('deviceVarId');
+																				req.resource_id=v.get('resourceId');
 																				req.is_create_new=true;
 																	}else{
 																				req.device_value_id=record.get('deviceVarId');
@@ -291,6 +292,7 @@ Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
 																				params:req,
 																				success:function(){
 																							Ext.example.msg('OK','组件数据绑定成功');
+																							Ext.WindowMgr.getActive().hide(1);
 																				}
 																	})
 														}
@@ -318,8 +320,7 @@ Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
 							});
 							this.DeviceView.on({
 										click:this.onDeviceSelect
-							})
-							
+							});
 							this.items=[this.DeviceView,this.deviceVarGrid];
 					    	Ems.page.DeviceDataPanel.superclass.initComponent.call(this);
 			},
@@ -400,6 +401,22 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    																			this.DeviceDataPanel
 										    																	]
 										    													})
+										    													this.DeviceWindow.on({
+										    															hide:function(win){
+										    																	   var  cmpWin=Ext.getCmp('PageCmpWin');
+										    																	    var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
+										    																	   if(!cmpWin){
+										    																	   			return 1;
+										    																	   }else{
+										    																	   			cmpWin.items.items[0].store.load({
+										    																	   					params:{
+										    																	   								bspk_page_resource:currentPage.get('bspkPageResource')
+										    																	   					}
+										    																	   			})
+										    																	   			cmpWin.show();
+										    																	   }
+										    															}
+										    													})
 										    										}else{
 										    													this.DeviceDataPanel.setPageRes(record); 
 										    										}
@@ -416,6 +433,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    			})
 										    	
 											 			this.PageResourceWindow=new  Ext.Window({
+											 							id:'PageCmpWin',
 											 							width:597,
 											 							height:400,
 											 							autoScroll:true,
@@ -443,7 +461,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 											 											{header:'Axis X',dataIndex:'resourceLeft'},
 											 											{header:'Width',dataIndex:'resourceWidth'},
 											 											{header:'Height',dataIndex:'resourceHeight'},
-											 											{header:'数据配置ID',dataIndex:'config',width:80}
+											 											{header:'数据配置ID',dataIndex:'valueId',width:80}
 											 											]
 											 									}),
 											 									store:new Ext.data.JsonStore({
