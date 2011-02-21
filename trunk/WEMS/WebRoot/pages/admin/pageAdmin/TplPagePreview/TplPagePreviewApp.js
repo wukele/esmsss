@@ -118,6 +118,9 @@ Ems.page.ComponentPanel=Ext.extend(Ext.Panel,{
 				   			  
 					   		var gwidth=this.proxy.ghost.getWidth();
 					   		var gheight=this.proxy.ghost.getHeight();
+					   		//除去拖动时多余的边框
+					   		if(this.proxy.ghost.hasClass('x-dd-drag-ghost'));
+					   			this.proxy.ghost.removeClass('x-dd-drag-ghost');
 					   		this.proxy.ghost.setX(x);
 					   		this.proxy.ghost.setY(y);
 					   		
