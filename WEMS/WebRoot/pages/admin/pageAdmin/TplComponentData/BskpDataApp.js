@@ -392,6 +392,32 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    										if(!this.DeviceWindow){
 										    													this.DeviceDataPanel=new  Ems.page.DeviceDataPanel();
 										    													this.DeviceDataPanel.setPageRes(record); 
+										    													
+										    													
+										    													this.reletionBindPanel=new  Ext.grid.GridPanel({
+										    																store:new Ext.data.JsonStore({
+										    																		url:'QryBindReletion.action',
+										    																		fields:[
+										    																		{name:'deviceName',mapping:'deviceName'},
+										    																		{name:'deviceType',mapping:'deviceType'},
+										    																		{name:'xtypeCode',mapping:'xtypeCode'},
+										    																		{name:'resourceId',mapping:'resourceId',type:'int'},
+										    																		{name:'valueId',mapping:'valueId'}										    																		
+										    																		],
+										    																	    root:'bind_reletions'
+										    																}),
+										    																cm:new Ext.grid.ColumnModel({
+										    																		defaults:{
+										    																				width:100,
+										    																				menuDisabled:true
+										    																		},
+										    																		columns:[
+										    																		{header:'设备名称',dataIndex:'deviceName'},
+										    																		{header:'设备种类',dataIndex:'deviceType'}
+										    																		]
+										    																})
+										    													});
+										    													
 										    													this.DeviceWindow=new Ext.Window({
 										    																	height:600,
 										    																	width:800,
