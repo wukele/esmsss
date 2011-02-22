@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.admin.page.service.BspkPageService;
+import com.admin.page.struct.BindReletionStruct;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.entity.BspkPageResource;
 
@@ -21,6 +22,8 @@ public class BspkPageResourceAction extends ActionSupport {
 			private  BspkPageService  bspkServ;
 			
 			private  List<BspkPageResource>  page_res;
+			
+			private  List<BindReletionStruct>  reletions;
 			
 			public List<BspkPageResource> getPage_res() {
 				return page_res;
@@ -37,5 +40,14 @@ public class BspkPageResourceAction extends ActionSupport {
 			public  String  QryBspkPageResource(){
 					page_res=bspkServ.GetbspkPageResource(bspk_page_resource);
 				    return  SUCCESS;
+			}
+			
+			public   String  QryBindReletion(){
+					 reletions=bspkServ.QryBindReletion(bspk_page_resource);
+				     return  SUCCESS;
+			}
+
+			public List<BindReletionStruct> getReletions() {
+				return reletions;
 			}
 }

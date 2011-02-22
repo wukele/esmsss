@@ -119,6 +119,9 @@
 			</action>
 			<action name="BindDeviceVar" class="BindDeviceVarAction">
 					 <result type="json"></result>
-			</action>				
+			</action>
+			<action name="QryBindReletion"  class="BspkPageResourceAction"  method="QryBindReletion">
+					  <result type="json"></result>
+			</action>		
 	</package>
 </struts>    
