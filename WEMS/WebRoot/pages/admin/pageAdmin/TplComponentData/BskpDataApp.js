@@ -392,32 +392,6 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    										if(!this.DeviceWindow){
 										    													this.DeviceDataPanel=new  Ems.page.DeviceDataPanel();
 										    													this.DeviceDataPanel.setPageRes(record); 
-										    													
-										    													
-										    													this.reletionBindPanel=new  Ext.grid.GridPanel({
-										    																store:new Ext.data.JsonStore({
-										    																		url:'QryBindReletion.action',
-										    																		fields:[
-										    																		{name:'deviceName',mapping:'deviceName'},
-										    																		{name:'deviceType',mapping:'deviceType'},
-										    																		{name:'xtypeCode',mapping:'xtypeCode'},
-										    																		{name:'resourceId',mapping:'resourceId',type:'int'},
-										    																		{name:'valueId',mapping:'valueId'}										    																		
-										    																		],
-										    																	    root:'bind_reletions'
-										    																}),
-										    																cm:new Ext.grid.ColumnModel({
-										    																		defaults:{
-										    																				width:100,
-										    																				menuDisabled:true
-										    																		},
-										    																		columns:[
-										    																		{header:'设备名称',dataIndex:'deviceName'},
-										    																		{header:'设备种类',dataIndex:'deviceType'}
-										    																		]
-										    																})
-										    													});
-										    													
 										    													this.DeviceWindow=new Ext.Window({
 										    																	height:600,
 										    																	width:800,
@@ -434,7 +408,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    																	   if(!cmpWin){
 										    																	   			return 1;
 										    																	   }else{
-										    																	   			cmpWin.items.items[0].store.load({
+										    																	   			cmpWin.items.items[0].items.items[0].store.load({
 										    																	   					params:{
 										    																	   								bspk_page_resource:currentPage.get('bspkPageResource')
 										    																	   					}
@@ -456,21 +430,50 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    						     			
 										    						     }
 										    					}]
-										    			})
-										    	
-											 			this.PageResourceWindow=new  Ext.Window({
-											 							id:'PageCmpWin',
-											 							width:597,
-											 							height:400,
-											 							autoScroll:true,
-											 							closeAction:'hide',
-						  												resizable:false,
-						  												title:'页面组件',
-											 							items:[new  Ext.grid.GridPanel({
+										    			});
+										    			
+										    			
+										    				
+										    		     this.reletionBindPanel=new  Ext.grid.GridPanel({
+										    		     				title:'绑定关系',
+										    		     				border:false,
+										    		     				id:'bind_reletion',
+										    							store:new Ext.data.JsonStore({
+										    																		url:'QryBindReletion.action',
+										    																		fields:[
+										    																		{name:'deviceName',mapping:'deviceName'},
+										    																		{name:'deviceType',mapping:'deviceType'},
+										    																		{name:'xtypeCode',mapping:'xtypeCode'},
+										    																		{name:'resourceId',mapping:'resourceId',type:'int'},
+										    																		{name:'valueId',mapping:'valueId'},
+										    																		{name:'variableName',mapping:'variableName'}
+										    																		],
+										    																	    root:'reletions'
+										    																}),
+										    																cm:new Ext.grid.ColumnModel({
+										    																		defaults:{
+										    																				width:100,
+										    																				menuDisabled:true
+										    																		},
+										    																		columns:[
+										    																		{header:'设备名称',dataIndex:'deviceName'},
+										    																		{header:'设备种类',dataIndex:'deviceType'},
+										    																		{header:'变量名称',dataIndex:'variableName'},
+										    																		{header:'XTYPE',dataIndex:'xtypeCode'},
+										    																		{header:'资源ID',dataIndex:'resourceId'},
+										    																		{header:'值配置ID',dataIndex:'valueId'}
+										    																		]
+										    																}),
+										    								sm:new  Ext.grid.RowSelectionModel({
+											 																				singleSelect:true
+										    								})
+										    			});
+										    			
+										    			
+										    			this.PageResource= new  Ext.grid.GridPanel({
 											 									tbar:ResTool,
-											 									width:580,
-											 									height:367,
 											 									border:false,
+											 									title:'页面资源',
 											 									sm:new  Ext.grid.RowSelectionModel({
 											 											singleSelect:true
 											 									}),
@@ -492,9 +495,6 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 											 									}),
 											 									store:new Ext.data.JsonStore({
 											 											 url:'QryBspkPageResource.action',
-											 											 baseParams:{
-											 											 			 bspk_page_resource:currentPage.get('bspkPageResource')
-											 											 },
 											 											 root:'page_res',
 											 											 fields:[
 											 											 {name:'resourceId',mapping:'resourceId',type:'int'},
@@ -507,12 +507,55 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 											 											 {name:'valueId',mapping:'valueId'},
 											 											 {name:'config',mapping:'config'}
 											 											 ],
-											 											 autoLoad:true
+											 											 baseParams:{
+											 												bspk_page_resource:currentPage.get('bspkPageResource')
+											 											},
+											 											autoLoad:true
 											 									})
-											 							})]
+											 									
+											 							});
+											 							
+											 		  this.tabLayoutPanel=new Ext.TabPanel({
+											 		  			activeTab:0,
+											 		  			border:false,
+											 		  			height:360,
+											 		  			items:[
+											 		  						this.PageResource,
+											 		  						this.reletionBindPanel
+											 		  			]
+											 		  });
+										    		  
+											 		 this.tabLayoutPanel.on({
+											 		 		 tabchange:function(tab,panel){
+											 		 		  				if(panel.getId()=='bind_reletion'){
+											 		 		  							 var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
+										  												 if(!currentPage){
+										   															Ext.example.msg('错误','未选取页面');
+										   															return 1;
+										   												}
+											 		 		  							panel.store.load({params:{
+											 		 		  										bspk_page_resource:currentPage.get('bspkPageResource')}
+											 		 		  							})
+											 		 		  				}
+											 		 		  },
+											 		 		  scope:this
+											 		 });
+											 		  
+										    			
+											 			this.PageResourceWindow=new  Ext.Window({
+											 							id:'PageCmpWin',
+											 							width:597,
+											 							height:400,
+											 							autoScroll:true,
+											 							closeAction:'hide',
+						  												resizable:false,
+						  												title:'页面组件',
+											 							items:[
+											 							      this.tabLayoutPanel
+											 							]
 											 			});
 											 }else{
-											 			this.PageResourceWindow.items.items[0].store.load({
+											 			this.PageResourceWindow.items.items[0].items.items[0].store.load({
 											 						params:{
 											 								   bspk_page_resource:currentPage.get('bspkPageResource')
 											 						}
