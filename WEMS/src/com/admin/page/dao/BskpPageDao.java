@@ -8,6 +8,7 @@ import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.admin.page.struct.BindReletionStruct;
 import com.ems.dao.EmsDao;
 import com.page.entity.BspkInfoPage;
 import com.page.entity.BspkPageResource;
@@ -114,6 +115,14 @@ public class BskpPageDao extends EmsDao {
 				 		"where bp.pageResource in ( " +
 				 		"select bi.bspkPageResource from BspkInfoPage as  bi where bi.bspkPageId=?)";
 				 getHibernateTemplate().bulkUpdate(delSql, bspkPageId);
+	}
+
+	public List<BindReletionStruct> findBindReletion(String bspkPageResource) {
+		// TODO Auto-generated method stub
+		String  qryStr="select  new com.admin.page.struct.BindReletionStruct  (dt.deviceName, dt.deviceType , bpr.xtypeCode , bpr.resourceId, bpr.valueId,dv.variableName) " +
+				"from  BspkDataDevice  as   bdd, DeviceTable   as dt , DeviceVariable  as  dv,BspkPageResource  as  bpr " +
+				"where  bdd.valueId=bpr.valueId and bdd.deviceValueId=dv.deviceVariableId   and  dt.deviceId  =  dv.deviceId  and  bpr.pageResource=?";
+		return  getHibernateTemplate().find(qryStr, bspkPageResource);
 	}
 	
 }

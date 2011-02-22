@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.admin.page.dao.BskpPageDao;
 import com.admin.page.dao.TplInfoPageDao;
 import com.admin.page.dao.TplPageResourceDao;
+import com.admin.page.struct.BindReletionStruct;
 import com.page.entity.BspkInfoPage;
 import com.page.entity.BspkPageResource;
 import com.page.entity.TplInfoPage;
@@ -207,4 +208,10 @@ public class BspkPageService {
 				}
 				log.info("临时数据页面删除成功");
 	}
+
+	public List<BindReletionStruct> QryBindReletion(String bspkPageResource) {
+		// TODO Auto-generated method stub
+		return   bskpDao.findBindReletion(bspkPageResource);
+	}
+
 }
