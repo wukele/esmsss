@@ -427,7 +427,9 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    						     text:'组件数据绑定关系解除',
 										    						     iconCls:'silk-delete',
 										    						     handler:function(){
-										    						     			
+										    						     		    if(this.EngineWin){
+										    						     		    			
+										    						     		    }
 										    						     }
 										    					}]
 										    			});
