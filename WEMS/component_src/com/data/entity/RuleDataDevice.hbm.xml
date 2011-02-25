@@ -8,7 +8,7 @@
     <class name="com.data.entity.RuleDataDevice" table="rule_data_device" catalog="protest">
         <id name="ruleId" type="java.lang.Integer">
             <column name="rule_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="valueId" type="java.lang.String">
             <column name="value_id" length="20" />
