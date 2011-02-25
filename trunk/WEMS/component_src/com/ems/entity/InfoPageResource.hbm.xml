@@ -8,7 +8,7 @@
     <class name="com.ems.entity.InfoPageResource" table="info_page_resource" catalog="protest">
         <id name="resourceId" type="java.lang.Integer">
             <column name="resource_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="pageResource" type="java.lang.String">
             <column name="page_resource" length="20" />
