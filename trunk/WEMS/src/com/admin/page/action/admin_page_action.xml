@@ -122,6 +122,12 @@
 			</action>
 			<action name="QryBindReletion"  class="BspkPageResourceAction"  method="QryBindReletion">
 					  <result type="json"></result>
-			</action>		
+			</action>
+			<action name="CreateInfoPage"  class="BuildInfoPageAction"  method="CreateNorPage">
+					  <result type="json"></result>
+			</action>
+			<action name="CreateDeviceInfoPage"  class="BuildInfoPageAction"   method="CreateDevicePage">
+					   <result type="json"></result>
+			</action>
 	</package>
 </struts>    

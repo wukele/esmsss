@@ -208,6 +208,17 @@ Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
 							this.DeviceView=new Ext.grid.GridPanel({
 									columnWidth:0.3,
 								    store:this.DeviceStore,
+								    tbar:new  Ext.Toolbar({
+								    		items:[
+								    		{
+								    				iconCls:'silk-connect',
+								    				text:'设备绑定',
+								    				handler:function(){
+								    							
+								    				}
+								    		}
+								    		]
+								    }),
 								    margins:'5 5 5 5',
 								    height:595,
 								    frame:true,
@@ -339,6 +350,54 @@ Ext.reg('devicePanel',Ems.page.DeviceDataPanel);
 
 
 
+Ems.page.RuleDataEnginePanel=Ext.extend(Ext.Panel,{
+		   width:1024,
+		   height:800,
+		   layout:'column',
+		   initComponent:function(){
+		   					this.EnginePanel=new Ext.grid.GridPanel({
+		   									store:new  Ext.data.JsonStore({
+		   											url:'DataEnginelist.action',
+		   											fields:[
+		   											{name:'engineId',mapping:'engineId',type:'int'},
+		   											{name:'engineCode',mapping:'engineCode'},
+		   											{name:'engineName',mapping:'engineName'},
+		   											{name:'actionName',mapping:'actionName'},
+		   											{name:'actionConfig',mapping:'actionConfig'},
+		   											{name:'engineType',mapping:'engineType'},
+		   											{name:'actionClass',mapping:'actionClass'},
+		   											{name:'maxInterval',mapping:'maxInterval',type:'int'}
+		   											],
+		   											root:'engines'
+		   									}),
+		   									cm:new Ext.grid.ColumnModel({
+		   											defaults:{
+		   														width:60,
+		   													    menuDisabled:true
+		   											},
+		   											columns:[
+		   											{header:'引擎编号',dataIndex:'engineId'},
+		   											{header:'引擎Code',dataIndex:'engineCode'},
+		   											{header:'引擎名称',dataIndex:'engineName'},
+		   											{header:'交易名称',dataIndex:'actionName'},
+		   											{header:'引擎类型',dataIndex:'engineType'},
+		   											{header:'延迟',dataIndex:'maxInterval'}
+		   											]
+		   									}),
+		   									sm:new Ext.grid.RowSelectionModel({
+								    			singleSelect:true
+								    		}), 
+								    		viewConfig:{
+								    		 		forceFit: true
+								    		}
+		   					});
+		   					
+		   					
+		   			        	
+		   }
+});
+
+
 
 Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 		region:'center',
@@ -427,9 +486,7 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										    						     text:'组件数据绑定关系解除',
 										    						     iconCls:'silk-delete',
 										    						     handler:function(){
-										    						     		    if(this.EngineWin){
-										    						     		    			
-										    						     		    }
+										    						     		
 										    						     }
 										    					}]
 										    			});
@@ -572,6 +629,60 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 									text:'页面数据引擎列表',
 									handler:function(){
 										
+									}
+								},'-',{
+									text:'生成普通页面',
+									handler:function(){
+												  var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
+												  if(!currentPage){
+										   				Ext.example.msg('错误','未选取页面');
+										   				return 1;
+										   		  }
+										   		 Ext.Ajax.request({
+										   		 		url:'CreateInfoPage.action',
+										   		 		params:{
+										   		 				bspk_page_id:currentPage.get('bspkPageId')
+										   		 		},
+										   		 		success:function(e){
+										   		 			    var  res=Ext.decode(e.responseText);
+										   		 			    if(res && res.is_success){
+										   		 			    			Ext.example.msg('OK','页面生成成功')
+										   		 			    }else{
+										   		 			    			if(res && res.message){
+										   		 			    						Ext.example.msg('warm',res.message)
+										   		 			    			}else{
+										   		 			    						Ext.example.msg('error','返回无效值');
+										   		 			    			}
+										   		 			    }
+										   		 		}
+										   		 });
+									}
+								},'-',{
+									text:'生成设备页面',
+									handler:function(){
+										       	  var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
+												  if(!currentPage){
+										   				Ext.example.msg('错误','未选取页面');
+										   				return 1;
+										   		  }
+										   		 Ext.Ajax.request({
+										   		 		url:'CreateDeviceInfoPage.action',
+										   		 		params:{
+										   		 				bspk_page_id:currentPage.get('bspkPageId')
+										   		 		},
+										   		 		success:function(e){
+										   		 			    var  res=Ext.decode(e.responseText);
+										   		 			    if(res && res.is_success){
+										   		 			    			Ext.example.msg('OK','页面生成成功')
+										   		 			    }else{
+										   		 			    			if(res && res.message){
+										   		 			    						Ext.example.msg('warm',res.message)
+										   		 			    			}else{
+										   		 			    						Ext.example.msg('error','返回无效值');
+										   		 			    			}
+										   		 			    }
+										   		 		}
+										   		 });
 									}
 								}]
 						})

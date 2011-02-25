@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.admin.page.struct.BindReletionStruct;
 import com.ems.dao.EmsDao;
+import com.page.entity.BspkDataDevice;
 import com.page.entity.BspkInfoPage;
 import com.page.entity.BspkPageResource;
 
@@ -123,6 +124,14 @@ public class BskpPageDao extends EmsDao {
 				"from  BspkDataDevice  as   bdd, DeviceTable   as dt , DeviceVariable  as  dv,BspkPageResource  as  bpr " +
 				"where  bdd.valueId=bpr.valueId and bdd.deviceValueId=dv.deviceVariableId   and  dt.deviceId  =  dv.deviceId  and  bpr.pageResource=?";
 		return  getHibernateTemplate().find(qryStr, bspkPageResource);
+	}
+
+	public List<BspkDataDevice> findBindRule(Integer bspkPageId) {
+		// TODO Auto-generated method stub
+		String   qryStr="select  bdd from  BspkDataDevice  as   bdd," +
+				"BspkPageResource  as  bpr,BspkInfoPage as bp  where  bdd.valueId=bpr.valueId" +
+				" and  bpr.pageResource = bp.bspkPageResource and  bp.bspkPageId=?";		
+		return getHibernateTemplate().find(qryStr, bspkPageId);
 	}
 	
 }
