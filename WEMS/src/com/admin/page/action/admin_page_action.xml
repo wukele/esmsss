@@ -129,5 +129,13 @@
 			<action name="CreateDeviceInfoPage"  class="BuildInfoPageAction"   method="CreateDevicePage">
 					   <result type="json"></result>
 			</action>
+			<action name="GetSystemMenu" class="MenuTreeAction"  method="GetSystemMenu">
+						<result type="json">
+								<param name="root">
+   										nodes
+  								</param>
+						</result>
+			</action>
+			
 	</package>
 </struts>    
