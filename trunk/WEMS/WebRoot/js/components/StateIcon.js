@@ -12,11 +12,13 @@
  * @config.iconExt: String 图片文件后缀名
  * @config.x: int x坐标，相对于容器，优先于cfgRecord.x
  * @config.y: int y坐标，相对于容器，优先于cfgRecord.y
- * @curState : String 当前状态
  * 
- * @setState(state:String[,title:String]) : void 设置状态
- * 		state为应状态码，对应目录下的文件名
- * 		title为状态提示，可选
+ * 数据值格式：
+ *   {
+ * 	   code:String,	//状态码，对应目录下的文件名
+ * 	   title:String	//状态提示，可选
+ *   }
+ *
  * 特性：
  * 		通过增加子目录来增加状态类型、通过增加图片来增加状态码、GIF文件提供动画功能
 
@@ -29,10 +31,16 @@
  */
 
 Ems.component.StateIcon = Ext.extend(Ems.component.BaseComponent, {
-	iconPath: "./state_icon_images",  // 图标路径
-	iconType: "default", // 图标类型
+	cfgItems:new Ext.data.ArrayStore({
+		fields: ['name', 'title', 'type', 'options'],
+		data: [["iconType", "图标类型", "string", "default;machine;temperature;yes_no"],
+				["iconExt", "后缀名", "string", ".gif;.jpg;.jpeg;.bmp;.png"]]
+	}),
+	iconPath: Ems.component.getCodeBase()+"/state_icon_images",  // 图标路径
+	name: "某某设备",
+	iconType: "yes_no", // 图标类型
 	iconExt: ".gif", // 图片文件后缀名
-	curState: null,  // 当前状态
+	data: {code: "yes", title:"正常"},
 	
 	// 构造
 	constructor: function(config){
@@ -44,31 +52,45 @@ Ems.component.StateIcon = Ext.extend(Ems.component.BaseComponent, {
 		Ext.apply(this, config);
 		this.on({
 			'render':this.OnRender,
+			'configchange':this.OnConfigChange,
+			'datachange':this.OnDataChange,
 			 scope:this
 		});
+	},
+	
+	// 图片地址
+	getIconUrl:function(){
+		return this.iconPath+"/"+this.iconType+"/"+(this.data.code||this.data)+this.iconExt;
+	},
+	
+	// 图片提示
+	getIconTitle:function(){
+		return this.name+(this.data.title?"："+this.data.title:"");
 	},
 	
 	// 渲染
 	OnRender:function(e){
 		var me=e.getEl();
 		me.position ("absolute");
-		me.insertFirst({tag:"img", stateicon:"yes", border:0, title:""});
+		me.insertFirst({tag:"img", stateicon:"yes", src:this.getIconUrl(), border:0, title:this.getIconTitle()});
 		me.on({
 			'dblclick':null,
 			scope:this
 		});
 	},
 	
-	// 变更状态
-	setState:function(state, title){
-		if(!title) title="";
-		if(this.curState!=state){  //仅当状态改变时处理
-			this.curState=state;
-			var icon=this.el.child("img[stateicon]");
-			var url=this.iconPath+"/"+this.iconType+"/"+state+this.iconExt;
-			icon.set({src:url, title:title});
-		}
+	// 数据变更
+	OnDataChange:function(){
+		var icon=this.el.child("img[stateicon]");
+		icon.set({src:this.getIconUrl(), title:this.getIconTitle()});
+	},
+	
+	// 配置发生改变 
+	OnConfigChange:function(e){
+		this.OnDataChange(e);
 	}
+	
 });
 
 Ext.reg('emsstateicon',Ems.component.StateIcon);
+Ems.component.reg('emsstateicon',Ems.component.StateIcon, "状态图标");
