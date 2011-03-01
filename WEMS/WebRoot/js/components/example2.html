@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>页面开发</title>
+<link rel="stylesheet" type="text/css" href="../../ext3/resources/css/ext-all.css" />
+<script type="text/javascript" src="../../ext3/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="../../ext3/ext-all.js"></script>
+<script type="text/javascript" src="../../ext3/src/locale/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="./EmsComponents.js"></script>
+<script type="text/javascript" src="./PageMaker.js"></script>
+<script type="text/javascript" src="./StateIcon.js"></script>
+<script type="text/javascript" src="./Label.js"></script>
+<script type="text/javascript">
+	// 背景列表，内容是实际的背景图数据
+	var images=new Ext.data.ArrayStore({
+		id: 0,
+		fields: ['name', 'url'],
+		data: [["网络拓扑", "./net_top.jpeg"],
+				["住所", "./house.jpg"]]
+	});
+	
+	// 数据源列表，内容是实际的数据源清单
+	var dsList=["DirectDataEngine"];
+	
+	// 设置背景列表
+	pagemaker.setBGList(images);
+	
+	// 设置数据源
+	pagemaker.setDSList(dsList);
+	
+	// 页面就绪时执行
+	Ext.onReady(function(){
+		// 设置编辑区容器
+		Ems.component.setContainer("divTest2");
+		
+		// 初始化页面参数
+		Ems.component.setPage("新页面", "网络拓扑", "./net_top.jpeg");
+
+		// 获取注册组件列表
+		pagemaker.compList = new Ext.form.ComboBox({
+			typeAhead: true,
+			triggerAction: 'all',
+			lazyRender:false,
+			mode: 'local',
+			store: Ems.component.getTypeAS(),
+			valueField: 'xtype',
+			displayField: 'name',
+			emptyText:'请选择一个组件....',
+			applyTo: 'compname'
+		});
+		
+	});
+	
+			
+</script>
+</head>
+<body style="font-size:10pt">
+	<h3>页面开发</h3>
+	<div>
+		
+<hr/>
+
+	    <form name="form1" id="form1" method="post" action="" onSubmit="return false;">
+<table border="0" cellspacing="2" cellpadding="2">
+  <tr>
+    <td valign="top"><table border="0" cellspacing="2" cellpadding="2">
+      <tr>
+        <td>组件类型<br/>
+            <input name="text" type="text" id="compname" size="16"/></td>
+      </tr>
+      <tr>
+        <td><input name="button" type="button" onClick="pagemaker.createComp(pagemaker.compList.getValue());" value="创建组件" />
+            <br/>
+            <input name="button" type="button" onClick="pagemaker.setComp()" value="设置组件" />
+          <br/>
+            <input name="button" type="button" onClick="pagemaker.getCompProfiles()" value="提取组件信息" />
+            <br/>
+            <input name="button" type="button" onClick="pagemaker.applyCompProfiles()" value="应用组件信息" />
+            <br/>
+            <input name="button" type="button" onClick="pagemaker.produce()" value="生成组件" />
+            <br/>
+            <input name="button" type="button" onClick="pagemaker.deleteComp()" value="删除组件" />
+			</td>
+      </tr>
+      <tr>
+        <td><input name="button" type="button" onClick="pagemaker.setPageDlg()" value="设置页面" />
+            <br/>
+            <input name="button" type="button" onClick="pagemaker.getPageProfile()" value="提取页面信息" />
+            <br/>
+            <input name="button" type="button" onClick="pagemaker.applyPageProfile()" value="应用页面信息" />
+			</td>
+      </tr>
+      <tr>
+        <td><strong>选择：</strong>鼠标单击</td>
+      </tr>
+      <tr>
+        <td>移动：鼠标拖拽</td>
+      </tr>
+      <tr>
+        <td>微调：Ctrl+光标键</td>
+      </tr>
+    </table></td>
+    <td valign="top">
+	<div id="divTest2">页面内容区</div>
+	</td>
+  </tr>
+</table>
+  </form>
+</div>
+
+
+</body>
+</html>
