@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>页面显示</title>
+<link rel="stylesheet" type="text/css" href="../../ext3/resources/css/ext-all.css" />
+<script type="text/javascript" src="../../ext3/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="../../ext3/ext-all.js"></script>
+<script type="text/javascript" src="../../ext3/src/locale/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="./EmsComponents.js"></script>
+<script type="text/javascript" src="./StateIcon.js"></script>
+<script type="text/javascript" src="./Label.js"></script>
+<script type="text/plain" id="pageProfile">
+{"pageName":"新页面","bgName":"网络拓扑","bgUrl":"./net_top.jpeg","components": [{"xtype":"emsstateicon","name":"服务器","x":14,"y":113,"width":32,"height":32,"dsType":"DirectDataEngine","dsPara":"DE101","iconType":"yes_no","iconExt":".gif","data": {"code":"yes","title":"正常"}},{"xtype":"emsstateicon","name":"交换机","x":139,"y":43,"width":32,"height":32,"dsType":"DirectDataEngine","dsPara":"DE101","iconType":"yes_no","iconExt":".gif","data": {"code":"yes","title":"正常"}},{"xtype":"emsstateicon","name":"路由器","x":203,"y":39,"width":32,"height":32,"dsType":"DirectDataEngine","dsPara":"DE101","iconType":"yes_no","iconExt":".gif","data": {"code":"no","title":"故障"}},{"xtype":"emslabel","name":"提示","x":96,"y":131,"width":230,"height":38,"dsType":"DirectDataEngine","dsPara":"DE101","innerStyle":"font-size:14pt; color:red;","data":"部分网络设备存在故障！"}]}
+</script>
+<script type="text/javascript">
+	// 页面信息对象化，实际的信息在头部的pageProfile里面
+	var pageProfile=Ext.util.JSON.decode(Ext.getHead().child("#pageProfile").dom.innerHTML);
+	
+	// 页面就绪时执行
+	Ext.onReady(function(){
+		// 设置编辑区容器
+		Ems.component.setContainer("divTest2");
+		
+		// 应用页面信息
+		Ems.component.applyPageProfile(pageProfile);
+
+	});
+			
+</script>
+</head>
+<body style="font-size:10pt">
+	<h3>页面显示</h3>
+	<hr/>
+<table border="0" cellspacing="2" cellpadding="2">
+  <tr>
+    <td><div id="divTest2">页面内容区</div></td>
+  </tr>
+</table>
+
+	
+
+
+</body>
+</html>
