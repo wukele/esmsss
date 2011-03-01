@@ -136,6 +136,17 @@
   								</param>
 						</result>
 			</action>
-			
+			<action name="GetInfoPage"  class="PageUtilAction"   method="GetInfoPageA">
+					   <result  type="json"></result>
+			</action>
+			<action name="QryCurrentPageResource"   class="PageMenuMangerAction"  method="QryCurrentPageResource">
+						<result type="json"></result>
+			</action>
+			<action name="QryComponentDataDevice"   class="PageMenuMangerAction"   method="qryCurrentPageData">
+						 <result type="json"></result>
+			</action>
+			<action name="AddNormalPageMenu"  class="NormalPageOperAction"  method="AddNormalPageMenu">
+						  <result type="json"></result>
+			</action>
 	</package>
 </struts>    

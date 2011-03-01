@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.admin.page.struct.RealTimeDeviceDataStruct;
 import com.ems.dao.EmsDao;
 import com.ems.entity.DeviceTable;
+import com.ems.entity.InfoPage;
 
 @Component("PageUtilDao")
 public class PageUtilDao extends EmsDao {
@@ -32,5 +33,10 @@ public class PageUtilDao extends EmsDao {
 					")  from DeviceTable as dt,DeviceVariable as dv,RealTimeData as rtd " +
 					" where dt.deviceId=dv.deviceId  and  dv.deviceVariableId=rtd.deviceVarId" +
 					" and  dt.deviceId=?",deviceId);
+		}
+
+		public List<InfoPage> findInfoPageA() {
+			// TODO Auto-generated method stub
+			return  getHibernateTemplate().find("from InfoPage");
 		}
 }
