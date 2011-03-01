@@ -73,9 +73,9 @@
 	    app.si3.render(document.getElementById("divTest"));
 		
 		// 设置状态
-		app.si.setState(1);
-		app.si2.setState("run", "运行中");
-		app.si3.setState(2, "超负荷");
+		app.si.setData({code:"1", title:"1"});
+		app.si2.setData({code:"run", title:"运行中"});
+		app.si3.setData({code:"2", title:"超负荷"});
 	});
 	
 	
@@ -95,21 +95,21 @@
 	    <form name="form1" method="post" action="">
 		  <div>请选择状态数据，观察上图的变化。请拖放、点击、Ctrl+光标键移动选中的组件。</div>
 		路由器运行状态：
-	      <select name="select2" size="5" onClick="app.si2.setState(this.value)" onKeyUp="app.si2.setState(this.value)">
+	      <select name="select2" size="5" onClick="app.si2.setData(this.value)" onKeyUp="app.si2.setData(this.value)">
 	        <option value="unknown">unknown</option>
 	        <option value="run">run</option>
 	        <option value="stop">stop</option>
 	        <option value="error">error</option>
           </select>
 		服务器负荷：
-	      <select name="select3" size="5" onClick="app.si3.setState(this.value.split(' ')[0], this.value.split(' ')[1])"
-		  	onKeyUp="app.si3.setState(this.value.split(" ")[0], this.value.split(" ")[1])">
+	      <select name="select3" size="5" onClick="app.si3.setData(this.value.split(' ')[0], this.value.split(' ')[1])"
+		  	onKeyUp="app.si3.setData(this.value.split(" ")[0], this.value.split(" ")[1])">
 	        <option value="0 闲置">0 闲置</option>
 	        <option value="1 正常">1 正常</option>
 	        <option value="2 超负荷">2 超负荷</option>
           </select>
 		交换机状态：
-	      <select name="select1" size="5" onClick="app.si.setState(this.value)" onKeyUp="app.si.setState(this.value)">
+	      <select name="select1" size="5" onClick="app.si.setData(this.value)" onKeyUp="app.si.setData(this.value)">
 	        <option value="0">0</option>
 	        <option value="1">1</option>
 	        <option value="2">2</option>
