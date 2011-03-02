@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +16,15 @@ import com.ems.entity.InfoPage;
 import com.ems.entity.InfoPageDAO;
 import com.entries.ulp.InfoMenu;
 import com.entries.ulp.InfoMenuDAO;
+import com.entries.ulp.RuleRoleFunc;
 
 
 
 @Component("PageMenuManageService")
 public class PageMenuManageService {
+	
+	private static final Log log = LogFactory.getLog(PageMenuManageService.class);
+	
 	
 	@Resource(name="PageMenuDao")
 	public void setPmDao(PageMenuDao pmDao) {
@@ -54,24 +60,39 @@ public class PageMenuManageService {
 		nm.setMenuUrl("ems_dispatcher_page_action.action");
 		nm.setMenuTitle(ip.getPageName());
 		nm.setModuleCode(moduleCode);
-		InfoMenu    im=imDao.findById(menuCode);
+		InfoMenu    im=null;
 		if(isLeaf){
-					
+					im=imDao.findById(menuCode);
 					nm.setParentMenuCode(im.getParentMenuCode());
 		}else{
-				     nm.setParentMenuCode(im.getMenuCode());
+				     
 		}
 		
 		String tempCode=GetMenuCode(moduleCode);
 		nm.setMenuCode(tempCode);
-		
+		nm.setMenuCol(0);
+		nm.setMenuRow(0);
 		ip.setMenuCode(tempCode);
 		imDao.save(nm);
 		ipDao.merge(ip);
 		res=true;
-		
-		
+		menuCode=tempCode;
+		log.info("≤Àµ•π“‘ÿ≥…π¶:MenuCode=="+menuCode);
+		RuleRoleFunc    rrf=new RuleRoleFunc();
+		rrf.setEntityCode(menuCode);
+		rrf.setEntityType("M");
+		rrf.setRoleCode("AD");
+		pmDao.addRuleRoleFunc(rrf);
 		return res;
+	}
+	@Resource(name="InfoMenuDAO")
+	public void setImDao(InfoMenuDAO imDao) {
+		this.imDao = imDao;
+	}
+	
+	@Resource(name="InfoPageDAO")
+	public void setIpDao(InfoPageDAO ipDao) {
+		this.ipDao = ipDao;
 	}
 
 	private String GetMenuCode(String moduleCode) {

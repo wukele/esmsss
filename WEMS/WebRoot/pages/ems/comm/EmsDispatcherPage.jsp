@@ -1,4 +1,4 @@
-<%@ page  pageEncoding="gbk"%>
+<%@ page  pageEncoding="utf-8"%>
 <%@page import="java.util.List"%>
 <%@page import="com.component.CommEmsKey"%>
 <%@page import="com.ems.entity.InfoPage"%>
@@ -34,8 +34,8 @@ String path =request.getContextPath();
 		var BasePanel= new Ext.Panel({
 			border:false,
 			layout:'absolute',
-			width:1024,
-			height:700,
+			width:<%=pageIf.getPageImageWidth() %>,
+			height:<%=pageIf.getPageImageHeight() %>,
 			bodyStyle:'background-image: url("<%= path+"/"+pageIf.getPageImageUrl()%>");background-repeat: no-repeat'
 		}); 
 		var data=<%=items%>
