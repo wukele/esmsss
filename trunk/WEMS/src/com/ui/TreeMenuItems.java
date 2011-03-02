@@ -63,9 +63,15 @@ public class TreeMenuItems {
 		
 		
 		public  void  writeTreeMenuItems(StringBuffer   buff) throws IOException{
-					buff.append("var  treeNode_"+this.menuCode+"=new  Ext.tree.TreeNode({\n" +
+					if(menuUrl!=null && menuUrl.length()>0){
+						buff.append("var  treeNode_"+this.menuCode+"=new  Ext.tree.TreeNode({\n" +
 							"\t 	text:'"+menuTitle+"', \n"+
 							"\t	url:'"+menuUrl+"?menu_code="+this.menuCode+"'\n\t\t });\n");
+					}else{
+						buff.append("var  treeNode_"+this.menuCode+"=new  Ext.tree.TreeNode({\n" +
+								"\t 	text:'"+menuTitle+"', \n"+
+								"\t	url:'"+menuUrl+"'\n\t\t });\n");
+					}
 					if(hasChild){
 							int c=childMenuItems.length;
 							for(int i=0;i<c;i++){

@@ -18,6 +18,10 @@ public class NormalPageOperAction extends ActionSupport {
 			private  boolean  is_leaf;
 			private  boolean  is_success;
 			private  String   module_code;
+			public String getModule_code() {
+				return module_code;
+			}
+
 			private  PageMenuManageService  pmServ; 
 			
 			public   String   AddNormalPageMenu(){

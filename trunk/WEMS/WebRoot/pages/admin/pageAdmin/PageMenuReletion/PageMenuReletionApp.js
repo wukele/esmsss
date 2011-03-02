@@ -20,7 +20,8 @@ Ems.page.SystemMenuTree=Ext.extend(Ext.tree.TreePanel,{
 			initComponent:function(){
 					    this.root=new  Ext.tree.AsyncTreeNode({
 					    			text:'EMS',
-					    			iconCls:'silk-table-refresh'		
+					    			iconCls:'silk-table-refresh',
+					    			allowDrop:false
 					    });
 					    this.on({
 					    		beforeload:this.onBeforeLoad,
@@ -275,16 +276,40 @@ Ems.page.PageMenuReletionApp=function(){
 									var  record=e.data.selections[0];
 									var  node=e.target.attributes;
 									if(!record)return 1;
+									if(record.get('menuCode')){
+												Ext.example.msg('warm','页面已被菜单使用');
+												return  1;
+									}
+									
 									Ext.Ajax.request({
 											url:'AddNormalPageMenu.action',
 											params:{
 													menu_code:node.menu_code,
 													module_code:node.module_code,
 													is_leaf:node.leaf,
-													page_id:record.get('page_id')
+													page_id:record.get('pageId'),
+													node_tree:e.target,
+													grid_row:record
 											},
 											success:function(result,opt){
-													
+													 if(result.responseText){
+													 			var  res=Ext.decode(result.responseText);
+													 			if(res.is_success){
+													 						//Ext.Msg.alert('ok','add node');
+													 						var  param=opt.params;
+													 						if(!param.is_leaf){
+													 							//	param.node_tree.load();
+													 							var  n_node=new  Ext.tree.TreeNode({
+													 									text:param.grid_row.get('pageName'),
+													 									leaf:true
+													 							});
+													 							n_node.attributes.menu_code=res.menu_code;
+													 							n_node.attributes.module_code=res.module_code;
+													 							param.node_tree.appendChild(n_node);	
+													 							Ems.page.PageMenuReletionApp.page_data_view.load();
+													 						}
+													 			}											 			
+													 }
 											}
 									})
 						},

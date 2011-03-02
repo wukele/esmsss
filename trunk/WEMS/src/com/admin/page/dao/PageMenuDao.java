@@ -8,6 +8,7 @@ import com.admin.page.struct.MenuTreeNode;
 import com.admin.page.struct.PageResourceDataRuleStruct;
 import com.admin.page.struct.PageResourceView;
 import com.ems.dao.EmsDao;
+import com.entries.ulp.RuleRoleFunc;
 
 
  @Component("PageMenuDao")
@@ -48,6 +49,11 @@ public class PageMenuDao extends EmsDao {
 				"where  pr.pageResource= ip.pageResourceId  and  pr.xtypeCode = cc.codeXtype " +
 				"and   pr.valueId = rdd.valueId  and   rdd.deviceValueId =  dv.deviceVariableId " +
 				"and   dv.deviceId = dt.deviceId and  ip.pageId=?",pageId);
+	}
+
+	public void addRuleRoleFunc(RuleRoleFunc rrf) {
+		// TODO Auto-generated method stub
+		  getHibernateTemplate().save(rrf);
 	}
 	 		
 	 		

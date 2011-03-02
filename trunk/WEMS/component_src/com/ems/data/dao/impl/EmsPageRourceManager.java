@@ -51,7 +51,7 @@ public class EmsPageRourceManager extends EmsDao implements
 							cp.setWidth(res.getResourceWidth());
 							cp.setXtype(res.getXtypeCode());
 							cp.setX(res.getResourceLeft());
-							cp.setY(res.getResourceHeight());
+							cp.setY(res.getResourceTop());
 							cp.setId(res.getValueId());
 							comps.add(cp);
 			}
