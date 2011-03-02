@@ -1,7 +1,7 @@
-select cr.scriptUrl
-from CodeComponent as cc,
-ComponentResourceCode as cr
-where cc.componentResourceId=
-cr.componentResourceId  and  
-cr.needScript=1
+select  
+	
+				 max(im.menuCode)
 
+from  InfoMenu  as im 
+where  im.moduleCode='0000000'
+group by  im.moduleCode

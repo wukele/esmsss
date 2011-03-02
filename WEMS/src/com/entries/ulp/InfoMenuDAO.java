@@ -229,4 +229,15 @@ public class InfoMenuDAO extends EmsDao {
 	public static InfoMenuDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (InfoMenuDAO) ctx.getBean("InfoMenuDAO");
 	}
+
+	public String GetMaxMenuCode(String moduleCode) {
+		// TODO Auto-generated method stub
+		List  l=getHibernateTemplate().find("select  max(im.menuCode)+1 from  InfoMenu  as im" +
+				" where  im.moduleCode=? group by  im.moduleCode",moduleCode);
+		if(l==null ||  l.size()==0){
+					return  moduleCode+1;
+		}else{
+				return String.valueOf(l.get(0));		
+		}
+	}
 }

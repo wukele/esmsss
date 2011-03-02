@@ -283,7 +283,7 @@ Ems.page.PageMenuReletionApp=function(){
 													is_leaf:node.leaf,
 													page_id:record.get('page_id')
 											},
-											success:function(result){
+											success:function(result,opt){
 													
 											}
 									})
