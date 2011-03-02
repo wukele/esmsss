@@ -1,11 +1,10 @@
 
 
 Ext.onReady(function(){
-	
-	
+	var sm = new Ext.grid.CheckboxSelectionModel({singleSelect:true})
 	var cm=new Ext.grid.ColumnModel([
-		new Ext.grid.RowNumberer({header:"",width:30,align:"center"}),//添加一个编号
-        new Ext.grid.CheckboxSelectionModel(),//增加 CheckBox多选框列
+		new Ext.grid.RowNumberer(),//添加一个编号
+        sm,//增加 CheckBox多选框列
 		{header:'工号ID',dataIndex:'operNo',sortable:true},
 		{header:'工号名称',dataIndex:'operName',sortable:true},
 		{header:'角色代码',dataIndex:'roleCodes',sortable:true},
@@ -249,7 +248,6 @@ Ext.onReady(function(){
 							{
 								text: '重  置',
 								handler: function() {
-									
 									Ext.getCmp('qryForm').form.reset();
 								}
 							}
