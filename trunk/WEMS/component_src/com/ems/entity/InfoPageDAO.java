@@ -6,6 +6,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Component;
+
+import com.ems.dao.EmsDao;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -19,7 +22,9 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  * @author MyEclipse Persistence Tools
  */
 
-public class InfoPageDAO extends HibernateDaoSupport {
+
+@Component("InfoPageDAO")
+public class InfoPageDAO extends EmsDao {
 	private static final Log log = LogFactory.getLog(InfoPageDAO.class);
 	// property constants
 	public static final String PAGE_RESOURCE_ID = "pageResourceId";
