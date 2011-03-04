@@ -144,20 +144,18 @@
 
 
 .x-hotarea{
-	position:relative;
     background: #efefef ;
 	border: 1px solid #dddddd;
 }
 
 .x-hotarea-exception{
-	position:relative;
 	background:#ee2a2a;
 	filter: Alpha(Opacity=50); 	
 	opacity:0.5;
 }
 
 .x-hotarea-nor{
-	position:relative;
+	
 }
 
 

@@ -18,6 +18,14 @@ public class NormalPageOperAction extends ActionSupport {
 			private  boolean  is_leaf;
 			private  boolean  is_success;
 			private  String   module_code;
+			private  String   return_message;
+			public String getReturn_message() {
+				return return_message;
+			}
+
+			private  String   n_text;
+			
+			
 			public String getModule_code() {
 				return module_code;
 			}
@@ -28,6 +36,28 @@ public class NormalPageOperAction extends ActionSupport {
 						
 						is_success=pmServ.buildNewRulePage(page_id,menu_code,module_code,is_leaf);
 						return   SUCCESS;
+			}
+			
+			public   String  RenamePageMenu(){
+						is_success=pmServ.RenameMenu(menu_code,module_code,n_text,return_message);
+						return  SUCCESS;
+			}
+			
+			
+			public  String   RemovePageMenu(){
+						is_success=pmServ.deletePageMenu(menu_code,module_code,return_message);
+						return  SUCCESS;
+			}
+			
+			public  String  deleteInfoPage(){
+					  is_success=pmServ.RemoveInfoPage(page_id);
+					  return  SUCCESS;
+			}
+			
+			
+
+			public void setN_text(String nText) {
+				n_text = nText;
 			}
 
 			public void setPage_id(Integer pageId) {

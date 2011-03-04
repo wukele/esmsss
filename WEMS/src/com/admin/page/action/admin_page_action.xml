@@ -148,5 +148,14 @@
 			<action name="AddNormalPageMenu"  class="NormalPageOperAction"  method="AddNormalPageMenu">
 						  <result type="json"></result>
 			</action>
+			<action name="PageMenuRename"  class="NormalPageOperAction"   method="RenamePageMenu">
+						  <result type="json"></result>
+			</action>
+			<action name="PageMenuRemove"  class="NormalPageOperAction"   method="RemovePageMenu">
+							<result type="json"></result>
+			</action>
+			<action name="deleteInfoPage"   class="NormalPageOperAction"   method="deleteInfoPage">
+							<result type="json"></result>
+			</action>
 	</package>
 </struts>    

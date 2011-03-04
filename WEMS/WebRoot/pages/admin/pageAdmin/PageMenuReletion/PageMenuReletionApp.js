@@ -27,8 +27,85 @@ Ems.page.SystemMenuTree=Ext.extend(Ext.tree.TreePanel,{
 					    		beforeload:this.onBeforeLoad,
 					    		scope:this
 					    })
+					    
+					    this.contextmenu=new  Ext.menu.Menu({
+					    		items:[{
+					    				text:'重命名',
+					    				handler:function(){
+					    							Ext.Msg.prompt('菜单','输入新菜单名:',function(btn,text){
+					    											if(btn=='ok' && text){
+					    														if(Ems.page.PageMenuReletionApp.s_node){
+					    																		Ext.Ajax.request({
+					    																						url:'PageMenuRename.action',
+					    																						params:{
+					    																									module_code:Ems.page.PageMenuReletionApp.s_node.attributes.module_code,
+					    																									menu_code:Ems.page.PageMenuReletionApp.s_node.attributes.menu_code,
+					    																									n_text:text
+					    																						},
+					    																						success:function(res,opt){
+					    																									if(res.responseText){
+					    																												var  result=Ext.decode(res.responseText);
+					    																												if(result.is_success){
+					    																															Ext.example.msg('success','菜单重命名成功');
+					    																															Ems.page.PageMenuReletionApp.s_node.setText(opt.params.n_text);
+					    																												}else{
+					    																															Ext.example.msg('faild',result.return_message);
+					    																												}
+					    																									}
+					    																						}
+					    																		})
+					    														}
+					    													
+					    											}
+					    							});
+					    				}
+					    		},'-',{
+					    				text:'删除菜单',
+					    				handler:function(){
+					    							var  node=Ems.page.PageMenuReletionApp.s_node;
+					    							if(node){
+					    									
+					    													Ext.Ajax.request({
+					    															url:'PageMenuRemove.action',
+					    															params:{
+					    																	module_code:Ems.page.PageMenuReletionApp.s_node.attributes.module_code,
+					    																    menu_code:Ems.page.PageMenuReletionApp.s_node.attributes.menu_code
+					    															},
+					    															success:function(res,opt){
+					    																	 if(res.responseText){
+					    																	 			var  result=Ext.decode(res.responseText);
+					    																	 			if(result.is_success){
+					    																	 						Ext.example.msg('success','菜单删除成功');
+					    																	 						p=node.parentNode;
+					    													 				 						if(p)p.removeChild(node,true);
+					    													 				 						Ems.page.PageMenuReletionApp.page_data_view.store.load();
+					    																	 			}else{
+					    																	 						Ext.example.msg('failed','删除失败');
+					    																	 			}
+					    																	 			
+					    																	 }
+					    															}
+					    													});
+					    									
+					    							}
+					    					
+					    				}
+					    		}]
+					    })
+					    
+					    this.on({
+					    		 contextmenu:this.onNodeContextmenu,
+					    		 scope:this
+					    });
+					    
 					    Ems.page.SystemMenuTree.superclass.initComponent.call(this);
 			},
+			onNodeContextmenu:function(node,e){
+						 e.stopEvent();
+						 Ems.page.PageMenuReletionApp.s_node=node;
+						 this.contextmenu.showAt(e.getXY());
+			},
+			
 			
 			onBeforeLoad:function(node){
 						this.getLoader().baseParams={
@@ -103,6 +180,33 @@ Ems.page.PageDataView=Ext.extend(Ext.grid.GridPanel,{
 					     		  render:this.onPanelRender,
 					     		  scope:this
 					     });
+					     this.tbar=new  Ext.Toolbar({
+					     			items:[{
+					     					text:'删除普通页面',
+					     					iconCls:'silk-delete',
+					     					handler:function(){
+					     								var  record=Ems.page.PageMenuReletionApp.page_data_view.getSelectionModel().getSelected();
+					     								if(!record){
+					     											Ext.example.msg('warning','请选择删除项');
+					     											return 1;
+					     								}
+					     								Ext.Ajax.request({
+					     											url:'deleteInfoPage.action',
+					     											params:{
+					     														page_id:record.get('pageId')
+					     											},
+					     											success:function(res,opt){
+					     														var  result=Ext.decode(res.responseText);
+					     														if(result  &&  result.is_success){
+					     																	Ext.example.msg('success','删除成功');
+					     																	Ems.page.PageMenuReletionApp.page_data_view.store.load();
+					     														}
+					     											}
+					     								})
+					     					}
+					     			}]
+					     })
+					     
 					     Ems.page.PageDataView.superclass.initComponent.call(this);
 			}
 			
@@ -273,11 +377,17 @@ Ems.page.PageMenuReletionApp=function(){
 						
 						onDataDrop:function(e){
 									//Ext.Msg.alert('before','ok');		
+								
+									
 									var  record=e.data.selections[0];
 									var  node=e.target.attributes;
 									if(!record)return 1;
+									if(!record.data){
+												Ext.example.msg('warning','不能更改菜单树项');
+												return 1;
+									}
 									if(record.get('menuCode')){
-												Ext.example.msg('warm','页面已被菜单使用');
+												Ext.example.msg('warning','页面已被菜单使用');
 												return  1;
 									}
 									
@@ -306,7 +416,7 @@ Ems.page.PageMenuReletionApp=function(){
 													 							n_node.attributes.menu_code=res.menu_code;
 													 							n_node.attributes.module_code=res.module_code;
 													 							param.node_tree.appendChild(n_node);	
-													 							Ems.page.PageMenuReletionApp.page_data_view.load();
+													 							Ems.page.PageMenuReletionApp.page_data_view.store.load();
 													 						}
 													 			}											 			
 													 }

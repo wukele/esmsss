@@ -7,10 +7,10 @@ Ems.Component.HotArea=Ext.extend(Ext.BoxComponent,{
 				cfg=cfg||{
 					width:this.defaultWidth,
 					height:this.defaultHeight,
-					border:false,
-					autoEl:{
-						tag:'div'
-					}
+					border:false
+				}
+				cfg.autoEl={
+					 tag:'div'
 				}
 				this.deviceId=cfg.ValueId;
 				cfg.overCls='x-hotarea';

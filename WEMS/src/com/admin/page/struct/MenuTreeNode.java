@@ -26,8 +26,8 @@ public class MenuTreeNode implements Serializable {
 	}
 	
 	public  MenuTreeNode(
+			 String  menuCode,
 			  String  moduleCode	,
-			  String  menuCode,
 			  String text,
 			  Integer  leaf
 	){
