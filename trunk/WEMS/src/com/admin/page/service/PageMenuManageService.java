@@ -100,6 +100,75 @@ public class PageMenuManageService {
 		
 		return imDao.GetMaxMenuCode(moduleCode);
 	}
+	
+	
+	@Transactional
+	public boolean RenameMenu(String menuCode, String moduleCode, String nText,String returnMessage) {
+		// TODO Auto-generated method stub
+		boolean   res=false;
+		InfoMenu   m= imDao.findById(menuCode);
+		m.setMenuTitle(nText);
+		m.setComments(nText);
+		try{
+				imDao.merge(m);
+				res=true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			log.error("重命名失败:"+ e.getMessage());
+			returnMessage=e.getMessage();
+		}
+		return res;
+	}
+	
+	 @Transactional
+	public boolean deletePageMenu(String menuCode, String moduleCode,
+			String returnMessage) {
+		// TODO Auto-generated method stub
+		boolean  res=false;
+		InfoMenu  m = imDao.findById(menuCode);
+		if(m==null){
+				returnMessage="子系统菜单不能删除";
+		}else{
+				if(m.getMenuUrl()==null  ||  m.getMenuUrl().equalsIgnoreCase("ems_dispatcher_page_action.action")){
+									imDao.delete(m);
+									List<InfoPage> ps=ipDao.findByMenuCode(m.getMenuCode());
+									for(int  i=0;i<ps.size();i++){
+												InfoPage  p=ps.get(i);
+												p.setMenuCode(null);
+												ipDao.merge(p);
+									}
+									imDao.deletleRoleRuleFunc(menuCode);
+									res=true;
+				}else{
+							returnMessage="系统菜单不能删除";
+				}
+		}
+		return res;
+	}
+	 
+	@Transactional
+	public boolean RemoveInfoPage(Integer pageId) {
+		// TODO Auto-generated method stub
+		boolean  res=false;
+		InfoPage   ip=ipDao.findById(pageId);
+		if(ip==null){
+					log.error("页面已经不存在");
+		}else{
+					ipDao.deletePageDataRule(ip.getPageResourceId());
+					log.info("页面数据关系删除成功");
+					ipDao.deletePageResource(ip.getPageResourceId());
+					log.info("页面组件删除成功");
+					ipDao.delete(ip);
+					if(ip.getMenuCode()!=null){
+								imDao.deleteMenu(ip.getMenuCode());
+								imDao.deletleRoleRuleFunc(ip.getMenuCode());
+					}
+					res=true;
+					log.info("页面删除成功");
+		}
+		
+		return res;
+	}
 			
 	
 	

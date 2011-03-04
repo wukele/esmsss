@@ -240,4 +240,14 @@ public class InfoMenuDAO extends EmsDao {
 				return String.valueOf(l.get(0));		
 		}
 	}
+
+	public void deleteMenu(String menuCode) {
+		// TODO Auto-generated method stub
+			getHibernateTemplate().bulkUpdate("delete  InfoMenu  where menuCode=?" ,menuCode);
+	}
+
+	public void deletleRoleRuleFunc(String menuCode) {
+		// TODO Auto-generated method stub
+			getHibernateTemplate().bulkUpdate("delete RuleRoleFunc where entityCode=?",menuCode);
+	}
 }

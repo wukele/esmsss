@@ -196,4 +196,14 @@ public class InfoPageDAO extends EmsDao {
 	public static InfoPageDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (InfoPageDAO) ctx.getBean("InfoPageDAO");
 	}
+
+	public void deletePageResource(String pageResource) {
+		// TODO Auto-generated method stub
+		getHibernateTemplate().bulkUpdate("delete  InfoPageResource  where  pageResource=?",pageResource);
+	}
+
+	public void deletePageDataRule(String pageResourceId) {
+		// TODO Auto-generated method stub
+		getHibernateTemplate().bulkUpdate("delete  RuleDataDevice  where valueId  in(select  valueId from  InfoPageResource  where  pageResource=?)",pageResourceId);
+	}
 }

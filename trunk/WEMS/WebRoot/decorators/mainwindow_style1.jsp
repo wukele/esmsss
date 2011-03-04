@@ -49,6 +49,7 @@ String path = request.getContextPath();
 	<script type="text/javascript">
 	<%
 		UIContainer  ui=(UIContainer)session.getAttribute(CommUlpKey.KEY_UI_CONTIANER);
+		System.out.println("not null");
 		StringBuffer  buff=new StringBuffer();
 		String accordionItems=ui.CreateAccordion(buff);  
 	%>
