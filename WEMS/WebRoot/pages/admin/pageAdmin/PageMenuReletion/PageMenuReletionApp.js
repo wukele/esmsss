@@ -90,6 +90,46 @@ Ems.page.SystemMenuTree=Ext.extend(Ext.tree.TreePanel,{
 					    							}
 					    					
 					    				}
+					    		},'-',{
+					    			 		text:'新建目录',
+					    			 		handler:function(){
+					    			 				var  node=Ems.page.PageMenuReletionApp.s_node;
+					    			 				if(node){
+					    			 							if(node.isLeaf()){
+					    			 										Ext.example.msg('warn','不能在功能页面上新增目录');
+					    			 										return 1;
+					    			 							}
+					    			 							Ext.Msg.prompt('目录名','输入目录名:',function(btn,text){
+					    			 										if(btn=='ok' &&   text){
+					    			 													var   nd=Ems.page.PageMenuReletionApp.s_node;
+					    			 													Ext.Ajax.request({
+					    			 																url:'addDirSystemMenu.action',
+					    			 																params:{
+					    			 																		module_code:nd.attributes.module_code,
+					    			 																		menu_code:nd.attributes.menu_code,
+					    			 																		dir_name:text
+					    			 																},
+					    			 																success:function(res,opt){
+					    			 																	     var  result=Ext.decode(res.responseText);
+					    			 																	     if(result &&  result.is_success){
+					    			 																	     		 Ext.example.msg('success','目录新增成功');
+					    			 																	     		 var  n_node=new  Ext.tree.TreeNode({
+					    			 																	     		 		text:opt.params.dir_name
+					    			 																	     		 });
+					    			 																	     		 n_node.attributes.module_code=opt.params.module_code;
+					    			 																	     		 n_node.attributes.parent_code=opt.params.menu_code;
+					    			 																	     		 n_node.attributes.menu_code=result.return_message;
+					    			 																	     		 Ems.page.PageMenuReletionApp.s_node.appendChild(n_node);
+					    			 																	     }else{
+					    			 																	     		  Ext.example.msg('faild','目录新增失败');
+					    			 																				  return 1;
+					    			 																	     }   
+					    			 																}
+					    			 													})
+					    			 										}
+					    			 							});
+					    			 				}
+					    			 		}
 					    		}]
 					    })
 					    

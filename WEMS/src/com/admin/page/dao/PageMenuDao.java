@@ -24,14 +24,15 @@ public class PageMenuDao extends EmsDao {
 		// TODO Auto-generated method stub
 		
 		return  getHibernateTemplate().find("select  new  com.admin.page.struct.MenuTreeNode(im.menuCode, im.moduleCode,  im.menuTitle ," +
-				" case   when  (select  count(*)  from  InfoMenu  as m  where  m.parentMenuCode=im.menuCode)>0  then 0  else  1 end)  from  InfoMenu  as im  where  im.moduleCode=?", moduleCode);
+				" case   when  (select  count(*)  from  InfoMenu  as m  where  m.parentMenuCode=im.menuCode)>0  then 0  else  1 end)  from  InfoMenu  as im  where  im.moduleCode=?" +
+				"  and  im.parentMenuCode is null", moduleCode);
 	}
 
 	public List<MenuTreeNode> getNodeMenus(String menuCode, String moduleCode) {
 		// TODO Auto-generated method stub
 		return  getHibernateTemplate().find("select  new  com.admin.page.struct.MenuTreeNode(im.menuCode, im.moduleCode,  im.menuTitle ," +
 				" case   when  (select  count(*)  from  InfoMenu  as m  where  m.parentMenuCode=im.menuCode)>0  then 0  else  1 end)  from  InfoMenu  as im  where  im.moduleCode=? " +
-				" and im.parentMenuCode=?", new String[]{menuCode,moduleCode});
+				" and im.parentMenuCode=?", new String[]{moduleCode,menuCode});
 	}
 
 	public List<PageResourceView> findCurrenPageRes(Integer pageId) {
