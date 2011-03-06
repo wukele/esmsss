@@ -65,7 +65,8 @@ public class PageMenuManageService {
 					im=imDao.findById(menuCode);
 					nm.setParentMenuCode(im.getParentMenuCode());
 		}else{
-				     
+					im=imDao.findById(menuCode);
+					nm.setParentMenuCode(menuCode);
 		}
 		
 		String tempCode=GetMenuCode(moduleCode);

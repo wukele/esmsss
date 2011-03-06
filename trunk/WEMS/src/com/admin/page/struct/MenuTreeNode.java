@@ -10,11 +10,20 @@ public class MenuTreeNode implements Serializable {
 	  private  String  url;
 	  private  String  menu_code;
 	  private  String  module_code;
+	  private  String  parent_code;
 	  
+	public String getParent_code() {
+		return parent_code;
+	}
+
+	public void setParent_code(String parentCode) {
+		parent_code = parentCode;
+	}
+
 	public  MenuTreeNode(
 			  String text,
 			  Integer  leaf,
-			  String  moduleCode			
+			  String  moduleCode
 	){
 				this.text=text;
 				if(leaf.intValue()==1){
@@ -39,6 +48,25 @@ public class MenuTreeNode implements Serializable {
 				}
 				this.module_code=moduleCode;
 				this.menu_code=menuCode;
+	}
+	
+	
+	public  MenuTreeNode(
+			 String  menuCode,
+			  String  moduleCode	,
+			  String text,
+			  Integer  leaf,
+			  String p_code
+	){
+				this.text=text;
+				if(leaf.intValue()==1){
+							this.leaf=true;
+				}else{
+							this.leaf=false;
+				}
+				this.module_code=moduleCode;
+				this.menu_code=menuCode;
+				this.parent_code=p_code;
 	}
 	
 	

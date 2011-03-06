@@ -11,7 +11,7 @@
 	<bean id="dataSourceMysql" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/protest">
+		<property name="url" value="jdbc:mysql://localhost:3306/emsdev">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value="zcf123"></property>
