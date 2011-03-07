@@ -177,14 +177,6 @@
 				UserAddCt.setDataStore(store);
 			},
 			init : function(contianerId) {
-				// for test ###
-				// store=new Ext.data.JsonStore({
-				// proxy:new
-				// Ext.data.MemoryProxy({lstUser:[{operNo:'1',operName:'²âÊÔ',loginName:'µÇÂ¼Ãû',operPwd:'ceshi',gender:'1'}]}),
-				// fields:fieldModel,
-				// idProperty:'operNo',
-				// root:'lstUser'
-				// });
 				store = new Ext.data.JsonStore({
 							proxy : new Ext.data.HttpProxy({
 										url : 'qryUser.action'

@@ -203,7 +203,52 @@
 						maxLengthText : '至多20位',
 						regex:/^\d{11}$/,
 						regexText:'无效的手机号码'
-					} ]})],
+					},{
+						xtype : 'combo',
+						fieldLabel : '部门',
+						name : 'deptNo',
+						store : new Ext.data.JsonStore({
+							proxy : new Ext.data.HttpProxy(
+												{
+													url : 'selectInfoDept.action'
+												}),
+										baseParams : {
+											flag : '1'
+										},
+										root : 'infoDepts',
+										totalProperty : 'totalProperty',
+										fields:['deptNo','deptName'],
+										autoLoad:true
+									}),
+							displayField:'deptName',
+							valueField:'deptNo',
+							editable:false,
+							triggerAction : 'all',
+							selectOnFocus:true
+						},
+						{
+						xtype : 'combo',
+						fieldLabel : '角色',
+						name : 'roleCode',
+						store : new Ext.data.JsonStore({
+							proxy : new Ext.data.HttpProxy(
+												{
+													url : 'qryRole.action'
+												}),
+										baseParams : {
+											flag : '1'
+										},
+										root : 'lstRole',
+										totalProperty : 'roleCount',
+										fields:['roleCode','roleName'],
+										autoLoad:true
+									}),
+							displayField:'roleName',
+							valueField:'roleCode',
+							editable:false,
+							triggerAction : 'all',
+							selectOnFocus:true
+						}]})],
 					buttons : [ {
 						xtype : 'button',
 						id:'ok',
