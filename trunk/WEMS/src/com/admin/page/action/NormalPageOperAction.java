@@ -19,6 +19,11 @@ public class NormalPageOperAction extends ActionSupport {
 			private  boolean  is_success;
 			private  String   module_code;
 			private  String   return_message;
+			private  String  dir_name;
+			public void setDir_name(String dirName) {
+				dir_name = dirName;
+			}
+
 			public String getReturn_message() {
 				return return_message;
 			}
@@ -52,6 +57,14 @@ public class NormalPageOperAction extends ActionSupport {
 			public  String  deleteInfoPage(){
 					  is_success=pmServ.RemoveInfoPage(page_id);
 					  return  SUCCESS;
+			}
+			
+			
+			public  String  addDirSystemMenu(){
+					 StringBuffer  buff=new StringBuffer();
+					 is_success=pmServ.addDirMenu(menu_code,module_code,dir_name,buff);
+					 return_message=buff.toString();
+					 return  SUCCESS;
 			}
 			
 			

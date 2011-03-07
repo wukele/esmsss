@@ -114,7 +114,8 @@ Ems.page.SystemMenuTree=Ext.extend(Ext.tree.TreePanel,{
 					    			 																	     if(result &&  result.is_success){
 					    			 																	     		 Ext.example.msg('success','目录新增成功');
 					    			 																	     		 var  n_node=new  Ext.tree.TreeNode({
-					    			 																	     		 		text:opt.params.dir_name
+					    			 																	     		 		text:opt.params.dir_name,
+					    			 																	     		 		isLeaf:false
 					    			 																	     		 });
 					    			 																	     		 n_node.attributes.module_code=opt.params.module_code;
 					    			 																	     		 n_node.attributes.parent_code=opt.params.menu_code;

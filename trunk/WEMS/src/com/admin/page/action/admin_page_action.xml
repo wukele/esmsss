@@ -157,5 +157,8 @@
 			<action name="deleteInfoPage"   class="NormalPageOperAction"   method="deleteInfoPage">
 							<result type="json"></result>
 			</action>
-	</package>
+			<action name="addDirSystemMenu" class="NormalPageOperAction"  method="addDirSystemMenu">
+							<result type="json" ></result>
+			</action>
+	</package> 
 </struts>    
