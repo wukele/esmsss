@@ -170,6 +170,43 @@ public class PageMenuManageService {
 		
 		return res;
 	}
+
+	@Transactional
+	public boolean addDirMenu(String menuCode, String moduleCode,
+			String dirName, StringBuffer buff) {
+		// TODO Auto-generated method stub
+		boolean  res=false;
+		InfoMenu  nm=new InfoMenu();
+		nm.setComments(dirName);
+		nm.setMenuTitle(dirName);
+		String   tempCode=GetMenuCode(moduleCode);
+		nm.setDeploySysCode("1");
+		nm.setIsshow(1);
+		nm.setIsactive(1);
+		buff.append(tempCode);
+		nm.setMenuCode(tempCode);
+		nm.setMenuCol(0);
+		nm.setMenuRow(0);	
+		nm.setParentMenuCode(menuCode);
+		nm.setModuleCode(moduleCode);
+		try{
+				imDao.save(nm);
+				//添加用户权限
+				RuleRoleFunc    rrf=new RuleRoleFunc();
+				rrf.setEntityCode(tempCode);
+				rrf.setEntityType("M");
+				rrf.setRoleCode("AD");
+				pmDao.addRuleRoleFunc(rrf);
+				log.info("目录添加成功:"+tempCode);
+				res=true;
+		}catch (Exception e) {
+			// TODO: handle exception
+				 log.error("目录添加失败："+ e.getMessage());
+				 throw  new RuntimeException(e.getMessage());
+		}
+		
+		return res;
+	}
 			
 	
 	
