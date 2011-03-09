@@ -63,11 +63,19 @@
 				<value>com/page/entity/BspkPageResource.hbm.xml</value>
 				<value>com/ems/entity/DeviceVariable.hbm.xml</value>
 				<value>com/page/entity/BspkDataDevice.hbm.xml</value>
-				<value>com/ems/entity/InfoDevicePage.hbm.xml</value></list>
+				<value>com/ems/entity/InfoDevicePage.hbm.xml</value>
+				<value>com/alarm/entity/AlarmLevelSetup.hbm.xml</value>
+				<value>com/alarm/entity/AlarmOperate.hbm.xml</value>
+				<value>
+					com/alarm/entity/AlarmPolicyEffectArea.hbm.xml
+				</value>
+				<value>com/alarm/entity/AlarmPolicy.hbm.xml</value>
+				<value>com/alarm/entity/InfoEvent.hbm.xml</value>
+				<value>com/alarm/entity/LogInfoEvent.hbm.xml</value></list>
 		</property>
 	</bean>
 	<context:annotation-config></context:annotation-config> 
-	<context:component-scan base-package="com.busi.*,com.ulp.*,*.*.dao,com.entries.ulp,
+	<context:component-scan base-package="com.busi.*,com.ulp.*,*.*.dao,com.entries.ulp,com.alarm.*,
 	com.ulp.dao.impl,com.ems.dao.impl,com.ems.data.dao.impl,com.ems.component.action,com.admin.*.*,com.ems.*"></context:component-scan>
 
 

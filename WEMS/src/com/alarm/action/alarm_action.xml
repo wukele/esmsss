@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="EmsAlarm" extends="json-default"  namespace="/">
+					<action name="LoadCurrentAlarms"   class="AlarmEventLoaderAction"  method="LoadAlarmOperate">
+								<result type="json"></result>
+					</action>
+					<action name="LoadEventInfo"  class="AlarmEventLoaderAction"  method="LoadEventInfo">
+								<result type="json"></result>
+					</action>
+	</package>
+</struts>    
