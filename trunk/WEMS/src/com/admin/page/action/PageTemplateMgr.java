@@ -22,6 +22,8 @@ public class PageTemplateMgr extends ActionSupport  implements  ServletRequestAw
 	   private  String image_name; 
 	   private  HttpServletRequest  request;
 	   private  List<TlpPageImage>  tlp_images;
+	   private  Integer   start;
+	   private  Integer  limit;
 	   private  int  totalProperty;
 	   public int getTotalProperty() {
 		return totalProperty;
@@ -41,6 +43,42 @@ public class PageTemplateMgr extends ActionSupport  implements  ServletRequestAw
 		public void setPts(PageTemplateService pts) {
 		this.pts = pts;
 	}
+	   
+	    public  String ExtPageTemplateQry(){
+	    	List<TlpPageImage>   temp=pts.QryPageTemplate(image_name);
+	    	totalProperty=0;
+	    	if(temp!=null  &&  temp.size()>0){
+	    				int  s=start.intValue();
+	    				int l=limit.intValue();
+	    				totalProperty=temp.size();
+	    				int  end=0;
+	    				if(s+l>totalProperty){
+	    							end=totalProperty;
+	    				}else{
+	    							end=s+l;
+	    				}
+	    				
+	    				tlp_images=temp.subList(s,end );
+	    				String path=request.getContextPath();
+	    				String content=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	    				for(int i=0;i<tlp_images.size();i++){
+	    					TlpPageImage  tpl=tlp_images.get(i);
+							tpl.setRemotePath(tpl.getImagePath());
+							tpl.setImagePath( content + tpl.getImagePath()  );
+	    				}		
+	    	}
+	    	
+	    	return  SUCCESS;
+	    }
+	   
+	   
+		public void setStart(Integer start) {
+			this.start = start;
+		}
+
+		public void setLimit(Integer limit) {
+			this.limit = limit;
+		}
 
 		public  String  PageTemplateQry(){
 					tlp_images=pts.QryPageTemplate(image_name);

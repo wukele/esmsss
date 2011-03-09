@@ -350,7 +350,11 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 						{name:'remotePath',mapping:'remotePath'},
 						{name:'imageDisplayName',mapping:'imageDisplayName'}],
 						autoLoad:true,
-						totalProperty:'totalProperty'
+						totalProperty:'totalProperty',
+						baseParams:{
+									start:0,
+									limit:10
+						}
 			});
 			this.items=[new Ems.page.PageTempateView({
 						store:this.store,
@@ -365,7 +369,7 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 			this.bbar=new Ext.PagingToolbar({
 					store:this.store,
 					displayInfo: true,
-					pageSize:6,
+					pageSize:10,
 					displayMsg : '显示第 {0} 条到 {1} 条记录，一共 {2} 条',
 					emptyMsg : '没有记录'
 			});

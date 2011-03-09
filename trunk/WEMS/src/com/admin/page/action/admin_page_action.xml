@@ -62,7 +62,7 @@
 			<action name="tpl_page_qry"  class="TemplatePageAdd">
 					<result type="json"></result>
 			</action>
-			<action name="PageTemplateMgrQry" class="PageTemplateMgr" method="PageTemplateQry">
+			<action name="PageTemplateMgrQry" class="PageTemplateMgr" method="ExtPageTemplateQry">
 					<result type="json"></result>
 			</action>
 			<action name="TplPageQry" class="TemplatePageRemain" method="TemplatePageRemainQry">
