@@ -75,7 +75,7 @@
 		</property>
 	</bean>
 	<context:annotation-config></context:annotation-config> 
-	<context:component-scan base-package="com.busi.*,com.ulp.*,*.*.dao,com.entries.ulp,com.alarm.*,
+	<context:component-scan base-package="com.busi.*,com.ulp.*,*.*.dao,com.entries.ulp,com.alarm.*,com.device.*,
 	com.ulp.dao.impl,com.ems.dao.impl,com.ems.data.dao.impl,com.ems.component.action,com.admin.*.*,com.ems.*"></context:component-scan>
 
 

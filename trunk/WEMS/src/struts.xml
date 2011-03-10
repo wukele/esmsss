@@ -30,4 +30,5 @@
 	<include file="devices_action.xml"></include>
 	<include file="com/admin/page/action/admin_page_action.xml"></include>
 	<include file="com/alarm/action/alarm_action.xml"></include>
+	<include file="com/device/action/device_action.xml"></include>
 </struts>    
