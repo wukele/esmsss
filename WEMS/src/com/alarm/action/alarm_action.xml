@@ -5,7 +5,7 @@
 					<action name="LoadCurrentAlarms"   class="AlarmEventLoaderAction"  method="LoadAlarmOperate">
 								<result type="json"></result>
 					</action>
-					<action name="LoadEventInfo"  class="AlarmEventLoaderAction"  method="LoadEventInfo">
+					<action name="LoadCurrentEvents"  class="AlarmEventLoaderAction"  method="LoadEventInfo">
 								<result type="json"></result>
 					</action>
 	</package>
