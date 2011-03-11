@@ -40,7 +40,7 @@ Ems.App.MainTab=Ext.extend(Ext.TabPanel,{
 	  											params:{
 	  												device_id:deviceId
 	  											},
-	  											script:true
+	  											scripts:true
 	  									});
 	  							}
 	  							clearAllTask();

@@ -52,7 +52,9 @@ public class PageMenuManageService {
 		boolean  res=false;
 		InfoMenu  nm=new InfoMenu();
 		InfoPage  ip=ipDao.findById(pageId);
-		
+		if("".equalsIgnoreCase(menuCode)  ||  menuCode==""){
+					menuCode=null;
+		}
 		nm.setComments(ip.getPageName());
 		nm.setDeploySysCode("1");
 		nm.setIsshow(1);
@@ -188,6 +190,9 @@ public class PageMenuManageService {
 		nm.setMenuCode(tempCode);
 		nm.setMenuCol(0);
 		nm.setMenuRow(0);	
+		if("".equalsIgnoreCase(menuCode)  ||  menuCode==""){
+			menuCode=null;
+		}
 		nm.setParentMenuCode(menuCode);
 		nm.setModuleCode(moduleCode);
 		try{
