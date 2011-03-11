@@ -87,6 +87,7 @@ public class RuleOperRoleDAO extends EmsDao {
 		// return listRet;
 		//		
 		List<IntermedialData> listRet = new LinkedList<IntermedialData>();
+	//	String whereStr = "select distinct a.operNo from RuleOperRole as a,InfoOper as b ,InfoRole as  c where a.operNo=b.operNo and a.roleCode=c.roleCode ";
 		String whereStr = "select distinct a.operNo from RuleOperRole as a,InfoOper as b ,InfoRole as  c where a.operNo=b.operNo and a.roleCode=c.roleCode ";
 		if (ruleOperRole != null) {
 			if (ruleOperRole.getOperNo() != null
@@ -187,17 +188,20 @@ public class RuleOperRoleDAO extends EmsDao {
 	public void insertRuleOperRole(IntermedialData pageParam)
 			throws RuntimeException {
 		// TODO Auto-generated method stub
-
+		RuleOperRole ruleOperRole = new RuleOperRole();
 		String operNO = pageParam.getOperNo();
-		String roleCodes = pageParam.getRoleCodes();
-		for (int i = 0; i < roleCodes.split(",").length; i++) {
-			RuleOperRole ruleOperRole = new RuleOperRole();
-			String roleCode = roleCodes.split(",")[i];
-			ruleOperRole.setOperNo(operNO);
-			ruleOperRole.setRoleCode(roleCode);
-//			ruleOperRole.setRid(new Integer("1"));
-			getHibernateTemplate().save(ruleOperRole);
-		}
+		String roleCode = pageParam.getRoleCode();
+		ruleOperRole.setOperNo(operNO);
+		ruleOperRole.setRoleCode(roleCode);
+		getHibernateTemplate().save(ruleOperRole);
+//		for (int i = 0; i < roleCodes.split(",").length; i++) {
+//			RuleOperRole ruleOperRole = new RuleOperRole();
+//			String roleCode = roleCodes.split(",")[i];
+//			ruleOperRole.setOperNo(operNO);
+//			ruleOperRole.setRoleCode(roleCode);
+////			ruleOperRole.setRid(new Integer("1"));
+//			getHibernateTemplate().save(ruleOperRole);
+//		}
 
 	}
 
