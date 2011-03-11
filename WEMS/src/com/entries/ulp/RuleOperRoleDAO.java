@@ -188,21 +188,26 @@ public class RuleOperRoleDAO extends EmsDao {
 	public void insertRuleOperRole(IntermedialData pageParam)
 			throws RuntimeException {
 		// TODO Auto-generated method stub
+		String operNO = pageParam.getOperNo();
+		String roleCodes = pageParam.getRoleCodes();
+		for (int i = 0; i < roleCodes.split(",").length; i++) {
+			RuleOperRole ruleOperRole = new RuleOperRole();
+			String roleCode = roleCodes.split(",")[i];
+			ruleOperRole.setOperNo(operNO);
+			ruleOperRole.setRoleCode(roleCode);
+//			ruleOperRole.setRid(new Integer("1"));
+			getHibernateTemplate().save(ruleOperRole);
+		}
+
+	}
+	
+	public void Save(IntermedialData pageParam){
 		RuleOperRole ruleOperRole = new RuleOperRole();
 		String operNO = pageParam.getOperNo();
 		String roleCode = pageParam.getRoleCode();
 		ruleOperRole.setOperNo(operNO);
 		ruleOperRole.setRoleCode(roleCode);
 		getHibernateTemplate().save(ruleOperRole);
-//		for (int i = 0; i < roleCodes.split(",").length; i++) {
-//			RuleOperRole ruleOperRole = new RuleOperRole();
-//			String roleCode = roleCodes.split(",")[i];
-//			ruleOperRole.setOperNo(operNO);
-//			ruleOperRole.setRoleCode(roleCode);
-////			ruleOperRole.setRid(new Integer("1"));
-//			getHibernateTemplate().save(ruleOperRole);
-//		}
-
 	}
 
 	public void deleteRuleOperRole(IntermedialData pageParam) {
