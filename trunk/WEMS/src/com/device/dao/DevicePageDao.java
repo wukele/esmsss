@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.admin.page.struct.PageResourceDataRuleStruct;
+import com.admin.page.struct.PageResourceView;
 import com.data.entity.RuleDataDevice;
 import com.ems.dao.EmsDao;
 
+import com.ems.entity.DeviceTable;
 import com.ems.entity.InfoDevicePage;
 import com.ems.entity.InfoPageResource;
 
@@ -53,5 +56,38 @@ public class DevicePageDao extends EmsDao {
 			throw  new   RuntimeException(e.getMessage());
 		}
 	}
+
+	public List<PageResourceView> FindPageCompById(Integer pageId) {
+		return  getHibernateTemplate().find("select   new com.admin.page.struct.PageResourceView(pr.pageResource, pr.xtypeCode , cc.componentName , pr.valueId , pr.resourceLeft , pr.resourceTop) " +
+				"from InfoPageResource  as  pr,InfoDevicePage as  ip,CodeComponent  cc where  pr.pageResource= ip.pageResourceId  and  pr.xtypeCode = cc.codeXtype " +
+				" and   ip.pageId=?",pageId);
+	}
+
+	public List<PageResourceDataRuleStruct> FindPageDataRule(Integer pageId) {
+		// TODO Auto-generated method stub
+		    return getHibernateTemplate().find("select  new  com.admin.page.struct.PageResourceDataRuleStruct(" +
+				"pr.resourceId,pr.pageResource,cc.componentName,rdd.valueId,dv.variableName,dt.deviceId,dt.deviceName,dt.deviceType) " +
+				"from InfoPageResource  as  pr,InfoDevicePage as  ip,CodeComponent  as  cc,RuleDataDevice  as rdd,DeviceVariable  as  dv,DeviceTable  as  dt " +
+				"where  pr.pageResource= ip.pageResourceId  and  pr.xtypeCode = cc.codeXtype " +
+				"and   pr.valueId = rdd.valueId  and   rdd.deviceValueId =  dv.deviceVariableId " +
+				"and   dv.deviceId = dt.deviceId and  ip.pageId=?",pageId);
+	}
+
+	public InfoDevicePage FindDevPageByPid(Integer pageId) {
+		// TODO Auto-generated method stub
+		return  (InfoDevicePage)getHibernateTemplate().find("from InfoDevicePage  where pageId=?",pageId).get(0);
+	}
+
+	public DeviceTable FindDevById(Integer deviceId) {
+		// TODO Auto-generated method stub
+		return  (DeviceTable)getHibernateTemplate().find("from DeviceTable  where  deviceId=?",deviceId).get(0);
+	}
+
+	public void margeDevpage(InfoDevicePage idp) {
+		// TODO Auto-generated method stub
+	         getHibernateTemplate().update(idp);
+	}
+	
+	
 
 }

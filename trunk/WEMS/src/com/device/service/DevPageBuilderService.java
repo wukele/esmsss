@@ -33,6 +33,7 @@ public class DevPageBuilderService {
 		bspk_dao = bspkDao;
 	}
 	
+	@Resource(name="DevicePageDao")
 	public void setDev_dao(DevicePageDao devDao) {
 		dev_dao = devDao;
 	}
@@ -101,7 +102,7 @@ public class DevPageBuilderService {
 		}
 		
 		
-		return false;
+		return  result;
 	}
 
 	private String GetPageResource() {

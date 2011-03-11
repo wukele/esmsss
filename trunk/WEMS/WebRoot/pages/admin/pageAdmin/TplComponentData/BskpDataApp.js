@@ -626,11 +626,6 @@ Ems.page.bskpPageViewer=Ext.extend(Ext.Panel,{
 										   
 									}
 								},'-',{
-									text:'页面数据引擎列表',
-									handler:function(){
-										
-									}
-								},'-',{
 									text:'生成普通页面',
 									handler:function(){
 												  var  currentPage=Ext.getCmp('bskpPagePanel').PageView.selectedPage;
