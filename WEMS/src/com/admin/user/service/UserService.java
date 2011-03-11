@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.entries.ulp.InfoOper;
 import com.entries.ulp.InfoOperDAO;
+import com.entries.ulp.IntermedialData;
+import com.entries.ulp.RuleOperRoleDAO;
 
 /**
  * 用户服务
@@ -30,6 +32,7 @@ public class UserService {
 	private String errorMsg;
 	private int errorCode;
 	private InfoOperDAO userDao;
+	private RuleOperRoleDAO ruleOperDao;
 
 	/**
 	 * 添加一个用户
@@ -46,6 +49,13 @@ public class UserService {
 			user.setStatisticalDeptNo("999999");
 			user.setFlag(0);
 			userDao.save(user);
+		/**
+		 * 这下面是我加的，看看是这个意思吧，呵呵
+		 */
+			IntermedialData data=new IntermedialData();
+			data.setOperNo(user.getOperNo());
+			data.setRoleCode(user.getRoleCode());
+			ruleOperDao.insertRuleOperRole(data);
 		} catch (RuntimeException e) {
 			// TODO: handle exception
 			log.error("appdenUser failed...");
@@ -278,4 +288,15 @@ public class UserService {
 	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
 	}
+
+	public RuleOperRoleDAO getRuleOperDao() {
+		return ruleOperDao;
+	}
+
+	@Resource(name="RuleOperRoleDAO")
+	public void setRuleOperDao(RuleOperRoleDAO ruleOperDao) {
+		this.ruleOperDao = ruleOperDao;
+	}
+	
+	
 }
