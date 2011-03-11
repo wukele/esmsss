@@ -18,4 +18,14 @@
 							  <result  type="json"></result>
 				</action>
 	</package>
+	<package name="EmsDev"   extends="struts-default"  namespace="/">
+				 <action name="EmsSysDeviceDispatcher"   class="EmsSysDeviceDispatcher"   method="EmsDevPageDispatch">
+				 			 <result  name="success">
+				 			 				/pages/ems/device/EmsDevicePage.jsp
+				 			 </result>
+				 			 <result  name="unfound">
+				 			 				/pages/ems/device/EmsPageDevNotFound.jsp
+				 			 </result>
+				 </action>
+	</package>
 </struts>    

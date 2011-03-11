@@ -87,6 +87,15 @@ public class DevicePageDao extends EmsDao {
 		// TODO Auto-generated method stub
 	         getHibernateTemplate().update(idp);
 	}
+
+	public InfoDevicePage findDevPage(Integer deviceId) {
+		// TODO Auto-generated method stub
+		List   p=getHibernateTemplate().find("from  InfoDevicePage  where  deviceId=?",deviceId);
+		if(p!=null  && p.size()>0){
+				return   (InfoDevicePage)p.get(0);
+		}else
+		return null;
+	}
 	
 	
 

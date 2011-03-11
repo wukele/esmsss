@@ -55,4 +55,10 @@ public class DevPageMangerService {
 				dev_dao.margeDevpage(idp);
 				return true;
 			}
+
+			public InfoDevicePage QryDevPage(Integer deviceId) {
+		
+				InfoDevicePage   dp=dev_dao.findDevPage(deviceId);
+				return  dp;
+			}
 }
