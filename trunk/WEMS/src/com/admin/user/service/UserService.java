@@ -55,7 +55,7 @@ public class UserService {
 			IntermedialData data=new IntermedialData();
 			data.setOperNo(user.getOperNo());
 			data.setRoleCode(user.getRoleCode());
-			ruleOperDao.insertRuleOperRole(data);
+			ruleOperDao.Save(data);
 		} catch (RuntimeException e) {
 			// TODO: handle exception
 			log.error("appdenUser failed...");
