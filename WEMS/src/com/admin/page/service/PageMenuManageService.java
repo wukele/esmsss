@@ -47,7 +47,7 @@ public class PageMenuManageService {
 	
 	@Transactional
 	public boolean buildNewRulePage(Integer pageId, String menuCode,
-			String moduleCode, boolean isLeaf) {
+			String moduleCode, boolean isLeaf, StringBuffer buff) {
 		// TODO Auto-generated method stub
 		boolean  res=false;
 		InfoMenu  nm=new InfoMenu();
@@ -79,6 +79,7 @@ public class PageMenuManageService {
 		res=true;
 		menuCode=tempCode;
 		log.info("≤Àµ•π“‘ÿ≥…π¶:MenuCode=="+menuCode);
+		buff.append(menuCode);
 		RuleRoleFunc    rrf=new RuleRoleFunc();
 		rrf.setEntityCode(menuCode);
 		rrf.setEntityType("M");

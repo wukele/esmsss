@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.admin.page.dao.PageUtilDao;
 import com.admin.page.struct.RealTimeDeviceDataStruct;
 import com.ems.entity.DeviceTable;
+import com.ems.entity.InfoDevicePage;
 import com.ems.entity.InfoPage;
 
 @Component("PageUtilService")
@@ -41,5 +42,10 @@ public class PageUtilService {
 			// TODO Auto-generated method stu
 			
 			return uDao.findInfoPageA();
+		}
+
+		public List<InfoDevicePage> GetDevPages() {
+			// TODO Auto-generated method stub
+			return uDao.findDevicePages();
 		}
 }

@@ -11,7 +11,8 @@ function  LoginPageInit(){
         labelWidth: 75, // label settings here cascade unless overridden
         frame:true,
         method:'POST',
-        title: 'Login to huawei system',
+        title: 'Login to EMS system',
+        buttonAlign:'center',
         onSubmit: Ext.emptyFn,
        	submit: function() 
        	{
@@ -20,14 +21,15 @@ function  LoginPageInit(){
        	},
         bodyStyle:'padding:5px 5px 0',
         width: 350,
+        height:162,
         defaults: {width: 230},
         defaultType: 'textfield',
         items: [{
-                fieldLabel: 'username',
+                fieldLabel: '”√ªß√˚',
                 name: 'username',
                 allowBlank:false
             },{
-                fieldLabel: 'password',
+                fieldLabel: '√‹¬Î',
                 name: 'password'
             }
         ],

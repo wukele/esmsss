@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.admin.page.service.PageUtilService;
 import com.admin.page.struct.RealTimeDeviceDataStruct;
 import com.ems.entity.DeviceTable;
+import com.ems.entity.InfoDevicePage;
 import com.ems.entity.InfoPage;
 import com.entries.ulp.InfoMenu;
 import com.opensymphony.xwork2.ActionSupport;
@@ -26,6 +27,12 @@ public class PageUtilAction extends ActionSupport {
 			
 			private List<InfoPage>    pages;
 			
+			private  List<InfoDevicePage>    info_dev_pages;
+			
+			public List<InfoDevicePage> getInfo_dev_pages() {
+				return info_dev_pages;
+			}
+
 			public void setDevice_id(Integer deviceId) {
 				device_id = deviceId;
 			}
@@ -53,6 +60,11 @@ public class PageUtilAction extends ActionSupport {
 			
 			public  String  QryRtdBydeviceId(){
 					real_time_datas=pageService.GetRealTimeDeviceDataBYDev(device_id);
+					return  SUCCESS;
+			}
+			
+			public String LoadDevPages(){
+					info_dev_pages=pageService.GetDevPages();
 					return  SUCCESS;
 			}
 			

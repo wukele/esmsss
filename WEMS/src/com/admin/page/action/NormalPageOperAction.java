@@ -38,8 +38,9 @@ public class NormalPageOperAction extends ActionSupport {
 			private  PageMenuManageService  pmServ; 
 			
 			public   String   AddNormalPageMenu(){
-						
-						is_success=pmServ.buildNewRulePage(page_id,menu_code,module_code,is_leaf);
+						StringBuffer   buff=new StringBuffer();
+						is_success=pmServ.buildNewRulePage(page_id,menu_code,module_code,is_leaf,buff);
+						menu_code=buff.toString();
 						return   SUCCESS;
 			}
 			
@@ -82,6 +83,10 @@ public class NormalPageOperAction extends ActionSupport {
 			}
 
 		
+
+			public String getMenu_code() {
+				return menu_code;
+			}
 
 			public void setMenu_code(String menuCode) {
 				menu_code = menuCode;

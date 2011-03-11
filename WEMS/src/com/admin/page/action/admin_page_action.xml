@@ -139,6 +139,9 @@
 			<action name="GetInfoPage"  class="PageUtilAction"   method="GetInfoPageA">
 					   <result  type="json"></result>
 			</action>
+			<action name="LoadDevPages"  class="PageUtilAction"   method="LoadDevPages">
+					   <result  type="json"></result>
+			</action>
 			<action name="QryCurrentPageResource"   class="PageMenuMangerAction"  method="QryCurrentPageResource">
 						<result type="json"></result>
 			</action>

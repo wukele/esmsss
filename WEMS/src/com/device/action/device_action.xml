@@ -2,6 +2,20 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="EmsDevice" extends="json-default"  namespace="/">
-				
+				<action name="CreateDeviceInfoPage"   class="DevicePageBuilder"   method="BuildDevicePageByBspk">
+							<result  type="json" ></result>
+				</action>
+				<action name="LoadDevPageComponents"   class="DevicePageManger"  method="LoadDevPageComponents">
+							<result  type="json"></result>
+				</action>
+				<action name="LoadDevPageDataRule" class="DevicePageManger" method="LoadDevPageDataRule">
+							 <result  type="json"></result>
+				</action>
+				<action name="LinkDevPage"   method="LinkDevPage"  class="DevicePageManger">
+							 <result type="json"></result>
+				</action>
+				<action name="DeLinkDevPage"  method="DeLinkDevPage"   class="DevicePageManger">
+							  <result  type="json"></result>
+				</action>
 	</package>
 </struts>    

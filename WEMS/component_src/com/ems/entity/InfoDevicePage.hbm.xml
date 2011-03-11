@@ -40,8 +40,8 @@
         <property name="operCode" type="java.lang.String">
             <column name="oper_code" length="4" />
         </property>
-        <property name="deviceId" type="java.lang.String">
-            <column name="device_id" length="20" />
+        <property name="deviceId" type="java.lang.Integer">
+            <column name="device_id" unique="true" />
         </property>
         <property name="deviceType" type="java.lang.String">
             <column name="device_type" length="20" />

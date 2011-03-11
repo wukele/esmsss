@@ -19,7 +19,7 @@ public class InfoDevicePage implements java.io.Serializable {
 	private Integer pageTop;
 	private Integer pageLeft;
 	private String operCode;
-	private String deviceId;
+	private Integer deviceId;
 	private String deviceType;
 
 	// Constructors
@@ -38,7 +38,7 @@ public class InfoDevicePage implements java.io.Serializable {
 	public InfoDevicePage(String pageResourceId, String pageType,
 			String pageImageUrl, String pageName, String pageIcon,
 			Integer pageImageWidth, Integer pageImageHeight, Integer pageTop,
-			Integer pageLeft, String operCode, String deviceId,
+			Integer pageLeft, String operCode, Integer deviceId,
 			String deviceType) {
 		this.pageResourceId = pageResourceId;
 		this.pageType = pageType;
@@ -144,11 +144,11 @@ public class InfoDevicePage implements java.io.Serializable {
 		this.operCode = operCode;
 	}
 
-	public String getDeviceId() {
+	public Integer getDeviceId() {
 		return this.deviceId;
 	}
 
-	public void setDeviceId(String deviceId) {
+	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
 	}
 
