@@ -1,9 +1,14 @@
 package com.admin.user.action;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONSerializer;
+
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 @Component("RoleManagerJsonAction")
 @Scope("prototype")
-public class RoleManagerJsonAction extends ActionSupport {
+public class RoleManagerJsonAction extends ActionSupport implements ServletResponseAware {
 
 	private InfoRole role;
 	private List<InfoRole> lstRole;
@@ -24,7 +29,9 @@ public class RoleManagerJsonAction extends ActionSupport {
 	private int returnNo = 0;
 	private String returnMsg;
 	private RoleService roleService;
-
+	private String roleTreeData;
+	private HttpServletResponse response;
+	
 	public RoleManagerJsonAction() {
 		// TODO Auto-generated constructor stub
 	}
@@ -156,6 +163,14 @@ public class RoleManagerJsonAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String getRoleTreeData() {
+		return roleTreeData;
+	}
+
+	public void setRoleTreeData(String roleTreeData) {
+		this.roleTreeData = roleTreeData;
+	}
+
 	public InfoRole getRole() {
 		return role;
 	}
@@ -170,10 +185,6 @@ public class RoleManagerJsonAction extends ActionSupport {
 
 	public void setLstRole(List<InfoRole> lstRole) {
 		this.lstRole = lstRole;
-	}
-
-	public RoleService getRoleService() {
-		return roleService;
 	}
 
 	@Resource(name = "RoleService")
@@ -211,6 +222,11 @@ public class RoleManagerJsonAction extends ActionSupport {
 
 	public void setLstRoleCode(List<String> lstRoleCode) {
 		this.lstRoleCode = lstRoleCode;
+	}
+
+	@Override
+	public void setServletResponse(HttpServletResponse arg0) {
+		this.response=arg0;
 	}
 
 }
