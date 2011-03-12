@@ -217,8 +217,7 @@
 										},
 										root : 'infoDepts',
 										totalProperty : 'totalProperty',
-										fields:['deptNo','deptName'],
-										autoLoad:true
+										fields:['deptNo','deptName']
 									}),
 							displayField:'deptName',
 							valueField:'deptNo',
@@ -240,8 +239,7 @@
 										},
 										root : 'lstRole',
 										totalProperty : 'roleCount',
-										fields:['roleCode','roleName'],
-										autoLoad:true
+										fields:['roleCode','roleName']
 									}),
 							displayField:'roleName',
 							valueField:'roleCode',
