@@ -26,7 +26,7 @@ public class UserManageJsonAction extends ActionSupport {
 	private int returnNo;
 	private String returnMsg;
 	private List<String> lstUserNo;
-	private Integer userCount=0;
+	private Integer userCount = 0;
 
 	/**
 	 * 添加用户
@@ -52,8 +52,8 @@ public class UserManageJsonAction extends ActionSupport {
 		if (user == null)
 			user = new InfoOper();
 		lstUser = userService.findUsers(user.getOperNo(), user.getOperName());
-		if(lstUser!=null)
-			userCount=lstUser.size();
+		if (lstUser != null)
+			userCount = lstUser.size();
 		return SUCCESS;
 	}
 
@@ -90,7 +90,7 @@ public class UserManageJsonAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String operNo = request.getParameter("operNo");
 		String flag = request.getParameter("flag");
-		user=new InfoOper();
+		user = new InfoOper();
 		if (flag.equals("删除")) {
 			user.setOperNo(operNo);
 			user.setRegionId("0");
@@ -112,57 +112,63 @@ public class UserManageJsonAction extends ActionSupport {
 
 	/**
 	 * 删除用户
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public String removeUser() throws Exception{
-		try{
+	public String removeUser() throws Exception {
+		try {
 			userService.removeUser(lstUserNo);
-		}catch (RuntimeException e) {
-			returnNo=1;
-			returnMsg=e.getMessage();
+		} catch (RuntimeException e) {
+			returnNo = 1;
+			returnMsg = e.getMessage();
 			throw e;
 		}
-		returnNo=0;
-		returnMsg="删除成功";
+		returnNo = 0;
+		returnMsg = "删除成功";
 		return SUCCESS;
 	}
+
 	/**
 	 * 无效用户
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public String invalidateUser() throws Exception{
-		try{
+	public String invalidateUser() throws Exception {
+		try {
 			userService.invalidateUser(lstUserNo);
-		}catch (RuntimeException e) {
-			returnNo=1;
-			returnMsg=e.getMessage();
+		} catch (RuntimeException e) {
+			returnNo = 1;
+			returnMsg = e.getMessage();
 			throw e;
 		}
-		
-		returnNo=0;
-		returnMsg="无效执行成功";
+
+		returnNo = 0;
+		returnMsg = "无效执行成功";
 		return SUCCESS;
 	}
+
 	/**
 	 * 有效用户
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public String validateUser() throws Exception{
-		try{
+	public String validateUser() throws Exception {
+		try {
 			userService.validateUser(lstUserNo);
-		}catch(RuntimeException e){
-			returnNo=1;
-			returnMsg=e.getMessage();
+		} catch (RuntimeException e) {
+			returnNo = 1;
+			returnMsg = e.getMessage();
 			throw e;
 		}
-		returnNo=0;
-		returnMsg="有效执行成功";
+		returnNo = 0;
+		returnMsg = "有效执行成功";
 		return SUCCESS;
 	}
-	
+
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -231,4 +237,5 @@ public class UserManageJsonAction extends ActionSupport {
 	public void setUserCount(Integer userCount) {
 		this.userCount = userCount;
 	}
+
 }
