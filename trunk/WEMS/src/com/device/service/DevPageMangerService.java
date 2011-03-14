@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.admin.page.struct.PageResourceDataRuleStruct;
 import com.admin.page.struct.PageResourceView;
+import com.component.DataEngine;
+import com.data.entity.InfoEngine;
 import com.device.dao.DevicePageDao;
 import com.ems.entity.DeviceTable;
 import com.ems.entity.InfoDevicePage;
+import com.ems.entity.InfoPageResource;
 
 
 @Component("DevPageMangerService")
@@ -60,5 +63,20 @@ public class DevPageMangerService {
 		
 				InfoDevicePage   dp=dev_dao.findDevPage(deviceId);
 				return  dp;
+			}
+
+			public List<String> qryScripts(String pageResourceId) {
+				// TODO Auto-generated method stub
+				return   dev_dao.findDevPageScript(pageResourceId);
+			}
+
+			public List<InfoPageResource> qryDevPageRes(String pageResourceId) {
+				// TODO Auto-generated method stub
+				return   dev_dao.findDevPageComp(pageResourceId);
+			}
+
+			public List<DataEngine> QryDevPageEngine(String pageResourceId) {
+				// TODO Auto-generated method stub
+				return  dev_dao.FindDevPageDE(pageResourceId);
 			}
 }

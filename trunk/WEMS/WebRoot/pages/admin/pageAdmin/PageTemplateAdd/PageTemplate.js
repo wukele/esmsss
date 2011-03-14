@@ -349,20 +349,20 @@ Ems.page.PageTemplatePan=Ext.extend(Ext.Panel,{
 						{name:'imagePath',mapping:'imagePath'},
 						{name:'remotePath',mapping:'remotePath'},
 						{name:'imageDisplayName',mapping:'imageDisplayName'}],
-						autoLoad:true,
-						totalProperty:'totalProperty',
-						baseParams:{
-									start:0,
-									limit:10
-						}
+						totalProperty:'totalProperty'
 			});
 			this.items=[new Ems.page.PageTempateView({
 						store:this.store,
 						id:'PageTempateView',
 						listeners:{
 							//选中初始化底图上传
-							selectionchange:function(dataView,nodes){
-								
+							render:function(){
+									this.store.load({
+										params:{
+											start:0,
+											limit:10
+										}
+									})
 							}
 						}
 			})];
