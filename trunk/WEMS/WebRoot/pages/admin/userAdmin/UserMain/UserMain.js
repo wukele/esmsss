@@ -39,12 +39,15 @@
 					Ext.example.msg("注意", "至少选择一条记录");
 
 				for (i = 0; i < selectedRecords.length; i++) {
-					paras['lstUserNo[' + i + ']'] = selectedRecords[i].data.operNo;
+					var data = selectedRecords[i].data;
+					for(pa in data){
+						paras['lstUser['+i+']'+'.'+pa] = data[pa];
+					}
 				}
 
 				// 删除
 				Ext.Ajax.request({
-							url : 'removeUser.action',
+							url : 'removeUser2.action',
 							method : 'post',
 							params : paras,
 							success : function(xhq, status) {

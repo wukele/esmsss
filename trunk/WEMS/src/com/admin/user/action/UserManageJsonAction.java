@@ -119,16 +119,35 @@ public class UserManageJsonAction extends ActionSupport {
 	public String removeUser() throws Exception {
 		try {
 			userService.removeUser(lstUserNo);
+			returnNo = 0;
+			returnMsg = "删除成功";
 		} catch (RuntimeException e) {
 			returnNo = 1;
 			returnMsg = e.getMessage();
 			throw e;
 		}
-		returnNo = 0;
-		returnMsg = "删除成功";
+		
 		return SUCCESS;
 	}
 
+	/**
+	 * 删除用户2
+	 * @return
+	 * @throws Exception
+	 */
+	public String removeUser2()	throws Exception{
+		try{
+			userService.removeUserList(lstUser);
+			returnNo=0;
+			returnMsg="删除成功";
+		}catch(RuntimeException e){
+			returnNo=1;
+			returnMsg=e.getMessage();
+			throw e;
+		}
+		
+		return SUCCESS;
+	}
 	/**
 	 * 无效用户
 	 * 

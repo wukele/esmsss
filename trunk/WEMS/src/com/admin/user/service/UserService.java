@@ -1,5 +1,7 @@
 package com.admin.user.service;
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,11 @@ import com.entries.ulp.RuleOperRoleDAO;
  */
 @Component("UserService")
 public class UserService {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(UserService.class);
+
 	private static final Log log = LogFactory.getLog(UserService.class);
 
 	private static final int STATUS_ACTIVE = 0;// 状态有效
@@ -151,6 +158,33 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * 批量删除
+	 * @param userList 用户列表
+	 */
+	@Transactional
+	public void removeUserList(List<InfoOper> userList){
+		if (logger.isDebugEnabled()) {
+			logger.debug("removeUserList(List<InfoOper>) - start"); //$NON-NLS-1$
+		}
+		
+		try {
+			if(userList == null || userList.size() == 0)
+				throw new RuntimeException("用户列表内容为空");
+			for(InfoOper user : userList){
+				userDao.deleteUser(user.getOperNo());
+				ruleOperDao.deleteRuleOperRole(user.getOperNo());			}
+		} catch (RuntimeException e) {
+			logger.error("removeUserList(List<InfoOper>)", e.fillInStackTrace()); //$NON-NLS-1$
+			throw e;
+		}
+		
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("removeUserList(List<InfoOper>) - end"); //$NON-NLS-1$
+		}
+	}
+	
 	/**
 	 * 删除用户
 	 * 
