@@ -29,5 +29,20 @@ public class DataBindDao extends EmsDao {
 		getHibernateTemplate().bulkUpdate("update  BspkPageResource  as  bpr  set  " +
 				"bpr.valueId=?  where  bpr.resourceId=?",new Object[]{valueId,resourceId});
 	}
+
+	public void addDeviceBindRule(String valueId, String deviceId) {
+		// TODO Auto-generated method stub
+			BspkDataDevice   bspkData=new BspkDataDevice();
+			bspkData.setDeviceNumber(deviceId);
+			bspkData.setValueId(valueId);
+			bspkData.setDeviceValueId("0");
+			getHibernateTemplate().save(bspkData);
+	}
+
+	public void ModifyDeviceBindRule(String valueId, String deviceId) {
+		// TODO Auto-generated method stub
+		getHibernateTemplate().bulkUpdate("update  BspkDataDevice  as  bpr  set  " +
+				"bpr.deviceNumber=?  where  bpr.valueId=?",new Object[]{deviceId,valueId});
+	}
 				
 }

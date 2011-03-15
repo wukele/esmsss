@@ -15,6 +15,7 @@ public class BindDeviceVarAction extends ActionSupport {
 			private  boolean  is_create_new;
 			private  String  device_value_id;
 			private  Integer  resource_id;
+			private  String  device_id;
 			public void setResource_id(Integer resourceId) {
 				resource_id = resourceId;
 			}
@@ -32,8 +33,16 @@ public class BindDeviceVarAction extends ActionSupport {
 			public void setDataServ(DataBindService dataServ) {
 				this.dataServ = dataServ;
 			}
-			public  String execute(){
+			public  String BindDeviceVarible(){
 				dataServ.BindDeviceVar(is_create_new,device_value_id,value_id,resource_id);
 				return  SUCCESS;
+			}
+			
+			public  String  BindDevice(){
+				dataServ.BindDevice(is_create_new,device_id,value_id,resource_id);
+				return  SUCCESS;
+			}
+			public void setDevice_id(String deviceId) {
+				device_id = deviceId;
 			}
 }

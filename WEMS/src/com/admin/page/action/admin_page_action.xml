@@ -117,8 +117,11 @@
 				<action name="QryRealTimeDeviceVarible" class="PageUtilAction" method="QryRtdBydeviceId">
 					<result type="json"></result>
 			</action>
-			<action name="BindDeviceVar" class="BindDeviceVarAction">
+			<action name="BindDeviceVar" class="BindDeviceVarAction"  method="BindDeviceVarible">
 					 <result type="json"></result>
+			</action>
+			<action name="BindEmsDevice"   class="BindDeviceVarAction" method="BindDevice">
+					  <result  type="json"></result>
 			</action>
 			<action name="QryBindReletion"  class="BspkPageResourceAction"  method="QryBindReletion">
 					  <result type="json"></result>

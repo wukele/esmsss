@@ -67,3 +67,16 @@ function clearAllNode(parentNode){
 }
 
 
+
+		Ext.Direct.on('message', function(e){
+     			var datas=e.realTimeData;
+     			if(datas && Ext.isArray(datas)){
+     					for(var i=0;i<datas.length;i++){
+     						 var item=datas[i];
+     						 Ext.getCmp(item.valueId).setValue(item.varLogicValue);
+     					}
+     			}
+    	});
+				
+
+

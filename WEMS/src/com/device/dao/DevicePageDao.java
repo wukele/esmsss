@@ -114,7 +114,7 @@ public class DevicePageDao extends EmsDao {
 	
 	public List<DataEngine> FindDevPageDE(String pageResource){
 		String   queryPageEngine="select distinct eng.engineCode"+
-				"from InfoPageResource as res,RuleEngineData as eng"+
+				" from InfoPageResource as res,RuleEngineData as eng"+
 				" where res.pageResource=? and res.valueId=eng.valueId";
 		List<String>  engines=getHibernateTemplate().find(queryPageEngine, pageResource);
 		if(engines==null ||  engines.size()<0){

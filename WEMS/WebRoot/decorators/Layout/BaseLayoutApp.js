@@ -175,7 +175,7 @@ Ems.App.FootPanel=Ext.extend(Ext.TabPanel,{
 							});
 							this.items=[this.alarmGrid,this.eventGrid];
 							this.on({
-										collapse:this.onTabCollapse,
+										expand:this.onTabCollapse,
 										scope:this
 							});
 							this.on({
