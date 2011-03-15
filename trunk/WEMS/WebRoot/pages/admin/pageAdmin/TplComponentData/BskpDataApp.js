@@ -38,7 +38,15 @@ Ems.page.bskpPagePanel=Ext.extend(Ext.Panel,{
 					store:this.store,
 					overClass:'x-seach-item-over'
 				})
-				this.store.load();
+			
+				this.PageView.on({
+						scope:this,
+						render:function(){
+										this.store.load();
+						}
+				});
+				
+				
 				this.PageView.on('dblclick',this.bspkPageSelected);
 				this.PageView.on({
 						contextmenu:this.onPageViewContextmenu,
@@ -214,7 +222,32 @@ Ems.page.DeviceDataPanel=Ext.extend(Ext.Panel,{
 								    				iconCls:'silk-connect',
 								    				text:'设备绑定',
 								    				handler:function(){
-								    							
+								    								var record=	this.ownerCt.ownerCt.getSelectionModel().getSelected();
+																	if(!record){
+																			Ext.example.msg('警告','请选择需绑定的设备变量');
+																			return 1;
+																	}
+																	var  v=this.ownerCt.ownerCt.ownerCt.record;
+																	var  vid=v.get('valueId');
+																	var  req={};
+																	if(!vid){
+																				req.device_id=record.get('deviceId');
+																				req.resource_id=v.get('resourceId');
+																				req.is_create_new=true;
+																	}else{
+																				req.device_id=record.get('deviceId');
+																				req.is_create_new=false;
+																				req.value_id=vid;
+																	}
+																	
+																	Ext.Ajax.request({
+																				url:'BindEmsDevice.action',
+																				params:req,
+																				success:function(res,opt){
+																								Ext.example.msg('OK','组件数据绑定成功');
+																								Ext.WindowMgr.getActive().hide(1);
+																				}
+																	})
 								    				}
 								    		}
 								    		]

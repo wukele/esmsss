@@ -70,7 +70,7 @@ public class EmsSysDeviceDispatcher extends ActionSupport  implements  ServletRe
 						
 						
 						
-						session.setAttribute(CommDevKey.KEY_DEVICE_PAGE_RESOURCE, json_page_comps);
+						session.setAttribute(CommDevKey.KEY_DEVICE_PAGE_RESOURCE, json_page_comps.toString());
 						
 						
 						//   获取页面数据引擎
@@ -78,7 +78,7 @@ public class EmsSysDeviceDispatcher extends ActionSupport  implements  ServletRe
 						
 						JSONArray  json_engines=new JSONArray();
 						json_engines.addAll(engines);
-						session.setAttribute(CommDevKey.KEY_DEVICE_DATA_ENGINE	 , engines);
+						session.setAttribute(CommDevKey.KEY_DEVICE_DATA_ENGINE	 , json_engines.toString());
 						
 						
 						return  SUCCESS;

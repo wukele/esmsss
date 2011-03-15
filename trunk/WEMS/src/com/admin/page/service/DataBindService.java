@@ -41,6 +41,25 @@ public class DataBindService {
 					bindDao.ModifyBindRule(valueId,deviceValueId);
 		}
 	}
+
+	public void BindDevice(boolean isCreateNew, String deviceId, String valueId, Integer resourceId) {
+		// TODO Auto-generated method stub
+		if(isCreateNew){
+			valueId=RandomStringUtils.random(4, true, false).toUpperCase()+RandomStringUtils.random(4, false, true);
+			log.info("新增设备绑定:值ID:=="+valueId);
+			try {
+						bindDao.addDeviceBindRule(valueId,deviceId);
+						bindDao.upDatePageResource(valueId,resourceId);
+			} catch (Exception e) {
+				// TODO: handle exception
+				log.error("新增绑定错误:"+e.getMessage());
+				throw new  RuntimeException();
+			}
+		}else{
+				  log.info("绑定关系变更");
+				  bindDao.ModifyDeviceBindRule(valueId,deviceId);
+		}
+	}
 				
 		
 }

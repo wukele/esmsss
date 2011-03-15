@@ -1,9 +1,9 @@
 package com.component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-public class DataEngine {
+
+public class DataEngine  implements  Serializable {
 			public int getInterval() {
 		return interval;
 	}
