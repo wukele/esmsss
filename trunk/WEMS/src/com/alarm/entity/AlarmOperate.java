@@ -1,6 +1,7 @@
 package com.alarm.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * AlarmOperate entity. @author MyEclipse Persistence Tools
@@ -18,7 +19,7 @@ public class AlarmOperate implements java.io.Serializable {
 	private String alarmSendAddress;
 	private String alarmOperateResult;
 	private String alarmAffirmPersonnel;
-	private Timestamp alarmAffirmTime;
+	private Date alarmAffirmTime;
 	private Timestamp alarmRelieveTime;
 	private Short alarmRelieveSendFormat;
 	private String alarmRelieveSendAddress;
@@ -117,11 +118,11 @@ public class AlarmOperate implements java.io.Serializable {
 		this.alarmAffirmPersonnel = alarmAffirmPersonnel;
 	}
 
-	public Timestamp getAlarmAffirmTime() {
+	public Date getAlarmAffirmTime() {
 		return this.alarmAffirmTime;
 	}
 
-	public void setAlarmAffirmTime(Timestamp alarmAffirmTime) {
+	public void setAlarmAffirmTime(Date alarmAffirmTime) {
 		this.alarmAffirmTime = alarmAffirmTime;
 	}
 

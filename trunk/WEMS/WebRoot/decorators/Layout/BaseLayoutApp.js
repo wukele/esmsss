@@ -60,6 +60,12 @@ Ems.App.MainTab=Ext.extend(Ext.TabPanel,{
 });
 
 
+Ems.App.FootCMenu=Ext.extend(Ext.menu.Menu,{
+				setReferenceGrid:function(grid){
+							this.grid=grid;
+				}
+})
+
 
 Ems.App.FootPanel=Ext.extend(Ext.TabPanel,{
 			constructor:function(cfg){
@@ -140,7 +146,7 @@ Ems.App.FootPanel=Ext.extend(Ext.TabPanel,{
 									{name:'sourceEntityCode',mapping:'sourceEntityCode'},
 									{name:'deviceVarId',mapping:'deviceVarId'}
 									],
-									root:'event'
+									root:'events'
 						});
 						this.eventGrid=new Ext.grid.GridPanel({
 									store:this.eventStore,
@@ -182,10 +188,74 @@ Ems.App.FootPanel=Ext.extend(Ext.TabPanel,{
 										tabchange:this.onTabActivate,
 										scope:this
 							});
+							this.alarmContextMenu=new Ems.App.FootCMenu({
+										items:[
+										{
+											text:'确认',
+											handler:function(){
+														if(this.ownerCt.grid){
+																	var   record=this.ownerCt.grid.getSelectionModel().getSelected();
+																	if(record){
+																				Ext.Ajax.request({
+																							url:'alarmConfirm.action',
+																							params:{
+																										alarm_operate_id:record.get('alarmOperateId'),
+																										mg:this.ownerCt.grid
+																							},
+																							success:function(res,opt){
+																										Ext.example.msg('success','确认成功');
+																										opt.params.mg.store.load();
+																							}
+																				});
+																	}else{
+																				Ext.example.msg('warn','请选择操作的项');
+																	}
+														}
+											}
+										},'-',
+										{
+											text:'删除',
+											handler:function(){
+														if(this.ownerCt.grid){
+																	var  record=this.ownerCt.grid.getSelectionModel().getSelected();
+																	if(record){
+																				Ext.Ajax.request({
+																							url:'alarmOperateDel.action',
+																							params:{
+																										alarm_operate_id:record.get('alarmOperateId'),
+																										mg:this.ownerCt.grid
+																							},
+																							success:function(res,opt){
+																										Ext.example.msg('success','删除成功');
+																										opt.params.mg.store.load()
+																							}
+																				});
+																	}else{
+																				Ext.example.msg('warn','请选择操作的项');
+																	}
+														}
+											}
+										}
+										]
+							});
+							
+							this.alarmContextMenu.setReferenceGrid(this.alarmGrid);
+							
+							this.alarmGrid.on({
+											contextmenu:this.onAlarmContextmenu,
+											scope:this
+							})
 							
 							
 							Ems.App.FootPanel.superclass.initComponent.call(this);
 			},
+			
+			onAlarmContextmenu:function(e){
+							e.stopEvent();
+							this.alarmContextMenu.showAt(e.getXY());
+			},
+			
+			
 			
 			onTabCollapse:function(){
 						 	if(this.getActiveTab()){
