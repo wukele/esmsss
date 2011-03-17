@@ -84,7 +84,7 @@ public class EmsSysDeviceDispatcher extends ActionSupport  implements  ServletRe
 						return  SUCCESS;
 			}
 
-			@Override
+		
 			public void setServletRequest(HttpServletRequest arg0) {
 				// TODO Auto-generated method stub
 						request=arg0;

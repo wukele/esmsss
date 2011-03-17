@@ -41,6 +41,14 @@ String path =request.getContextPath();
 		var data=<%=items%>
 		BasePanel.add(data);
 		
+		Ext.each(BasePanel.items.items,function(item){
+						if(item){
+									if(item.setDesignMode){
+												item.setDesignMode(0);
+									}
+						}
+		});
+		
 		BasePanel.render(Ext.get('page_container'));
 		/* DataEngines */
 		<%  

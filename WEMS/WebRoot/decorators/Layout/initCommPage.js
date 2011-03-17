@@ -77,6 +77,10 @@ function clearAllNode(parentNode){
      					}
      			}
     	});
+    	
+    	Ext.Direct.on('status',function(e){
+    		   
+    	});
 				
 
 

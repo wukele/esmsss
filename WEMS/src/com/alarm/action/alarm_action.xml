@@ -8,5 +8,11 @@
 					<action name="LoadCurrentEvents"  class="AlarmEventLoaderAction"  method="LoadEventInfo">
 								<result type="json"></result>
 					</action>
+					<action name="alarmConfirm" class="AlarmOperAction"  method="ComfirmAlarm">
+								<result type="json"></result>
+					</action>
+					<action name="alarmOperateDel" class="AlarmOperAction"  method="DeleteAlarmOperate">
+								<result type="json"></result>
+					</action>
 	</package>
 </struts>    

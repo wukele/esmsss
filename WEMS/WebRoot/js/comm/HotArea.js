@@ -3,6 +3,12 @@ Ext.ns('Ems.Component')
 Ems.Component.HotArea=Ext.extend(Ext.BoxComponent,{
 		defaultWidth:100,
 		defaultHeight:100,
+		designMode:1,
+		setDesignMode:function(d){
+						this.designMode=d;
+		},
+		
+		
 		constructor:function(cfg){
 				cfg=cfg||{
 					width:this.defaultWidth,
@@ -12,13 +18,13 @@ Ems.Component.HotArea=Ext.extend(Ext.BoxComponent,{
 				cfg.autoEl={
 					 tag:'div'
 				}
-				this.deviceId=cfg.ValueId;
+				this.deviceId=cfg.id;
 				cfg.overCls='x-hotarea';
 				Ems.Component.HotArea.superclass.constructor.call(this,cfg); 
 		},
 		DEVICE_NOR:0,
 		DEVICE_EXCEPTION:1,		
-		setValue:function(val){
+		setStatus:function(val){
 				if(val || val==this.DEVICE_EXCEPTION){
 						this.getEl().replaceClass('x-hotarea-nor','x-hotarea-exception');
 				}else{
@@ -28,25 +34,27 @@ Ems.Component.HotArea=Ext.extend(Ext.BoxComponent,{
 		
 		afterRender:function(){
 				Ems.Component.HotArea.superclass.afterRender.call(this);
-				if(this.deviceId){
-					this.setValue(0);
+				
+				if(this.deviceId &&  !this.designMode){
+					this.setStatus(0);
 				}else{
-					this.setValue(1);
+					this.setStatus(1);
 				}
 				this.getEl().on({
 						click:this.OnHotAreaClick,
 						scope:this
 				});
 		},
+		
 				
 		OnHotAreaClick:function(e){
-				if(this.deviceId){
+				if(this.deviceId  && !this.designMode){
 					clearAllTask();
 					Ext.getCmp('content-panel').load({
-						url:'EmsSysDeviceDispatcher.action',
+						url:'EmsHotAreaNav.action',
 						scripts:true,
 						 params:{
-						 	device_id:this.deviceId
+						 		value_id:this.deviceId
 						 }
 					})
 				}

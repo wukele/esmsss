@@ -27,5 +27,14 @@
 				 			 				/pages/ems/device/EmsPageDevNotFound.jsp
 				 			 </result>
 				 </action>
+				 <action name="EmsHotAreaNav"  class="EmsHotAreaNav"  method="NavToEmsPage">	
+				 			 <result name="success" type="chain">
+											<param name="namespace">/</param>
+											<param name="actionName">EmsSysDeviceDispatcher</param>
+							</result>
+				 			 <result  name="unfound">
+				 			 				/pages/ems/device/EmsPageDevNotFound.jsp
+				 			 </result>	
+				 </action>
 	</package>
 </struts>    

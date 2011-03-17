@@ -11,7 +11,7 @@
 	<bean id="dataSourceMysql" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/emsdev">
+		<property name="url" value="jdbc:mysql://localhost:3306/emsdev2">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value="zcf123"></property>
@@ -27,10 +27,10 @@
 					org.hibernate.dialect.MySQLDialect
 				</prop>
 				<prop key="hibernate.show_sql">
-					true
+					false
 				</prop>
 				<prop key="hibernate.format_sql">
-					true
+					false
 				</prop>
 			</props>
 		</property>

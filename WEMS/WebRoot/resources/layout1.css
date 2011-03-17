@@ -146,6 +146,9 @@
 .x-hotarea{
     background: #efefef ;
 	border: 1px solid #dddddd;
+	filter: Alpha(Opacity=30); 	
+	opacity:0.3;
+	cursor: pointer;
 }
 
 .x-hotarea-exception{
