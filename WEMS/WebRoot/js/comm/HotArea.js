@@ -23,7 +23,7 @@ Ems.Component.HotArea=Ext.extend(Ext.BoxComponent,{
 				Ems.Component.HotArea.superclass.constructor.call(this,cfg); 
 		},
 		DEVICE_NOR:0,
-		DEVICE_EXCEPTION:1,		
+		DEVICE_EXCEPTION:3,		
 		setStatus:function(val){
 				if(val || val==this.DEVICE_EXCEPTION){
 						this.getEl().replaceClass('x-hotarea-nor','x-hotarea-exception');

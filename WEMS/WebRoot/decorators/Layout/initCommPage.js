@@ -79,7 +79,16 @@ function clearAllNode(parentNode){
     	});
     	
     	Ext.Direct.on('status',function(e){
-    		   
+    		   var  datas=e.device_status;
+    		   if(datas  &&  Ext.isArray(datas)){
+    		   					for(var i=0;i<datas.length;i++){
+    		   							var  item=datas[i];
+    		   							var  cmp=Ext.getCmp(item.value_id);
+    		   							if(cmp && cmp.setStatus){
+    		   										cmp.setStatus(item.status_code);
+    		   							}
+    		   				}
+    		   }
     	});
 				
 
