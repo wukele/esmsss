@@ -17,6 +17,9 @@
 				<action name="DeLinkDevPage"  method="DeLinkDevPage"   class="DevicePageManger">
 							  <result  type="json"></result>
 				</action>
+				<action name="statusChangeEngine"   method="ChangeDeviceStatus"   class="DeviceStateEngine">
+							<result  type="json"></result>
+				</action>
 	</package>
 	<package name="EmsDev"   extends="struts-default"  namespace="/">
 				 <action name="EmsSysDeviceDispatcher"   class="EmsSysDeviceDispatcher"   method="EmsDevPageDispatch">
